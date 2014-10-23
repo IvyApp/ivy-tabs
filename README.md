@@ -1,5 +1,7 @@
 # ivy-tabs
 
+[![Build Status](https://travis-ci.org/IvyApp/ivy-tabs.svg?branch=master)](https://travis-ci.org/IvyApp/ivy-tabs)
+
 [WAI-ARIA][1] accessible tab component for [Ember][2]. Based on [ic-tabs][3].
 
 ## Installation
