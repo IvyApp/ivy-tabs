@@ -118,10 +118,28 @@ test('selected tab attributes', function() {
   this.append();
 
   var tab = component.$('#tab1');
+  ok(tab.hasClass('active'), 'has "active" class');
   equal(tab.attr('selected'), 'selected', 'selected');
   equal(tab.attr('aria-selected'), 'true', 'aria-selected');
   equal(tab.attr('aria-expanded'), 'true', 'aria-expanded');
   equal(tab.attr('tabindex'), '0', 'tabindex');
+});
+
+test('selected panel attributes', function() {
+  var component = this.subject({
+    template: Ember.Handlebars.compile(
+      '{{#ivy-tab-list id="tablist"}}' +
+      '  {{#ivy-tab id="tab1"}}tab 1{{/ivy-tab}}' +
+      '  {{#ivy-tab id="tab2"}}tab 2{{/ivy-tab}}' +
+      '{{/ivy-tab-list}}' +
+      '{{#ivy-tab-panel id="panel1"}}panel 1{{/ivy-tab-panel}}' +
+      '{{#ivy-tab-panel id="panel2"}}panel 2{{/ivy-tab-panel}}'
+    )
+  });
+  this.append();
+
+  var panel = component.$('#panel1');
+  ok(panel.hasClass('active'), 'has "active" class');
 });
 
 test('deselected tab attributes', function() {
@@ -138,8 +156,26 @@ test('deselected tab attributes', function() {
   this.append();
 
   var tab = component.$('#tab2');
+  ok(!tab.hasClass('active'), 'does not have "active" class');
   equal(tab.attr('selected'), undefined, 'selected');
   equal(tab.attr('aria-selected'), 'false', 'aria-selected');
   equal(tab.attr('aria-expanded'), 'false', 'aria-expanded');
   equal(tab.attr('tabindex'), undefined, 'tabindex');
+});
+
+test('deselected panel attributes', function() {
+  var component = this.subject({
+    template: Ember.Handlebars.compile(
+      '{{#ivy-tab-list id="tablist"}}' +
+      '  {{#ivy-tab id="tab1"}}tab 1{{/ivy-tab}}' +
+      '  {{#ivy-tab id="tab2"}}tab 2{{/ivy-tab}}' +
+      '{{/ivy-tab-list}}' +
+      '{{#ivy-tab-panel id="panel1"}}panel 1{{/ivy-tab-panel}}' +
+      '{{#ivy-tab-panel id="panel2"}}panel 2{{/ivy-tab-panel}}'
+    )
+  });
+  this.append();
+
+  var panel = component.$('#panel2');
+  ok(!panel.hasClass('active'), 'does not have "active" class');
 });
