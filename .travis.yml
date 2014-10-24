@@ -4,4 +4,4 @@ notifications:
     on_success: change
     on_failure: always
     rooms:
-      - secure: qyIqLCwoZPemEg20Ztd9HbvD+Fn54ZitnJnWwxx85NGqxdNT5H/rJWpZ41sljwyLgtZOgfOvAcw4v8J87/KLxhMZRepA8QE1iFOZBW3wSoyxI+c+45qCnidJ6+Rltz5DHwmlwPyRudbWcY46sgNr3b0ZiCnlM5G7Ls+lOsIT6u0=
+      - secure: TgwO0nxw0SIBaNybX32LCSUuDe04R9EBbMQ28sYFU8jhLQYm+Q7E87Yg8OkDhHJ7xfkCR8kriFLWmhX2U9k0y18ifJ4r9pt7/ASw1TOy5wetAEY9b7voaEI0auQGs3XSmGDq4vp/IDX9ZSe+LnR7QzVHKt6gcD6eAjhsSiNXCgk=
