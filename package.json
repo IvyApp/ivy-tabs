@@ -4,6 +4,7 @@
   "description": "WAI-ARIA accessible tab component for Ember.",
   "main": "dist/cjs/main.js",
   "scripts": {
+    "publish-build": "script/publish-build",
     "test": "script/test"
   },
   "repository": {

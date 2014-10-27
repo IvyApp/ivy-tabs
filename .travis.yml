@@ -1,7 +1,12 @@
+after_success:
+- npm run-script publish-build
+env:
+  global:
+  - secure: BW3XJWrqFehVIGxhhiAIb3ktCiU69LDt60Y5lIDDk5sxZfOxed8SseZzy5vsmopklz22+aK7T4gGXX6E1j/pkOThW0vXeFS+syRIbpGZHH5D07mvhuLbAH5pHiCxPPKEmEj5afQCMAohghx7jBEZ2PmHY2y6va9Dkt5p1h4Seyw=
 language: node_js
 notifications:
   slack:
     on_success: change
     on_failure: always
     rooms:
-      - secure: TgwO0nxw0SIBaNybX32LCSUuDe04R9EBbMQ28sYFU8jhLQYm+Q7E87Yg8OkDhHJ7xfkCR8kriFLWmhX2U9k0y18ifJ4r9pt7/ASw1TOy5wetAEY9b7voaEI0auQGs3XSmGDq4vp/IDX9ZSe+LnR7QzVHKt6gcD6eAjhsSiNXCgk=
+    - secure: TgwO0nxw0SIBaNybX32LCSUuDe04R9EBbMQ28sYFU8jhLQYm+Q7E87Yg8OkDhHJ7xfkCR8kriFLWmhX2U9k0y18ifJ4r9pt7/ASw1TOy5wetAEY9b7voaEI0auQGs3XSmGDq4vp/IDX9ZSe+LnR7QzVHKt6gcD6eAjhsSiNXCgk=
