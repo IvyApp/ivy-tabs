@@ -1,5 +1,9 @@
 after_success:
 - npm run-script publish-build
+cache:
+  directories:
+  - bower_components
+  - node_modules
 env:
   global:
   - secure: BW3XJWrqFehVIGxhhiAIb3ktCiU69LDt60Y5lIDDk5sxZfOxed8SseZzy5vsmopklz22+aK7T4gGXX6E1j/pkOThW0vXeFS+syRIbpGZHH5D07mvhuLbAH5pHiCxPPKEmEj5afQCMAohghx7jBEZ2PmHY2y6va9Dkt5p1h4Seyw=
