@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 echo "# running script/test"
 script/build
 node_modules/.bin/bower install
