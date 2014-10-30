@@ -179,3 +179,34 @@ test('deselected panel attributes', function() {
   var panel = component.$('#panel2');
   ok(!panel.hasClass('active'), 'does not have "active" class');
 });
+
+test('selects previous tab if active tab is removed', function() {
+  var component = this.subject({
+    items: Ember.A([
+      { tabId: 'tab1', panelId: 'panel1', name: 'Item 1' },
+      { tabId: 'tab2', panelId: 'panel2', name: 'Item 2' }
+    ]),
+
+    layout: Ember.Handlebars.compile(
+      '{{#ivy-tab-list id="tablist"}}' +
+      '  {{#each items}}' +
+      '    {{#ivy-tab id=tabId}}{{name}}{{/ivy-tab}}' +
+      '  {{/each}}' +
+      '{{/ivy-tab-list}}' +
+      '{{#each items}}' +
+      '  {{#ivy-tab-panel id=panelId}}{{name}}{{/ivy-tab-panel}}' +
+      '{{/each}}'
+    )
+  });
+  this.append();
+
+  ok(component.$('#tab1').hasClass('active'), 'tab1 is active');
+  ok(!component.$('#tab2').hasClass('active'), 'tab2 is not active');
+
+  Ember.run(function() {
+    component.get('items').removeAt(0);
+  });
+
+  equal(component.$('#tab1').length, 0, 'tab1 was removed');
+  ok(component.$('#tab2').hasClass('active'), 'tab2 became active');
+});
