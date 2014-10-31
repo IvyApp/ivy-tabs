@@ -19,6 +19,7 @@ test('selects first tab by default', function() {
   });
   this.append();
 
+  equal(component.get('selectedIndex'), 0, 'selectedIndex');
   ok(component.$('#tab1').is('[aria-selected=true]'), 'tab1 is selected');
   ok(component.$('#tab2').is('[aria-selected=false]'), 'tab2 is not selected');
   ok(component.$('#panel1').is(':visible'), 'panel1 is visible');
@@ -40,6 +41,7 @@ test('selects tab by selectedIndex', function() {
   });
   this.append();
 
+  equal(component.get('selectedIndex'), 1, 'selectedIndex');
   ok(component.$('#tab1').is('[aria-selected=false]'), 'tab1 is not selected');
   ok(component.$('#tab2').is('[aria-selected=true]'), 'tab2 is selected');
   ok(component.$('#panel1').is(':not(:visible)'), 'panel1 is not visible');
@@ -49,6 +51,7 @@ test('selects tab by selectedIndex', function() {
     component.set('selectedIndex', 0);
   });
 
+  equal(component.get('selectedIndex'), 0, 'selectedIndex');
   ok(component.$('#tab1').is('[aria-selected=true]'), 'tab1 is selected');
   ok(component.$('#tab2').is('[aria-selected=false]'), 'tab2 is not selected');
   ok(component.$('#panel1').is(':visible'), 'panel1 is visible');
@@ -72,6 +75,7 @@ test('selects tab on click', function() {
     component.$('#tab2').click();
   });
 
+  equal(component.get('selectedIndex'), 1, 'selectedIndex');
   ok(component.$('#tab1').is('[aria-selected=false]'), 'tab1 is not selected');
   ok(component.$('#tab2').is('[aria-selected=true]'), 'tab2 is selected');
   ok(component.$('#panel1').is(':not(:visible)'), 'panel1 is not visible');
