@@ -4,6 +4,7 @@
   "description": "WAI-ARIA accessible tab component for Ember.",
   "main": "dist/cjs/main.js",
   "scripts": {
+    "docs": "script/docs",
     "publish-build": "script/publish-build",
     "test": "script/test"
   },
@@ -26,6 +27,7 @@
     "broccoli": "^0.12.3",
     "broccoli-cli": "0.0.1",
     "broccoli-dist-es6-module": "^0.2.0",
-    "testem": "^0.6.18"
+    "testem": "^0.6.18",
+    "yuidocjs": "^0.3.50"
   }
 }
