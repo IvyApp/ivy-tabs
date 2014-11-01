@@ -2,4 +2,10 @@
 echo "# running script/test"
 script/build
 node_modules/.bin/bower install
-node_modules/.bin/testem ci
+
+for ember_version in "1.3" "1.4" "1.5" "1.6" "1.7" "1.8"
+do
+  echo "# running tests against Ember $ember_version"
+  cd "test/matrix/ember-$ember_version" && bower install -s && cd ../../../ &&
+    testem ci -f "test/matrix/ember-$ember_version/testem.json" -R dot
+done
