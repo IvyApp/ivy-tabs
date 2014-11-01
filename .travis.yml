@@ -9,6 +9,7 @@ env:
   - secure: BW3XJWrqFehVIGxhhiAIb3ktCiU69LDt60Y5lIDDk5sxZfOxed8SseZzy5vsmopklz22+aK7T4gGXX6E1j/pkOThW0vXeFS+syRIbpGZHH5D07mvhuLbAH5pHiCxPPKEmEj5afQCMAohghx7jBEZ2PmHY2y6va9Dkt5p1h4Seyw=
 language: node_js
 notifications:
+  email: false
   slack:
     on_success: change
     on_failure: always
