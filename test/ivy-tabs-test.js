@@ -105,7 +105,7 @@ test('WAI-ARIA attributes', function() {
 
   var tabpanel = component.$('#panel1');
   equal(tabpanel.attr('role'), 'tabpanel', 'panel1: role');
-  equal(tabpanel.attr('aria-labeledby'), 'tab1', 'panel1: aria-labeledby');
+  equal(tabpanel.attr('aria-labelledby'), 'tab1', 'panel1: aria-labelledby');
 });
 
 test('selected tab attributes', function() {
