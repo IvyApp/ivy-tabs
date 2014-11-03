@@ -214,3 +214,33 @@ test('selects previous tab if active tab is removed', function() {
   equal(component.$('#tab1').length, 0, 'tab1 was removed');
   ok(component.$('#tab2').hasClass('active'), 'tab2 became active');
 });
+
+test('arrow keys navigate between tabs', function() {
+  var component = this.subject({
+    template: Ember.Handlebars.compile(
+      '{{#ivy-tab-list id="tablist"}}' +
+      '  {{#ivy-tab id="tab1"}}tab 1{{/ivy-tab}}' +
+      '  {{#ivy-tab id="tab2"}}tab 2{{/ivy-tab}}' +
+      '{{/ivy-tab-list}}' +
+      '{{#ivy-tab-panel id="panel1"}}panel 1{{/ivy-tab-panel}}' +
+      '{{#ivy-tab-panel id="panel2"}}panel 2{{/ivy-tab-panel}}'
+    )
+  });
+  this.append();
+
+  Ember.run(component.$('#tab1'), 'trigger', jQuery.Event('keydown', { keyCode: 37 }));
+  equal(component.get('selectedIndex'), 1, 'left arrow - tab2 is selected');
+  ok(component.$('#tab2').get(0) === document.activeElement, 'tab2 has focus');
+
+  Ember.run(component.$('#tab2'), 'trigger', jQuery.Event('keydown', { keyCode: 38 }));
+  equal(component.get('selectedIndex'), 0, 'up arrow - tab1 is selected');
+  ok(component.$('#tab1').get(0) === document.activeElement, 'tab1 has focus');
+
+  Ember.run(component.$('#tab1'), 'trigger', jQuery.Event('keydown', { keyCode: 39 }));
+  equal(component.get('selectedIndex'), 1, 'right arrow - tab2 is selected');
+  ok(component.$('#tab2').get(0) === document.activeElement, 'tab2 has focus');
+
+  Ember.run(component.$('#tab2'), 'trigger', jQuery.Event('keydown', { keyCode: 40 }));
+  equal(component.get('selectedIndex'), 0, 'down arrow - tab1 is selected');
+  ok(component.$('#tab1').get(0) === document.activeElement, 'tab1 has focus');
+});
