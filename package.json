@@ -27,6 +27,10 @@
     "broccoli": "^0.12.3",
     "broccoli-cli": "0.0.1",
     "broccoli-dist-es6-module": "^0.2.0",
+    "broccoli-merge-trees": "^0.2.1",
+    "broccoli-replace": "^0.2.0",
+    "broccoli-static-compiler": "^0.2.1",
+    "git-repo-version": "0.0.2",
     "testem": "^0.6.18",
     "yuidocjs": "^0.3.50"
   }

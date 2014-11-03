@@ -30,10 +30,8 @@ echo -e "CHANNEL: ${CHANNEL}\n"
 
 # Sending output to /dev/null to prevent GH_TOKEN leak on error.
 git clone --branch ${CHANNEL} https://${USER}:${GH_TOKEN}@github.com/${COMPONENTS_REPO_SLUG}.git bower_ivy_tabs &> /dev/null
-for build in amd cjs globals named-amd; do
-  rm -rf bower_ivy_tabs/${build}
-  cp -R dist/${build} bower_ivy_tabs/${build}
-done
+rm -rf bower_ivy_tabs/*
+cp -R dist/* bower_ivy_tabs/
 cd bower_ivy_tabs
 git remote rm origin
 
