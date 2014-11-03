@@ -1,6 +1,6 @@
 {
   "name": "ivy-tabs",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "description": "WAI-ARIA accessible tab component for Ember.",
   "main": "dist/cjs/main.js",
   "scripts": {
