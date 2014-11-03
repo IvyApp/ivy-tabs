@@ -1,5 +1,8 @@
 after_success:
 - npm run-script publish-build
+branches:
+  only:
+  - master
 cache:
   directories:
   - bower_components
