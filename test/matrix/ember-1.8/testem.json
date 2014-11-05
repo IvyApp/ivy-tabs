@@ -6,8 +6,8 @@
     "test/matrix/ember-1.8/bower_components/handlebars/handlebars.js",
     "test/matrix/ember-1.8/bower_components/ember/ember.js",
     "test/matrix/ember-1.8/bower_components/ember-qunit/dist/globals/main.js",
-    "dist/globals/main.js",
-    "http://localhost:4200/globals/main.js",
+    "dist/ivy-tabs.js",
+    "http://localhost:4200/ivy-tabs.js",
     "test/test-helper.js",
     "test/**/*-test.js"
   ],

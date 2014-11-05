@@ -2,48 +2,28 @@
 
 [![Build Status](https://travis-ci.org/IvyApp/ivy-tabs.svg?branch=master)](https://travis-ci.org/IvyApp/ivy-tabs)
 
-[WAI-ARIA][1] accessible tab component for [Ember][2]. Based on [ic-tabs][3].
+`ivy-tabs` provides a [WAI-ARIA][1] accessible tab component for [Ember][2].
 
-## Installation
+It works with Ember 1.3 through 1.8.
 
-```sh
-$ npm install ivy-tabs
-```
+Special thanks to [ic-tabs][3], which `ivy-tabs` is based on.
 
-or...
+## Bower
 
 ```sh
-$ bower install ivy-tabs
+$ bower install -S ivy-tabs
 ```
 
-Then include the script(s) into your application.
-
-### npm + browserify
-
-```js
-require('ivy-tabs');
-```
-
-### amd
-
-Register `ivy-tabs` as a [package][4], then:
-
-```js
-define(['ivy-tabs'], ...)
-```
-
-### named-amd
-
-You ought to know what you're doing if this is the case.
-
-### globals
+Then include `ivy-tabs.js` into your application:
 
 ```html
-<script src="bower_components/ivy-tabs/dist/globals/main.js"></script>
+<script src="bower_components/ivy-tabs/ivy-tabs.js"></script>
 ```
 
-You'll also need to install the initializer to make the components available in
-your templates:
+## Initializer
+
+You'll need to register the components so that they're usable from your
+templates. An initializer is provided to do this for you:
 
 ```js
 App = Ember.Application.create(/* ... */);
@@ -100,4 +80,3 @@ change is tested or it won't be merged.
 [1]: http://www.w3.org/TR/wai-aria/roles#tab
 [2]: http://emberjs.com
 [3]: https://github.com/instructure/ic-tabs
-[4]: http://requirejs.org/docs/api.html#packages

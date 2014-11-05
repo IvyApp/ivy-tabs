@@ -1,31 +1,27 @@
-var distES6 = require('broccoli-dist-es6-module');
 var getVersion = require('git-repo-version');
 var mergeTrees = require('broccoli-merge-trees');
 var pickFiles = require('broccoli-static-compiler');
 var replace = require('broccoli-replace');
+var transpileES6 = require('broccoli-es6-module-transpiler');
 
 var distTrees = [];
+
+distTrees.push(transpileES6('lib', {
+  formatter: 'bundle',
+  output: '/ivy-tabs.js'
+}));
 
 distTrees.push(pickFiles('config/package_manager_files', {
   srcDir: '/',
   destDir: '/'
 }));
 
-distTrees.push(distES6('lib', {
-  global: 'ivy.tabs',
-  packageName: 'ivy-tabs',
-  main: 'main',
-  shim: {
-    'ember': 'Ember'
-  }
-}));
-
-distTrees = mergeTrees(distTrees);
-distTrees = replace(distTrees, {
+var distTree = mergeTrees(distTrees);
+distTree = replace(distTree, {
   files: ['**/*.js', '**/*.json'],
   patterns: [
     { match: /VERSION_STRING_PLACEHOLDER/g, replacement: getVersion() }
   ]
 });
 
-module.exports = distTrees;
+module.exports = distTree;

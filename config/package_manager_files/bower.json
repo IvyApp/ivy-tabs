@@ -5,12 +5,7 @@
     "Dray Lacy"
   ],
   "description": "WAI-ARIA accessible tab component for Ember.",
-  "main": "./globals/main.js",
-  "moduleType": [
-    "amd",
-    "globals",
-    "node"
-  ],
+  "main": "./ivy-tabs.js",
   "keywords": [
     "ember",
     "tabs"
