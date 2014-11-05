@@ -19,16 +19,16 @@ test('selects first tab by default', function() {
   });
   this.append();
 
-  equal(component.get('selectedIndex'), 0, 'selectedIndex');
+  equal(component.get('selected-index'), 0, 'selected-index');
   ok(component.$('#tab1').is('[aria-selected=true]'), 'tab1 is selected');
   ok(component.$('#tab2').is('[aria-selected=false]'), 'tab2 is not selected');
   ok(component.$('#panel1').is(':visible'), 'panel1 is visible');
   ok(component.$('#panel2').is(':not(:visible)'), 'panel2 is not visible');
 });
 
-test('selects tab by selectedIndex', function() {
+test('selects tab by selected-index', function() {
   var component = this.subject({
-    selectedIndex: 1,
+    'selected-index': 1,
 
     template: Ember.Handlebars.compile(
       '{{#ivy-tab-list}}' +
@@ -41,17 +41,17 @@ test('selects tab by selectedIndex', function() {
   });
   this.append();
 
-  equal(component.get('selectedIndex'), 1, 'selectedIndex');
+  equal(component.get('selected-index'), 1, 'selected-index');
   ok(component.$('#tab1').is('[aria-selected=false]'), 'tab1 is not selected');
   ok(component.$('#tab2').is('[aria-selected=true]'), 'tab2 is selected');
   ok(component.$('#panel1').is(':not(:visible)'), 'panel1 is not visible');
   ok(component.$('#panel2').is(':visible'), 'panel2 is visible');
 
   Ember.run(function() {
-    component.set('selectedIndex', 0);
+    component.set('selected-index', 0);
   });
 
-  equal(component.get('selectedIndex'), 0, 'selectedIndex');
+  equal(component.get('selected-index'), 0, 'selected-index');
   ok(component.$('#tab1').is('[aria-selected=true]'), 'tab1 is selected');
   ok(component.$('#tab2').is('[aria-selected=false]'), 'tab2 is not selected');
   ok(component.$('#panel1').is(':visible'), 'panel1 is visible');
@@ -75,7 +75,7 @@ test('selects tab on click', function() {
     component.$('#tab2').click();
   });
 
-  equal(component.get('selectedIndex'), 1, 'selectedIndex');
+  equal(component.get('selected-index'), 1, 'selected-index');
   ok(component.$('#tab1').is('[aria-selected=false]'), 'tab1 is not selected');
   ok(component.$('#tab2').is('[aria-selected=true]'), 'tab2 is selected');
   ok(component.$('#panel1').is(':not(:visible)'), 'panel1 is not visible');
@@ -229,18 +229,18 @@ test('arrow keys navigate between tabs', function() {
   this.append();
 
   Ember.run(component.$('#tab1'), 'trigger', jQuery.Event('keydown', { keyCode: 37 }));
-  equal(component.get('selectedIndex'), 1, 'left arrow - tab2 is selected');
+  equal(component.get('selected-index'), 1, 'left arrow - tab2 is selected');
   ok(component.$('#tab2').get(0) === document.activeElement, 'tab2 has focus');
 
   Ember.run(component.$('#tab2'), 'trigger', jQuery.Event('keydown', { keyCode: 38 }));
-  equal(component.get('selectedIndex'), 0, 'up arrow - tab1 is selected');
+  equal(component.get('selected-index'), 0, 'up arrow - tab1 is selected');
   ok(component.$('#tab1').get(0) === document.activeElement, 'tab1 has focus');
 
   Ember.run(component.$('#tab1'), 'trigger', jQuery.Event('keydown', { keyCode: 39 }));
-  equal(component.get('selectedIndex'), 1, 'right arrow - tab2 is selected');
+  equal(component.get('selected-index'), 1, 'right arrow - tab2 is selected');
   ok(component.$('#tab2').get(0) === document.activeElement, 'tab2 has focus');
 
   Ember.run(component.$('#tab2'), 'trigger', jQuery.Event('keydown', { keyCode: 40 }));
-  equal(component.get('selectedIndex'), 0, 'down arrow - tab1 is selected');
+  equal(component.get('selected-index'), 0, 'down arrow - tab1 is selected');
   ok(component.$('#tab1').get(0) === document.activeElement, 'tab1 has focus');
 });
