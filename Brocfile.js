@@ -1,8 +1,8 @@
 var distES6 = require('broccoli-dist-es6-module');
+var getVersion = require('git-repo-version');
 var mergeTrees = require('broccoli-merge-trees');
 var pickFiles = require('broccoli-static-compiler');
 var replace = require('broccoli-replace');
-var getVersion = require('git-repo-version');
 
 var distTrees = [];
 
