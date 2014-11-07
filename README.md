@@ -27,7 +27,7 @@ templates. An initializer is provided to do this for you:
 
 ```js
 App = Ember.Application.create(/* ... */);
-App.initializer(ivy.tabs.initializer);
+App.initializer(IvyTabs.initializer);
 ```
 
 ## Usage
