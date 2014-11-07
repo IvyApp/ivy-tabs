@@ -2,10 +2,10 @@ emq.globalize();
 
 setResolver(Ember.DefaultResolver.extend({
   testSubjects: {
-    'component:ivy-tab': ivy.tabs.IvyTabComponent,
-    'component:ivy-tab-list': ivy.tabs.IvyTabListComponent,
-    'component:ivy-tab-panel': ivy.tabs.IvyTabPanelComponent,
-    'component:ivy-tabs': ivy.tabs.IvyTabsComponent
+    'component:ivy-tab': IvyTabs.IvyTabComponent,
+    'component:ivy-tab-list': IvyTabs.IvyTabListComponent,
+    'component:ivy-tab-panel': IvyTabs.IvyTabPanelComponent,
+    'component:ivy-tabs': IvyTabs.IvyTabsComponent
   },
 
   resolve: function(fullName) {
