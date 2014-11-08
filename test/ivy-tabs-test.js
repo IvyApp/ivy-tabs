@@ -6,16 +6,18 @@ moduleForComponent('ivy-tabs', 'component:ivy-tabs', {
   ]
 });
 
+var basicTemplate = Ember.Handlebars.compile(
+  '{{#ivy-tab-list id="tablist"}}' +
+  '  {{#ivy-tab id="tab1"}}tab 1{{/ivy-tab}}' +
+  '  {{#ivy-tab id="tab2"}}tab 2{{/ivy-tab}}' +
+  '{{/ivy-tab-list}}' +
+  '{{#ivy-tab-panel id="panel1"}}panel 1{{/ivy-tab-panel}}' +
+  '{{#ivy-tab-panel id="panel2"}}panel 2{{/ivy-tab-panel}}'
+);
+
 test('selects first tab by default', function() {
   var component = this.subject({
-    template: Ember.Handlebars.compile(
-      '{{#ivy-tab-list}}' +
-      '  {{#ivy-tab id="tab1"}}tab 1{{/ivy-tab}}' +
-      '  {{#ivy-tab id="tab2"}}tab 2{{/ivy-tab}}' +
-      '{{/ivy-tab-list}}' +
-      '{{#ivy-tab-panel id="panel1"}}panel 1{{/ivy-tab-panel}}' +
-      '{{#ivy-tab-panel id="panel2"}}panel 2{{/ivy-tab-panel}}'
-    )
+    template: basicTemplate
   });
   this.append();
 
@@ -29,15 +31,7 @@ test('selects first tab by default', function() {
 test('selects tab by selected-index', function() {
   var component = this.subject({
     'selected-index': 1,
-
-    template: Ember.Handlebars.compile(
-      '{{#ivy-tab-list}}' +
-      '  {{#ivy-tab id="tab1"}}tab 1{{/ivy-tab}}' +
-      '  {{#ivy-tab id="tab2"}}tab 2{{/ivy-tab}}' +
-      '{{/ivy-tab-list}}' +
-      '{{#ivy-tab-panel id="panel1"}}panel 1{{/ivy-tab-panel}}' +
-      '{{#ivy-tab-panel id="panel2"}}panel 2{{/ivy-tab-panel}}'
-    )
+    template: basicTemplate
   });
   this.append();
 
@@ -60,14 +54,7 @@ test('selects tab by selected-index', function() {
 
 test('selects tab on click', function() {
   var component = this.subject({
-    template: Ember.Handlebars.compile(
-      '{{#ivy-tab-list}}' +
-      '  {{#ivy-tab id="tab1"}}tab 1{{/ivy-tab}}' +
-      '  {{#ivy-tab id="tab2"}}tab 2{{/ivy-tab}}' +
-      '{{/ivy-tab-list}}' +
-      '{{#ivy-tab-panel id="panel1"}}panel 1{{/ivy-tab-panel}}' +
-      '{{#ivy-tab-panel id="panel2"}}panel 2{{/ivy-tab-panel}}'
-    )
+    template: basicTemplate
   });
   this.append();
 
@@ -84,14 +71,7 @@ test('selects tab on click', function() {
 
 test('WAI-ARIA attributes', function() {
   var component = this.subject({
-    template: Ember.Handlebars.compile(
-      '{{#ivy-tab-list id="tablist"}}' +
-      '  {{#ivy-tab id="tab1"}}tab 1{{/ivy-tab}}' +
-      '  {{#ivy-tab id="tab2"}}tab 2{{/ivy-tab}}' +
-      '{{/ivy-tab-list}}' +
-      '{{#ivy-tab-panel id="panel1"}}panel 1{{/ivy-tab-panel}}' +
-      '{{#ivy-tab-panel id="panel2"}}panel 2{{/ivy-tab-panel}}'
-    )
+    template: basicTemplate
   });
   this.append();
 
@@ -110,14 +90,7 @@ test('WAI-ARIA attributes', function() {
 
 test('selected tab attributes', function() {
   var component = this.subject({
-    template: Ember.Handlebars.compile(
-      '{{#ivy-tab-list id="tablist"}}' +
-      '  {{#ivy-tab id="tab1"}}tab 1{{/ivy-tab}}' +
-      '  {{#ivy-tab id="tab2"}}tab 2{{/ivy-tab}}' +
-      '{{/ivy-tab-list}}' +
-      '{{#ivy-tab-panel id="panel1"}}panel 1{{/ivy-tab-panel}}' +
-      '{{#ivy-tab-panel id="panel2"}}panel 2{{/ivy-tab-panel}}'
-    )
+    template: basicTemplate
   });
   this.append();
 
@@ -131,14 +104,7 @@ test('selected tab attributes', function() {
 
 test('selected panel attributes', function() {
   var component = this.subject({
-    template: Ember.Handlebars.compile(
-      '{{#ivy-tab-list id="tablist"}}' +
-      '  {{#ivy-tab id="tab1"}}tab 1{{/ivy-tab}}' +
-      '  {{#ivy-tab id="tab2"}}tab 2{{/ivy-tab}}' +
-      '{{/ivy-tab-list}}' +
-      '{{#ivy-tab-panel id="panel1"}}panel 1{{/ivy-tab-panel}}' +
-      '{{#ivy-tab-panel id="panel2"}}panel 2{{/ivy-tab-panel}}'
-    )
+    template: basicTemplate
   });
   this.append();
 
@@ -148,14 +114,7 @@ test('selected panel attributes', function() {
 
 test('deselected tab attributes', function() {
   var component = this.subject({
-    template: Ember.Handlebars.compile(
-      '{{#ivy-tab-list id="tablist"}}' +
-      '  {{#ivy-tab id="tab1"}}tab 1{{/ivy-tab}}' +
-      '  {{#ivy-tab id="tab2"}}tab 2{{/ivy-tab}}' +
-      '{{/ivy-tab-list}}' +
-      '{{#ivy-tab-panel id="panel1"}}panel 1{{/ivy-tab-panel}}' +
-      '{{#ivy-tab-panel id="panel2"}}panel 2{{/ivy-tab-panel}}'
-    )
+    template: basicTemplate
   });
   this.append();
 
@@ -169,14 +128,7 @@ test('deselected tab attributes', function() {
 
 test('deselected panel attributes', function() {
   var component = this.subject({
-    template: Ember.Handlebars.compile(
-      '{{#ivy-tab-list id="tablist"}}' +
-      '  {{#ivy-tab id="tab1"}}tab 1{{/ivy-tab}}' +
-      '  {{#ivy-tab id="tab2"}}tab 2{{/ivy-tab}}' +
-      '{{/ivy-tab-list}}' +
-      '{{#ivy-tab-panel id="panel1"}}panel 1{{/ivy-tab-panel}}' +
-      '{{#ivy-tab-panel id="panel2"}}panel 2{{/ivy-tab-panel}}'
-    )
+    template: basicTemplate
   });
   this.append();
 
@@ -217,14 +169,7 @@ test('selects previous tab if active tab is removed', function() {
 
 test('arrow keys navigate between tabs', function() {
   var component = this.subject({
-    template: Ember.Handlebars.compile(
-      '{{#ivy-tab-list id="tablist"}}' +
-      '  {{#ivy-tab id="tab1"}}tab 1{{/ivy-tab}}' +
-      '  {{#ivy-tab id="tab2"}}tab 2{{/ivy-tab}}' +
-      '{{/ivy-tab-list}}' +
-      '{{#ivy-tab-panel id="panel1"}}panel 1{{/ivy-tab-panel}}' +
-      '{{#ivy-tab-panel id="panel2"}}panel 2{{/ivy-tab-panel}}'
-    )
+    template: basicTemplate
   });
   this.append();
 
