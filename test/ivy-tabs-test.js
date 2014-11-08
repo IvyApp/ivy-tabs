@@ -22,34 +22,6 @@ test('selects first tab by default', function() {
   this.append();
 
   equal(component.get('selected-index'), 0, 'selected-index');
-  ok(component.$('#tab1').is('[aria-selected=true]'), 'tab1 is selected');
-  ok(component.$('#tab2').is('[aria-selected=false]'), 'tab2 is not selected');
-  ok(component.$('#panel1').is(':visible'), 'panel1 is visible');
-  ok(component.$('#panel2').is(':not(:visible)'), 'panel2 is not visible');
-});
-
-test('selects tab by selected-index', function() {
-  var component = this.subject({
-    'selected-index': 1,
-    template: basicTemplate
-  });
-  this.append();
-
-  equal(component.get('selected-index'), 1, 'selected-index');
-  ok(component.$('#tab1').is('[aria-selected=false]'), 'tab1 is not selected');
-  ok(component.$('#tab2').is('[aria-selected=true]'), 'tab2 is selected');
-  ok(component.$('#panel1').is(':not(:visible)'), 'panel1 is not visible');
-  ok(component.$('#panel2').is(':visible'), 'panel2 is visible');
-
-  Ember.run(function() {
-    component.set('selected-index', 0);
-  });
-
-  equal(component.get('selected-index'), 0, 'selected-index');
-  ok(component.$('#tab1').is('[aria-selected=true]'), 'tab1 is selected');
-  ok(component.$('#tab2').is('[aria-selected=false]'), 'tab2 is not selected');
-  ok(component.$('#panel1').is(':visible'), 'panel1 is visible');
-  ok(component.$('#panel2').is(':not(:visible)'), 'panel2 is not visible');
 });
 
 test('selects tab on click', function() {
@@ -63,10 +35,6 @@ test('selects tab on click', function() {
   });
 
   equal(component.get('selected-index'), 1, 'selected-index');
-  ok(component.$('#tab1').is('[aria-selected=false]'), 'tab1 is not selected');
-  ok(component.$('#tab2').is('[aria-selected=true]'), 'tab2 is selected');
-  ok(component.$('#panel1').is(':not(:visible)'), 'panel1 is not visible');
-  ok(component.$('#panel2').is(':visible'), 'panel2 is visible');
 });
 
 test('WAI-ARIA attributes', function() {
@@ -110,6 +78,7 @@ test('selected panel attributes', function() {
 
   var panel = component.$('#panel1');
   ok(panel.hasClass('active'), 'has "active" class');
+  ok(panel.is(':visible'), 'is visible');
 });
 
 test('deselected tab attributes', function() {
@@ -134,6 +103,7 @@ test('deselected panel attributes', function() {
 
   var panel = component.$('#panel2');
   ok(!panel.hasClass('active'), 'does not have "active" class');
+  ok(!panel.is(':visible'), 'is not visible');
 });
 
 test('selects previous tab if active tab is removed', function() {
