@@ -108,6 +108,8 @@ test('deselected panel attributes', function() {
 
 test('selects previous tab if active tab is removed', function() {
   var component = this.subject({
+    'selected-index': 1,
+
     items: Ember.A([
       { tabId: 'tab1', panelId: 'panel1', name: 'Item 1' },
       { tabId: 'tab2', panelId: 'panel2', name: 'Item 2' }
@@ -126,15 +128,11 @@ test('selects previous tab if active tab is removed', function() {
   });
   this.append();
 
-  ok(component.$('#tab1').hasClass('active'), 'tab1 is active');
-  ok(!component.$('#tab2').hasClass('active'), 'tab2 is not active');
-
   Ember.run(function() {
-    component.get('items').removeAt(0);
+    component.get('items').removeAt(1);
   });
 
-  equal(component.$('#tab1').length, 0, 'tab1 was removed');
-  ok(component.$('#tab2').hasClass('active'), 'tab2 became active');
+  equal(component.get('selected-index'), 0, 'tab2 became active');
 });
 
 test('arrow keys navigate between tabs', function() {
