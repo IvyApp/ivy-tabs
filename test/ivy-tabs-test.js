@@ -143,19 +143,22 @@ test('arrow keys navigate between tabs', function() {
   });
   this.append();
 
-  Ember.run(component.$('#tab1'), 'trigger', jQuery.Event('keydown', { keyCode: 37 }));
+  var tab1 = component.$('#tab1');
+  var tab2 = component.$('#tab2');
+
+  Ember.run(tab1, 'trigger', jQuery.Event('keydown', { keyCode: 37 }));
   equal(component.get('selected-index'), 1, 'left arrow - tab2 is selected');
-  ok(component.$('#tab2').get(0) === document.activeElement, 'tab2 has focus');
+  ok(tab2.get(0) === document.activeElement, 'tab2 has focus');
 
-  Ember.run(component.$('#tab2'), 'trigger', jQuery.Event('keydown', { keyCode: 38 }));
+  Ember.run(tab2, 'trigger', jQuery.Event('keydown', { keyCode: 38 }));
   equal(component.get('selected-index'), 0, 'up arrow - tab1 is selected');
-  ok(component.$('#tab1').get(0) === document.activeElement, 'tab1 has focus');
+  ok(tab1.get(0) === document.activeElement, 'tab1 has focus');
 
-  Ember.run(component.$('#tab1'), 'trigger', jQuery.Event('keydown', { keyCode: 39 }));
+  Ember.run(tab1, 'trigger', jQuery.Event('keydown', { keyCode: 39 }));
   equal(component.get('selected-index'), 1, 'right arrow - tab2 is selected');
-  ok(component.$('#tab2').get(0) === document.activeElement, 'tab2 has focus');
+  ok(tab2.get(0) === document.activeElement, 'tab2 has focus');
 
-  Ember.run(component.$('#tab2'), 'trigger', jQuery.Event('keydown', { keyCode: 40 }));
+  Ember.run(tab2, 'trigger', jQuery.Event('keydown', { keyCode: 40 }));
   equal(component.get('selected-index'), 0, 'down arrow - tab1 is selected');
-  ok(component.$('#tab1').get(0) === document.activeElement, 'tab1 has focus');
+  ok(tab1.get(0) === document.activeElement, 'tab1 has focus');
 });
