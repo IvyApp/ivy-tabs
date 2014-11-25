@@ -2,33 +2,23 @@
 
 [![Build Status](https://travis-ci.org/IvyApp/ivy-tabs.svg?branch=master)](https://travis-ci.org/IvyApp/ivy-tabs)
 
-`ivy-tabs` provides a [WAI-ARIA][1] accessible tab component for [Ember][2].
+A group of [Ember.js Components] that interact to create a [WAI-ARIA tab] interface.
 
-It works with Ember 1.3 through 1.8.
+Special thanks to [ic-tabs], which this addon is based on.
 
-Special thanks to [ic-tabs][3], which `ivy-tabs` is based on.
+## Installation
 
-## Bower
+### As an Ember CLI addon
+
+Use this addon in your ember-cli application:
 
 ```sh
-$ bower install -S ivy-tabs
+npm install --save-dev IvyApp/ivy-tabs
 ```
 
-Then include `ivy-tabs.js` into your application:
+### As a standalone library
 
-```html
-<script src="bower_components/ivy-tabs/ivy-tabs.js"></script>
-```
-
-## Initializer
-
-You'll need to register the components so that they're usable from your
-templates. An initializer is provided to do this for you:
-
-```js
-App = Ember.Application.create(/* ... */);
-App.initializer(IvyTabs.initializer);
-```
+Copy to your vendor directory and link up the .js file.
 
 ## Usage
 
@@ -63,20 +53,49 @@ Some things to note:
 
 ## Contributing
 
-```sh
-$ git clone # <this repo>
-$ npm install
-$ npm test
-
-# during dev
-$ broccoli serve
-# new tab
-$ testem
-```
-
 Fork this repo, make a new branch, and send a pull request. Make sure your
 change is tested or it won't be merged.
 
-[1]: http://www.w3.org/TR/wai-aria/roles#tab
-[2]: http://emberjs.com
-[3]: https://github.com/instructure/ic-tabs
+### Installation
+
+```sh
+git clone git@github.com:IvyApp/ivy-tabs.git
+cd ivy-tabs
+npm install
+```
+
+### Running
+
+```sh
+ember server
+```
+
+Then visit your app at [http://localhost:4200](http://localhost:4200).
+
+### Running Tests
+
+```sh
+ember test
+```
+
+Or, to start a test server:
+
+```sh
+ember test --server
+```
+
+### Building
+
+```sh
+ember build
+```
+
+For more information on using ember-cli, visit
+[http://www.ember-cli.com/](http://www.ember-cli.com/).
+
+Also see the [packaging] readme file for a non Ember CLI release.
+
+[Ember.js Components]: http://emberjs.com/guides/components/
+[WAI-ARIA tab]: http://www.w3.org/TR/wai-aria/roles#tab
+[ic-tabs]: https://github.com/instructure/ic-tabs
+[packaging]: https://github.com/IvyApp/ivy-tabs/blob/master/packaging/README.md
