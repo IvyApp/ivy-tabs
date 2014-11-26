@@ -31,7 +31,6 @@
     "broccoli-es3-safe-recast": "^1.0.0",
     "broccoli-es6-concatenator": "^0.1.10",
     "broccoli-filter": "^0.1.10",
-    "broccoli-funnel": "^0.1.6",
     "broccoli-merge-trees": "^0.2.1",
     "broccoli-replace": "^0.2.0",
     "broccoli-static-compiler": "^0.2.1",
