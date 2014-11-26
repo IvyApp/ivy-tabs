@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
-
 echo "Building standalone library..."
-cd standalone
 rm -rf dist
 ../node_modules/.bin/broccoli build dist
 

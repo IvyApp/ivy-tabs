@@ -7,7 +7,6 @@
     "test": "tests"
   },
   "scripts": {
-    "postinstall": "./postinstall.sh",
     "publish-build": "./publish-build.sh",
     "start": "ember server",
     "build": "ember build",
