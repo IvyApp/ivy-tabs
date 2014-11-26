@@ -1,27 +1,21 @@
-var getVersion = require('git-repo-version');
-var mergeTrees = require('broccoli-merge-trees');
-var pickFiles = require('broccoli-static-compiler');
-var replace = require('broccoli-replace');
-var transpileES6 = require('broccoli-es6-module-transpiler');
+/* global require, module */
 
-var distTrees = [];
+var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
-distTrees.push(transpileES6('lib', {
-  formatter: 'bundle',
-  output: '/ivy-tabs.js'
-}));
+var app = new EmberAddon();
 
-distTrees.push(pickFiles('config/package_manager_files', {
-  srcDir: '/',
-  destDir: '/'
-}));
+// Use `app.import` to add additional libraries to the generated
+// output files.
+//
+// If you need to use different assets in different
+// environments, specify an object as the first parameter. That
+// object's keys should be the environment name and the values
+// should be the asset to use in that environment.
+//
+// If the library that you are including contains AMD or ES6
+// modules that you would like to import into your application
+// please specify an object with the list of modules as keys
+// along with the exports of each module as its value.
+app.import('bower_components/bootstrap/dist/css/bootstrap.css');
 
-var distTree = mergeTrees(distTrees);
-distTree = replace(distTree, {
-  files: ['**/*.js', '**/*.json'],
-  patterns: [
-    { match: /VERSION_STRING_PLACEHOLDER/g, replacement: getVersion() }
-  ]
-});
-
-module.exports = distTree;
+module.exports = app.toTree();

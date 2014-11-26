@@ -1,0 +1,16 @@
+{
+  "name": "ivy-tabs",
+  "version": "VERSION_STRING_PLACEHOLDER",
+  "authors": [
+    "Dray Lacy"
+  ],
+  "description": "WAI-ARIA accessible tabs for Ember.",
+  "main": "./ivy-tabs-VERSION_STRING_PLACEHOLDER.js",
+  "keywords": [
+    "ember",
+    "tabs"
+  ],
+  "dependencies": {
+    "ember": ">= 1.3.0"
+  }
+}
