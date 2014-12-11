@@ -22,6 +22,6 @@ window.Ember.Application.initializer({
   name: shim,
 
   initialize: function(container) {
-    require(shim).initialize(container);
+    require(shim)['default'](container);
   }
 });
