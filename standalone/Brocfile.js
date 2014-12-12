@@ -3,11 +3,11 @@
 var autoRegister = require('broccoli-ember-auto-register');
 var compileES6 = require('broccoli-es6-concatenator');
 var es3Safe = require('broccoli-es3-safe-recast');
+var iife = require('broccoli-iife');
 var mergeTrees = require('broccoli-merge-trees');
 var packageInfo = require('../package.json');
 var pickFiles = require('broccoli-static-compiler');
 var replace = require('broccoli-replace');
-var wrap = require('./wrap');
 
 var addonTree = pickFiles('../addon', {
   destDir: packageInfo.name,
@@ -49,7 +49,7 @@ var es6Tree = compileES6(jsTree, {
   wrapInEval: false
 });
 es6Tree = es3Safe(es6Tree);
-es6Tree = wrap(es6Tree);
+es6Tree = iife(es6Tree);
 
 var packagingTree = pickFiles('package_manager_files', {
   destDir: '/',
