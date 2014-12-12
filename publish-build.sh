@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
-./build.sh
+
+echo "Building standalone library..."
+cd standalone
+rm -rf dist
+../node_modules/.bin/broccoli build dist
+
 git config --global user.email "dray@envylabs.com"
 git config --global user.name "Dray Lacy"
 

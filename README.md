@@ -93,9 +93,9 @@ ember build
 For more information on using ember-cli, visit
 [http://www.ember-cli.com/](http://www.ember-cli.com/).
 
-Also see the [packaging] readme file for a non Ember CLI release.
+Also see the [standalone] readme file for a non Ember CLI release.
 
 [Ember.js Components]: http://emberjs.com/guides/components/
 [WAI-ARIA tab]: http://www.w3.org/TR/wai-aria/roles#tab
 [ic-tabs]: https://github.com/instructure/ic-tabs
-[packaging]: https://github.com/IvyApp/ivy-tabs/blob/master/packaging/README.md
+[standalone]: https://github.com/IvyApp/ivy-tabs/blob/master/standalone/README.md
