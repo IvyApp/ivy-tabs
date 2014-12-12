@@ -4,67 +4,63 @@ var autoRegister = require('broccoli-ember-auto-register');
 var compileES6 = require('broccoli-es6-concatenator');
 var es3Safe = require('broccoli-es3-safe-recast');
 var mergeTrees = require('broccoli-merge-trees');
+var packageInfo = require('../package.json');
 var pickFiles = require('broccoli-static-compiler');
 var replace = require('broccoli-replace');
 var wrap = require('./wrap');
 
-var packageDetails = require('../package.json');
-var packageName = packageDetails.name;
-var version = packageDetails.version;
-
 var addonTree = pickFiles('../addon', {
-  srcDir: '/',
-  destDir: packageName
-});
-
-var appTree = pickFiles('../app', {
-  srcDir: '/',
-  destDir: '/app'
-});
-
-var registrations = autoRegister(pickFiles(appTree, {
-  srcDir: '/app',
+  destDir: packageInfo.name,
   files: ['**/*.js'],
-  destDir: '/'
-}), {
-  moduleName: packageName + '-shim',
-  modulePrefix: packageName,
-  outputFile: 'registry-output.js'
+  srcDir: '/'
+});
+
+var registryTree = pickFiles(addonTree, {
+  destDir: '/',
+  files: ['components/**/*.js'],
+  srcDir: packageInfo.name
+});
+registryTree = autoRegister(registryTree, {
+  moduleName: packageInfo.name + '-shim',
+  modulePrefix: packageInfo.name,
+  outputFile: 'registry.js'
 });
 
 var loaderTree = pickFiles('../bower_components', {
-  srcDir: '/loader.js',
-  destDir: '/'
+  destDir: '/',
+  files: ['loader.js'],
+  srcDir: '/loader.js'
 });
 
 var glueTree = pickFiles('.', {
+  destDir: '/',
   files: ['glue.js'],
-  srcDir: '/',
-  destDir: '/'
+  srcDir: '/'
 });
 
-var jsTree = mergeTrees([glueTree, addonTree, appTree, registrations, loaderTree]);
+var jsTree = mergeTrees([addonTree, glueTree, loaderTree, registryTree]);
 
-var compiledJsTree = compileES6(jsTree, {
-  wrapInEval: false,
+var es6Tree = compileES6(jsTree, {
+  ignoredModules: ['ember'],
+  inputFiles: [packageInfo.name + '/**/*.js'],
+  legacyFilesToAppend: ['registry.js', 'glue.js'],
   loaderFile: 'loader.js',
-  inputFiles: [packageName + '/index.js', 'app/**/*.js'],
-  ignoredModules: ['ember', packageName],
-  outputFile: '/' + packageName + '-' + version + '.js',
-  legacyFilesToAppend: ['registry-output.js', 'glue.js']
+  outputFile: '/' + packageInfo.name + '-' + packageInfo.version + '.js',
+  wrapInEval: false
 });
-compiledJsTree = es3Safe(compiledJsTree);
-compiledJsTree = wrap(compiledJsTree);
+es6Tree = es3Safe(es6Tree);
+es6Tree = wrap(es6Tree);
 
-var packageTree = pickFiles('package_manager_files', {
-  srcDir: '/',
-  destDir: '/'
+var packagingTree = pickFiles('package_manager_files', {
+  destDir: '/',
+  srcDir: '/'
 });
 
-var distTree = replace(mergeTrees([compiledJsTree, packageTree]), {
+var distTree = mergeTrees([es6Tree, packagingTree]);
+distTree = replace(distTree, {
   files: ['**/*.js', '**/*.json'],
   patterns: [
-    { match: /VERSION_STRING_PLACEHOLDER/g, replacement: version }
+    { match: /VERSION_STRING_PLACEHOLDER/g, replacement: packageInfo.version }
   ]
 });
 
