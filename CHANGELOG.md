@@ -2,6 +2,8 @@
 
 ## master
 
+## 1.0.0-beta.4
+
 * Upgrade to ember-cli 0.1.5.
 * Upgrade to ember 1.9.1 in dummy app.
 * Remove unnecessary ember-data dependency in dummy app.
