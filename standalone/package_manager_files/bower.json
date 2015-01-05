@@ -5,7 +5,7 @@
     "Dray Lacy"
   ],
   "description": "WAI-ARIA accessible tabs for Ember.",
-  "main": "./ivy-tabs-VERSION_STRING_PLACEHOLDER.js",
+  "main": "./ivy-tabs.js",
   "keywords": [
     "ember",
     "tabs"
