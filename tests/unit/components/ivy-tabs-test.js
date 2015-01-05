@@ -120,12 +120,12 @@ test('selects previous tab if active tab is removed', function() {
 
     layout: Ember.Handlebars.compile(
       '{{#ivy-tab-list id="tablist"}}' +
-      '  {{#each items}}' +
-      '    {{#ivy-tab id=tabId}}{{name}}{{/ivy-tab}}' +
+      '  {{#each item in items}}' +
+      '    {{#ivy-tab id=tabId}}{{item.name}}{{/ivy-tab}}' +
       '  {{/each}}' +
       '{{/ivy-tab-list}}' +
-      '{{#each items}}' +
-      '  {{#ivy-tab-panel id=panelId}}{{name}}{{/ivy-tab-panel}}' +
+      '{{#each item in items}}' +
+      '  {{#ivy-tab-panel id=panelId}}{{item.name}}{{/ivy-tab-panel}}' +
       '{{/each}}'
     )
   });
