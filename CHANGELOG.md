@@ -3,6 +3,7 @@
 ## master
 
 * Upgrade to ember-cli 0.1.5.
+* Upgrade to ember 1.9.1 in dummy app.
 
 ## 1.0.0-beta.3
 
