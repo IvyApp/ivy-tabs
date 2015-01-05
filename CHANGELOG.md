@@ -2,6 +2,8 @@
 
 ## master
 
+* Upgrade to ember-cli 0.1.5.
+
 ## 1.0.0-beta.3
 
 * More tooling changes. Should now be usable as a Bower package, outside of an
