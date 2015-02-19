@@ -2,6 +2,12 @@
 
 ## master
 
+## 1.0.1
+
+* This release bumps the patch version to ensure that the latest code is up on
+  npm. Since previously "1.0.0+canary" was published, npm treated that as
+  a 1.0.0 release. If you had been using 1.0.0, it's safe to update to 1.0.1.
+
 ## 1.0.0
 
 * Ensure selected-index remains 0 if all tabs are removed.
