@@ -2,25 +2,17 @@
 
 ## master
 
-## 1.0.0-beta.4
+## 1.0.0
 
+* Ensure selected-index remains 0 if all tabs are removed.
 * Upgrade to ember-cli 0.1.5.
 * Upgrade to ember 1.9.1 in dummy app.
 * Remove unnecessary ember-data dependency in dummy app.
 * Remove version suffix from ivy-tabs.js.
-
-## 1.0.0-beta.3
-
 * More tooling changes. Should now be usable as a Bower package, outside of an
   Ember CLI app.
-
-## 1.0.0-beta.2
-
 * Remove deprecated selectedIndex property.
 * Convert to an ember-cli addon.
-
-## 1.0.0-beta.1
-
 * Rename toplevel global from `ivy.tabs` to `IvyTabs`.
 
 ## 0.3.0
