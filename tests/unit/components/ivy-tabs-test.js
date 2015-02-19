@@ -109,25 +109,22 @@ test('deselected panel attributes', function() {
   ok(!panel.is(':visible'), 'is not visible');
 });
 
+var eachLayout = Ember.Handlebars.compile(
+  '{{#ivy-tab-list}}' +
+  '  {{#each item in items}}' +
+  '    {{#ivy-tab}}{{item}}{{/ivy-tab}}' +
+  '  {{/each}}' +
+  '{{/ivy-tab-list}}' +
+  '{{#each item in items}}' +
+  '  {{#ivy-tab-panel}}{{item}}{{/ivy-tab-panel}}' +
+  '{{/each}}'
+);
+
 test('selects previous tab if active tab is removed', function() {
   var component = this.subject({
     'selected-index': 1,
-
-    items: Ember.A([
-      { tabId: 'tab1', panelId: 'panel1', name: 'Item 1' },
-      { tabId: 'tab2', panelId: 'panel2', name: 'Item 2' }
-    ]),
-
-    layout: Ember.Handlebars.compile(
-      '{{#ivy-tab-list id="tablist"}}' +
-      '  {{#each item in items}}' +
-      '    {{#ivy-tab id=tabId}}{{item.name}}{{/ivy-tab}}' +
-      '  {{/each}}' +
-      '{{/ivy-tab-list}}' +
-      '{{#each item in items}}' +
-      '  {{#ivy-tab-panel id=panelId}}{{item.name}}{{/ivy-tab-panel}}' +
-      '{{/each}}'
-    )
+    items: Ember.A(['Item 1', 'Item 2']),
+    layout: eachLayout
   });
   this.append();
 
@@ -135,7 +132,22 @@ test('selects previous tab if active tab is removed', function() {
     component.get('items').removeAt(1);
   });
 
-  equal(component.get('selected-index'), 0, 'tab2 became active');
+  equal(component.get('selected-index'), 0, 'previous tab became active');
+});
+
+test('selects first tab if all tabs are replaced', function() {
+  var component = this.subject({
+    'selected-index': 1,
+    items: Ember.A(['Item 1', 'Item 2']),
+    layout: eachLayout
+  });
+  this.append();
+
+  Ember.run(function() {
+    component.set('items', Ember.A(['Item 3', 'Item 4']));
+  });
+
+  equal(component.get('selected-index'), 0, 'first tab became active');
 });
 
 test('arrow keys navigate between tabs', function() {
