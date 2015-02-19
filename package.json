@@ -1,6 +1,6 @@
 {
   "name": "ivy-tabs",
-  "version": "1.0.0-beta.4",
+  "version": "1.0.0",
   "description": "WAI-ARIA accessible tabs for Ember.",
   "directories": {
     "doc": "doc",
