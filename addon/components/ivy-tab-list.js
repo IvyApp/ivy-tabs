@@ -107,7 +107,12 @@ export default Ember.Component.extend({
    */
   selectPreviousTab: function() {
     var index = this.get('selected-index') - 1;
-    if (index === -1) { index = this.get('tabs.length') - 1; }
+
+    // Previous from the first tab should select the last tab.
+    if (index < 0) { index = this.get('tabs.length') - 1; }
+    // This would only happen if there are no tabs, so stay at 0.
+    if (index < 0) { index = 0; }
+
     this.selectTabByIndex(index);
   },
 
