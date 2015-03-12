@@ -1,6 +1,9 @@
 # ivy-tabs
 
-## master
+## 1.1.0-beta.1
+
+* Upgrade to ember-cli 0.2.0.
+* Upgrade to ember 1.10.0.
 
 ## 1.0.0
 
