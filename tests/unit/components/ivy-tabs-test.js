@@ -22,7 +22,7 @@ test('selects first tab by default', function(assert) {
   var component = this.subject({
     template: basicTemplate
   });
-  this.append();
+  this.render();
 
   assert.equal(component.get('selected-index'), 0, 'selected-index');
 });
@@ -31,7 +31,7 @@ test('selects tab on click', function(assert) {
   var component = this.subject({
     template: basicTemplate
   });
-  this.append();
+  this.render();
 
   Ember.run(function() {
     component.$('#tab2').click();
@@ -44,7 +44,7 @@ test('WAI-ARIA attributes', function(assert) {
   var component = this.subject({
     template: basicTemplate
   });
-  this.append();
+  this.render();
 
   var tablist = component.$('#tablist');
   assert.equal(tablist.attr('aria-multiselectable'), 'false', 'tablist: aria-multiselectable');
@@ -63,7 +63,7 @@ test('selected tab attributes', function(assert) {
   var component = this.subject({
     template: basicTemplate
   });
-  this.append();
+  this.render();
 
   var tab = component.$('#tab1');
   assert.ok(tab.hasClass('active'), 'has "active" class');
@@ -77,7 +77,7 @@ test('selected panel attributes', function(assert) {
   var component = this.subject({
     template: basicTemplate
   });
-  this.append();
+  this.render();
 
   var panel = component.$('#panel1');
   assert.ok(panel.hasClass('active'), 'has "active" class');
@@ -88,7 +88,7 @@ test('deselected tab attributes', function(assert) {
   var component = this.subject({
     template: basicTemplate
   });
-  this.append();
+  this.render();
 
   var tab = component.$('#tab2');
   assert.ok(!tab.hasClass('active'), 'does not have "active" class');
@@ -102,7 +102,7 @@ test('deselected panel attributes', function(assert) {
   var component = this.subject({
     template: basicTemplate
   });
-  this.append();
+  this.render();
 
   var panel = component.$('#panel2');
   assert.ok(!panel.hasClass('active'), 'does not have "active" class');
@@ -126,7 +126,7 @@ test('selects previous tab if active tab is removed', function(assert) {
     items: Ember.A(['Item 1', 'Item 2']),
     layout: eachLayout
   });
-  this.append();
+  this.render();
 
   Ember.run(function() {
     component.get('items').removeAt(1);
@@ -141,7 +141,7 @@ test('selects first tab if all tabs are replaced', function(assert) {
     items: Ember.A(['Item 1', 'Item 2']),
     layout: eachLayout
   });
-  this.append();
+  this.render();
 
   Ember.run(function() {
     component.set('items', Ember.A(['Item 3', 'Item 4']));
@@ -154,7 +154,7 @@ test('arrow keys navigate between tabs', function(assert) {
   var component = this.subject({
     template: basicTemplate
   });
-  this.append();
+  this.render();
 
   var tab1 = component.$('#tab1');
   var tab2 = component.$('#tab2');
