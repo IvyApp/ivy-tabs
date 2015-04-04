@@ -140,7 +140,7 @@ export default Ember.Component.extend({
    *
    * @method select
    */
-  select: Ember.on('click', function() {
+  select: Ember.on('click', 'touchEnd', function() {
     this.get('tabList').selectTab(this);
   }),
 
