@@ -40,6 +40,19 @@ test('selects tab on click', function(assert) {
   assert.equal(component.get('selected-index'), 1, 'selected-index');
 });
 
+test('selects tab on touchEnd', function(assert) {
+  var component = this.subject({
+    template: basicTemplate
+  });
+  this.render();
+
+  Ember.run(function() {
+    component.$('#tab2').trigger('touchend');
+  });
+
+  assert.equal(component.get('selected-index'), 1, 'selected-index');
+});
+
 test('WAI-ARIA attributes', function(assert) {
   var component = this.subject({
     template: basicTemplate

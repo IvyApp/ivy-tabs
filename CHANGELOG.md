@@ -1,5 +1,9 @@
 # ivy-tabs
 
+## 1.1.0-beta.2
+
+* Add touch support.
+
 ## 1.1.0-beta.1
 
 * Upgrade to ember-cli 0.2.0.
