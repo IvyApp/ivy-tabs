@@ -13,10 +13,13 @@ cache:
     - node_modules
 
 env:
-  - EMBER_TRY_SCENARIO=default
-  - EMBER_TRY_SCENARIO=ember-release
-  - EMBER_TRY_SCENARIO=ember-beta
-  - EMBER_TRY_SCENARIO=ember-canary
+  global:
+    - secure: BW3XJWrqFehVIGxhhiAIb3ktCiU69LDt60Y5lIDDk5sxZfOxed8SseZzy5vsmopklz22+aK7T4gGXX6E1j/pkOThW0vXeFS+syRIbpGZHH5D07mvhuLbAH5pHiCxPPKEmEj5afQCMAohghx7jBEZ2PmHY2y6va9Dkt5p1h4Seyw=
+  matrix:
+    - EMBER_TRY_SCENARIO=default
+    - EMBER_TRY_SCENARIO=ember-release
+    - EMBER_TRY_SCENARIO=ember-beta
+    - EMBER_TRY_SCENARIO=ember-canary
 
 matrix:
   fast_finish: true
@@ -35,10 +38,6 @@ install:
 
 script:
   - ember try $EMBER_TRY_SCENARIO test
-
-env:
-  global:
-  - secure: BW3XJWrqFehVIGxhhiAIb3ktCiU69LDt60Y5lIDDk5sxZfOxed8SseZzy5vsmopklz22+aK7T4gGXX6E1j/pkOThW0vXeFS+syRIbpGZHH5D07mvhuLbAH5pHiCxPPKEmEj5afQCMAohghx7jBEZ2PmHY2y6va9Dkt5p1h4Seyw=
 
 notifications:
   email: false
