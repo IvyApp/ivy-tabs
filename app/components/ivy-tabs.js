@@ -1,3 +1,1 @@
-import IvyTabsComponent from 'ivy-tabs/components/ivy-tabs';
-
-export default IvyTabsComponent;
+export { default } from 'ivy-tabs/components/ivy-tabs';
