@@ -1,5 +1,10 @@
 # ivy-tabs
 
+## 1.1.0-beta.3
+
+* Upgrade addon to ember-cli 0.2.4.
+* Fix an issue with initial value of `selected-index` not being applied.
+
 ## 1.1.0-beta.2
 
 * Add touch support.
