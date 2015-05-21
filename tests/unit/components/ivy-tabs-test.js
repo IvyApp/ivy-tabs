@@ -1,84 +1,67 @@
 import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 
-moduleForComponent('ivy-tabs', 'component:ivy-tabs', {
-  needs: [
-    'component:ivy-tab',
-    'component:ivy-tab-list',
-    'component:ivy-tab-panel'
-  ]
+moduleForComponent('ivy-tabs', {
+  integration: true
 });
 
-var basicTemplate = Ember.Handlebars.compile(
-  '{{#ivy-tab-list id="tablist"}}' +
-  '  {{#ivy-tab id="tab1"}}tab 1{{/ivy-tab}}' +
-  '  {{#ivy-tab id="tab2"}}tab 2{{/ivy-tab}}' +
-  '{{/ivy-tab-list}}' +
-  '{{#ivy-tab-panel id="panel1"}}panel 1{{/ivy-tab-panel}}' +
-  '{{#ivy-tab-panel id="panel2"}}panel 2{{/ivy-tab-panel}}'
-);
+var basicTemplate =
+  '{{#ivy-tabs selected-index=selectedIndex}}' +
+  '  {{#ivy-tab-list id="tablist"}}' +
+  '    {{#ivy-tab id="tab1"}}tab 1{{/ivy-tab}}' +
+  '    {{#ivy-tab id="tab2"}}tab 2{{/ivy-tab}}' +
+  '  {{/ivy-tab-list}}' +
+  '  {{#ivy-tab-panel id="panel1"}}panel 1{{/ivy-tab-panel}}' +
+  '  {{#ivy-tab-panel id="panel2"}}panel 2{{/ivy-tab-panel}}' +
+  '{{/ivy-tabs}}';
 
 test('selects first tab by default', function(assert) {
-  var component = this.subject({
-    template: basicTemplate
-  });
-  this.render();
+  this.render(basicTemplate);
 
-  assert.equal(component.get('selected-index'), 0, 'selected-index');
+  assert.equal(this.get('selectedIndex'), 0, 'selected-index');
+});
+
+test('selects tab by index', function(assert) {
+  this.set('selectedIndex', 1);
+  this.render(basicTemplate);
+
+  assert.equal(this.get('selectedIndex'), 1, 'selected-index');
 });
 
 test('selects tab on click', function(assert) {
-  var component = this.subject({
-    template: basicTemplate
-  });
-  this.render();
+  this.render(basicTemplate);
+  this.$('#tab2').click();
 
-  Ember.run(function() {
-    component.$('#tab2').click();
-  });
-
-  assert.equal(component.get('selected-index'), 1, 'selected-index');
+  assert.equal(this.get('selectedIndex'), 1, 'selected-index');
 });
 
 test('selects tab on touchEnd', function(assert) {
-  var component = this.subject({
-    template: basicTemplate
-  });
-  this.render();
+  this.render(basicTemplate);
+  this.$('#tab2').trigger('touchend');
 
-  Ember.run(function() {
-    component.$('#tab2').trigger('touchend');
-  });
-
-  assert.equal(component.get('selected-index'), 1, 'selected-index');
+  assert.equal(this.get('selectedIndex'), 1, 'selected-index');
 });
 
 test('WAI-ARIA attributes', function(assert) {
-  var component = this.subject({
-    template: basicTemplate
-  });
-  this.render();
+  this.render(basicTemplate);
 
-  var tablist = component.$('#tablist');
+  var tablist = this.$('#tablist');
   assert.equal(tablist.attr('aria-multiselectable'), 'false', 'tablist: aria-multiselectable');
   assert.equal(tablist.attr('role'), 'tablist', 'tablist: role');
 
-  var tab = component.$('#tab1');
+  var tab = this.$('#tab1');
   assert.equal(tab.attr('role'), 'tab', 'tab1: role');
   assert.equal(tab.attr('aria-controls'), 'panel1', 'tab1: aria-controls');
 
-  var tabpanel = component.$('#panel1');
+  var tabpanel = this.$('#panel1');
   assert.equal(tabpanel.attr('role'), 'tabpanel', 'panel1: role');
   assert.equal(tabpanel.attr('aria-labelledby'), 'tab1', 'panel1: aria-labelledby');
 });
 
 test('selected tab attributes', function(assert) {
-  var component = this.subject({
-    template: basicTemplate
-  });
-  this.render();
+  this.render(basicTemplate);
 
-  var tab = component.$('#tab1');
+  var tab = this.$('#tab1');
   assert.ok(tab.hasClass('active'), 'has "active" class');
   assert.equal(tab.attr('selected'), 'selected', 'selected');
   assert.equal(tab.attr('aria-selected'), 'true', 'aria-selected');
@@ -87,23 +70,17 @@ test('selected tab attributes', function(assert) {
 });
 
 test('selected panel attributes', function(assert) {
-  var component = this.subject({
-    template: basicTemplate
-  });
-  this.render();
+  this.render(basicTemplate);
 
-  var panel = component.$('#panel1');
+  var panel = this.$('#panel1');
   assert.ok(panel.hasClass('active'), 'has "active" class');
   assert.ok(panel.is(':visible'), 'is visible');
 });
 
 test('deselected tab attributes', function(assert) {
-  var component = this.subject({
-    template: basicTemplate
-  });
-  this.render();
+  this.render(basicTemplate);
 
-  var tab = component.$('#tab2');
+  var tab = this.$('#tab2');
   assert.ok(!tab.hasClass('active'), 'does not have "active" class');
   assert.equal(tab.attr('selected'), undefined, 'selected');
   assert.equal(tab.attr('aria-selected'), 'false', 'aria-selected');
@@ -112,79 +89,68 @@ test('deselected tab attributes', function(assert) {
 });
 
 test('deselected panel attributes', function(assert) {
-  var component = this.subject({
-    template: basicTemplate
-  });
-  this.render();
+  this.render(basicTemplate);
 
-  var panel = component.$('#panel2');
+  var panel = this.$('#panel2');
   assert.ok(!panel.hasClass('active'), 'does not have "active" class');
   assert.ok(!panel.is(':visible'), 'is not visible');
 });
 
-var eachLayout = Ember.Handlebars.compile(
-  '{{#ivy-tab-list}}' +
+var eachTemplate =
+  '{{#ivy-tabs selected-index=selectedIndex}}' +
+  '  {{#ivy-tab-list}}' +
+  '    {{#each item in items}}' +
+  '      {{#ivy-tab}}{{item}}{{/ivy-tab}}' +
+  '    {{/each}}' +
+  '  {{/ivy-tab-list}}' +
   '  {{#each item in items}}' +
-  '    {{#ivy-tab}}{{item}}{{/ivy-tab}}' +
+  '    {{#ivy-tab-panel}}{{item}}{{/ivy-tab-panel}}' +
   '  {{/each}}' +
-  '{{/ivy-tab-list}}' +
-  '{{#each item in items}}' +
-  '  {{#ivy-tab-panel}}{{item}}{{/ivy-tab-panel}}' +
-  '{{/each}}'
-);
+  '{{/ivy-tabs}}';
 
 test('selects previous tab if active tab is removed', function(assert) {
-  var component = this.subject({
-    'selected-index': 1,
-    items: Ember.A(['Item 1', 'Item 2']),
-    layout: eachLayout
-  });
-  this.render();
+  this.set('selectedIndex', 1);
+  this.set('items', Ember.A(['Item 1', 'Item 2']));
+  this.render(eachTemplate);
 
-  Ember.run(function() {
-    component.get('items').removeAt(1);
+  Ember.run(this, function() {
+    this.get('items').removeAt(1);
   });
 
-  assert.equal(component.get('selected-index'), 0, 'previous tab became active');
+  assert.equal(this.get('selectedIndex'), 0, 'previous tab became active');
 });
 
 test('selects first tab if all tabs are replaced', function(assert) {
-  var component = this.subject({
-    'selected-index': 1,
-    items: Ember.A(['Item 1', 'Item 2']),
-    layout: eachLayout
-  });
-  this.render();
+  this.set('selectedIndex', 1);
+  this.set('items', Ember.A(['Item 1', 'Item 2']));
+  this.render(eachTemplate);
 
-  Ember.run(function() {
-    component.set('items', Ember.A(['Item 3', 'Item 4']));
+  Ember.run(this, function() {
+    this.set('items', Ember.A(['Item 3', 'Item 4']));
   });
 
-  assert.equal(component.get('selected-index'), 0, 'first tab became active');
+  assert.equal(this.get('selectedIndex'), 0, 'first tab became active');
 });
 
 test('arrow keys navigate between tabs', function(assert) {
-  var component = this.subject({
-    template: basicTemplate
-  });
-  this.render();
+  this.render(basicTemplate);
 
-  var tab1 = component.$('#tab1');
-  var tab2 = component.$('#tab2');
+  var tab1 = this.$('#tab1');
+  var tab2 = this.$('#tab2');
 
   Ember.run(tab1, 'trigger', Ember.$.Event('keydown', { keyCode: 37 }));
-  assert.equal(component.get('selected-index'), 1, 'left arrow - tab2 is selected');
+  assert.equal(this.get('selectedIndex'), 1, 'left arrow - tab2 is selected');
   assert.ok(tab2.get(0) === document.activeElement, 'tab2 has focus');
 
   Ember.run(tab2, 'trigger', Ember.$.Event('keydown', { keyCode: 38 }));
-  assert.equal(component.get('selected-index'), 0, 'up arrow - tab1 is selected');
+  assert.equal(this.get('selectedIndex'), 0, 'up arrow - tab1 is selected');
   assert.ok(tab1.get(0) === document.activeElement, 'tab1 has focus');
 
   Ember.run(tab1, 'trigger', Ember.$.Event('keydown', { keyCode: 39 }));
-  assert.equal(component.get('selected-index'), 1, 'right arrow - tab2 is selected');
+  assert.equal(this.get('selectedIndex'), 1, 'right arrow - tab2 is selected');
   assert.ok(tab2.get(0) === document.activeElement, 'tab2 has focus');
 
   Ember.run(tab2, 'trigger', Ember.$.Event('keydown', { keyCode: 40 }));
-  assert.equal(component.get('selected-index'), 0, 'down arrow - tab1 is selected');
+  assert.equal(this.get('selectedIndex'), 0, 'down arrow - tab1 is selected');
   assert.ok(tab1.get(0) === document.activeElement, 'tab1 has focus');
 });
