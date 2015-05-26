@@ -120,16 +120,16 @@ test('selects previous tab if active tab is removed', function(assert) {
   assert.equal(this.get('selectedIndex'), 0, 'previous tab became active');
 });
 
-test('selects first tab if all tabs are replaced', function(assert) {
+test('selects previous tab if active tab is removed via replacement', function(assert) {
   this.set('selectedIndex', 1);
   this.set('items', Ember.A(['Item 1', 'Item 2']));
   this.render(eachTemplate);
 
   Ember.run(this, function() {
-    this.set('items', Ember.A(['Item 3', 'Item 4']));
+    this.set('items', Ember.A(['Item 3']));
   });
 
-  assert.equal(this.get('selectedIndex'), 0, 'first tab became active');
+  assert.equal(this.get('selectedIndex'), 0, 'previous tab became active');
 });
 
 test('arrow keys navigate between tabs', function(assert) {
