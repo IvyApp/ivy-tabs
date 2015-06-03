@@ -144,6 +144,18 @@ test('retains tab selection if preceeding tab is removed', function(assert) {
   assert.equal(this.get('selectedIndex'), 0, 'tab selection is retained');
 });
 
+test('selects the next tab when an active, first tab is removed', function(assert) {
+  this.set('selectedIndex', 0);
+  this.set('items', Ember.A(['Item 1', 'Item 2', 'Item 3']));
+  this.render(eachTemplate);
+
+  Ember.run(this, function() {
+    this.get('items').removeAt(0);
+  });
+
+  assert.equal(this.get('selectedIndex'), 0, 'selects next tab');
+});
+
 test('arrow keys navigate between tabs', function(assert) {
   this.render(basicTemplate);
 

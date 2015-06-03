@@ -167,8 +167,12 @@ export default Ember.Component.extend({
     var index = tab.get('index');
     this.get('tabs').removeObject(tab);
 
-    if (tab.get('isSelected') || index < this.get('selected-index')) {
+    if (index < this.get('selected-index')) {
       this.selectPreviousTab();
+    } else if (tab.get('isSelected')) {
+      if (index !== 0) {
+        this.selectPreviousTab();
+      }
     }
   },
 
