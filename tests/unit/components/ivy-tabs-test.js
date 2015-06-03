@@ -132,6 +132,18 @@ test('selects previous tab if active tab is removed via replacement', function(a
   assert.equal(this.get('selectedIndex'), 0, 'previous tab became active');
 });
 
+test('retains tab selection if preceeding tab is removed', function(assert) {
+  this.set('selectedIndex', 1);
+  this.set('items', Ember.A(['Item 1', 'Item 2']));
+  this.render(eachTemplate);
+
+  Ember.run(this, function() {
+    this.get('items').removeAt(0);
+  });
+
+  assert.equal(this.get('selectedIndex'), 0, 'tab selection is retained');
+});
+
 test('arrow keys navigate between tabs', function(assert) {
   this.render(basicTemplate);
 

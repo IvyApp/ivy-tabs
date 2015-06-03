@@ -164,8 +164,12 @@ export default Ember.Component.extend({
    * @param {IvyTabs.IvyTabComponent} tab
    */
   unregisterTab: function(tab) {
+    var index = tab.get('index');
     this.get('tabs').removeObject(tab);
-    if (tab.get('isSelected')) { this.selectPreviousTab(); }
+
+    if (tab.get('isSelected') || index < this.get('selected-index')) {
+      this.selectPreviousTab();
+    }
   },
 
   _initTabs: Ember.on('init', function() {
