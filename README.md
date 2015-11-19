@@ -16,10 +16,6 @@ Use this addon in your ember-cli application:
 npm install --save-dev IvyApp/ivy-tabs
 ```
 
-### As a standalone library
-
-Copy to your vendor directory and link up the .js file.
-
 ## Usage
 
 ```handlebars
@@ -93,9 +89,6 @@ ember build
 For more information on using ember-cli, visit
 [http://www.ember-cli.com/](http://www.ember-cli.com/).
 
-Also see the [standalone] readme file for a non Ember CLI release.
-
 [Ember.js Components]: http://emberjs.com/guides/components/
 [WAI-ARIA tab]: http://www.w3.org/TR/wai-aria/roles#tab
 [ic-tabs]: https://github.com/instructure/ic-tabs
-[standalone]: https://github.com/IvyApp/ivy-tabs/blob/master/standalone/README.md

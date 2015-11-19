@@ -5,16 +5,11 @@ node_js:
 
 sudo: false
 
-after_success:
-  - npm run-script publish-build
-
 cache:
   directories:
     - node_modules
 
 env:
-  global:
-    - secure: BW3XJWrqFehVIGxhhiAIb3ktCiU69LDt60Y5lIDDk5sxZfOxed8SseZzy5vsmopklz22+aK7T4gGXX6E1j/pkOThW0vXeFS+syRIbpGZHH5D07mvhuLbAH5pHiCxPPKEmEj5afQCMAohghx7jBEZ2PmHY2y6va9Dkt5p1h4Seyw=
   matrix:
     - EMBER_TRY_SCENARIO=default
     - EMBER_TRY_SCENARIO=ember-release
@@ -32,7 +27,7 @@ before_install:
   - "npm install -g npm@^2"
 
 install:
-  - npm install -g bower broccoli-cli
+  - npm install -g bower
   - npm install
   - bower install
 

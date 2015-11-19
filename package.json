@@ -7,7 +7,6 @@
     "test": "tests"
   },
   "scripts": {
-    "publish-build": "./publish-build.sh",
     "start": "ember server",
     "build": "ember build",
     "test": "ember try:testall"
@@ -22,15 +21,7 @@
     "url": "https://github.com/IvyApp/ivy-tabs/issues"
   },
   "devDependencies": {
-    "broccoli": "^0.13.6",
     "broccoli-asset-rev": "^2.0.2",
-    "broccoli-ember-auto-register": "^0.2.0",
-    "broccoli-es3-safe-recast": "^1.0.0",
-    "broccoli-es6-concatenator": "^0.1.11",
-    "broccoli-iife": "^0.1.0",
-    "broccoli-merge-trees": "^0.2.1",
-    "broccoli-replace": "^0.2.0",
-    "broccoli-static-compiler": "^0.2.1",
     "ember-cli": "0.2.7",
     "ember-cli-app-version": "0.3.3",
     "ember-cli-content-security-policy": "0.4.0",
