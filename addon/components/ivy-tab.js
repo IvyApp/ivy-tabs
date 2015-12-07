@@ -11,7 +11,7 @@ import Ember from 'ember';
  */
 export default Ember.Component.extend({
   tagName: 'li',
-  attributeBindings: ['aria-controls', 'aria-expanded', 'aria-selected', 'role', 'selected', 'tabindex'],
+  attributeBindings: ['aria-controls', 'aria-expanded', 'aria-selected', 'aria-disabled', 'role', 'selected', 'disabled', 'tabindex'],
   classNames: ['ivy-tab'],
   classNameBindings: ['active', 'complete'],
 
@@ -60,6 +60,18 @@ export default Ember.Component.extend({
   }).property('isSelected'),
 
   /**
+   * Tells screenreaders whether or not this tab is disabled.
+   *
+   * See http://www.w3.org/TR/wai-aria/states_and_properties#aria-disabled
+   *
+   * @property aria-disabled
+   * @type String
+   */
+  'aria-disabled': Ember.computed(function() {
+    return this.get('isDisabled') + ''; // coerce to 'true' or 'false'
+  }).property('isDisabled'),
+
+  /**
    * The `role` attribute of the tab element.
    *
    * See http://www.w3.org/TR/wai-aria/roles#tab
@@ -81,6 +93,28 @@ export default Ember.Component.extend({
   selected: Ember.computed(function() {
     if (this.get('isSelected')) { return 'selected'; }
   }).property('isSelected'),
+
+  /**
+   * The `disabled` attribute of the tab element. If the tab's `isDisabled`
+   * property is `true` this will be the literal string 'disabled', otherwise
+   * it will be `undefined`.
+   *
+   * @property disabled
+   * @type String
+   */
+  disabled: Ember.computed(function() {
+    if (this.get('isDisabled')) { return 'disabled'; }
+  }).property('isDisabled'),
+
+  /**
+   * The CSS class to apply to a tab's element when its `isDisabled` property
+   * is `true`.
+   *
+   * @property isDisabled
+   * @type String
+   * @default false
+   */
+  isDisabled: false,
 
   /**
    * Makes the selected tab keyboard tabbable, and prevents tabs from getting

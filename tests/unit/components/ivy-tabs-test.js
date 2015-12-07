@@ -10,6 +10,7 @@ var basicTemplate =
   '  {{#ivy-tab-list id="tablist"}}' +
   '    {{#ivy-tab id="tab1"}}tab 1{{/ivy-tab}}' +
   '    {{#ivy-tab id="tab2"}}tab 2{{/ivy-tab}}' +
+  '    {{#ivy-tab id="tab3" isDisabled=true}}tab 2{{/ivy-tab}}' +
   '  {{/ivy-tab-list}}' +
   '  {{#ivy-tab-panel id="panel1"}}panel 1{{/ivy-tab-panel}}' +
   '  {{#ivy-tab-panel id="panel2"}}panel 2{{/ivy-tab-panel}}' +
@@ -33,6 +34,13 @@ test('selects tab on click', function(assert) {
   this.$('#tab2').click();
 
   assert.equal(this.get('selectedIndex'), 1, 'selected-index');
+});
+
+test('does not select disabled tab on click', function(assert) {
+  this.render(basicTemplate);
+  this.$('#tab3').click();
+
+  assert.notEqual(this.get('selectedIndex'), 2, 'selected-index');
 });
 
 test('selects tab on touchEnd', function(assert) {

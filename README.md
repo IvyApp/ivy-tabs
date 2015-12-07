@@ -27,7 +27,7 @@ Copy to your vendor directory and link up the .js file.
   {{#ivy-tab-list}}
     {{#ivy-tab}}Foo{{/ivy-tab}}
     {{#ivy-tab}}Bar{{/ivy-tab}}
-    {{#ivy-tab}}Baz{{/ivy-tab}}
+    {{#ivy-tab isDisabled=disabledAttr}}Baz{{/ivy-tab}}
   {{/ivy-tab-list}}
 
   {{#ivy-tab-panel}}
