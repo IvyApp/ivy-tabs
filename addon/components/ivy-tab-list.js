@@ -145,7 +145,13 @@ export default Ember.Component.extend({
    * @param {Number} index
    */
   selectTabByIndex: function(index) {
+    var tabs = this.get('tabs');
+
     this.set('selected-index', index);
+
+    for (var i = tabs.length - 1; i >= 0; i--) {
+      tabs[i].set('isComplete', i < index);
+    }
   },
 
   /**

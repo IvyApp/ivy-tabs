@@ -13,7 +13,7 @@ export default Ember.Component.extend({
   tagName: 'li',
   attributeBindings: ['aria-controls', 'aria-expanded', 'aria-selected', 'role', 'selected', 'tabindex'],
   classNames: ['ivy-tab'],
-  classNameBindings: ['active'],
+  classNameBindings: ['active', 'complete'],
 
   init: function() {
     this._super();
@@ -114,6 +114,28 @@ export default Ember.Component.extend({
    * @default 'active'
    */
   activeClass: 'active',
+
+  /**
+   * Accessed as a className binding to apply the tab's `completeClass` CSS class
+   * to the element when the tab's `isComplete` property is true.
+   *
+   * @property complete
+   * @type String
+   * @readOnly
+   */
+  complete: Ember.computed(function() {
+    if (this.get('isComplete')) { return this.get('completeClass'); }
+  }).property('isComplete'),
+
+  /**
+   * The CSS class to apply to a tab's element when its `isComplete` property
+   * is `true`.
+   *
+   * @property completeClass
+   * @type String
+   * @default 'complete'
+   */
+  completeClass: 'complete',
 
   /**
    * The index of this tab in the `ivy-tab-list` component.
