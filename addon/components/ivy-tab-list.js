@@ -95,9 +95,11 @@ export default Ember.Component.extend({
    * @method selectNextTab
    */
   selectNextTab: function() {
-    var index = this.get('selected-index') + 1;
-    if (index === this.get('tabs.length')) { index = 0; }
-    this.selectTabByIndex(index);
+    var nextTab = this.findNextEnabledTab( this.get('selected-index') );
+
+    if (nextTab) {
+      this.selectTab( nextTab );
+    }
   },
 
   /**
@@ -106,14 +108,75 @@ export default Ember.Component.extend({
    * @method selectPreviousTab
    */
   selectPreviousTab: function() {
-    var index = this.get('selected-index') - 1;
+    var prevTab = this.findPreviousEnabledTab( this.get('selected-index') );
 
-    // Previous from the first tab should select the last tab.
-    if (index < 0) { index = this.get('tabs.length') - 1; }
-    // This would only happen if there are no tabs, so stay at 0.
-    if (index < 0) { index = 0; }
+    if (prevTab) {
+      this.selectTab( prevTab );
+    }
+  },
 
-    this.selectTabByIndex(index);
+  /**
+   * Finds next tab that is not disabled
+   *
+   * @method findNextEnabledTab
+   * @param {String} index
+   */
+  findNextEnabledTab: function findNextEnabledTab(index) {
+    var lastIndex = this.get('tabs.length') - 1,
+        tabs = this.get('tabs'),
+        i, tab;
+
+    index++;
+
+    for (i = index; i <= lastIndex; i++) {
+      tab = tabs.objectAt(i);
+
+      if (!tab.get('isDisabled')) {
+        return tab;
+      }
+    }
+
+    for (i = 0; i < index; i++) {
+      tab = tabs.objectAt(i);
+
+      if (!tab.get('isDisabled')) {
+        return tab;
+      }
+    }
+
+    return null;
+  },
+
+  /**
+   * Finds previous tab that is not disabled
+   *
+   * @method findPreviousEnabledTab
+   * @param {String} index
+   */
+  findPreviousEnabledTab: function findPreviousEnabledTab(index) {
+    var lastIndex = this.get('tabs.length') - 1,
+        tabs = this.get('tabs'),
+        i, tab;
+
+    index--;
+
+    for (i = index; i >= 0; i--) {
+      tab = tabs.objectAt(i);
+
+      if (!tab.get('isDisabled')) {
+        return tab;
+      }
+    }
+
+    for (i = lastIndex; i > index; i--) {
+      tab = tabs.objectAt(i);
+
+      if (!tab.get('isDisabled')) {
+        return tab;
+      }
+    }
+
+    return null;
   },
 
   'selected-index': Ember.computed.alias('tabsContainer.selected-index'),
@@ -145,7 +208,18 @@ export default Ember.Component.extend({
    * @param {Number} index
    */
   selectTabByIndex: function(index) {
+    var tabs = this.get('tabs'),
+        tab = tabs.objectAt(index);
+
+    if (!tab || tab.get('isDisabled')) {
+      return;
+    }
+
     this.set('selected-index', index);
+
+    for (var i = tabs.length - 1; i >= 0; i--) {
+      tabs[i].set('isComplete', i < index);
+    }
   },
 
   /**

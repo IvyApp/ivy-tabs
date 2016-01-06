@@ -23,7 +23,7 @@ npm install --save-dev IvyApp/ivy-tabs
   {{#ivy-tab-list}}
     {{#ivy-tab}}Foo{{/ivy-tab}}
     {{#ivy-tab}}Bar{{/ivy-tab}}
-    {{#ivy-tab}}Baz{{/ivy-tab}}
+    {{#ivy-tab isDisabled=disabledAttr}}Baz{{/ivy-tab}}
   {{/ivy-tab-list}}
 
   {{#ivy-tab-panel}}
