@@ -13,7 +13,7 @@ Special thanks to [ic-tabs], which this addon is based on.
 Use this addon in your ember-cli application:
 
 ```sh
-npm install --save-dev IvyApp/ivy-tabs
+ember install ivy-tabs
 ```
 
 ## Usage
