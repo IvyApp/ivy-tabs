@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/IvyApp/ivy-tabs.svg?branch=master)](https://travis-ci.org/IvyApp/ivy-tabs)
 [![Ember Observer Score](http://emberobserver.com/badges/ivy-tabs.svg)](http://emberobserver.com/addons/ivy-tabs)
 
-A group of [Ember.js Components] that interact to create a [WAI-ARIA tab] interface.
+A group of Ember.js Components that interact to create a [WAI-ARIA tab] interface.
 
 Special thanks to [ic-tabs], which this addon is based on.
 
@@ -86,6 +86,5 @@ ember build
 For more information on using ember-cli, visit
 [http://www.ember-cli.com/](http://www.ember-cli.com/).
 
-[Ember.js Components]: http://emberjs.com/guides/components/
 [WAI-ARIA tab]: http://www.w3.org/TR/wai-aria/roles#tab
 [ic-tabs]: https://github.com/instructure/ic-tabs
