@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import layout from '../templates/components/ivy-tab-list';
 
 /**
  * @module ivy-tabs
@@ -10,17 +11,19 @@ import Ember from 'ember';
  * @extends Ember.Component
  */
 export default Ember.Component.extend({
+  layout: layout,
+
   tagName: 'ul',
   attributeBindings: ['aria-multiselectable', 'role'],
   classNames: ['ivy-tab-list'],
 
-  init: function() {
-    this._super();
+  init() {
+    this._super(...arguments);
     Ember.run.once(this, this._registerWithTabsContainer);
   },
 
-  willDestroy: function() {
-    this._super();
+  willDestroy() {
+    this._super(...arguments);
     Ember.run.once(this, this._unregisterWithTabsContainer);
   },
 
@@ -49,7 +52,7 @@ export default Ember.Component.extend({
    *
    * @method focusSelectedTab
    */
-  focusSelectedTab: function() {
+  focusSelectedTab() {
     this.get('selectedTab').$().focus();
   },
 
@@ -85,7 +88,7 @@ export default Ember.Component.extend({
    * @method registerTab
    * @param {IvyTabs.IvyTabComponent} tab
    */
-  registerTab: function(tab) {
+  registerTab(tab) {
     this.get('tabs').pushObject(tab);
   },
 
@@ -94,8 +97,8 @@ export default Ember.Component.extend({
    *
    * @method selectNextTab
    */
-  selectNextTab: function() {
-    var index = this.get('selected-index') + 1;
+  selectNextTab() {
+    let index = this.get('selected-index') + 1;
     if (index === this.get('tabs.length')) { index = 0; }
     this.selectTabByIndex(index);
   },
@@ -105,8 +108,8 @@ export default Ember.Component.extend({
    *
    * @method selectPreviousTab
    */
-  selectPreviousTab: function() {
-    var index = this.get('selected-index') - 1;
+  selectPreviousTab() {
+    let index = this.get('selected-index') - 1;
 
     // Previous from the first tab should select the last tab.
     if (index < 0) { index = this.get('tabs.length') - 1; }
@@ -134,7 +137,7 @@ export default Ember.Component.extend({
    * @method selectTab
    * @param {IvyTabs.IvyTabComponent} tab
    */
-  selectTab: function(tab) {
+  selectTab(tab) {
     this.selectTabByIndex(this.get('tabs').indexOf(tab));
   },
 
@@ -144,9 +147,21 @@ export default Ember.Component.extend({
    * @method selectTabByIndex
    * @param {Number} index
    */
-  selectTabByIndex: function(index) {
+  selectTabByIndex(index) {
     this.set('selected-index', index);
   },
+
+  tabs: Ember.computed(function() {
+    return Ember.A();
+  }).readOnly(),
+
+  _deprecatedParentViewBasedTabsContainer: Ember.computed('parentView', function() {
+    Ember.deprecate('Inferring `tabsContainer` from `parentView` on `{{ivy-tab-list}}` is deprecated. Please assign in an instance of `{{ivy-tabs}}` to the `tabsContainer` property.', false, {
+      id: 'ivy-tabs.ivy-tab-list.tabs-container-missing',
+      until: '2.0.0'
+    });
+    return this.get('parentView');
+  }).readOnly(),
 
   /**
    * The `ivy-tabs` component.
@@ -155,7 +170,7 @@ export default Ember.Component.extend({
    * @type IvyTabs.IvyTabsComponent
    * @readOnly
    */
-  tabsContainer: Ember.computed.alias('parentView').readOnly(),
+  tabsContainer: Ember.computed.oneWay('_deprecatedParentViewBasedTabsContainer'),
 
   /**
    * Removes a tab from the `tabs` array.
@@ -163,8 +178,8 @@ export default Ember.Component.extend({
    * @method unregisterTab
    * @param {IvyTabs.IvyTabComponent} tab
    */
-  unregisterTab: function(tab) {
-    var index = tab.get('index');
+  unregisterTab(tab) {
+    const index = tab.get('index');
     this.get('tabs').removeObject(tab);
 
     if (index < this.get('selected-index')) {
@@ -176,15 +191,11 @@ export default Ember.Component.extend({
     }
   },
 
-  _initTabs: Ember.on('init', function() {
-    this.set('tabs', Ember.A());
-  }),
-
-  _registerWithTabsContainer: function() {
+  _registerWithTabsContainer() {
     this.get('tabsContainer').registerTabList(this);
   },
 
-  _unregisterWithTabsContainer: function() {
+  _unregisterWithTabsContainer() {
     this.get('tabsContainer').unregisterTabList(this);
   }
 });

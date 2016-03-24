@@ -14,13 +14,13 @@ export default Ember.Component.extend({
   classNames: ['ivy-tab-panel'],
   classNameBindings: ['active'],
 
-  init: function() {
-    this._super();
+  init() {
+    this._super(...arguments);
     Ember.run.once(this, this._registerWithTabsContainer);
   },
 
-  willDestroy: function() {
-    this._super();
+  willDestroy() {
+    this._super(...arguments);
     Ember.run.once(this, this._unregisterWithTabsContainer);
   },
 
@@ -102,7 +102,7 @@ export default Ember.Component.extend({
    * @type IvyTabs.IvyTabComponent
    */
   tab: Ember.computed(function() {
-    var tabs = this.get('tabs');
+    const tabs = this.get('tabs');
     if (tabs) { return tabs.objectAt(this.get('index')); }
   }).property('tabs.[]', 'index'),
 
@@ -134,6 +134,14 @@ export default Ember.Component.extend({
    */
   tabs: Ember.computed.alias('tabList.tabs').readOnly(),
 
+  _deprecatedParentViewBasedTabsContainer: Ember.computed('parentView', function() {
+    Ember.deprecate('Inferring `tabsContainer` from `parentView` on `{{ivy-tab-panel}}` is deprecated. Please assign in an instance of `{{ivy-tabs}}` to the `tabsContainer` property.', false, {
+      id: 'ivy-tabs.ivy-tab-panel.tabs-container-missing',
+      until: '2.0.0'
+    });
+    return this.get('parentView');
+  }).readOnly(),
+
   /**
    * The `ivy-tabs` component.
    *
@@ -141,13 +149,13 @@ export default Ember.Component.extend({
    * @type IvyTabs.IvyTabsComponent
    * @readOnly
    */
-  tabsContainer: Ember.computed.alias('parentView').readOnly(),
+  tabsContainer: Ember.computed.oneWay('_deprecatedParentViewBasedTabsContainer'),
 
-  _registerWithTabsContainer: function() {
+  _registerWithTabsContainer() {
     this.get('tabsContainer').registerTabPanel(this);
   },
 
-  _unregisterWithTabsContainer: function() {
+  _unregisterWithTabsContainer() {
     this.get('tabsContainer').unregisterTabPanel(this);
   }
 });

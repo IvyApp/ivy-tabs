@@ -8,33 +8,29 @@ Special thanks to [ic-tabs], which this addon is based on.
 
 ## Installation
 
-### As an Ember CLI addon
-
-Use this addon in your ember-cli application:
-
 ```sh
-npm install --save-dev IvyApp/ivy-tabs
+$ ember install ivy-tabs
 ```
 
 ## Usage
 
 ```handlebars
-{{#ivy-tabs}}
-  {{#ivy-tab-list}}
-    {{#ivy-tab}}Foo{{/ivy-tab}}
-    {{#ivy-tab}}Bar{{/ivy-tab}}
-    {{#ivy-tab}}Baz{{/ivy-tab}}
+{{#ivy-tabs as |tabsContainer|}}
+  {{#ivy-tab-list tabsContainer=tabsContainer as |tabList|}}
+    {{#ivy-tab tabList=tabList}}Foo{{/ivy-tab}}
+    {{#ivy-tab tabList=tabList}}Bar{{/ivy-tab}}
+    {{#ivy-tab tabList=tabList}}Baz{{/ivy-tab}}
   {{/ivy-tab-list}}
 
-  {{#ivy-tab-panel}}
+  {{#ivy-tab-panel tabsContainer=tabsContainer}}
     <h2>Foo</h2>
   {{/ivy-tab-panel}}
 
-  {{#ivy-tab-panel}}
+  {{#ivy-tab-panel tabsContainer=tabsContainer}}
     <h2>Bar</h2>
   {{/ivy-tab-panel}}
 
-  {{#ivy-tab-panel}}
+  {{#ivy-tab-panel tabsContainer=tabsContainer}}
     <h2>Baz</h2>
   {{/ivy-tab-panel}}
 {{/ivy-tabs}}
@@ -43,9 +39,9 @@ npm install --save-dev IvyApp/ivy-tabs
 Some things to note:
 
   * Associations between tabs and tab-panes are inferred by order.
-  * `ivy-tab-list` must be an immediate child of `ivy-tabs`.
-  * `ivy-tab` must be an immediate child of `ivy-tab-list`.
-  * `ivy-tab-panel` must be an immediate child of `ivy-tabs`.
+  * Both `ivy-tabs` and `ivy-tab-list` yield themselves as a parameter, which
+    should be passed down to their children as `tabsContainer` and `tabList`,
+    respectively.
 
 ## Contributing
 

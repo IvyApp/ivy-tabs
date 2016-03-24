@@ -15,13 +15,13 @@ export default Ember.Component.extend({
   classNames: ['ivy-tab'],
   classNameBindings: ['active'],
 
-  init: function() {
-    this._super();
+  init() {
+    this._super(...arguments);
     Ember.run.once(this, this._registerWithTabList);
   },
 
-  willDestroy: function() {
-    this._super();
+  willDestroy() {
+    this._super(...arguments);
     Ember.run.once(this, this._unregisterWithTabList);
   },
 
@@ -144,6 +144,14 @@ export default Ember.Component.extend({
     this.get('tabList').selectTab(this);
   }),
 
+  _deprecatedParentViewBasedTabList: Ember.computed('parentView', function() {
+    Ember.deprecate('Inferring `tabList` from `parentView` on `{{ivy-tab}}` is deprecated. Please assign in an instance of `{{ivy-tab-list}}` to the `tabList` property.', false, {
+      id: 'ivy-tabs.ivy-tab.tab-list-missing',
+      until: '2.0.0'
+    });
+    return this.get('parentView');
+  }).readOnly(),
+
   /**
    * The `ivy-tab-list` component this tab belongs to.
    *
@@ -151,7 +159,7 @@ export default Ember.Component.extend({
    * @type IvyTabs.IvyTabListComponent
    * @readOnly
    */
-  tabList: Ember.computed.alias('parentView').readOnly(),
+  tabList: Ember.computed.oneWay('_deprecatedParentViewBasedTabList'),
 
   /**
    * The `ivy-tab-panel` associated with this tab.
@@ -191,11 +199,11 @@ export default Ember.Component.extend({
    */
   tabsContainer: Ember.computed.alias('tabList.tabsContainer').readOnly(),
 
-  _registerWithTabList: function() {
+  _registerWithTabList() {
     this.get('tabList').registerTab(this);
   },
 
-  _unregisterWithTabList: function() {
+  _unregisterWithTabList() {
     this.get('tabList').unregisterTab(this);
   }
 });

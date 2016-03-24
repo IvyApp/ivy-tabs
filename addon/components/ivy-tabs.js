@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import layout from '../templates/components/ivy-tabs';
 
 /**
  * @module ivy-tabs
@@ -10,12 +11,9 @@ import Ember from 'ember';
  * @extends Ember.Component
  */
 export default Ember.Component.extend({
-  classNames: ['ivy-tabs'],
+  layout: layout,
 
-  init: function() {
-    this._super();
-    this._initTabPanels();
-  },
+  classNames: ['ivy-tabs'],
 
   /**
    * Set this to the index of the tab you'd like to be selected. Usually it is
@@ -34,7 +32,7 @@ export default Ember.Component.extend({
    * @method registerTabList
    * @param {IvyTabs.IvyTabListComponent} tabList
    */
-  registerTabList: function(tabList) {
+  registerTabList(tabList) {
     this.set('tabList', tabList);
     Ember.run.once(this, this._selectTabByIndex);
   },
@@ -45,9 +43,13 @@ export default Ember.Component.extend({
    * @method registerTabPanel
    * @param {IvyTabs.IvyTabPanelComponent} tabPanel
    */
-  registerTabPanel: function(tabPanel) {
+  registerTabPanel(tabPanel) {
     this.get('tabPanels').pushObject(tabPanel);
   },
+
+  tabPanels: Ember.computed(function() {
+    return Ember.A();
+  }).readOnly(),
 
   /**
    * Removes the `ivy-tab-list` component.
@@ -55,7 +57,7 @@ export default Ember.Component.extend({
    * @method unregisterTabList
    * @param {IvyTabs.IvyTabListComponent} tabList
    */
-  unregisterTabList: function(/* tabList */) {
+  unregisterTabList(/* tabList */) {
     this.set('tabList', null);
   },
 
@@ -65,16 +67,12 @@ export default Ember.Component.extend({
    * @method unregisterTabPanel
    * @param {IvyTabs.IvyTabPanelComponent} tabPanel
    */
-  unregisterTabPanel: function(tabPanel) {
+  unregisterTabPanel(tabPanel) {
     this.get('tabPanels').removeObject(tabPanel);
   },
 
-  _initTabPanels: function() {
-    this.set('tabPanels', Ember.A());
-  },
-
-  _selectTabByIndex: function() {
-    var selectedIndex = this.get('selected-index');
+  _selectTabByIndex() {
+    let selectedIndex = this.get('selected-index');
     if (Ember.isNone(selectedIndex)) { selectedIndex = 0; }
     this.get('tabList').selectTabByIndex(selectedIndex);
   }
