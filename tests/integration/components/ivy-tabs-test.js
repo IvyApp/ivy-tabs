@@ -6,7 +6,7 @@ moduleForComponent('ivy-tabs', {
   integration: true
 });
 
-var basicTemplate = hbs`
+const basicTemplate = hbs`
   {{#ivy-tabs selected-index=selectedIndex}}
     {{#ivy-tab-list id="tablist"}}
       {{#ivy-tab id="tab1"}}tab 1{{/ivy-tab}}
@@ -47,15 +47,15 @@ test('selects tab on touchEnd', function(assert) {
 test('WAI-ARIA attributes', function(assert) {
   this.render(basicTemplate);
 
-  var tablist = this.$('#tablist');
+  const tablist = this.$('#tablist');
   assert.equal(tablist.attr('aria-multiselectable'), 'false', 'tablist: aria-multiselectable');
   assert.equal(tablist.attr('role'), 'tablist', 'tablist: role');
 
-  var tab = this.$('#tab1');
+  const tab = this.$('#tab1');
   assert.equal(tab.attr('role'), 'tab', 'tab1: role');
   assert.equal(tab.attr('aria-controls'), 'panel1', 'tab1: aria-controls');
 
-  var tabpanel = this.$('#panel1');
+  const tabpanel = this.$('#panel1');
   assert.equal(tabpanel.attr('role'), 'tabpanel', 'panel1: role');
   assert.equal(tabpanel.attr('aria-labelledby'), 'tab1', 'panel1: aria-labelledby');
 });
@@ -63,7 +63,7 @@ test('WAI-ARIA attributes', function(assert) {
 test('selected tab attributes', function(assert) {
   this.render(basicTemplate);
 
-  var tab = this.$('#tab1');
+  const tab = this.$('#tab1');
   assert.ok(tab.hasClass('active'), 'has "active" class');
   assert.equal(tab.attr('selected'), 'selected', 'selected');
   assert.equal(tab.attr('aria-selected'), 'true', 'aria-selected');
@@ -74,7 +74,7 @@ test('selected tab attributes', function(assert) {
 test('selected panel attributes', function(assert) {
   this.render(basicTemplate);
 
-  var panel = this.$('#panel1');
+  const panel = this.$('#panel1');
   assert.ok(panel.hasClass('active'), 'has "active" class');
   assert.ok(panel.is(':visible'), 'is visible');
 });
@@ -82,7 +82,7 @@ test('selected panel attributes', function(assert) {
 test('deselected tab attributes', function(assert) {
   this.render(basicTemplate);
 
-  var tab = this.$('#tab2');
+  const tab = this.$('#tab2');
   assert.ok(!tab.hasClass('active'), 'does not have "active" class');
   assert.equal(tab.attr('selected'), undefined, 'selected');
   assert.equal(tab.attr('aria-selected'), 'false', 'aria-selected');
@@ -93,12 +93,12 @@ test('deselected tab attributes', function(assert) {
 test('deselected panel attributes', function(assert) {
   this.render(basicTemplate);
 
-  var panel = this.$('#panel2');
+  const panel = this.$('#panel2');
   assert.ok(!panel.hasClass('active'), 'does not have "active" class');
   assert.ok(!panel.is(':visible'), 'is not visible');
 });
 
-var eachTemplate = hbs`
+const eachTemplate = hbs`
   {{#ivy-tabs selected-index=selectedIndex}}
     {{#ivy-tab-list}}
       {{#each items as |item|}}
@@ -162,8 +162,8 @@ test('selects the next tab when an active, first tab is removed', function(asser
 test('arrow keys navigate between tabs', function(assert) {
   this.render(basicTemplate);
 
-  var tab1 = this.$('#tab1');
-  var tab2 = this.$('#tab2');
+  const tab1 = this.$('#tab1');
+  const tab2 = this.$('#tab2');
 
   Ember.run(tab1, 'trigger', Ember.$.Event('keydown', { keyCode: 37 }));
   assert.equal(this.get('selectedIndex'), 1, 'left arrow - tab2 is selected');

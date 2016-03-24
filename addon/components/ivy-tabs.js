@@ -74,7 +74,7 @@ export default Ember.Component.extend({
   },
 
   _selectTabByIndex: function() {
-    var selectedIndex = this.get('selected-index');
+    let selectedIndex = this.get('selected-index');
     if (Ember.isNone(selectedIndex)) { selectedIndex = 0; }
     this.get('tabList').selectTabByIndex(selectedIndex);
   }

@@ -102,7 +102,7 @@ export default Ember.Component.extend({
    * @type IvyTabs.IvyTabComponent
    */
   tab: Ember.computed(function() {
-    var tabs = this.get('tabs');
+    const tabs = this.get('tabs');
     if (tabs) { return tabs.objectAt(this.get('index')); }
   }).property('tabs.[]', 'index'),
 

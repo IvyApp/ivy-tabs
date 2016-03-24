@@ -95,7 +95,7 @@ export default Ember.Component.extend({
    * @method selectNextTab
    */
   selectNextTab: function() {
-    var index = this.get('selected-index') + 1;
+    let index = this.get('selected-index') + 1;
     if (index === this.get('tabs.length')) { index = 0; }
     this.selectTabByIndex(index);
   },
@@ -106,7 +106,7 @@ export default Ember.Component.extend({
    * @method selectPreviousTab
    */
   selectPreviousTab: function() {
-    var index = this.get('selected-index') - 1;
+    let index = this.get('selected-index') - 1;
 
     // Previous from the first tab should select the last tab.
     if (index < 0) { index = this.get('tabs.length') - 1; }
@@ -164,7 +164,7 @@ export default Ember.Component.extend({
    * @param {IvyTabs.IvyTabComponent} tab
    */
   unregisterTab: function(tab) {
-    var index = tab.get('index');
+    const index = tab.get('index');
     this.get('tabs').removeObject(tab);
 
     if (index < this.get('selected-index')) {
