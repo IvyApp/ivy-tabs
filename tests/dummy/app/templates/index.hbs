@@ -1,12 +1,12 @@
-{{#ivy-tabs}}
-  {{#ivy-tab-list}}
-    {{#ivy-tab}}Tab A{{/ivy-tab}}
-    {{#ivy-tab}}Tab B{{/ivy-tab}}
-    {{#ivy-tab}}Tab C{{/ivy-tab}}
+{{#ivy-tabs as |tabsContainer|}}
+  {{#ivy-tab-list tabsContainer=tabsContainer as |tabList|}}
+    {{#ivy-tab tabList=tabList}}Tab A{{/ivy-tab}}
+    {{#ivy-tab tabList=tabList}}Tab B{{/ivy-tab}}
+    {{#ivy-tab tabList=tabList}}Tab C{{/ivy-tab}}
   {{/ivy-tab-list}}
 
   <div class="tab-content">
-    {{#ivy-tab-panel}}
+    {{#ivy-tab-panel tabsContainer=tabsContainer}}
       <h2>Tab A</h2>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -19,7 +19,7 @@
       </p>
     {{/ivy-tab-panel}}
 
-    {{#ivy-tab-panel}}
+    {{#ivy-tab-panel tabsContainer=tabsContainer}}
       <h2>Tab B</h2>
       <p>
         Tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -31,7 +31,7 @@
       </p>
     {{/ivy-tab-panel}}
 
-    {{#ivy-tab-panel}}
+    {{#ivy-tab-panel tabsContainer=tabsContainer}}
       <h2>Tab C</h2>
       <p>
         Veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
