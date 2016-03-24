@@ -18,12 +18,12 @@ export default Ember.Component.extend({
   classNames: ['ivy-tab-list'],
 
   init() {
-    this._super();
+    this._super(...arguments);
     Ember.run.once(this, this._registerWithTabsContainer);
   },
 
   willDestroy() {
-    this._super();
+    this._super(...arguments);
     Ember.run.once(this, this._unregisterWithTabsContainer);
   },
 

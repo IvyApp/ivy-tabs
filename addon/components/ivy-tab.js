@@ -16,12 +16,12 @@ export default Ember.Component.extend({
   classNameBindings: ['active'],
 
   init() {
-    this._super();
+    this._super(...arguments);
     Ember.run.once(this, this._registerWithTabList);
   },
 
   willDestroy() {
-    this._super();
+    this._super(...arguments);
     Ember.run.once(this, this._unregisterWithTabList);
   },
 
