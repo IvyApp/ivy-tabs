@@ -151,6 +151,10 @@ export default Ember.Component.extend({
     this.set('selected-index', index);
   },
 
+  tabs: Ember.computed(function() {
+    return Ember.A();
+  }).readOnly(),
+
   /**
    * The `ivy-tabs` component.
    *
@@ -178,10 +182,6 @@ export default Ember.Component.extend({
       }
     }
   },
-
-  _initTabs: Ember.on('init', function() {
-    this.set('tabs', Ember.A());
-  }),
 
   _registerWithTabsContainer: function() {
     this.get('tabsContainer').registerTabList(this);

@@ -15,11 +15,6 @@ export default Ember.Component.extend({
 
   classNames: ['ivy-tabs'],
 
-  init: function() {
-    this._super();
-    this._initTabPanels();
-  },
-
   /**
    * Set this to the index of the tab you'd like to be selected. Usually it is
    * bound to a controller property that is used as a query parameter, but can
@@ -52,6 +47,10 @@ export default Ember.Component.extend({
     this.get('tabPanels').pushObject(tabPanel);
   },
 
+  tabPanels: Ember.computed(function() {
+    return Ember.A();
+  }).readOnly(),
+
   /**
    * Removes the `ivy-tab-list` component.
    *
@@ -70,10 +69,6 @@ export default Ember.Component.extend({
    */
   unregisterTabPanel: function(tabPanel) {
     this.get('tabPanels').removeObject(tabPanel);
-  },
-
-  _initTabPanels: function() {
-    this.set('tabPanels', Ember.A());
   },
 
   _selectTabByIndex: function() {
