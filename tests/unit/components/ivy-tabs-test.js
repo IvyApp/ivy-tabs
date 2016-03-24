@@ -99,11 +99,11 @@ test('deselected panel attributes', function(assert) {
 var eachTemplate =
   '{{#ivy-tabs selected-index=selectedIndex}}' +
   '  {{#ivy-tab-list}}' +
-  '    {{#each item in items}}' +
+  '    {{#each items as |item|}}' +
   '      {{#ivy-tab}}{{item}}{{/ivy-tab}}' +
   '    {{/each}}' +
   '  {{/ivy-tab-list}}' +
-  '  {{#each item in items}}' +
+  '  {{#each items as |item|}}' +
   '    {{#ivy-tab-panel}}{{item}}{{/ivy-tab-panel}}' +
   '  {{/each}}' +
   '{{/ivy-tabs}}';
