@@ -17,12 +17,12 @@ export default Ember.Component.extend({
   attributeBindings: ['aria-multiselectable', 'role'],
   classNames: ['ivy-tab-list'],
 
-  init: function() {
+  init() {
     this._super();
     Ember.run.once(this, this._registerWithTabsContainer);
   },
 
-  willDestroy: function() {
+  willDestroy() {
     this._super();
     Ember.run.once(this, this._unregisterWithTabsContainer);
   },
@@ -52,7 +52,7 @@ export default Ember.Component.extend({
    *
    * @method focusSelectedTab
    */
-  focusSelectedTab: function() {
+  focusSelectedTab() {
     this.get('selectedTab').$().focus();
   },
 
@@ -88,7 +88,7 @@ export default Ember.Component.extend({
    * @method registerTab
    * @param {IvyTabs.IvyTabComponent} tab
    */
-  registerTab: function(tab) {
+  registerTab(tab) {
     this.get('tabs').pushObject(tab);
   },
 
@@ -97,7 +97,7 @@ export default Ember.Component.extend({
    *
    * @method selectNextTab
    */
-  selectNextTab: function() {
+  selectNextTab() {
     let index = this.get('selected-index') + 1;
     if (index === this.get('tabs.length')) { index = 0; }
     this.selectTabByIndex(index);
@@ -108,7 +108,7 @@ export default Ember.Component.extend({
    *
    * @method selectPreviousTab
    */
-  selectPreviousTab: function() {
+  selectPreviousTab() {
     let index = this.get('selected-index') - 1;
 
     // Previous from the first tab should select the last tab.
@@ -137,7 +137,7 @@ export default Ember.Component.extend({
    * @method selectTab
    * @param {IvyTabs.IvyTabComponent} tab
    */
-  selectTab: function(tab) {
+  selectTab(tab) {
     this.selectTabByIndex(this.get('tabs').indexOf(tab));
   },
 
@@ -147,7 +147,7 @@ export default Ember.Component.extend({
    * @method selectTabByIndex
    * @param {Number} index
    */
-  selectTabByIndex: function(index) {
+  selectTabByIndex(index) {
     this.set('selected-index', index);
   },
 
@@ -170,7 +170,7 @@ export default Ember.Component.extend({
    * @method unregisterTab
    * @param {IvyTabs.IvyTabComponent} tab
    */
-  unregisterTab: function(tab) {
+  unregisterTab(tab) {
     const index = tab.get('index');
     this.get('tabs').removeObject(tab);
 
@@ -183,11 +183,11 @@ export default Ember.Component.extend({
     }
   },
 
-  _registerWithTabsContainer: function() {
+  _registerWithTabsContainer() {
     this.get('tabsContainer').registerTabList(this);
   },
 
-  _unregisterWithTabsContainer: function() {
+  _unregisterWithTabsContainer() {
     this.get('tabsContainer').unregisterTabList(this);
   }
 });

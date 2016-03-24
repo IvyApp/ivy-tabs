@@ -15,12 +15,12 @@ export default Ember.Component.extend({
   classNames: ['ivy-tab'],
   classNameBindings: ['active'],
 
-  init: function() {
+  init() {
     this._super();
     Ember.run.once(this, this._registerWithTabList);
   },
 
-  willDestroy: function() {
+  willDestroy() {
     this._super();
     Ember.run.once(this, this._unregisterWithTabList);
   },
@@ -191,11 +191,11 @@ export default Ember.Component.extend({
    */
   tabsContainer: Ember.computed.alias('tabList.tabsContainer').readOnly(),
 
-  _registerWithTabList: function() {
+  _registerWithTabList() {
     this.get('tabList').registerTab(this);
   },
 
-  _unregisterWithTabList: function() {
+  _unregisterWithTabList() {
     this.get('tabList').unregisterTab(this);
   }
 });

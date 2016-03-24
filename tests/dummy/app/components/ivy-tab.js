@@ -5,7 +5,7 @@ export default IvyTabComponent.extend({
   tagName: 'li',
 
   actions: {
-    select: function() {
+    select() {
       this.select();
     }
   },

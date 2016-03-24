@@ -14,12 +14,12 @@ export default Ember.Component.extend({
   classNames: ['ivy-tab-panel'],
   classNameBindings: ['active'],
 
-  init: function() {
+  init() {
     this._super();
     Ember.run.once(this, this._registerWithTabsContainer);
   },
 
-  willDestroy: function() {
+  willDestroy() {
     this._super();
     Ember.run.once(this, this._unregisterWithTabsContainer);
   },
@@ -143,11 +143,11 @@ export default Ember.Component.extend({
    */
   tabsContainer: Ember.computed.oneWay('parentView'),
 
-  _registerWithTabsContainer: function() {
+  _registerWithTabsContainer() {
     this.get('tabsContainer').registerTabPanel(this);
   },
 
-  _unregisterWithTabsContainer: function() {
+  _unregisterWithTabsContainer() {
     this.get('tabsContainer').unregisterTabPanel(this);
   }
 });
