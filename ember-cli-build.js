@@ -16,10 +16,6 @@ module.exports = function(defaults) {
     behave. You most likely want to be modifying `./index.js` or app's build file
   */
 
-  app.import(path.join(app.bowerDirectory, 'ember/ember-template-compiler.js'), {
-    type: 'test'
-  });
-
   var bootstrapTree = new Funnel(path.join(app.bowerDirectory, 'bootstrap/dist/css'), {
     destDir: '/assets'
   });

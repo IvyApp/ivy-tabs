@@ -1,19 +1,21 @@
 import Ember from 'ember';
+import hbs from 'htmlbars-inline-precompile';
 import { moduleForComponent, test } from 'ember-qunit';
 
 moduleForComponent('ivy-tabs', {
   integration: true
 });
 
-var basicTemplate =
-  '{{#ivy-tabs selected-index=selectedIndex}}' +
-  '  {{#ivy-tab-list id="tablist"}}' +
-  '    {{#ivy-tab id="tab1"}}tab 1{{/ivy-tab}}' +
-  '    {{#ivy-tab id="tab2"}}tab 2{{/ivy-tab}}' +
-  '  {{/ivy-tab-list}}' +
-  '  {{#ivy-tab-panel id="panel1"}}panel 1{{/ivy-tab-panel}}' +
-  '  {{#ivy-tab-panel id="panel2"}}panel 2{{/ivy-tab-panel}}' +
-  '{{/ivy-tabs}}';
+var basicTemplate = hbs`
+  {{#ivy-tabs selected-index=selectedIndex}}
+    {{#ivy-tab-list id="tablist"}}
+      {{#ivy-tab id="tab1"}}tab 1{{/ivy-tab}}
+      {{#ivy-tab id="tab2"}}tab 2{{/ivy-tab}}
+    {{/ivy-tab-list}}
+    {{#ivy-tab-panel id="panel1"}}panel 1{{/ivy-tab-panel}}
+    {{#ivy-tab-panel id="panel2"}}panel 2{{/ivy-tab-panel}}
+  {{/ivy-tabs}}
+`;
 
 test('selects first tab by default', function(assert) {
   this.render(basicTemplate);
@@ -96,17 +98,18 @@ test('deselected panel attributes', function(assert) {
   assert.ok(!panel.is(':visible'), 'is not visible');
 });
 
-var eachTemplate =
-  '{{#ivy-tabs selected-index=selectedIndex}}' +
-  '  {{#ivy-tab-list}}' +
-  '    {{#each items as |item|}}' +
-  '      {{#ivy-tab}}{{item}}{{/ivy-tab}}' +
-  '    {{/each}}' +
-  '  {{/ivy-tab-list}}' +
-  '  {{#each items as |item|}}' +
-  '    {{#ivy-tab-panel}}{{item}}{{/ivy-tab-panel}}' +
-  '  {{/each}}' +
-  '{{/ivy-tabs}}';
+var eachTemplate = hbs`
+  {{#ivy-tabs selected-index=selectedIndex}}
+    {{#ivy-tab-list}}
+      {{#each items as |item|}}
+        {{#ivy-tab}}{{item}}{{/ivy-tab}}
+      {{/each}}
+    {{/ivy-tab-list}}
+    {{#each items as |item|}}
+      {{#ivy-tab-panel}}{{item}}{{/ivy-tab-panel}}
+    {{/each}}
+  {{/ivy-tabs}}
+`;
 
 test('selects previous tab if active tab is removed', function(assert) {
   this.set('selectedIndex', 1);
