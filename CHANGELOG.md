@@ -1,5 +1,14 @@
 # ivy-tabs
 
+## 1.2.0
+
+* Upgrade `ember-cli` to 2.4.2.
+* Use block params instead of `parentView`.
+* Remove index file.
+* Remove standalone builds.
+* Select the next tab when the active, first tab is removed.
+* Retain tab selection if a preceding tab is removed.
+
 ## 1.1.0
 
 * Upgrade addon to ember-cli 0.2.4.
