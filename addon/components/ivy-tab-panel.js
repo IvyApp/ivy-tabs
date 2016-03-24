@@ -141,7 +141,7 @@ export default Ember.Component.extend({
    * @type IvyTabs.IvyTabsComponent
    * @readOnly
    */
-  tabsContainer: Ember.computed.alias('parentView').readOnly(),
+  tabsContainer: Ember.computed.oneWay('parentView'),
 
   _registerWithTabsContainer: function() {
     this.get('tabsContainer').registerTabPanel(this);

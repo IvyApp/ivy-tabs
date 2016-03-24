@@ -151,7 +151,7 @@ export default Ember.Component.extend({
    * @type IvyTabs.IvyTabListComponent
    * @readOnly
    */
-  tabList: Ember.computed.alias('parentView').readOnly(),
+  tabList: Ember.computed.oneWay('parentView'),
 
   /**
    * The `ivy-tab-panel` associated with this tab.

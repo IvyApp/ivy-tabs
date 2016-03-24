@@ -7,13 +7,13 @@ moduleForComponent('ivy-tabs', {
 });
 
 const basicTemplate = hbs`
-  {{#ivy-tabs selected-index=selectedIndex}}
-    {{#ivy-tab-list id="tablist"}}
-      {{#ivy-tab id="tab1"}}tab 1{{/ivy-tab}}
-      {{#ivy-tab id="tab2"}}tab 2{{/ivy-tab}}
+  {{#ivy-tabs selected-index=selectedIndex as |tabsContainer|}}
+    {{#ivy-tab-list id="tablist" tabsContainer=tabsContainer as |tabList|}}
+      {{#ivy-tab id="tab1" tabList=tabList}}tab 1{{/ivy-tab}}
+      {{#ivy-tab id="tab2" tabList=tabList}}tab 2{{/ivy-tab}}
     {{/ivy-tab-list}}
-    {{#ivy-tab-panel id="panel1"}}panel 1{{/ivy-tab-panel}}
-    {{#ivy-tab-panel id="panel2"}}panel 2{{/ivy-tab-panel}}
+    {{#ivy-tab-panel id="panel1" tabsContainer=tabsContainer}}panel 1{{/ivy-tab-panel}}
+    {{#ivy-tab-panel id="panel2" tabsContainer=tabsContainer}}panel 2{{/ivy-tab-panel}}
   {{/ivy-tabs}}
 `;
 
@@ -99,14 +99,14 @@ test('deselected panel attributes', function(assert) {
 });
 
 const eachTemplate = hbs`
-  {{#ivy-tabs selected-index=selectedIndex}}
-    {{#ivy-tab-list}}
+  {{#ivy-tabs selected-index=selectedIndex as |tabsContainer|}}
+    {{#ivy-tab-list tabsContainer=tabsContainer as |tabList|}}
       {{#each items as |item|}}
-        {{#ivy-tab}}{{item}}{{/ivy-tab}}
+        {{#ivy-tab tabList=tabList}}{{item}}{{/ivy-tab}}
       {{/each}}
     {{/ivy-tab-list}}
     {{#each items as |item|}}
-      {{#ivy-tab-panel}}{{item}}{{/ivy-tab-panel}}
+      {{#ivy-tab-panel tabsContainer=tabsContainer}}{{item}}{{/ivy-tab-panel}}
     {{/each}}
   {{/ivy-tabs}}
 `;

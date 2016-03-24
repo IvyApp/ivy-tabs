@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import layout from '../templates/components/ivy-tab-list';
 
 /**
  * @module ivy-tabs
@@ -10,6 +11,8 @@ import Ember from 'ember';
  * @extends Ember.Component
  */
 export default Ember.Component.extend({
+  layout: layout,
+
   tagName: 'ul',
   attributeBindings: ['aria-multiselectable', 'role'],
   classNames: ['ivy-tab-list'],
@@ -155,7 +158,7 @@ export default Ember.Component.extend({
    * @type IvyTabs.IvyTabsComponent
    * @readOnly
    */
-  tabsContainer: Ember.computed.alias('parentView').readOnly(),
+  tabsContainer: Ember.computed.oneWay('parentView'),
 
   /**
    * Removes a tab from the `tabs` array.

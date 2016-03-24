@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import layout from '../templates/components/ivy-tabs';
 
 /**
  * @module ivy-tabs
@@ -10,6 +11,8 @@ import Ember from 'ember';
  * @extends Ember.Component
  */
 export default Ember.Component.extend({
+  layout: layout,
+
   classNames: ['ivy-tabs'],
 
   init: function() {
