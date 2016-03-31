@@ -148,7 +148,7 @@ export default Ember.Component.extend({
    * @param {Number} index
    */
   selectTabByIndex(index) {
-    this.set('selected-index', index);
+    this.sendAction('update', index);
   },
 
   tabs: Ember.computed(function() {

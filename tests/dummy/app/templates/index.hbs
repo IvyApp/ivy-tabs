@@ -1,4 +1,4 @@
-{{#ivy-tabs as |tabs|}}
+{{#ivy-tabs selected-index=selectedIndex update=(action (mut selectedIndex)) as |tabs|}}
   {{#tabs.tablist as |tablist|}}
     {{#tablist.tab}}Tab A{{/tablist.tab}}
     {{#tablist.tab}}Tab B{{/tablist.tab}}

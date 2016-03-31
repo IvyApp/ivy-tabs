@@ -7,7 +7,7 @@ moduleForComponent('ivy-tabs', {
 });
 
 const basicTemplate = hbs`
-  {{#ivy-tabs selected-index=selectedIndex as |tabs|}}
+  {{#ivy-tabs selected-index=selectedIndex update=(action (mut selectedIndex)) as |tabs|}}
     {{#tabs.tablist id="tablist" as |tablist|}}
       {{#tablist.tab id="tab1"}}tab 1{{/tablist.tab}}
       {{#tablist.tab id="tab2"}}tab 2{{/tablist.tab}}
@@ -107,7 +107,7 @@ test('deselected panel attributes', function(assert) {
 });
 
 const eachTemplate = hbs`
-  {{#ivy-tabs selected-index=selectedIndex as |tabs|}}
+  {{#ivy-tabs selected-index=selectedIndex update=(action (mut selectedIndex)) as |tabs|}}
     {{#tabs.tablist as |tablist|}}
       {{#each items as |item|}}
         {{#tablist.tab}}{{item}}{{/tablist.tab}}

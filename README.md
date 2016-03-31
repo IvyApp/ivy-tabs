@@ -19,7 +19,7 @@ $ ember install ivy-tabs
 ## Usage
 
 ```handlebars
-{{#ivy-tabs as |tabs|}}
+{{#ivy-tabs selected-index=selectedIndex update=(action (mut selectedIndex)) as |tabs|}}
   {{#tabs.tablist as |tablist|}}
     {{#tablist.tab}}Foo{{/tablist.tab}}
     {{#tablist.tab}}Bar{{/tablist.tab}}
@@ -43,6 +43,8 @@ $ ember install ivy-tabs
 Some things to note:
 
   * Associations between tabs and panels are inferred by order.
+  * An `update` action is sent when a tab is selected. As an argument, it
+    receives the index (0-based) of the selected tab.
 
 ## Contributing
 
