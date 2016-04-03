@@ -7,6 +7,9 @@ A group of Ember.js Components that interact to create a [WAI-ARIA tab] interfac
 
 Special thanks to [ic-tabs], which this addon is based on.
 
+**NOTE: This addon uses contextual components, which require Ember >= 2.3. For
+older versions of Ember, use the 1.x release series of this addon.**
+
 ## Installation
 
 ```sh
@@ -16,33 +19,30 @@ $ ember install ivy-tabs
 ## Usage
 
 ```handlebars
-{{#ivy-tabs as |tabsContainer|}}
-  {{#ivy-tab-list tabsContainer=tabsContainer as |tabList|}}
-    {{#ivy-tab tabList=tabList}}Foo{{/ivy-tab}}
-    {{#ivy-tab tabList=tabList}}Bar{{/ivy-tab}}
-    {{#ivy-tab tabList=tabList}}Baz{{/ivy-tab}}
-  {{/ivy-tab-list}}
+{{#ivy-tabs as |tabs|}}
+  {{#tabs.tablist as |tablist|}}
+    {{#tablist.tab}}Foo{{/tablist.tab}}
+    {{#tablist.tab}}Bar{{/tablist.tab}}
+    {{#tablist.tab}}Baz{{/tablist.tab}}
+  {{/tabs.tablist}}
 
-  {{#ivy-tab-panel tabsContainer=tabsContainer}}
+  {{#tabs.tabpanel}}
     <h2>Foo</h2>
-  {{/ivy-tab-panel}}
+  {{/tabs.tabpanel}}
 
-  {{#ivy-tab-panel tabsContainer=tabsContainer}}
+  {{#tabs.tabpanel}}
     <h2>Bar</h2>
-  {{/ivy-tab-panel}}
+  {{/tabs.tabpanel}}
 
-  {{#ivy-tab-panel tabsContainer=tabsContainer}}
+  {{#tabs.tabpanel}}
     <h2>Baz</h2>
-  {{/ivy-tab-panel}}
+  {{/tabs.tabpanel}}
 {{/ivy-tabs}}
 ```
 
 Some things to note:
 
   * Associations between tabs and tab-panes are inferred by order.
-  * Both `ivy-tabs` and `ivy-tab-list` yield themselves as a parameter, which
-    should be passed down to their children as `tabsContainer` and `tabList`,
-    respectively.
 
 ## Contributing
 
