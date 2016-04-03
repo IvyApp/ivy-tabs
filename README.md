@@ -42,7 +42,7 @@ $ ember install ivy-tabs
 
 Some things to note:
 
-  * Associations between tabs and tab-panes are inferred by order.
+  * Associations between tabs and panels are inferred by order.
 
 ## Contributing
 
