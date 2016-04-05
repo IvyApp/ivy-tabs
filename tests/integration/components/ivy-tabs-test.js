@@ -55,9 +55,15 @@ test('WAI-ARIA attributes', function(assert) {
   assert.equal(tab.attr('role'), 'tab', 'tab1: role');
   assert.equal(tab.attr('aria-controls'), 'panel1', 'tab1: aria-controls');
 
-  const tabpanel = this.$('#panel1');
+  let tabpanel = this.$('#panel1');
   assert.equal(tabpanel.attr('role'), 'tabpanel', 'panel1: role');
   assert.equal(tabpanel.attr('aria-labelledby'), 'tab1', 'panel1: aria-labelledby');
+  assert.equal(tabpanel.attr('aria-hidden'), 'false', 'panel1: aria-hidden');
+
+  tabpanel = this.$('#panel2');
+  assert.equal(tabpanel.attr('role'), 'tabpanel', 'panel2: role');
+  assert.equal(tabpanel.attr('aria-labelledby'), 'tab2', 'panel2: aria-labelledby');
+  assert.equal(tabpanel.attr('aria-hidden'), 'true', 'panel2: aria-hidden');
 });
 
 test('selected tab attributes', function(assert) {
@@ -76,6 +82,7 @@ test('selected panel attributes', function(assert) {
 
   const panel = this.$('#panel1');
   assert.ok(panel.hasClass('active'), 'has "active" class');
+  assert.equal(panel.attr('aria-hidden'), 'false', 'aria-hidden');
   assert.ok(panel.is(':visible'), 'is visible');
 });
 
@@ -95,6 +102,7 @@ test('deselected panel attributes', function(assert) {
 
   const panel = this.$('#panel2');
   assert.ok(!panel.hasClass('active'), 'does not have "active" class');
+  assert.equal(panel.attr('aria-hidden'), 'true', 'aria-hidden');
   assert.ok(!panel.is(':visible'), 'is not visible');
 });
 

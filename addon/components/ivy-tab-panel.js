@@ -10,7 +10,7 @@ import Ember from 'ember';
  * @extends Ember.Component
  */
 export default Ember.Component.extend({
-  attributeBindings: ['aria-labelledby', 'role'],
+  attributeBindings: ['aria-hidden', 'aria-labelledby', 'role'],
   classNames: ['ivy-tab-panel'],
   classNameBindings: ['active'],
 
@@ -23,6 +23,17 @@ export default Ember.Component.extend({
     this._super(...arguments);
     Ember.run.once(this, this._unregisterWithTabsContainer);
   },
+
+  /**
+   * Tells screenreaders whether or not the panel is visible.
+   *
+   * See http://www.w3.org/TR/wai-aria/states_and_properties#aria-hidden
+   *
+   * @property aria-hidden
+   * @type Boolean
+   * @readOnly
+   */
+  'aria-hidden': Ember.computed.not('isSelected').readOnly(),
 
   /**
    * Tells screenreaders which tab labels this panel.
