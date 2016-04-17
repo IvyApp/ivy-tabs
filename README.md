@@ -84,7 +84,7 @@ ember build
 ```
 
 For more information on using ember-cli, visit
-[http://www.ember-cli.com/](http://www.ember-cli.com/).
+[http://ember-cli.com/](http://ember-cli.com/).
 
 [WAI-ARIA tab]: http://www.w3.org/TR/wai-aria/roles#tab
 [ic-tabs]: https://github.com/instructure/ic-tabs
