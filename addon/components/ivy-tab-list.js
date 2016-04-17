@@ -14,7 +14,7 @@ export default Ember.Component.extend({
   layout: layout,
 
   tagName: 'ul',
-  attributeBindings: ['aria-multiselectable', 'role'],
+  attributeBindings: ['aria-multiselectable'],
   classNames: ['ivy-tab-list'],
 
   init() {
@@ -41,11 +41,11 @@ export default Ember.Component.extend({
    *
    * See http://www.w3.org/TR/wai-aria/roles#tablist
    *
-   * @property role
+   * @property ariaRole
    * @type String
    * @default 'tablist'
    */
-  role: 'tablist',
+  ariaRole: 'tablist',
 
   /**
    * Gives focus to the selected tab.

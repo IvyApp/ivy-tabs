@@ -10,7 +10,7 @@ import Ember from 'ember';
  * @extends Ember.Component
  */
 export default Ember.Component.extend({
-  attributeBindings: ['aria-hidden', 'aria-labelledby', 'role'],
+  attributeBindings: ['aria-hidden', 'aria-labelledby'],
   classNames: ['ivy-tab-panel'],
   classNameBindings: ['active'],
 
@@ -49,11 +49,11 @@ export default Ember.Component.extend({
   /**
    * See http://www.w3.org/TR/wai-aria/roles#tabpanel
    *
-   * @property role
+   * @property ariaRole
    * @type String
    * @default 'tabpanel'
    */
-  role: 'tabpanel',
+  ariaRole: 'tabpanel',
 
   /**
    * Accessed as a className binding to apply the panel's `activeClass` CSS

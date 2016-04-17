@@ -11,7 +11,7 @@ import Ember from 'ember';
  */
 export default Ember.Component.extend({
   tagName: 'li',
-  attributeBindings: ['aria-controls', 'aria-expanded', 'aria-selected', 'role', 'selected', 'tabindex'],
+  attributeBindings: ['aria-controls', 'aria-expanded', 'aria-selected', 'selected', 'tabindex'],
   classNames: ['ivy-tab'],
   classNameBindings: ['active'],
 
@@ -64,11 +64,11 @@ export default Ember.Component.extend({
    *
    * See http://www.w3.org/TR/wai-aria/roles#tab
    *
-   * @property role
+   * @property ariaRole
    * @type String
    * @default 'tab'
    */
-  role: 'tab',
+  ariaRole: 'tab',
 
   /**
    * The `selected` attribute of the tab element. If the tab's `isSelected`
