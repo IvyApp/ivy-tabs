@@ -1,5 +1,14 @@
 # ivy-tabs
 
+## 2.0.0
+
+**This release drops support for Ember < 2.3.**
+
+* [#13](https://github.com/IvyApp/ivy-tabs/pull/13) Data down, Actions up.
+* [#15](https://github.com/IvyApp/ivy-tabs/pull/15) Add aria-hidden to ivy-tab-panel.
+* [#12](https://github.com/IvyApp/ivy-tabs/pull/12) Convert to contextual components.
+* Upgrade to Ember CLI 2.5.0.
+
 ## 1.2.0
 
 * Upgrade `ember-cli` to 2.4.2.
