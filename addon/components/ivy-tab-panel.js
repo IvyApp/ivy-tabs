@@ -44,7 +44,7 @@ export default Ember.Component.extend({
    * @type String
    * @readOnly
    */
-  'aria-labelledby': Ember.computed.alias('tab.elementId').readOnly(),
+  'aria-labelledby': Ember.computed.readOnly('tab.elementId'),
 
   /**
    * See http://www.w3.org/TR/wai-aria/roles#tabpanel
@@ -94,7 +94,7 @@ export default Ember.Component.extend({
    * @type Boolean
    * @readOnly
    */
-  isSelected: Ember.computed.alias('tab.isSelected').readOnly(),
+  isSelected: Ember.computed.readOnly('tab.isSelected'),
 
   /**
    * If `false`, this panel will appear hidden in the DOM. This is an alias to
@@ -104,7 +104,7 @@ export default Ember.Component.extend({
    * @type Boolean
    * @readOnly
    */
-  isVisible: Ember.computed.alias('isSelected').readOnly(),
+  isVisible: Ember.computed.readOnly('isSelected'),
 
   /**
    * The `ivy-tab` associated with this panel.
@@ -124,7 +124,7 @@ export default Ember.Component.extend({
    * @type IvyTabs.IvyTabListComponent
    * @readOnly
    */
-  tabList: Ember.computed.alias('tabsContainer.tabList').readOnly(),
+  tabList: Ember.computed.readOnly('tabsContainer.tabList'),
 
   /**
    * The array of all `ivy-tab-panel` instances within the `ivy-tabs`
@@ -134,7 +134,7 @@ export default Ember.Component.extend({
    * @type Array | IvyTabs.IvyTabPanelComponent
    * @readOnly
    */
-  tabPanels: Ember.computed.alias('tabsContainer.tabPanels').readOnly(),
+  tabPanels: Ember.computed.readOnly('tabsContainer.tabPanels'),
 
   /**
    * The array of all `ivy-tab` instances within the `ivy-tab-list` component.
@@ -143,7 +143,7 @@ export default Ember.Component.extend({
    * @type Array | IvyTabs.IvyTabComponent
    * @readOnly
    */
-  tabs: Ember.computed.alias('tabList.tabs').readOnly(),
+  tabs: Ember.computed.readOnly('tabList.tabs'),
 
   /**
    * The `ivy-tabs` component.

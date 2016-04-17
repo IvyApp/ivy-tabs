@@ -34,7 +34,7 @@ export default Ember.Component.extend({
    * @type String
    * @readOnly
    */
-  'aria-controls': Ember.computed.alias('tabPanel.elementId').readOnly(),
+  'aria-controls': Ember.computed.readOnly('tabPanel.elementId'),
 
   /**
    * Tells screenreaders whether or not this tab's panel is expanded.
@@ -45,7 +45,7 @@ export default Ember.Component.extend({
    * @type String
    * @readOnly
    */
-  'aria-expanded': Ember.computed.alias('aria-selected').readOnly(),
+  'aria-expanded': Ember.computed.readOnly('aria-selected'),
 
   /**
    * Tells screenreaders whether or not this tab is selected.
@@ -171,7 +171,7 @@ export default Ember.Component.extend({
    * @type Array | IvyTabs.IvyTabPanelComponent
    * @readOnly
    */
-  tabPanels: Ember.computed.alias('tabsContainer.tabPanels').readOnly(),
+  tabPanels: Ember.computed.readOnly('tabsContainer.tabPanels'),
 
   /**
    * The array of all `ivy-tab` instances within the `ivy-tab-list` component.
@@ -180,7 +180,7 @@ export default Ember.Component.extend({
    * @type Array | IvyTabs.IvyTabComponent
    * @readOnly
    */
-  tabs: Ember.computed.alias('tabList.tabs').readOnly(),
+  tabs: Ember.computed.readOnly('tabList.tabs'),
 
   /**
    * The `ivy-tabs` component.
@@ -189,7 +189,7 @@ export default Ember.Component.extend({
    * @type IvyTabs.IvyTabsComponent
    * @readOnly
    */
-  tabsContainer: Ember.computed.alias('tabList.tabsContainer').readOnly(),
+  tabsContainer: Ember.computed.readOnly('tabList.tabsContainer'),
 
   _registerWithTabList() {
     this.get('tabList').registerTab(this);
