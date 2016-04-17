@@ -63,9 +63,9 @@ export default Ember.Component.extend({
    * @type String
    * @readOnly
    */
-  active: Ember.computed(function() {
+  active: Ember.computed('isSelected', function() {
     if (this.get('isSelected')) { return this.get('activeClass'); }
-  }).property('isSelected'),
+  }),
 
   /**
    * The CSS class to apply to a panel's element when its `isSelected` property
@@ -83,9 +83,9 @@ export default Ember.Component.extend({
    * @property index
    * @type Number
    */
-  index: Ember.computed(function() {
+  index: Ember.computed('tabPanels.[]', function() {
     return this.get('tabPanels').indexOf(this);
-  }).property('tabPanels.[]'),
+  }),
 
   /**
    * Whether or not this panel's associated tab is selected.
@@ -112,10 +112,10 @@ export default Ember.Component.extend({
    * @property tab
    * @type IvyTabs.IvyTabComponent
    */
-  tab: Ember.computed(function() {
+  tab: Ember.computed('tabs.[]', 'index', function() {
     const tabs = this.get('tabs');
     if (tabs) { return tabs.objectAt(this.get('index')); }
-  }).property('tabs.[]', 'index'),
+  }),
 
   /**
    * The `ivy-tab-list` component this panel belongs to.

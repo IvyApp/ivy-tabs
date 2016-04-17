@@ -10,7 +10,7 @@ export default IvyTabComponent.extend({
     }
   },
 
-  panelHref: Ember.computed(function() {
+  panelHref: Ember.computed('aria-controls', function() {
     return '#' + this.get('aria-controls');
-  }).property('aria-controls')
+  })
 });

@@ -55,9 +55,9 @@ export default Ember.Component.extend({
    * @property aria-selected
    * @type String
    */
-  'aria-selected': Ember.computed(function() {
+  'aria-selected': Ember.computed('isSelected', function() {
     return this.get('isSelected') + ''; // coerce to 'true' or 'false'
-  }).property('isSelected'),
+  }),
 
   /**
    * The `role` attribute of the tab element.
@@ -78,9 +78,9 @@ export default Ember.Component.extend({
    * @property selected
    * @type String
    */
-  selected: Ember.computed(function() {
+  selected: Ember.computed('isSelected', function() {
     if (this.get('isSelected')) { return 'selected'; }
-  }).property('isSelected'),
+  }),
 
   /**
    * Makes the selected tab keyboard tabbable, and prevents tabs from getting
@@ -89,9 +89,9 @@ export default Ember.Component.extend({
    * @property tabindex
    * @type Number
    */
-  tabindex: Ember.computed(function() {
+  tabindex: Ember.computed('isSelected', function() {
     if (this.get('isSelected')) { return 0; }
-  }).property('isSelected'),
+  }),
 
   /**
    * Accessed as a className binding to apply the tab's `activeClass` CSS class
@@ -101,9 +101,9 @@ export default Ember.Component.extend({
    * @type String
    * @readOnly
    */
-  active: Ember.computed(function() {
+  active: Ember.computed('isSelected', function() {
     if (this.get('isSelected')) { return this.get('activeClass'); }
-  }).property('isSelected'),
+  }),
 
   /**
    * The CSS class to apply to a tab's element when its `isSelected` property
@@ -121,9 +121,9 @@ export default Ember.Component.extend({
    * @property index
    * @type Number
    */
-  index: Ember.computed(function() {
+  index: Ember.computed('tabs.[]', function() {
     return this.get('tabs').indexOf(this);
-  }).property('tabs.[]'),
+  }),
 
   /**
    * Whether or not this tab is selected.
@@ -131,9 +131,9 @@ export default Ember.Component.extend({
    * @property isSelected
    * @type Boolean
    */
-  isSelected: Ember.computed(function() {
+  isSelected: Ember.computed('tabList.selectedTab', function() {
     return this.get('tabList.selectedTab') === this;
-  }).property('tabList.selectedTab'),
+  }),
 
   /**
    * Called when the user clicks on the tab. Selects this tab.
@@ -159,9 +159,9 @@ export default Ember.Component.extend({
    * @property tabPanel
    * @type IvyTabs.IvyTabPanelComponent
    */
-  tabPanel: Ember.computed(function() {
+  tabPanel: Ember.computed('tabPanels.[]', 'index', function() {
     return this.get('tabPanels').objectAt(this.get('index'));
-  }).property('tabPanels.[]', 'index'),
+  }),
 
   /**
    * The array of all `ivy-tab-panel` instances within the `ivy-tabs`

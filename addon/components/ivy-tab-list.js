@@ -127,9 +127,9 @@ export default Ember.Component.extend({
    * @property selectedTab
    * @type IvyTabs.IvyTabComponent
    */
-  selectedTab: Ember.computed(function() {
+  selectedTab: Ember.computed('selected-index', 'tabs.[]', function() {
     return this.get('tabs').objectAt(this.get('selected-index'));
-  }).property('selected-index', 'tabs.[]'),
+  }),
 
   /**
    * Select the given tab.
