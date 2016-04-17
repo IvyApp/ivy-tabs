@@ -145,21 +145,14 @@ export default Ember.Component.extend({
    */
   tabs: Ember.computed.alias('tabList.tabs').readOnly(),
 
-  _deprecatedParentViewBasedTabsContainer: Ember.computed('parentView', function() {
-    Ember.deprecate('Inferring `tabsContainer` from `parentView` on `{{ivy-tab-panel}}` is deprecated. Please assign in an instance of `{{ivy-tabs}}` to the `tabsContainer` property.', false, {
-      id: 'ivy-tabs.ivy-tab-panel.tabs-container-missing',
-      until: '2.0.0'
-    });
-    return this.get('parentView');
-  }).readOnly(),
-
   /**
    * The `ivy-tabs` component.
    *
    * @property tabsContainer
    * @type IvyTabs.IvyTabsComponent
+   * @default null
    */
-  tabsContainer: Ember.computed.oneWay('_deprecatedParentViewBasedTabsContainer'),
+  tabsContainer: null,
 
   _registerWithTabsContainer() {
     this.get('tabsContainer').registerTabPanel(this);

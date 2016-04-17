@@ -144,21 +144,14 @@ export default Ember.Component.extend({
     this.get('tabList').selectTab(this);
   }),
 
-  _deprecatedParentViewBasedTabList: Ember.computed('parentView', function() {
-    Ember.deprecate('Inferring `tabList` from `parentView` on `{{ivy-tab}}` is deprecated. Please assign in an instance of `{{ivy-tab-list}}` to the `tabList` property.', false, {
-      id: 'ivy-tabs.ivy-tab.tab-list-missing',
-      until: '2.0.0'
-    });
-    return this.get('parentView');
-  }).readOnly(),
-
   /**
    * The `ivy-tab-list` component this tab belongs to.
    *
    * @property tabList
    * @type IvyTabs.IvyTabListComponent
+   * @default null
    */
-  tabList: Ember.computed.oneWay('_deprecatedParentViewBasedTabList'),
+  tabList: null,
 
   /**
    * The `ivy-tab-panel` associated with this tab.
