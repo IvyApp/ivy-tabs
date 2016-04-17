@@ -157,7 +157,6 @@ export default Ember.Component.extend({
    *
    * @property tabList
    * @type IvyTabs.IvyTabListComponent
-   * @readOnly
    */
   tabList: Ember.computed.oneWay('_deprecatedParentViewBasedTabList'),
 

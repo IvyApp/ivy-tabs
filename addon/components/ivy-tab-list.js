@@ -168,7 +168,6 @@ export default Ember.Component.extend({
    *
    * @property tabsContainer
    * @type IvyTabs.IvyTabsComponent
-   * @readOnly
    */
   tabsContainer: Ember.computed.oneWay('_deprecatedParentViewBasedTabsContainer'),
 
