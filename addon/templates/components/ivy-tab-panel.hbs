@@ -1,0 +1,7 @@
+{{#if remove-inactive-content}}
+  {{#if isSelected}}
+    {{yield}}
+  {{/if}}
+{{else}}
+  {{yield}}
+{{/if}}

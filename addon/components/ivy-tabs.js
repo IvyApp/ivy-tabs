@@ -16,6 +16,15 @@ export default Ember.Component.extend({
   classNames: ['ivy-tabs'],
 
   /**
+   * Set this to true if you'd like only the active tab panel to be rendered to the DOM.
+   *
+   * @property remove-inactive-content
+   * @type Boolean
+   * @default false
+   */
+  'remove-inactive-content': false,
+
+  /**
    * Set this to the index of the tab you'd like to be selected. Usually it is
    * bound to a controller property that is used as a query parameter, but can
    * be bound to anything.

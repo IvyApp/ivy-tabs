@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import layout from '../templates/components/ivy-tab-panel';
 
 /**
  * @module ivy-tabs
@@ -10,6 +11,8 @@ import Ember from 'ember';
  * @extends Ember.Component
  */
 export default Ember.Component.extend({
+  layout: layout,
+
   attributeBindings: ['aria-hidden', 'aria-labelledby'],
   classNames: ['ivy-tab-panel'],
   classNameBindings: ['active'],
