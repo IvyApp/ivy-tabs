@@ -189,3 +189,24 @@ test('arrow keys navigate between tabs', function(assert) {
   assert.equal(this.get('selectedIndex'), 0, 'down arrow - tab1 is selected');
   assert.ok(tab1.get(0) === document.activeElement, 'tab1 has focus');
 });
+
+test('inactive tab content can be removed from the DOM', function(assert) {
+  this.render(hbs`
+    {{#ivy-tabs remove-inactive-content=true on-select=(action (mut selectedIndex)) selected-index=selectedIndex as |tabs|}}
+      {{#tabs.tablist id="tablist" as |tablist|}}
+        {{#tablist.tab id="tab1"}}tab 1{{/tablist.tab}}
+        {{#tablist.tab id="tab2"}}tab 2{{/tablist.tab}}
+      {{/tabs.tablist}}
+      {{#tabs.tabpanel id="panel1"}}panel 1{{/tabs.tabpanel}}
+      {{#tabs.tabpanel id="panel2"}}panel 2{{/tabs.tabpanel}}
+    {{/ivy-tabs}}
+  `);
+
+  assert.equal(this.$('#panel1').text().trim(), 'panel 1', 'panel1\'s content is in the DOM');
+  assert.equal(this.$('#panel2').text().trim(), '', 'panel2\'s content is not in the DOM');
+
+  this.$('#tab2').click();
+
+  assert.equal(this.$('#panel1').text().trim(), '', 'panel1\'s content is not in the DOM');
+  assert.equal(this.$('#panel2').text().trim(), 'panel 2', 'panel2\'s content is not in the DOM');
+});
