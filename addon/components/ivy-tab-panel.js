@@ -99,14 +99,22 @@ export default Ember.Component.extend({
   isSelected: Ember.computed.readOnly('tab.isSelected'),
 
   /**
+   * Object to uniquely identify this tab within the tabList.
+   *
+   * @property model
+   * @type Object
+   */
+  model: null,
+
+  /**
    * The `ivy-tab` associated with this panel.
    *
    * @property tab
    * @type IvyTabs.IvyTabComponent
    */
-  tab: Ember.computed('tabs.[]', 'index', function() {
+  tab: Ember.computed('model', 'tabs.@each.model', function() {
     const tabs = this.get('tabs');
-    if (tabs) { return tabs.objectAt(this.get('index')); }
+    if (tabs) { return tabs.findBy('model', this.get('model')); }
   }),
 
   /**
@@ -153,4 +161,6 @@ export default Ember.Component.extend({
   _unregisterWithTabsContainer() {
     this.get('tabsContainer').unregisterTabPanel(this);
   }
+}).reopenClass({
+  positionalParams: ['model']
 });

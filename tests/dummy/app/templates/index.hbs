@@ -1,12 +1,12 @@
-{{#ivy-tabs on-select=(action (mut selectedIndex)) selected-index=selectedIndex as |tabs|}}
+{{#ivy-tabs selected=selected as |tabs|}}
   {{#tabs.tablist as |tablist|}}
-    {{#tablist.tab}}Tab A{{/tablist.tab}}
-    {{#tablist.tab}}Tab B{{/tablist.tab}}
-    {{#tablist.tab}}Tab C{{/tablist.tab}}
+    {{#tablist.tab "A" on-select=(action (mut selected))}}Tab A{{/tablist.tab}}
+    {{#tablist.tab "B" on-select=(action (mut selected))}}Tab B{{/tablist.tab}}
+    {{#tablist.tab "C" on-select=(action (mut selected))}}Tab C{{/tablist.tab}}
   {{/tabs.tablist}}
 
   <div class="tab-content">
-    {{#tabs.tabpanel}}
+    {{#tabs.tabpanel "A"}}
       <h2>Tab A</h2>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -19,7 +19,7 @@
       </p>
     {{/tabs.tabpanel}}
 
-    {{#tabs.tabpanel}}
+    {{#tabs.tabpanel "B"}}
       <h2>Tab B</h2>
       <p>
         Tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -31,7 +31,7 @@
       </p>
     {{/tabs.tabpanel}}
 
-    {{#tabs.tabpanel}}
+    {{#tabs.tabpanel "C"}}
       <h2>Tab C</h2>
       <p>
         Veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
