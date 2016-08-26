@@ -104,9 +104,8 @@ export default Ember.Component.extend({
    *
    * @property isVisible
    * @type Boolean
-   * @readOnly
    */
-  isVisible: Ember.computed.readOnly('isSelected'),
+  isVisible: Ember.computed.oneWay('isSelected'),
 
   /**
    * The `ivy-tab` associated with this panel.
