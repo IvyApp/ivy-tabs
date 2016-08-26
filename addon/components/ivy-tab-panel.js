@@ -33,7 +33,9 @@ export default Ember.Component.extend({
    * @type Boolean
    * @readOnly
    */
-  'aria-hidden': Ember.computed.not('isSelected').readOnly(),
+  'aria-hidden': Ember.computed('isSelected', function() {
+    return `${!this.get('isSelected')}`;
+  }).readOnly(),
 
   /**
    * Tells screenreaders which tab labels this panel.
