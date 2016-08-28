@@ -13,7 +13,6 @@ import layout from '../templates/components/ivy-tab-list';
 export default Ember.Component.extend({
   layout: layout,
 
-  tagName: 'ul',
   attributeBindings: ['aria-multiselectable'],
   classNames: ['ivy-tab-list'],
 
