@@ -7,10 +7,10 @@ moduleForComponent('ivy-tabs', {
 });
 
 const basicTemplate = hbs`
-  {{#ivy-tabs selected=selectedModel as |tabs|}}
+  {{#ivy-tabs selection=selection as |tabs|}}
     {{#tabs.tablist id="tablist" as |tablist|}}
-      {{#tablist.tab "Item 1" id="tab1" on-select=(action (mut selectedModel))}}tab 1{{/tablist.tab}}
-      {{#tablist.tab "Item 2" id="tab2" on-select=(action (mut selectedModel))}}tab 2{{/tablist.tab}}
+      {{#tablist.tab "Item 1" id="tab1" on-select=(action (mut selection))}}tab 1{{/tablist.tab}}
+      {{#tablist.tab "Item 2" id="tab2" on-select=(action (mut selection))}}tab 2{{/tablist.tab}}
     {{/tabs.tablist}}
     {{#tabs.tabpanel "Item 1" id="panel1"}}panel 1{{/tabs.tabpanel}}
     {{#tabs.tabpanel "Item 2" id="panel2"}}panel 2{{/tabs.tabpanel}}
@@ -20,28 +20,28 @@ const basicTemplate = hbs`
 test('selects first tab by default', function(assert) {
   this.render(basicTemplate);
 
-  assert.equal(this.get('selectedModel'), 'Item 1', 'selected');
+  assert.equal(this.get('selection'), 'Item 1', 'selection');
 });
 
 test('selects tab by model', function(assert) {
-  this.set('selectedModel', 'Item 2');
+  this.set('selection', 'Item 2');
   this.render(basicTemplate);
 
-  assert.equal(this.get('selectedModel'), 'Item 2', 'selected');
+  assert.equal(this.get('selection'), 'Item 2', 'selection');
 });
 
 test('selects tab on click', function(assert) {
   this.render(basicTemplate);
   this.$('#tab2').click();
 
-  assert.equal(this.get('selectedModel'), 'Item 2', 'selected-index');
+  assert.equal(this.get('selection'), 'Item 2', 'selection');
 });
 
 test('selects tab on touchEnd', function(assert) {
   this.render(basicTemplate);
   this.$('#tab2').trigger('touchend');
 
-  assert.equal(this.get('selectedModel'), 'Item 2', 'selected-index');
+  assert.equal(this.get('selection'), 'Item 2', 'selection');
 });
 
 test('WAI-ARIA attributes', function(assert) {
@@ -105,10 +105,10 @@ test('deselected panel attributes', function(assert) {
 });
 
 const eachTemplate = hbs`
-  {{#ivy-tabs selected=selectedModel as |tabs|}}
+  {{#ivy-tabs selection=selection as |tabs|}}
     {{#tabs.tablist as |tablist|}}
       {{#each items as |item|}}
-        {{#tablist.tab item on-select=(action (mut selectedModel))}}{{item}}{{/tablist.tab}}
+        {{#tablist.tab item on-select=(action (mut selection))}}{{item}}{{/tablist.tab}}
       {{/each}}
     {{/tabs.tablist}}
     {{#each items as |item|}}
@@ -118,7 +118,7 @@ const eachTemplate = hbs`
 `;
 
 test('selects previous tab if active tab is removed', function(assert) {
-  this.set('selectedModel', 'Item 1');
+  this.set('selection', 'Item 1');
   this.set('items', Ember.A(['Item 1', 'Item 2']));
   this.render(eachTemplate);
 
@@ -126,11 +126,11 @@ test('selects previous tab if active tab is removed', function(assert) {
     this.get('items').removeAt(1);
   });
 
-  assert.equal(this.get('selectedModel'), 'Item 1', 'previous tab became active');
+  assert.equal(this.get('selection'), 'Item 1', 'previous tab became active');
 });
 
 test('selects previous tab if active tab is removed via replacement', function(assert) {
-  this.set('selectedModel', 'Item 2');
+  this.set('selection', 'Item 2');
   this.set('items', Ember.A(['Item 1', 'Item 2']));
   this.render(eachTemplate);
 
@@ -138,11 +138,11 @@ test('selects previous tab if active tab is removed via replacement', function(a
     this.set('items', Ember.A(['Item 3']));
   });
 
-  assert.equal(this.get('selectedModel'), 'Item 3', 'previous tab became active');
+  assert.equal(this.get('selection'), 'Item 3', 'previous tab became active');
 });
 
 test('retains tab selection if preceeding tab is removed', function(assert) {
-  this.set('selectedModel', 'Item 2');
+  this.set('selection', 'Item 2');
   this.set('items', Ember.A(['Item 1', 'Item 2']));
   this.render(eachTemplate);
 
@@ -150,11 +150,11 @@ test('retains tab selection if preceeding tab is removed', function(assert) {
     this.get('items').removeAt(0);
   });
 
-  assert.equal(this.get('selectedModel'), 'Item 2', 'tab selection is retained');
+  assert.equal(this.get('selection'), 'Item 2', 'tab selection is retained');
 });
 
 test('selects the next tab when an active, first tab is removed', function(assert) {
-  this.set('selectedModel', 'Item 1');
+  this.set('selection', 'Item 1');
   this.set('items', Ember.A(['Item 1', 'Item 2', 'Item 3']));
   this.render(eachTemplate);
 
@@ -162,7 +162,7 @@ test('selects the next tab when an active, first tab is removed', function(asser
     this.get('items').removeAt(0);
   });
 
-  assert.equal(this.get('selectedModel'), 'Item 2', 'selects next tab');
+  assert.equal(this.get('selection'), 'Item 2', 'selects next tab');
 });
 
 test('arrow keys navigate between tabs', function(assert) {
@@ -172,18 +172,18 @@ test('arrow keys navigate between tabs', function(assert) {
   const tab2 = this.$('#tab2');
 
   Ember.run(tab1, 'trigger', Ember.$.Event('keydown', { keyCode: 37 }));
-  assert.equal(this.get('selectedModel'), 'Item 2', 'left arrow - tab2 is selected');
+  assert.equal(this.get('selection'), 'Item 2', 'left arrow - tab2 is selected');
   assert.ok(tab2.get(0) === document.activeElement, 'tab2 has focus');
 
   Ember.run(tab2, 'trigger', Ember.$.Event('keydown', { keyCode: 38 }));
-  assert.equal(this.get('selectedModel'), 'Item 1', 'up arrow - tab1 is selected');
+  assert.equal(this.get('selection'), 'Item 1', 'up arrow - tab1 is selected');
   assert.ok(tab1.get(0) === document.activeElement, 'tab1 has focus');
 
   Ember.run(tab1, 'trigger', Ember.$.Event('keydown', { keyCode: 39 }));
-  assert.equal(this.get('selectedModel'), 'Item 2', 'right arrow - tab2 is selected');
+  assert.equal(this.get('selection'), 'Item 2', 'right arrow - tab2 is selected');
   assert.ok(tab2.get(0) === document.activeElement, 'tab2 has focus');
 
   Ember.run(tab2, 'trigger', Ember.$.Event('keydown', { keyCode: 40 }));
-  assert.equal(this.get('selectedModel'), 'Item 1', 'down arrow - tab1 is selected');
+  assert.equal(this.get('selection'), 'Item 1', 'down arrow - tab1 is selected');
   assert.ok(tab1.get(0) === document.activeElement, 'tab1 has focus');
 });

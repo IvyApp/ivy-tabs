@@ -125,7 +125,7 @@ export default Ember.Component.extend({
     this.selectTabByIndex(index);
   },
 
-  selected: Ember.computed.alias('tabsContainer.selected'),
+  selection: Ember.computed.alias('tabsContainer.selection'),
 
   /**
    * The currently-selected `ivy-tab` instance.
@@ -133,8 +133,8 @@ export default Ember.Component.extend({
    * @property selectedTab
    * @type IvyTabs.IvyTabComponent
    */
-  selectedTab: Ember.computed('selected', 'tabs.@each.model', function() {
-    return this.get('tabs').findBy('model', this.get('selected'));
+  selectedTab: Ember.computed('selection', 'tabs.@each.model', function() {
+    return this.get('tabs').findBy('model', this.get('selection'));
   }),
 
   /**

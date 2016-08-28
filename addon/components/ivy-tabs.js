@@ -20,10 +20,10 @@ export default Ember.Component.extend({
    * bound to a controller property that is used as a query parameter, but can
    * be bound to anything.
    *
-   * @property selected
+   * @property selection
    * @type Object
    */
-  selected: null,
+  selection: null,
 
   /**
    * Registers the `ivy-tab-list` instance.
@@ -47,11 +47,11 @@ export default Ember.Component.extend({
   },
 
   selectTab() {
-    let selected = this.get('selected');
-    if (Ember.isNone(selected)) {
+    let selection = this.get('selection');
+    if (Ember.isNone(selection)) {
       this.get('tabList').selectTabByIndex(0);
     } else {
-      this.get('tabList').selectTabByModel(selected);
+      this.get('tabList').selectTabByModel(selection);
     }
   },
 

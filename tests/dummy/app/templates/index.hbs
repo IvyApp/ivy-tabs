@@ -1,8 +1,8 @@
-{{#ivy-tabs selected=selected as |tabs|}}
+{{#ivy-tabs selection=selection as |tabs|}}
   {{#tabs.tablist as |tablist|}}
-    {{#tablist.tab "A" on-select=(action (mut selected))}}Tab A{{/tablist.tab}}
-    {{#tablist.tab "B" on-select=(action (mut selected))}}Tab B{{/tablist.tab}}
-    {{#tablist.tab "C" on-select=(action (mut selected))}}Tab C{{/tablist.tab}}
+    {{#tablist.tab "A" on-select=(action (mut selection))}}Tab A{{/tablist.tab}}
+    {{#tablist.tab "B" on-select=(action (mut selection))}}Tab B{{/tablist.tab}}
+    {{#tablist.tab "C" on-select=(action (mut selection))}}Tab C{{/tablist.tab}}
   {{/tabs.tablist}}
 
   <div class="tab-content">
