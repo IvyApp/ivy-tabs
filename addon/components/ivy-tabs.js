@@ -33,7 +33,7 @@ export default Ember.Component.extend({
    */
   registerTabList(tabList) {
     this.set('tabList', tabList);
-    Ember.run.once(this, this._selectTabByModel);
+    Ember.run.once(this, this.selectTab);
   },
 
   /**
@@ -44,6 +44,15 @@ export default Ember.Component.extend({
    */
   registerTabPanel(tabPanel) {
     this.get('tabPanels').pushObject(tabPanel);
+  },
+
+  selectTab() {
+    let selected = this.get('selected');
+    if (Ember.isNone(selected)) {
+      this.get('tabList').selectTabByIndex(0);
+    } else {
+      this.get('tabList').selectTabByModel(selected);
+    }
   },
 
   tabPanels: Ember.computed(function() {
@@ -68,14 +77,5 @@ export default Ember.Component.extend({
    */
   unregisterTabPanel(tabPanel) {
     this.get('tabPanels').removeObject(tabPanel);
-  },
-
-  _selectTabByModel() {
-    let selected = this.get('selected');
-    if (Ember.isNone(selected)) {
-      this.get('tabList').selectTabByIndex(0);
-    } else {
-      this.get('tabList').selectTabByModel(selected);
-    }
   }
 });

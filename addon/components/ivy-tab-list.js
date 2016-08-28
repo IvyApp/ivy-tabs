@@ -90,11 +90,10 @@ export default Ember.Component.extend({
    */
   registerTab(tab) {
     const tabs = this.get('tabs');
+    const tabsContainer = this.get('tabsContainer');
     tabs.pushObject(tab);
 
-    if (tabs.get('length') === 1) {
-      tab.select();
-    }
+    Ember.run.scheduleOnce('afterRender', tabsContainer, tabsContainer.selectTab);
   },
 
   /**
