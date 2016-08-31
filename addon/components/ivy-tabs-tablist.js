@@ -92,7 +92,7 @@ export default Ember.Component.extend({
     const tabsContainer = this.get('tabsContainer');
     tabs.pushObject(tab);
 
-    Ember.run.scheduleOnce('afterRender', tabsContainer, tabsContainer.selectTab);
+    Ember.run.once(tabsContainer, tabsContainer.selectTab);
   },
 
   /**
