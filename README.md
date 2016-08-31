@@ -21,22 +21,22 @@ $ ember install ivy-tabs
 ### Templates
 
 ```handlebars
-{{#ivy-tabs on-select=(action (mut selectedIndex)) selected-index=selectedIndex as |tabs|}}
+{{#ivy-tabs selection=selection as |tabs|}}
   {{#tabs.tablist as |tablist|}}
-    {{#tablist.tab}}Foo{{/tablist.tab}}
-    {{#tablist.tab}}Bar{{/tablist.tab}}
-    {{#tablist.tab}}Baz{{/tablist.tab}}
+    {{#tablist.tab "TabA" on-select=(action (mut selection))}}Foo{{/tablist.tab}}
+    {{#tablist.tab "TabB" on-select=(action (mut selection))}}Bar{{/tablist.tab}}
+    {{#tablist.tab "TabC" on-select=(action (mut selection))}}Baz{{/tablist.tab}}
   {{/tabs.tablist}}
 
-  {{#tabs.tabpanel}}
+  {{#tabs.tabpanel "TabA"}}
     <h2>Foo</h2>
   {{/tabs.tabpanel}}
 
-  {{#tabs.tabpanel}}
+  {{#tabs.tabpanel "TabB"}}
     <h2>Bar</h2>
   {{/tabs.tabpanel}}
 
-  {{#tabs.tabpanel}}
+  {{#tabs.tabpanel "TabC"}}
     <h2>Baz</h2>
   {{/tabs.tabpanel}}
 {{/ivy-tabs}}
@@ -44,9 +44,13 @@ $ ember install ivy-tabs
 
 Some things to note:
 
-  * Associations between tabs and panels are inferred by order.
+  * Associations between tabs and panels are explicitly defined by the "models"
+    (the first positional parameter) given to them. In the above example, the
+    given tab models are "TabA", "TabB", and "TabC". This model could be any
+    JavaScript Object that you'd like, they are not required to be strings.
   * An `on-select` action is sent when a tab is selected. As an argument, it
-    receives the index (0-based) of the selected tab.
+    receives the model defined on the tab (for example, when the Foo tab is
+    selected, the `on-select` event will carry "TabA" as an argument).
 
 ### Presentation
 

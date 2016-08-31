@@ -80,16 +80,6 @@ export default Ember.Component.extend({
   activeClass: 'active',
 
   /**
-   * The index of this panel in the `ivy-tabs` component.
-   *
-   * @property index
-   * @type Number
-   */
-  index: Ember.computed('tabPanels.[]', function() {
-    return this.get('tabPanels').indexOf(this);
-  }),
-
-  /**
    * Whether or not this panel's associated tab is selected.
    *
    * @property isSelected
@@ -99,34 +89,23 @@ export default Ember.Component.extend({
   isSelected: Ember.computed.readOnly('tab.isSelected'),
 
   /**
+   * Object to uniquely identify this tab within the tabList.
+   *
+   * @property model
+   * @type Object
+   */
+  model: null,
+
+  /**
    * The `ivy-tab` associated with this panel.
    *
    * @property tab
    * @type IvyTabs.IvyTabComponent
    */
-  tab: Ember.computed('tabs.[]', 'index', function() {
+  tab: Ember.computed('model', 'tabs.@each.model', function() {
     const tabs = this.get('tabs');
-    if (tabs) { return tabs.objectAt(this.get('index')); }
+    if (tabs) { return tabs.findBy('model', this.get('model')); }
   }),
-
-  /**
-   * The `ivy-tab-list` component this panel belongs to.
-   *
-   * @property tabList
-   * @type IvyTabs.IvyTabListComponent
-   * @readOnly
-   */
-  tabList: Ember.computed.readOnly('tabsContainer.tabList'),
-
-  /**
-   * The array of all `ivy-tab-panel` instances within the `ivy-tabs`
-   * component.
-   *
-   * @property tabPanels
-   * @type Array | IvyTabs.IvyTabPanelComponent
-   * @readOnly
-   */
-  tabPanels: Ember.computed.readOnly('tabsContainer.tabPanels'),
 
   /**
    * The array of all `ivy-tab` instances within the `ivy-tab-list` component.
@@ -135,7 +114,7 @@ export default Ember.Component.extend({
    * @type Array | IvyTabs.IvyTabComponent
    * @readOnly
    */
-  tabs: Ember.computed.readOnly('tabList.tabs'),
+  tabs: Ember.computed.readOnly('tabsContainer.tabList.tabs'),
 
   /**
    * The `ivy-tabs` component.
@@ -153,4 +132,6 @@ export default Ember.Component.extend({
   _unregisterWithTabsContainer() {
     this.get('tabsContainer').unregisterTabPanel(this);
   }
+}).reopenClass({
+  positionalParams: ['model']
 });

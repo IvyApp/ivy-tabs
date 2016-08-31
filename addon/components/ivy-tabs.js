@@ -16,15 +16,14 @@ export default Ember.Component.extend({
   classNames: ['ivy-tabs'],
 
   /**
-   * Set this to the index of the tab you'd like to be selected. Usually it is
+   * Set this to the model of the tab you'd like to be selected. Usually it is
    * bound to a controller property that is used as a query parameter, but can
    * be bound to anything.
    *
-   * @property selected-index
-   * @type Number
-   * @default 0
+   * @property selection
+   * @type Object
    */
-  'selected-index': 0,
+  selection: null,
 
   /**
    * Registers the `ivy-tab-list` instance.
@@ -34,7 +33,7 @@ export default Ember.Component.extend({
    */
   registerTabList(tabList) {
     this.set('tabList', tabList);
-    Ember.run.once(this, this._selectTabByIndex);
+    Ember.run.once(this, this.selectTab);
   },
 
   /**
@@ -45,6 +44,15 @@ export default Ember.Component.extend({
    */
   registerTabPanel(tabPanel) {
     this.get('tabPanels').pushObject(tabPanel);
+  },
+
+  selectTab() {
+    let selection = this.get('selection');
+    if (Ember.isNone(selection)) {
+      this.get('tabList').selectTabByIndex(0);
+    } else {
+      this.get('tabList').selectTabByModel(selection);
+    }
   },
 
   tabPanels: Ember.computed(function() {
@@ -69,11 +77,5 @@ export default Ember.Component.extend({
    */
   unregisterTabPanel(tabPanel) {
     this.get('tabPanels').removeObject(tabPanel);
-  },
-
-  _selectTabByIndex() {
-    let selectedIndex = this.get('selected-index');
-    if (Ember.isNone(selectedIndex)) { selectedIndex = 0; }
-    this.get('tabList').selectTabByIndex(selectedIndex);
   }
 });

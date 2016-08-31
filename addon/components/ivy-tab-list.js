@@ -89,7 +89,11 @@ export default Ember.Component.extend({
    * @param {IvyTabs.IvyTabComponent} tab
    */
   registerTab(tab) {
-    this.get('tabs').pushObject(tab);
+    const tabs = this.get('tabs');
+    const tabsContainer = this.get('tabsContainer');
+    tabs.pushObject(tab);
+
+    Ember.run.scheduleOnce('afterRender', tabsContainer, tabsContainer.selectTab);
   },
 
   /**
@@ -98,7 +102,8 @@ export default Ember.Component.extend({
    * @method selectNextTab
    */
   selectNextTab() {
-    let index = this.get('selected-index') + 1;
+    const selectedTab = this.get('selectedTab');
+    let index = selectedTab.get('index') + 1;
     if (index === this.get('tabs.length')) { index = 0; }
     this.selectTabByIndex(index);
   },
@@ -109,7 +114,8 @@ export default Ember.Component.extend({
    * @method selectPreviousTab
    */
   selectPreviousTab() {
-    let index = this.get('selected-index') - 1;
+    const selectedTab = this.get('selectedTab');
+    let index = selectedTab.get('index') - 1;
 
     // Previous from the first tab should select the last tab.
     if (index < 0) { index = this.get('tabs.length') - 1; }
@@ -119,7 +125,7 @@ export default Ember.Component.extend({
     this.selectTabByIndex(index);
   },
 
-  'selected-index': Ember.computed.alias('tabsContainer.selected-index'),
+  selection: Ember.computed.alias('tabsContainer.selection'),
 
   /**
    * The currently-selected `ivy-tab` instance.
@@ -127,19 +133,9 @@ export default Ember.Component.extend({
    * @property selectedTab
    * @type IvyTabs.IvyTabComponent
    */
-  selectedTab: Ember.computed('selected-index', 'tabs.[]', function() {
-    return this.get('tabs').objectAt(this.get('selected-index'));
+  selectedTab: Ember.computed('selection', 'tabs.@each.model', function() {
+    return this.get('tabs').findBy('model', this.get('selection'));
   }),
-
-  /**
-   * Select the given tab.
-   *
-   * @method selectTab
-   * @param {IvyTabs.IvyTabComponent} tab
-   */
-  selectTab(tab) {
-    this.selectTabByIndex(this.get('tabs').indexOf(tab));
-  },
 
   /**
    * Select the tab at `index`.
@@ -148,7 +144,23 @@ export default Ember.Component.extend({
    * @param {Number} index
    */
   selectTabByIndex(index) {
-    this.sendAction('on-select', index);
+    const tab = this.get('tabs').objectAt(index);
+
+    if (!tab) {
+      throw new Error('Tab index out of bounds');
+    }
+
+    tab.select();
+  },
+
+  selectTabByModel(model) {
+    const tab = this.get('tabs').findBy('model', model);
+
+    if (!tab) {
+      throw new Error('Tab could not be found by model');
+    }
+
+    tab.select();
   },
 
   tabs: Ember.computed(function() {
@@ -172,15 +184,12 @@ export default Ember.Component.extend({
    */
   unregisterTab(tab) {
     const index = tab.get('index');
-    this.get('tabs').removeObject(tab);
 
-    if (index < this.get('selected-index')) {
-      this.selectPreviousTab();
-    } else if (tab.get('isSelected')) {
-      if (index !== 0) {
-        this.selectPreviousTab();
-      }
+    if (tab.get('isSelected') && index === 0) {
+      this.selectNextTab();
     }
+
+    this.get('tabs').removeObject(tab);
   },
 
   _registerWithTabsContainer() {

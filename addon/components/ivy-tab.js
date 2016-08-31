@@ -136,12 +136,20 @@ export default Ember.Component.extend({
   }),
 
   /**
+   * Object to uniquely identify this tab within the tabList.
+   *
+   * @property model
+   * @type Object
+   */
+  model: null,
+
+  /**
    * Called when the user clicks on the tab. Selects this tab.
    *
    * @method select
    */
   select: Ember.on('click', 'touchEnd', function() {
-    this.get('tabList').selectTab(this);
+    this.sendAction('on-select', this.get('model'));
   }),
 
   /**
@@ -159,8 +167,8 @@ export default Ember.Component.extend({
    * @property tabPanel
    * @type IvyTabs.IvyTabPanelComponent
    */
-  tabPanel: Ember.computed('tabPanels.[]', 'index', function() {
-    return this.get('tabPanels').objectAt(this.get('index'));
+  tabPanel: Ember.computed('tabPanels.@each.model', 'model', function() {
+    return this.get('tabPanels').findBy('model', this.get('model'));
   }),
 
   /**
@@ -198,4 +206,6 @@ export default Ember.Component.extend({
   _unregisterWithTabList() {
     this.get('tabList').unregisterTab(this);
   }
+}).reopenClass({
+  positionalParams: ['model']
 });
