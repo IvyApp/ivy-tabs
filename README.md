@@ -23,9 +23,17 @@ $ ember install ivy-tabs
 ```handlebars
 {{#ivy-tabs selection=selection as |tabs|}}
   {{#tabs.tablist as |tablist|}}
-    {{#tablist.tab "TabA" on-select=(action (mut selection))}}Foo{{/tablist.tab}}
-    {{#tablist.tab "TabB" on-select=(action (mut selection))}}Bar{{/tablist.tab}}
-    {{#tablist.tab "TabC" on-select=(action (mut selection))}}Baz{{/tablist.tab}}
+    <ul role="presentation">
+      <li role="presentation">
+        {{#tablist.tab "TabA" on-select=(action (mut selection))}}Foo{{/tablist.tab}}
+      </li>
+      <li role="presentation">
+        {{#tablist.tab "TabB" on-select=(action (mut selection))}}Bar{{/tablist.tab}}
+      </li>
+      <li role="presentation">
+        {{#tablist.tab "TabC" on-select=(action (mut selection))}}Baz{{/tablist.tab}}
+      </li>
+    </ul>
   {{/tabs.tablist}}
 
   {{#tabs.tabpanel "TabA"}}
