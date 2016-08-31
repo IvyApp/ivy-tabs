@@ -4,6 +4,18 @@
 
 See [changes since release][HEAD].
 
+## [3.0.0][] / 2016-08-31
+
+**This release introduces several breaking changes from the 2.x series.** Refer
+to the README for current usage.
+
+* [#24](https://github.com/IvyApp/ivy-tabs/pull/24) "Namespace" components under `ivy-tabs-*`
+* [#23](https://github.com/IvyApp/ivy-tabs/pull/23) Remove `tagName` values except for tabs, which are now anchor tags by default.
+* [#21](https://github.com/IvyApp/ivy-tabs/pull/21) Select tabs by a (now required) model value, rather than tab index.
+    * Rename `selectedIndex` on `ivy-tabs` to `selection`.
+    * Move `on-select` action from `ivy-tabs` to individual tabs.
+* [#22](https://github.com/IvyApp/ivy-tabs/pull/22) Remove isVisible manipulation and rely on application styles for presentation management.
+
 ## [2.0.0][] / 2016-04-17
 
 **This release drops support for Ember < 2.3.**
@@ -113,4 +125,5 @@ See [changes since release][HEAD].
 [1.1.0]: https://github.com/IvyApp/ivy-tabs/compare/v1.0.0...v1.1.0
 [1.2.0]: https://github.com/IvyApp/ivy-tabs/compare/v1.1.0...v1.2.0
 [2.0.0]: https://github.com/IvyApp/ivy-tabs/compare/v1.2.0...v2.0.0
-[HEAD]: https://github.com/IvyApp/ivy-tabs/compare/v2.0.0...master
+[3.0.0]: https://github.com/IvyApp/ivy-tabs/compare/v2.0.0...v3.0.0
+[HEAD]: https://github.com/IvyApp/ivy-tabs/compare/v3.0.0...master
