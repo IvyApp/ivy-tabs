@@ -83,7 +83,6 @@ test('selected panel attributes', function(assert) {
   const panel = this.$('#panel1');
   assert.ok(panel.hasClass('active'), 'has "active" class');
   assert.equal(panel.attr('aria-hidden'), 'false', 'aria-hidden');
-  assert.ok(panel.is(':visible'), 'is visible');
 });
 
 test('deselected tab attributes', function(assert) {
@@ -103,7 +102,6 @@ test('deselected panel attributes', function(assert) {
   const panel = this.$('#panel2');
   assert.ok(!panel.hasClass('active'), 'does not have "active" class');
   assert.equal(panel.attr('aria-hidden'), 'true', 'aria-hidden');
-  assert.ok(!panel.is(':visible'), 'is not visible');
 });
 
 const eachTemplate = hbs`
@@ -188,32 +186,4 @@ test('arrow keys navigate between tabs', function(assert) {
   Ember.run(tab2, 'trigger', Ember.$.Event('keydown', { keyCode: 40 }));
   assert.equal(this.get('selectedIndex'), 0, 'down arrow - tab1 is selected');
   assert.ok(tab1.get(0) === document.activeElement, 'tab1 has focus');
-});
-
-test('allows isVisible to be set on panels', function(assert) {
-  const isVisibleTemplate = hbs`
-    {{#ivy-tabs on-select=(action (mut selectedIndex)) selected-index=selectedIndex as |tabs|}}
-      {{#tabs.tablist id="tablist" as |tablist|}}
-        {{#tablist.tab id="tab1"}}tab 1{{/tablist.tab}}
-        {{#tablist.tab id="tab2"}}tab 2{{/tablist.tab}}
-      {{/tabs.tablist}}
-      {{#tabs.tabpanel id="panel1" isVisible=true}}panel 1{{/tabs.tabpanel}}
-      {{#tabs.tabpanel id="panel2" isVisible=true}}panel 2{{/tabs.tabpanel}}
-    {{/ivy-tabs}}
-  `;
-  this.render(isVisibleTemplate);
-
-  const panel1 = this.$('#panel1');
-  const panel2 = this.$('#panel2');
-
-  assert.ok(panel1.is(':visible'), 'is visible');
-  assert.ok(panel2.is(':visible'), 'is visible');
-
-  this.$('#tab1').click();
-  assert.ok(panel1.is(':visible'), 'is visible');
-  assert.ok(panel2.is(':visible'), 'is visible');
-
-  this.$('#tab2').click();
-  assert.ok(panel1.is(':visible'), 'is visible');
-  assert.ok(panel2.is(':visible'), 'is visible');
 });

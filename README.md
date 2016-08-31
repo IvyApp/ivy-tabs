@@ -18,6 +18,8 @@ $ ember install ivy-tabs
 
 ## Usage
 
+### Templates
+
 ```handlebars
 {{#ivy-tabs on-select=(action (mut selectedIndex)) selected-index=selectedIndex as |tabs|}}
   {{#tabs.tablist as |tablist|}}
@@ -45,6 +47,39 @@ Some things to note:
   * Associations between tabs and panels are inferred by order.
   * An `on-select` action is sent when a tab is selected. As an argument, it
     receives the index (0-based) of the selected tab.
+
+### Presentation
+
+ivy-tabs does not make any assumptions about how you will present your tabs.
+Specifically, this means that ivy-tabs will not automatically hide unselected
+tab panels. Rather, you should update your application styles to reflect your
+needs.
+
+In an ideal world, your application would carry a CSS rule similar to the
+following:
+
+```css
+[aria-hidden="true"] {
+  display: none;
+}
+```
+
+If, for some reason, your target audience does not support CSS attribute
+selectors, you may also opt to instead rely on the ivy-tabs classes by
+defaulting all panels to being hidden and only displaying the active panel
+using CSS rules similar to (remember, `.active` will be different if you
+override the `activeClass` property of your ivy-tab-panel):
+
+```css
+.ivy-tab-panel {
+  display: none;
+}
+
+.ivy-tab-panel.active {
+  display: block;
+}
+```
+
 
 ## Contributing
 
