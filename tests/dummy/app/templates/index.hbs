@@ -1,13 +1,21 @@
 {{#ivy-tabs selection=selection as |tabs|}}
   {{#tabs.tablist as |tablist|}}
-    {{#tablist.tab "A" on-select=(action (mut selection))}}Tab A{{/tablist.tab}}
-    {{#tablist.tab "B" on-select=(action (mut selection))}}Tab B{{/tablist.tab}}
-    {{#tablist.tab "C" on-select=(action (mut selection))}}Tab C{{/tablist.tab}}
+    <ul class="nav nav-tabs" role="presentation">
+      <li class="{{if (eq selection "A") "active"}}" role="presentation">
+        {{#tablist.tab "A" on-select=(action (mut selection))}}Tab A{{/tablist.tab}}
+      </li>
+      <li class="{{if (eq selection "B") "active"}}" role="presentation">
+        {{#tablist.tab "B" on-select=(action (mut selection))}}Tab B{{/tablist.tab}}
+      </li>
+      <li class="{{if (eq selection "C") "active"}}" role="presentation">
+        {{#tablist.tab "C" on-select=(action (mut selection))}}Tab C{{/tablist.tab}}
+      </li>
+    </ul>
   {{/tabs.tablist}}
 
   <div class="tab-content">
-    {{#tabs.tabpanel "A"}}
-      <h2>Tab A</h2>
+    {{#tabs.tabpanel "A" id="panel-a"}}
+      <h2>Panel A</h2>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -19,8 +27,8 @@
       </p>
     {{/tabs.tabpanel}}
 
-    {{#tabs.tabpanel "B"}}
-      <h2>Tab B</h2>
+    {{#tabs.tabpanel "B" id="panel-b"}}
+      <h2>Panel B</h2>
       <p>
         Tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -31,8 +39,8 @@
       </p>
     {{/tabs.tabpanel}}
 
-    {{#tabs.tabpanel "C"}}
-      <h2>Tab C</h2>
+    {{#tabs.tabpanel "C" id="panel-c"}}
+      <h2>Panel C</h2>
       <p>
         Veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
         commodo consequat. Duis aute irure dolor in reprehenderit in voluptate

@@ -10,8 +10,8 @@ import Ember from 'ember';
  * @extends Ember.Component
  */
 export default Ember.Component.extend({
-  tagName: 'li',
-  attributeBindings: ['aria-controls', 'aria-expanded', 'aria-selected', 'selected', 'tabindex'],
+  tagName: 'a',
+  attributeBindings: ['aria-controls', 'aria-expanded', 'aria-selected', 'href', 'selected', 'tabindex'],
   classNames: ['ivy-tab'],
   classNameBindings: ['active'],
 
@@ -115,6 +115,14 @@ export default Ember.Component.extend({
    */
   activeClass: 'active',
 
+  href: Ember.computed('tabPanel.elementId', 'tagName', function() {
+    if (this.get('tagName') !== 'a') {
+      return;
+    }
+
+    return '#' + this.get('tabPanel.elementId');
+  }).readOnly(),
+
   /**
    * The index of this tab in the `ivy-tab-list` component.
    *
@@ -148,8 +156,13 @@ export default Ember.Component.extend({
    *
    * @method select
    */
-  select: Ember.on('click', 'touchEnd', function() {
+  select() {
     this.sendAction('on-select', this.get('model'));
+  },
+
+  selectOnClickOrTouch: Ember.on('click', 'touchEnd', function(event) {
+    event.preventDefault();
+    this.select();
   }),
 
   /**
