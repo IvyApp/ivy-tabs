@@ -33,7 +33,6 @@ export default Ember.Component.extend({
    */
   registerTabList(tabList) {
     this.set('tabList', tabList);
-    Ember.run.once(this, this.selectTab);
   },
 
   /**
@@ -44,15 +43,6 @@ export default Ember.Component.extend({
    */
   registerTabPanel(tabPanel) {
     this.get('tabPanels').pushObject(tabPanel);
-  },
-
-  selectTab() {
-    let selection = this.get('selection');
-    if (Ember.isNone(selection)) {
-      this.get('tabList').selectTabByIndex(0);
-    } else {
-      this.get('tabList').selectTabByModel(selection);
-    }
   },
 
   tabPanels: Ember.computed(function() {

@@ -88,11 +88,8 @@ export default Ember.Component.extend({
    * @param {IvyTabs.IvyTabComponent} tab
    */
   registerTab(tab) {
-    const tabs = this.get('tabs');
-    const tabsContainer = this.get('tabsContainer');
-    tabs.pushObject(tab);
-
-    Ember.run.once(tabsContainer, tabsContainer.selectTab);
+    this.get('tabs').pushObject(tab);
+    Ember.run.once(this, this.selectTab);
   },
 
   /**
@@ -124,7 +121,14 @@ export default Ember.Component.extend({
     this.selectTabByIndex(index);
   },
 
-  selection: Ember.computed.alias('tabsContainer.selection'),
+  selectTab() {
+    let selection = this.get('selection');
+    if (Ember.isNone(selection)) {
+      this.selectTabByIndex(0);
+    } else {
+      this.selectTabByModel(selection);
+    }
+  },
 
   /**
    * The currently-selected `ivy-tabs-tab` instance.
@@ -193,6 +197,7 @@ export default Ember.Component.extend({
 
   _registerWithTabsContainer() {
     this.get('tabsContainer').registerTabList(this);
+    Ember.run.once(this, this.selectTab);
   },
 
   _unregisterWithTabsContainer() {
