@@ -124,7 +124,7 @@ export default Ember.Component.extend({
   }).readOnly(),
 
   /**
-   * The index of this tab in the `ivy-tab-list` component.
+   * The index of this tab in the `ivy-tabs-tablist` component.
    *
    * @property index
    * @type Number
@@ -166,7 +166,7 @@ export default Ember.Component.extend({
   }),
 
   /**
-   * The `ivy-tab-list` component this tab belongs to.
+   * The `ivy-tabs-tablist` component this tab belongs to.
    *
    * @property tabList
    * @type IvyTabs.IvyTabListComponent
@@ -175,7 +175,7 @@ export default Ember.Component.extend({
   tabList: null,
 
   /**
-   * The `ivy-tab-panel` associated with this tab.
+   * The `ivy-tabs-tabpanel` associated with this tab.
    *
    * @property tabPanel
    * @type IvyTabs.IvyTabPanelComponent
@@ -185,7 +185,7 @@ export default Ember.Component.extend({
   }),
 
   /**
-   * The array of all `ivy-tab-panel` instances within the `ivy-tabs`
+   * The array of all `ivy-tabs-tabpanel` instances within the `ivy-tabs`
    * component.
    *
    * @property tabPanels
@@ -195,7 +195,7 @@ export default Ember.Component.extend({
   tabPanels: Ember.computed.readOnly('tabsContainer.tabPanels'),
 
   /**
-   * The array of all `ivy-tab` instances within the `ivy-tab-list` component.
+   * The array of all `ivy-tabs-tab` instances within the `ivy-tabs-tablist` component.
    *
    * @property tabs
    * @type Array | IvyTabs.IvyTabComponent
