@@ -83,11 +83,11 @@ using CSS rules similar to (remember, `.active` will be different if you
 override the `activeClass` property of your ivy-tabs-tabpanel):
 
 ```css
-.ivy-tab-panel {
+.ivy-tabs-tabpanel {
   display: none;
 }
 
-.ivy-tab-panel.active {
+.ivy-tabs-tabpanel.active {
   display: block;
 }
 ```

@@ -12,7 +12,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   tagName: 'a',
   attributeBindings: ['aria-controls', 'aria-expanded', 'aria-selected', 'href', 'selected', 'tabindex'],
-  classNames: ['ivy-tab'],
+  classNames: ['ivy-tabs-tab'],
   classNameBindings: ['active'],
 
   init() {

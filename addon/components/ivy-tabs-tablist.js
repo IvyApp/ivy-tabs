@@ -14,7 +14,7 @@ export default Ember.Component.extend({
   layout: layout,
 
   attributeBindings: ['aria-multiselectable'],
-  classNames: ['ivy-tab-list'],
+  classNames: ['ivy-tabs-tablist'],
 
   init() {
     this._super(...arguments);

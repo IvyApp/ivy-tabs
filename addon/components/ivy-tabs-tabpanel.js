@@ -11,7 +11,7 @@ import Ember from 'ember';
  */
 export default Ember.Component.extend({
   attributeBindings: ['aria-hidden', 'aria-labelledby'],
-  classNames: ['ivy-tab-panel'],
+  classNames: ['ivy-tabs-tabpanel'],
   classNameBindings: ['active'],
 
   init() {
