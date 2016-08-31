@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../templates/components/ivy-tab-list';
+import layout from '../templates/components/ivy-tabs-tablist';
 
 /**
  * @module ivy-tabs
@@ -14,7 +14,7 @@ export default Ember.Component.extend({
   layout: layout,
 
   attributeBindings: ['aria-multiselectable'],
-  classNames: ['ivy-tab-list'],
+  classNames: ['ivy-tabs-tablist'],
 
   init() {
     this._super(...arguments);
@@ -127,7 +127,7 @@ export default Ember.Component.extend({
   selection: Ember.computed.alias('tabsContainer.selection'),
 
   /**
-   * The currently-selected `ivy-tab` instance.
+   * The currently-selected `ivy-tabs-tab` instance.
    *
    * @property selectedTab
    * @type IvyTabs.IvyTabComponent

@@ -80,14 +80,14 @@ If, for some reason, your target audience does not support CSS attribute
 selectors, you may also opt to instead rely on the ivy-tabs classes by
 defaulting all panels to being hidden and only displaying the active panel
 using CSS rules similar to (remember, `.active` will be different if you
-override the `activeClass` property of your ivy-tab-panel):
+override the `activeClass` property of your ivy-tabs-tabpanel):
 
 ```css
-.ivy-tab-panel {
+.ivy-tabs-tabpanel {
   display: none;
 }
 
-.ivy-tab-panel.active {
+.ivy-tabs-tabpanel.active {
   display: block;
 }
 ```

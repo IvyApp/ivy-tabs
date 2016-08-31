@@ -11,7 +11,7 @@ import Ember from 'ember';
  */
 export default Ember.Component.extend({
   attributeBindings: ['aria-hidden', 'aria-labelledby'],
-  classNames: ['ivy-tab-panel'],
+  classNames: ['ivy-tabs-tabpanel'],
   classNameBindings: ['active'],
 
   init() {
@@ -97,7 +97,7 @@ export default Ember.Component.extend({
   model: null,
 
   /**
-   * The `ivy-tab` associated with this panel.
+   * The `ivy-tabs-tab` associated with this panel.
    *
    * @property tab
    * @type IvyTabs.IvyTabComponent
@@ -108,7 +108,7 @@ export default Ember.Component.extend({
   }),
 
   /**
-   * The array of all `ivy-tab` instances within the `ivy-tab-list` component.
+   * The array of all `ivy-tabs-tab` instances within the `ivy-tabs-tablist` component.
    *
    * @property tabs
    * @type Array | IvyTabs.IvyTabComponent

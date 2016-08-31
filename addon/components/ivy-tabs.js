@@ -26,7 +26,7 @@ export default Ember.Component.extend({
   selection: null,
 
   /**
-   * Registers the `ivy-tab-list` instance.
+   * Registers the `ivy-tabs-tablist` instance.
    *
    * @method registerTabList
    * @param {IvyTabs.IvyTabListComponent} tabList
@@ -60,7 +60,7 @@ export default Ember.Component.extend({
   }).readOnly(),
 
   /**
-   * Removes the `ivy-tab-list` component.
+   * Removes the `ivy-tabs-tablist` component.
    *
    * @method unregisterTabList
    * @param {IvyTabs.IvyTabListComponent} tabList
