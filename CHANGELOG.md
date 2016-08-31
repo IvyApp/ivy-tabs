@@ -1,6 +1,10 @@
 # ivy-tabs
 
-## 2.0.0
+[![Build Status](https://travis-ci.org/IvyApp/ivy-tabs.svg?branch=master)](https://travis-ci.org/IvyApp/ivy-tabs)
+
+See [changes since release][HEAD].
+
+## [2.0.0][] / 2016-04-17
 
 **This release drops support for Ember < 2.3.**
 
@@ -9,7 +13,7 @@
 * [#12](https://github.com/IvyApp/ivy-tabs/pull/12) Convert to contextual components.
 * Upgrade to Ember CLI 2.5.0.
 
-## 1.2.0
+## [1.2.0][] / 2016-03-24
 
 * Upgrade `ember-cli` to 2.4.2.
 * Use block params instead of `parentView`.
@@ -18,7 +22,7 @@
 * Select the next tab when the active, first tab is removed.
 * Retain tab selection if a preceding tab is removed.
 
-## 1.1.0
+## [1.1.0][] / 2015-05-21
 
 * Upgrade addon to ember-cli 0.2.4.
 * Fix an issue with initial value of `selected-index` not being applied.
@@ -26,7 +30,7 @@
 * Upgrade to ember-cli 0.2.0.
 * Upgrade to ember 1.10.0.
 
-## 1.0.0
+## [1.0.0][] / 2015-02-19
 
 * Ensure selected-index remains 0 if all tabs are removed.
 * Upgrade to ember-cli 0.1.5.
@@ -39,7 +43,7 @@
 * Convert to an ember-cli addon.
 * Rename toplevel global from `ivy.tabs` to `IvyTabs`.
 
-## 0.3.0
+## [0.3.0][] / 2014-11-05
 
 * Move away from `broccoli-dist-es6-module`. Instead, use
   `broccoli-es6-module-transpiler`, which supports the latest version of the
@@ -48,26 +52,26 @@
   format.
 * Deprecate `selectedIndex`, use `selected-index` instead.
 
-## 0.2.0
+## [0.2.0][] / 2014-11-03
 
 * Add keyboard navigation.
 
-## 0.1.6
+## [0.1.6][] / 2014-11-04
 
 * Build tooling changes.
 
-## 0.1.5
+## [0.1.5][] / 2014-11-03
 
 * Fix issue with tab index being out of order. This was being caused by
   a reliance on `didInsertElement` firing in a particular order, which Ember
   doesn't guarantee. Instead, the actions are now fired inside the `init` and
   `willDestroy` methods of the component classes.
 
-## 0.1.4
+## [0.1.4][] / 2014-11-01
 
 * Fix incorrect spelling of "aria-labelledby".
 
-## 0.1.3
+## [0.1.3][] / 2014-11-01
 
 * Rewrite internals to make selectedIndex canonical. Previously, the "active
   tab" object was canonical, and the selectedIndex was calculated based on this
@@ -77,11 +81,11 @@
   Ember 1.5.
 * Change "aria-expanded" to a read-only alias.
 
-## 0.1.2
+## [0.1.2][] / 2014-10-30
 
 * When active tab is removed, select the previous tab (if any).
 
-## 0.1.1
+## [0.1.1][] / 2014-10-23
 
 * Ensure `ivy-tab-panel`'s `isVisible` property is a Boolean. Previously it was
   an alias to `active`, which returns a String so that it can be used as
@@ -92,6 +96,21 @@
   would result in the tab panels animating in and out when switching between
   tabs.
 
-## 0.1.0
+## [0.1.0][] / 2014-10-23
 
 * Initial release.
+
+[0.1.0]: https://github.com/IvyApp/ivy-tabs/tree/v0.1.0
+[0.1.1]: https://github.com/IvyApp/ivy-tabs/compare/v0.1.0...v0.1.1
+[0.1.2]: https://github.com/IvyApp/ivy-tabs/compare/v0.1.1...v0.1.2
+[0.1.3]: https://github.com/IvyApp/ivy-tabs/compare/v0.1.2...v0.1.3
+[0.1.4]: https://github.com/IvyApp/ivy-tabs/compare/v0.1.3...v0.1.4
+[0.1.5]: https://github.com/IvyApp/ivy-tabs/compare/v0.1.4...v0.1.5
+[0.1.6]: https://github.com/IvyApp/ivy-tabs/compare/v0.1.5...v0.1.6
+[0.2.0]: https://github.com/IvyApp/ivy-tabs/compare/v0.1.6...v0.2.0
+[0.3.0]: https://github.com/IvyApp/ivy-tabs/compare/v0.2.0...v0.3.0
+[1.0.0]: https://github.com/IvyApp/ivy-tabs/compare/v0.3.0...v1.0.0
+[1.1.0]: https://github.com/IvyApp/ivy-tabs/compare/v1.0.0...v1.1.0
+[1.2.0]: https://github.com/IvyApp/ivy-tabs/compare/v1.1.0...v1.2.0
+[2.0.0]: https://github.com/IvyApp/ivy-tabs/compare/v1.2.0...v2.0.0
+[HEAD]: https://github.com/IvyApp/ivy-tabs/compare/v2.0.0...master
