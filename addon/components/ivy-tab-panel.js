@@ -99,15 +99,6 @@ export default Ember.Component.extend({
   isSelected: Ember.computed.readOnly('tab.isSelected'),
 
   /**
-   * If `false`, this panel will appear hidden in the DOM. This is an alias to
-   * `isSelected`.
-   *
-   * @property isVisible
-   * @type Boolean
-   */
-  isVisible: Ember.computed.oneWay('isSelected'),
-
-  /**
    * The `ivy-tab` associated with this panel.
    *
    * @property tab
