@@ -3,7 +3,17 @@
     <h1>ivy-tabs</h1>
   </div>
 
-  {{outlet}}
+  <div class="row">
+    <div class="col-sm-9">
+      {{outlet}}
+    </div>
+    <div class="col-sm-3">
+      <div class="list-group">
+        {{link-to "Basic Example" "index" class="list-group-item"}}
+        {{link-to "Query Parameters Example" "query-params" class="list-group-item"}}
+      </div>
+    </div>
+  </div>
 
   <hr>
   <p>View source on <a href="https://github.com/IvyApp/ivy-tabs">GitHub</a>.</p>
