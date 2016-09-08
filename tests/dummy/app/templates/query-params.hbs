@@ -6,13 +6,13 @@
   {{#ivy-tabs selection=querySelection as |tabs|}}
     {{#tabs.tablist class="nav nav-tabs" tagName="ul" as |tablist|}}
       <li class="{{if (eq querySelection "A") "active"}}" role="presentation">
-        {{#tablist.tab "A" on-select=(action (mut querySelection))}}Tab A{{/tablist.tab}}
+        {{#tablist.tab "A" id="query-params-tab-a" on-select=(action (mut querySelection))}}Tab A{{/tablist.tab}}
       </li>
       <li class="{{if (eq querySelection "B") "active"}}" role="presentation">
-        {{#tablist.tab "B" on-select=(action (mut querySelection))}}Tab B{{/tablist.tab}}
+        {{#tablist.tab "B" id="query-params-tab-b" on-select=(action (mut querySelection))}}Tab B{{/tablist.tab}}
       </li>
       <li class="{{if (eq querySelection "C") "active"}}" role="presentation">
-        {{#tablist.tab "C" on-select=(action (mut querySelection))}}Tab C{{/tablist.tab}}
+        {{#tablist.tab "C" id="query-params-tab-c" on-select=(action (mut querySelection))}}Tab C{{/tablist.tab}}
       </li>
     {{/tabs.tablist}}
 

@@ -4,15 +4,15 @@
 
 <div class="example">
   {{#ivy-tabs selection=basicSelection as |tabs|}}
-    {{#tabs.tablist class="nav nav-tabs" tagName="ul" as |tablist|}}
+    {{#tabs.tablist class="nav nav-tabs" id="basic-tablist" tagName="ul" as |tablist|}}
       <li class="{{if (eq basicSelection "A") "active"}}" role="presentation">
-        {{#tablist.tab "A" on-select=(action (mut basicSelection))}}Tab A{{/tablist.tab}}
+        {{#tablist.tab "A" id="basic-tab-a" on-select=(action (mut basicSelection))}}Tab A{{/tablist.tab}}
       </li>
       <li class="{{if (eq basicSelection "B") "active"}}" role="presentation">
-        {{#tablist.tab "B" on-select=(action (mut basicSelection))}}Tab B{{/tablist.tab}}
+        {{#tablist.tab "B" id="basic-tab-b" on-select=(action (mut basicSelection))}}Tab B{{/tablist.tab}}
       </li>
       <li class="{{if (eq basicSelection "C") "active"}}" role="presentation">
-        {{#tablist.tab "C" on-select=(action (mut basicSelection))}}Tab C{{/tablist.tab}}
+        {{#tablist.tab "C" id="basic-tab-c" on-select=(action (mut basicSelection))}}Tab C{{/tablist.tab}}
       </li>
     {{/tabs.tablist}}
 
