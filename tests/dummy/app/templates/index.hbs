@@ -1,54 +1,67 @@
-{{#ivy-tabs selection=selection as |tabs|}}
-  {{#tabs.tablist as |tablist|}}
-    <ul class="nav nav-tabs" role="presentation">
-      <li class="{{if (eq selection "A") "active"}}" role="presentation">
-        {{#tablist.tab "A" on-select=(action (mut selection))}}Tab A{{/tablist.tab}}
-      </li>
-      <li class="{{if (eq selection "B") "active"}}" role="presentation">
-        {{#tablist.tab "B" on-select=(action (mut selection))}}Tab B{{/tablist.tab}}
-      </li>
-      <li class="{{if (eq selection "C") "active"}}" role="presentation">
-        {{#tablist.tab "C" on-select=(action (mut selection))}}Tab C{{/tablist.tab}}
-      </li>
-    </ul>
-  {{/tabs.tablist}}
+<h2>Basic Example</h2>
 
-  <div class="tab-content">
-    {{#tabs.tabpanel "A" id="panel-a"}}
-      <h2>Panel A</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </p>
-    {{/tabs.tabpanel}}
+<p>First up, let's show off a very basic example of <code>ivy-tabs</code> in action. Here we have some tabs and panels defined directly in the template. We've bound the active selection to a <code>basicSelection</code> property, whose value is currently <code>{{basicSelection}}</code>.</p>
 
-    {{#tabs.tabpanel "B" id="panel-b"}}
-      <h2>Panel B</h2>
-      <p>
-        Tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </p>
-    {{/tabs.tabpanel}}
+<div class="example">
+  {{#ivy-tabs selection=basicSelection as |tabs|}}
+    {{#tabs.tablist class="nav nav-tabs" tagName="ul" as |tablist|}}
+      <li class="{{if (eq basicSelection "A") "active"}}" role="presentation">
+        {{#tablist.tab "A" on-select=(action (mut basicSelection))}}Tab A{{/tablist.tab}}
+      </li>
+      <li class="{{if (eq basicSelection "B") "active"}}" role="presentation">
+        {{#tablist.tab "B" on-select=(action (mut basicSelection))}}Tab B{{/tablist.tab}}
+      </li>
+      <li class="{{if (eq basicSelection "C") "active"}}" role="presentation">
+        {{#tablist.tab "C" on-select=(action (mut basicSelection))}}Tab C{{/tablist.tab}}
+      </li>
+    {{/tabs.tablist}}
 
-    {{#tabs.tabpanel "C" id="panel-c"}}
-      <h2>Panel C</h2>
-      <p>
-        Veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-        Tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.
-      </p>
-    {{/tabs.tabpanel}}
-  </div>
-{{/ivy-tabs}}
+    <div class="tab-content">
+      {{#tabs.tabpanel "A" class="tab-pane" id="basic-panel-a"}}
+        <p>Kale chips marfa next level hella hot chicken. Post-ironic snackwave dreamcatcher lyft, hot chicken brunch roof party small batch quinoa migas ugh. Live-edge beard leggings affogato, marfa yr brooklyn. Jean shorts artisan cred schlitz gluten-free pour-over distillery sriracha portland iceland, normcore kombucha roof party. Gentrify truffaut hot chicken air plant, hashtag la croix photo booth kogi live-edge. Bitters kogi subway tile tousled offal bushwick narwhal fam. Cray salvia poutine, jianbing ethical hot chicken whatever VHS.</p>
+      {{/tabs.tabpanel}}
+
+      {{#tabs.tabpanel "B" class="tab-pane" id="basic-panel-b"}}
+        <p>Green juice vice PBR&amp;B +1 affogato. Sustainable lumbersexual fam, glossier letterpress mustache street art tilde 3 wolf moon viral. Enamel pin trust fund chia YOLO, PBR&amp;B organic ethical cardigan lomo migas pour-over shoreditch dreamcatcher. Enamel pin kickstarter godard organic authentic, butcher snackwave paleo celiac messenger bag roof party keffiyeh distillery. Direct trade skateboard narwhal thundercats, tumeric fam lumbersexual. Vice helvetica brooklyn, tbh edison bulb authentic austin post-ironic. Organic pickled YOLO godard.</p>
+      {{/tabs.tabpanel}}
+
+      {{#tabs.tabpanel "C" class="tab-pane" id="basic-panel-c"}}
+        <p>Pork belly waistcoat tbh, pour-over lyft intelligentsia man bun sartorial mumblecore live-edge plaid pok pok salvia. Keytar jean shorts distillery, kogi deep v blog hexagon meditation vegan tumblr schlitz mixtape franzen 3 wolf moon. +1 semiotics pork belly cliche food truck, paleo hell of cred vegan polaroid. Microdosing DIY craft beer messenger bag deep v. Live-edge asymmetrical williamsburg vinyl, raw denim dreamcatcher brunch lyft tilde migas glossier hashtag cliche YOLO. Banjo gochujang locavore organic. Wayfarers chambray hammock, scenester direct trade 90's disrupt activated charcoal poke kinfolk fanny pack try-hard asymmetrical vaporware.</p>
+      {{/tabs.tabpanel}}
+    </div>
+  {{/ivy-tabs}}
+</div>
+
+<h2>Query Parameters</h2>
+
+<p>Like in the basic example above, we've bound the selection to a property. This time, we've called it <code>querySelection</code>, and its current value is <code>{{querySelection}}</code>. We've also told Ember to treat it as a query parameter, aliased to <code>tab</code>. Notice how the URL changes when you select a new tab? Now try refreshing the page. Neat, huh?</p>
+
+<div class="example">
+  {{#ivy-tabs selection=querySelection as |tabs|}}
+    {{#tabs.tablist class="nav nav-tabs" tagName="ul" as |tablist|}}
+      <li class="{{if (eq querySelection "A") "active"}}" role="presentation">
+        {{#tablist.tab "A" on-select=(action (mut querySelection))}}Tab A{{/tablist.tab}}
+      </li>
+      <li class="{{if (eq querySelection "B") "active"}}" role="presentation">
+        {{#tablist.tab "B" on-select=(action (mut querySelection))}}Tab B{{/tablist.tab}}
+      </li>
+      <li class="{{if (eq querySelection "C") "active"}}" role="presentation">
+        {{#tablist.tab "C" on-select=(action (mut querySelection))}}Tab C{{/tablist.tab}}
+      </li>
+    {{/tabs.tablist}}
+
+    <div class="tab-content">
+      {{#tabs.tabpanel "A" class="tab-pane" id="query-panel-a"}}
+        <p>Kale chips marfa next level hella hot chicken. Post-ironic snackwave dreamcatcher lyft, hot chicken brunch roof party small batch quinoa migas ugh. Live-edge beard leggings affogato, marfa yr brooklyn. Jean shorts artisan cred schlitz gluten-free pour-over distillery sriracha portland iceland, normcore kombucha roof party. Gentrify truffaut hot chicken air plant, hashtag la croix photo booth kogi live-edge. Bitters kogi subway tile tousled offal bushwick narwhal fam. Cray salvia poutine, jianbing ethical hot chicken whatever VHS.</p>
+      {{/tabs.tabpanel}}
+
+      {{#tabs.tabpanel "B" class="tab-pane" id="query-panel-b"}}
+        <p>Green juice vice PBR&amp;B +1 affogato. Sustainable lumbersexual fam, glossier letterpress mustache street art tilde 3 wolf moon viral. Enamel pin trust fund chia YOLO, PBR&amp;B organic ethical cardigan lomo migas pour-over shoreditch dreamcatcher. Enamel pin kickstarter godard organic authentic, butcher snackwave paleo celiac messenger bag roof party keffiyeh distillery. Direct trade skateboard narwhal thundercats, tumeric fam lumbersexual. Vice helvetica brooklyn, tbh edison bulb authentic austin post-ironic. Organic pickled YOLO godard.</p>
+      {{/tabs.tabpanel}}
+
+      {{#tabs.tabpanel "C" class="tab-pane" id="query-panel-c"}}
+        <p>Pork belly waistcoat tbh, pour-over lyft intelligentsia man bun sartorial mumblecore live-edge plaid pok pok salvia. Keytar jean shorts distillery, kogi deep v blog hexagon meditation vegan tumblr schlitz mixtape franzen 3 wolf moon. +1 semiotics pork belly cliche food truck, paleo hell of cred vegan polaroid. Microdosing DIY craft beer messenger bag deep v. Live-edge asymmetrical williamsburg vinyl, raw denim dreamcatcher brunch lyft tilde migas glossier hashtag cliche YOLO. Banjo gochujang locavore organic. Wayfarers chambray hammock, scenester direct trade 90's disrupt activated charcoal poke kinfolk fanny pack try-hard asymmetrical vaporware.</p>
+      {{/tabs.tabpanel}}
+    </div>
+  {{/ivy-tabs}}
+</div>
