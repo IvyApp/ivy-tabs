@@ -1,18 +1,18 @@
 <h2>Query Parameters Example</h2>
 
-<p>Like in the basic example above, we've bound the selection to a property. This time, we've called it <code>querySelection</code>, and its current value is <code>{{querySelection}}</code>. We've also told Ember to treat it as a query parameter, aliased to <code>tab</code>. Notice how the URL changes when you select a new tab? Now try refreshing the page. Neat, huh?</p>
+<p>Like in the {{link-to "Basic Example" "index"}}, we've bound the selection to a <code>selection</code> property (currently set to <code>{{selection}}</code>). We've also told Ember to treat <code>selection</code> as a query parameter, serializing it into the querystring as <code>tab</code>. Notice how the URL changes when you select a new tab? Now try refreshing the page. Neat, huh?</p>
 
 <div class="example">
-  {{#ivy-tabs selection=querySelection as |tabs|}}
+  {{#ivy-tabs selection=selection as |tabs|}}
     {{#tabs.tablist class="nav nav-tabs" tagName="ul" as |tablist|}}
-      <li class="{{if (eq querySelection "A") "active"}}" role="presentation">
-        {{#tablist.tab "A" id="query-params-tab-a" on-select=(action (mut querySelection))}}Tab A{{/tablist.tab}}
+      <li class="{{if (eq selection "A") "active"}}" role="presentation">
+        {{#tablist.tab "A" id="query-params-tab-a" on-select=(action (mut selection))}}Tab A{{/tablist.tab}}
       </li>
-      <li class="{{if (eq querySelection "B") "active"}}" role="presentation">
-        {{#tablist.tab "B" id="query-params-tab-b" on-select=(action (mut querySelection))}}Tab B{{/tablist.tab}}
+      <li class="{{if (eq selection "B") "active"}}" role="presentation">
+        {{#tablist.tab "B" id="query-params-tab-b" on-select=(action (mut selection))}}Tab B{{/tablist.tab}}
       </li>
-      <li class="{{if (eq querySelection "C") "active"}}" role="presentation">
-        {{#tablist.tab "C" id="query-params-tab-c" on-select=(action (mut querySelection))}}Tab C{{/tablist.tab}}
+      <li class="{{if (eq selection "C") "active"}}" role="presentation">
+        {{#tablist.tab "C" id="query-params-tab-c" on-select=(action (mut selection))}}Tab C{{/tablist.tab}}
       </li>
     {{/tabs.tablist}}
 

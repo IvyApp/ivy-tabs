@@ -2,7 +2,7 @@ import Route from 'ember-route';
 
 export default Route.extend({
   queryParams: {
-    querySelection: {
+    selection: {
       as: 'tab',
 
       // There's no sense polluting the browser history every time someone

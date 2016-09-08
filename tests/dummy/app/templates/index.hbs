@@ -1,18 +1,18 @@
 <h2>Basic Example</h2>
 
-<p>First up, let's show off a very basic example of <code>ivy-tabs</code> in action. Here we have some tabs and panels defined directly in the template. We've bound the active selection to a <code>basicSelection</code> property, whose value is currently <code>{{basicSelection}}</code>.</p>
+<p>Here's a very basic example of <code>ivy-tabs</code> in action. Here we've defined some tabs and tabpanels directly in our template. We've bound the active selection to a <code>selection</code> property, which is currently set to <code>{{selection}}</code>.</p>
 
 <div class="example">
-  {{#ivy-tabs selection=basicSelection as |tabs|}}
+  {{#ivy-tabs selection=selection as |tabs|}}
     {{#tabs.tablist class="nav nav-tabs" id="basic-tablist" tagName="ul" as |tablist|}}
-      <li class="{{if (eq basicSelection "A") "active"}}" role="presentation">
-        {{#tablist.tab "A" id="basic-tab-a" on-select=(action (mut basicSelection))}}Tab A{{/tablist.tab}}
+      <li class="{{if (eq selection "A") "active"}}" role="presentation">
+        {{#tablist.tab "A" id="basic-tab-a" on-select=(action (mut selection))}}Tab A{{/tablist.tab}}
       </li>
-      <li class="{{if (eq basicSelection "B") "active"}}" role="presentation">
-        {{#tablist.tab "B" id="basic-tab-b" on-select=(action (mut basicSelection))}}Tab B{{/tablist.tab}}
+      <li class="{{if (eq selection "B") "active"}}" role="presentation">
+        {{#tablist.tab "B" id="basic-tab-b" on-select=(action (mut selection))}}Tab B{{/tablist.tab}}
       </li>
-      <li class="{{if (eq basicSelection "C") "active"}}" role="presentation">
-        {{#tablist.tab "C" id="basic-tab-c" on-select=(action (mut basicSelection))}}Tab C{{/tablist.tab}}
+      <li class="{{if (eq selection "C") "active"}}" role="presentation">
+        {{#tablist.tab "C" id="basic-tab-c" on-select=(action (mut selection))}}Tab C{{/tablist.tab}}
       </li>
     {{/tabs.tablist}}
 
