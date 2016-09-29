@@ -50,7 +50,9 @@ $ ember install ivy-tabs
 {{/ivy-tabs}}
 ```
 
-Some things to note:
+## Hints
+
+### General
 
   * Associations between tabs and panels are explicitly defined by the "models"
     (the first positional parameter) given to them. In the above example, the
@@ -59,6 +61,47 @@ Some things to note:
   * An `on-select` action is sent when a tab is selected. As an argument, it
     receives the model defined on the tab (for example, when the Foo tab is
     selected, the `on-select` event will carry "TabA" as an argument).
+
+### Using an attribute of an `ember-data model` as `ivy-tab model`
+
+If you are going to use an attribute of an **ember-data model** as model of your tab, be sure you preload
+the values before using them in the template.
+
+If you don't preload the values, you are going to have problems when setting the `selection` option, because the tab models are going to be `undefined` when the addon tries to select the tab, causing an error.
+
+You can do that be loading the values in your route:
+
+```js
+...
+
+  afterModel(model) {
+    return Ember.RSVP.resolve(model.get('<the-models-you-need-to-set-the-ivy-tabs models>'));
+  },
+
+...
+
+```
+
+Doing this you are not going to have any problem using options like `selection`
+
+```js
+...
+
+  {{#ivy-tabs selection=selection as |tabs|}}
+    {{#tabs.tablist as |tablist|}}
+      <ul role="presentation">
+        {{#each <models-you-preload> as |<preloaded-model>| }}
+          <li>
+            {{#tablist.tab <preloaded-model>.<attr-to-be-used-as-tab-model> on-select=(action (mut selection)) }}
+              {{<preloaded-model>.<attr-to-be-used-as-tab-model>}}
+            {{/tablist.tab}}
+          </li>
+        {{/each}}
+      </ul>
+    {{/tabs.tablist}}
+
+...
+```
 
 ### Presentation
 
