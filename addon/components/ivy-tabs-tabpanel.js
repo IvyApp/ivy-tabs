@@ -86,7 +86,9 @@ export default Ember.Component.extend({
    * @type Boolean
    * @readOnly
    */
-  isSelected: Ember.computed.readOnly('tab.isSelected'),
+  isSelected: Ember.computed('model', 'selection', function() {
+    return this.get('model') === this.get('selection');
+  }).readOnly(),
 
   /**
    * Object to uniquely identify this tab within the tabList.
