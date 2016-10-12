@@ -4,6 +4,10 @@
 
 See [changes since release][HEAD].
 
+## [3.0.1][] / 2016-10-12
+
+* [#25](https://github.com/IvyApp/ivy-tabs/issues/25) Fix a deprecation warning when tab panels are defined before the tab list.
+
 ## [3.0.0][] / 2016-08-31
 
 **This release introduces several breaking changes from the 2.x series.** Refer
