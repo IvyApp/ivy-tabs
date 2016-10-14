@@ -4,6 +4,11 @@
 
 See [changes since release][HEAD].
 
+## [3.0.2][] / 2016-10-14
+
+* Remove `throw` when a tab is not found by index or model. Add "dynamic tabs" example page to the dummy app.
+* Switch from globals to modules.
+
 ## [3.0.1][] / 2016-10-12
 
 * [#25](https://github.com/IvyApp/ivy-tabs/issues/25) Fix a deprecation warning when tab panels are defined before the tab list.
