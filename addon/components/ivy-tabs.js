@@ -1,5 +1,7 @@
-import Ember from 'ember';
+import Component from 'ember-component';
+import computed from 'ember-computed';
 import layout from '../templates/components/ivy-tabs';
+import { A } from 'ember-array/utils';
 
 /**
  * @module ivy-tabs
@@ -10,7 +12,7 @@ import layout from '../templates/components/ivy-tabs';
  * @namespace IvyTabs
  * @extends Ember.Component
  */
-export default Ember.Component.extend({
+export default Component.extend({
   layout: layout,
 
   classNames: ['ivy-tabs'],
@@ -45,8 +47,8 @@ export default Ember.Component.extend({
     this.get('tabPanels').pushObject(tabPanel);
   },
 
-  tabPanels: Ember.computed(function() {
-    return Ember.A();
+  tabPanels: computed(function() {
+    return A();
   }).readOnly(),
 
   /**

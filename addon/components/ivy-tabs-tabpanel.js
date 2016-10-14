@@ -1,4 +1,6 @@
-import Ember from 'ember';
+import Component from 'ember-component';
+import computed, { readOnly } from 'ember-computed';
+import { once } from 'ember-runloop';
 
 /**
  * @module ivy-tabs
@@ -9,19 +11,19 @@ import Ember from 'ember';
  * @namespace IvyTabs
  * @extends Ember.Component
  */
-export default Ember.Component.extend({
+export default Component.extend({
   attributeBindings: ['aria-hidden', 'aria-labelledby'],
   classNames: ['ivy-tabs-tabpanel'],
   classNameBindings: ['active'],
 
   init() {
     this._super(...arguments);
-    Ember.run.once(this, this._registerWithTabsContainer);
+    once(this, this._registerWithTabsContainer);
   },
 
   willDestroy() {
     this._super(...arguments);
-    Ember.run.once(this, this._unregisterWithTabsContainer);
+    once(this, this._unregisterWithTabsContainer);
   },
 
   /**
@@ -33,7 +35,7 @@ export default Ember.Component.extend({
    * @type Boolean
    * @readOnly
    */
-  'aria-hidden': Ember.computed('isSelected', function() {
+  'aria-hidden': computed('isSelected', function() {
     return `${!this.get('isSelected')}`;
   }).readOnly(),
 
@@ -46,7 +48,7 @@ export default Ember.Component.extend({
    * @type String
    * @readOnly
    */
-  'aria-labelledby': Ember.computed.readOnly('tab.elementId'),
+  'aria-labelledby': readOnly('tab.elementId'),
 
   /**
    * See http://www.w3.org/TR/wai-aria/roles#tabpanel
@@ -65,7 +67,7 @@ export default Ember.Component.extend({
    * @type String
    * @readOnly
    */
-  active: Ember.computed('isSelected', function() {
+  active: computed('isSelected', function() {
     if (this.get('isSelected')) { return this.get('activeClass'); }
   }),
 
@@ -86,7 +88,7 @@ export default Ember.Component.extend({
    * @type Boolean
    * @readOnly
    */
-  isSelected: Ember.computed('model', 'selection', function() {
+  isSelected: computed('model', 'selection', function() {
     return this.get('model') === this.get('selection');
   }).readOnly(),
 
@@ -104,7 +106,7 @@ export default Ember.Component.extend({
    * @property tab
    * @type IvyTabs.IvyTabComponent
    */
-  tab: Ember.computed('model', 'tabs.@each.model', function() {
+  tab: computed('model', 'tabs.@each.model', function() {
     const tabs = this.get('tabs');
     if (tabs) { return tabs.findBy('model', this.get('model')); }
   }),
@@ -116,7 +118,7 @@ export default Ember.Component.extend({
    * @type Array | IvyTabs.IvyTabComponent
    * @readOnly
    */
-  tabs: Ember.computed.readOnly('tabsContainer.tabList.tabs'),
+  tabs: readOnly('tabsContainer.tabList.tabs'),
 
   /**
    * The `ivy-tabs` component.

@@ -1,4 +1,7 @@
-import Ember from 'ember';
+import Component from 'ember-component';
+import computed, { readOnly } from 'ember-computed';
+import on from 'ember-evented/on';
+import { once } from 'ember-runloop';
 
 /**
  * @module ivy-tabs
@@ -9,7 +12,7 @@ import Ember from 'ember';
  * @namespace IvyTabs
  * @extends Ember.Component
  */
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: 'a',
   attributeBindings: ['aria-controls', 'aria-expanded', 'aria-selected', 'href', 'selected', 'tabindex'],
   classNames: ['ivy-tabs-tab'],
@@ -17,12 +20,12 @@ export default Ember.Component.extend({
 
   init() {
     this._super(...arguments);
-    Ember.run.once(this, this._registerWithTabList);
+    once(this, this._registerWithTabList);
   },
 
   willDestroy() {
     this._super(...arguments);
-    Ember.run.once(this, this._unregisterWithTabList);
+    once(this, this._unregisterWithTabList);
   },
 
   /**
@@ -34,7 +37,7 @@ export default Ember.Component.extend({
    * @type String
    * @readOnly
    */
-  'aria-controls': Ember.computed.readOnly('tabPanel.elementId'),
+  'aria-controls': readOnly('tabPanel.elementId'),
 
   /**
    * Tells screenreaders whether or not this tab's panel is expanded.
@@ -45,7 +48,7 @@ export default Ember.Component.extend({
    * @type String
    * @readOnly
    */
-  'aria-expanded': Ember.computed.readOnly('aria-selected'),
+  'aria-expanded': readOnly('aria-selected'),
 
   /**
    * Tells screenreaders whether or not this tab is selected.
@@ -55,7 +58,7 @@ export default Ember.Component.extend({
    * @property aria-selected
    * @type String
    */
-  'aria-selected': Ember.computed('isSelected', function() {
+  'aria-selected': computed('isSelected', function() {
     return this.get('isSelected') + ''; // coerce to 'true' or 'false'
   }),
 
@@ -78,7 +81,7 @@ export default Ember.Component.extend({
    * @property selected
    * @type String
    */
-  selected: Ember.computed('isSelected', function() {
+  selected: computed('isSelected', function() {
     if (this.get('isSelected')) { return 'selected'; }
   }),
 
@@ -89,7 +92,7 @@ export default Ember.Component.extend({
    * @property tabindex
    * @type Number
    */
-  tabindex: Ember.computed('isSelected', function() {
+  tabindex: computed('isSelected', function() {
     if (this.get('isSelected')) { return 0; }
   }),
 
@@ -101,7 +104,7 @@ export default Ember.Component.extend({
    * @type String
    * @readOnly
    */
-  active: Ember.computed('isSelected', function() {
+  active: computed('isSelected', function() {
     if (this.get('isSelected')) { return this.get('activeClass'); }
   }),
 
@@ -115,7 +118,7 @@ export default Ember.Component.extend({
    */
   activeClass: 'active',
 
-  href: Ember.computed('tabPanel.elementId', 'tagName', function() {
+  href: computed('tabPanel.elementId', 'tagName', function() {
     if (this.get('tagName') !== 'a') {
       return;
     }
@@ -129,7 +132,7 @@ export default Ember.Component.extend({
    * @property index
    * @type Number
    */
-  index: Ember.computed('tabs.[]', function() {
+  index: computed('tabs.[]', function() {
     return this.get('tabs').indexOf(this);
   }),
 
@@ -139,7 +142,7 @@ export default Ember.Component.extend({
    * @property isSelected
    * @type Boolean
    */
-  isSelected: Ember.computed('tabList.selectedTab', function() {
+  isSelected: computed('tabList.selectedTab', function() {
     return this.get('tabList.selectedTab') === this;
   }),
 
@@ -160,7 +163,7 @@ export default Ember.Component.extend({
     this.sendAction('on-select', this.get('model'));
   },
 
-  selectOnClickOrTouch: Ember.on('click', 'touchEnd', function(event) {
+  selectOnClickOrTouch: on('click', 'touchEnd', function(event) {
     event.preventDefault();
     this.select();
   }),
@@ -180,7 +183,7 @@ export default Ember.Component.extend({
    * @property tabPanel
    * @type IvyTabs.IvyTabPanelComponent
    */
-  tabPanel: Ember.computed('tabPanels.@each.model', 'model', function() {
+  tabPanel: computed('tabPanels.@each.model', 'model', function() {
     return this.get('tabPanels').findBy('model', this.get('model'));
   }),
 
@@ -192,7 +195,7 @@ export default Ember.Component.extend({
    * @type Array | IvyTabs.IvyTabPanelComponent
    * @readOnly
    */
-  tabPanels: Ember.computed.readOnly('tabsContainer.tabPanels'),
+  tabPanels: readOnly('tabsContainer.tabPanels'),
 
   /**
    * The array of all `ivy-tabs-tab` instances within the `ivy-tabs-tablist` component.
@@ -201,7 +204,7 @@ export default Ember.Component.extend({
    * @type Array | IvyTabs.IvyTabComponent
    * @readOnly
    */
-  tabs: Ember.computed.readOnly('tabList.tabs'),
+  tabs: readOnly('tabList.tabs'),
 
   /**
    * The `ivy-tabs` component.
@@ -210,7 +213,7 @@ export default Ember.Component.extend({
    * @type IvyTabs.IvyTabsComponent
    * @readOnly
    */
-  tabsContainer: Ember.computed.readOnly('tabList.tabsContainer'),
+  tabsContainer: readOnly('tabList.tabsContainer'),
 
   _registerWithTabList() {
     this.get('tabList').registerTab(this);

@@ -1,5 +1,6 @@
-import Ember from 'ember';
 import hbs from 'htmlbars-inline-precompile';
+import run from 'ember-runloop';
+import { A } from 'ember-array/utils';
 import { moduleForComponent, test } from 'ember-qunit';
 
 moduleForComponent('ivy-tabs', {
@@ -21,10 +22,10 @@ const eachTemplate = hbs`
 
 test('selects previous tab if active tab is removed', function(assert) {
   this.set('selection', 'Item 1');
-  this.set('items', Ember.A(['Item 1', 'Item 2']));
+  this.set('items', A(['Item 1', 'Item 2']));
   this.render(eachTemplate);
 
-  Ember.run(this, function() {
+  run(this, function() {
     this.get('items').removeAt(1);
   });
 
@@ -33,11 +34,11 @@ test('selects previous tab if active tab is removed', function(assert) {
 
 test('selects previous tab if active tab is removed via replacement', function(assert) {
   this.set('selection', 'Item 2');
-  this.set('items', Ember.A(['Item 1', 'Item 2']));
+  this.set('items', A(['Item 1', 'Item 2']));
   this.render(eachTemplate);
 
-  Ember.run(this, function() {
-    this.set('items', Ember.A(['Item 3']));
+  run(this, function() {
+    this.set('items', A(['Item 3']));
   });
 
   assert.equal(this.get('selection'), 'Item 3', 'previous tab became active');
@@ -45,10 +46,10 @@ test('selects previous tab if active tab is removed via replacement', function(a
 
 test('retains tab selection if preceeding tab is removed', function(assert) {
   this.set('selection', 'Item 2');
-  this.set('items', Ember.A(['Item 1', 'Item 2']));
+  this.set('items', A(['Item 1', 'Item 2']));
   this.render(eachTemplate);
 
-  Ember.run(this, function() {
+  run(this, function() {
     this.get('items').removeAt(0);
   });
 
@@ -57,10 +58,10 @@ test('retains tab selection if preceeding tab is removed', function(assert) {
 
 test('selects the next tab when an active, first tab is removed', function(assert) {
   this.set('selection', 'Item 1');
-  this.set('items', Ember.A(['Item 1', 'Item 2', 'Item 3']));
+  this.set('items', A(['Item 1', 'Item 2', 'Item 3']));
   this.render(eachTemplate);
 
-  Ember.run(this, function() {
+  run(this, function() {
     this.get('items').removeAt(0);
   });
 

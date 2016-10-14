@@ -1,5 +1,10 @@
-import Ember from 'ember';
+import Component from 'ember-component';
+import computed from 'ember-computed';
 import layout from '../templates/components/ivy-tabs-tablist';
+import on from 'ember-evented/on';
+import { A } from 'ember-array/utils';
+import { isNone } from 'ember-utils';
+import { once, scheduleOnce } from 'ember-runloop';
 
 /**
  * @module ivy-tabs
@@ -10,7 +15,7 @@ import layout from '../templates/components/ivy-tabs-tablist';
  * @namespace IvyTabs
  * @extends Ember.Component
  */
-export default Ember.Component.extend({
+export default Component.extend({
   layout: layout,
 
   attributeBindings: ['aria-multiselectable'],
@@ -18,12 +23,12 @@ export default Ember.Component.extend({
 
   init() {
     this._super(...arguments);
-    Ember.run.once(this, this._registerWithTabsContainer);
+    once(this, this._registerWithTabsContainer);
   },
 
   willDestroy() {
     this._super(...arguments);
-    Ember.run.once(this, this._unregisterWithTabsContainer);
+    once(this, this._unregisterWithTabsContainer);
   },
 
   /**
@@ -63,7 +68,7 @@ export default Ember.Component.extend({
    * @method navigateOnKeyDown
    * @param {Event} event
    */
-  navigateOnKeyDown: Ember.on('keyDown', function(event) {
+  navigateOnKeyDown: on('keyDown', function(event) {
     switch (event.keyCode) {
     case 37: /* left */
     case 38: /* up */
@@ -78,7 +83,7 @@ export default Ember.Component.extend({
     }
 
     event.preventDefault();
-    Ember.run.scheduleOnce('afterRender', this, this.focusSelectedTab);
+    scheduleOnce('afterRender', this, this.focusSelectedTab);
   }),
 
   /**
@@ -89,7 +94,7 @@ export default Ember.Component.extend({
    */
   registerTab(tab) {
     this.get('tabs').pushObject(tab);
-    Ember.run.once(this, this.selectTab);
+    once(this, this.selectTab);
   },
 
   /**
@@ -124,7 +129,7 @@ export default Ember.Component.extend({
   selectTab() {
     const selection = this.get('selection');
 
-    if (Ember.isNone(selection) || this.get('tabs.length') === 1) {
+    if (isNone(selection) || this.get('tabs.length') === 1) {
       this.selectTabByIndex(0);
     } else {
       this.selectTabByModel(selection);
@@ -137,7 +142,7 @@ export default Ember.Component.extend({
    * @property selectedTab
    * @type IvyTabs.IvyTabComponent
    */
-  selectedTab: Ember.computed('selection', 'tabs.@each.model', function() {
+  selectedTab: computed('selection', 'tabs.@each.model', function() {
     return this.get('tabs').findBy('model', this.get('selection'));
   }),
 
@@ -163,8 +168,8 @@ export default Ember.Component.extend({
     }
   },
 
-  tabs: Ember.computed(function() {
-    return Ember.A();
+  tabs: computed(function() {
+    return A();
   }).readOnly(),
 
   /**
@@ -198,7 +203,7 @@ export default Ember.Component.extend({
 
   _registerWithTabsContainer() {
     this.get('tabsContainer').registerTabList(this);
-    Ember.run.once(this, this.selectTab);
+    once(this, this.selectTab);
   },
 
   _unregisterWithTabsContainer() {
