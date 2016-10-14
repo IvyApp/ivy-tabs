@@ -1,5 +1,9 @@
-[aria-hidden="true"] {
+[role="tabpanel"][aria-hidden="true"] {
   display: none;
+}
+
+.close {
+  float: none;
 }
 
 .nav-tabs {

@@ -122,8 +122,9 @@ export default Ember.Component.extend({
   },
 
   selectTab() {
-    let selection = this.get('selection');
-    if (Ember.isNone(selection)) {
+    const selection = this.get('selection');
+
+    if (Ember.isNone(selection) || this.get('tabs.length') === 1) {
       this.selectTabByIndex(0);
     } else {
       this.selectTabByModel(selection);
@@ -149,21 +150,17 @@ export default Ember.Component.extend({
   selectTabByIndex(index) {
     const tab = this.get('tabs').objectAt(index);
 
-    if (!tab) {
-      throw new Error('Tab index out of bounds');
+    if (tab) {
+      tab.select();
     }
-
-    tab.select();
   },
 
   selectTabByModel(model) {
     const tab = this.get('tabs').findBy('model', model);
 
-    if (!tab) {
-      throw new Error('Tab could not be found by model');
+    if (tab) {
+      tab.select();
     }
-
-    tab.select();
   },
 
   tabs: Ember.computed(function() {
@@ -188,8 +185,12 @@ export default Ember.Component.extend({
   unregisterTab(tab) {
     const index = tab.get('index');
 
-    if (tab.get('isSelected') && index === 0) {
-      this.selectNextTab();
+    if (tab.get('isSelected')) {
+      if (index === 0) {
+        this.selectNextTab();
+      } else {
+        this.selectPreviousTab();
+      }
     }
 
     this.get('tabs').removeObject(tab);

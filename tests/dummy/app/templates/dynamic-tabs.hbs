@@ -1,0 +1,31 @@
+<h2>Dynamic Tabs Example</h2>
+
+<p>Here's an example of using <code>ivy-tabs</code> with a dynamic collection of objects. Try clicking the "Add a Tab" button below to add a tab. To remove one, click the <strong>&times;</strong> to the left of the tab's name.</p>
+
+<div class="example">
+  {{#ivy-tabs selection=selection as |tabs|}}
+    {{#tabs.tablist class="nav nav-tabs" tagName="ul" as |tablist|}}
+      {{#each model as |item|}}
+        <li class="{{if (eq selection item.index) "active"}}" role="presentation">
+          {{#tablist.tab item.index on-select=(action (mut selection))}}
+            <button class="close" type="button" {{action "removeItem" item}}>
+              <span aria-hidden="true">&times;</span>
+            </button>
+
+            Item {{item.index}}
+          {{/tablist.tab}}
+        </li>
+      {{/each}}
+    {{/tabs.tablist}}
+
+    <div class="tab-content">
+      {{#each model as |item|}}
+        {{#tabs.tabpanel item.index class="tab-pane"}}
+          <p>Here is some content for Item {{item.index}}. Kale chips marfa next level hella hot chicken. Post-ironic snackwave dreamcatcher lyft, hot chicken brunch roof party small batch quinoa migas ugh. Live-edge beard leggings affogato, marfa yr brooklyn. Jean shorts artisan cred schlitz gluten-free pour-over distillery sriracha portland iceland, normcore kombucha roof party. Gentrify truffaut hot chicken air plant, hashtag la croix photo booth kogi live-edge. Bitters kogi subway tile tousled offal bushwick narwhal fam. Cray salvia poutine, jianbing ethical hot chicken whatever VHS.</p>
+        {{/tabs.tabpanel}}
+      {{/each}}
+    </div>
+  {{/ivy-tabs}}
+
+  <button class="btn btn-default" type="button" {{action "addItem"}}>Add a Tab</button>
+</div>
