@@ -104,9 +104,23 @@ export default Component.extend({
    */
   selectNextTab() {
     const selectedTab = this.get('selectedTab');
-    let index = selectedTab.get('index') + 1;
-    if (index === this.get('tabs.length')) { index = 0; }
-    this.selectTabByIndex(index);
+    const tabs = this.get('tabs');
+    const length = tabs.get('length');
+
+    let idx = selectedTab.get('index');
+    let tab;
+
+    do {
+      idx++;
+      // Next from the last tab should select the first tab.
+      if (idx === length) { idx = 0; }
+
+      tab = tabs.objectAt(idx);
+    } while (tab && tab.isDestroying && tab !== selectedTab);
+
+    if (tab) {
+      tab.select();
+    }
   },
 
   /**
@@ -116,14 +130,25 @@ export default Component.extend({
    */
   selectPreviousTab() {
     const selectedTab = this.get('selectedTab');
-    let index = selectedTab.get('index') - 1;
+    const tabs = this.get('tabs');
+    const length = tabs.get('length');
 
-    // Previous from the first tab should select the last tab.
-    if (index < 0) { index = this.get('tabs.length') - 1; }
-    // This would only happen if there are no tabs, so stay at 0.
-    if (index < 0) { index = 0; }
+    let idx = selectedTab.get('index');
+    let tab;
 
-    this.selectTabByIndex(index);
+    do {
+      idx--;
+      // Previous from the first tab should select the last tab.
+      if (idx < 0) { idx = length - 1; }
+      // This would only happen if there are no tabs, so stay at 0.
+      if (idx < 0) { idx = 0; }
+
+      tab = tabs.objectAt(idx);
+    } while (tab && tab.isDestroying && tab !== selectedTab);
+
+    if (tab) {
+      tab.select();
+    }
   },
 
   selectTab() {
