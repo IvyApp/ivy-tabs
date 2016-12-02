@@ -4,6 +4,10 @@
 
 See [changes since release][HEAD].
 
+## [3.1.0][] / 2016-12-02
+
+* [#32](https://github.com/IvyApp/ivy-tabs/pull/32) Add Ember 2.10 support.
+
 ## [3.0.2][] / 2016-10-14
 
 * Remove `throw` when a tab is not found by index or model. Add "dynamic tabs" example page to the dummy app.
@@ -137,4 +141,5 @@ to the README for current usage.
 [3.0.0]: https://github.com/IvyApp/ivy-tabs/compare/v2.0.0...v3.0.0
 [3.0.1]: https://github.com/IvyApp/ivy-tabs/compare/v3.0.0...v3.0.1
 [3.0.2]: https://github.com/IvyApp/ivy-tabs/compare/v3.0.1...v3.0.2
-[HEAD]: https://github.com/IvyApp/ivy-tabs/compare/v3.0.2...master
+[3.1.0]: https://github.com/IvyApp/ivy-tabs/compare/v3.0.2...v3.1.0
+[HEAD]: https://github.com/IvyApp/ivy-tabs/compare/v3.1.0...master
