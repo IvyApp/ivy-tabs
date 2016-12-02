@@ -1,6 +1,6 @@
 <h2>Dynamic Tabs Example</h2>
 
-<p>Here's an example of using <code>ivy-tabs</code> with a dynamic collection of objects. Try clicking the "Add a Tab" button below to add a tab. To remove one, click the <strong>&times;</strong> to the left of the tab's name.</p>
+<p>Here's an example of using <code>ivy-tabs</code> with a dynamic collection of objects. Try clicking the "Add an Item" button below to add a tab. To remove one, click the <strong>&times;</strong> to the left of the tab's name or select its corresponding checkbox and click the "Remove Items" button.</p>
 
 <div class="example">
   {{#ivy-tabs selection=selection as |tabs|}}
@@ -27,5 +27,19 @@
     </div>
   {{/ivy-tabs}}
 
-  <button class="btn btn-default" type="button" {{action "addItem"}}>Add a Tab</button>
+  <button class="btn btn-default" type="button" {{action "addItem"}}>
+    Add an Item
+  </button>
+
+  <button class="btn btn-default" disabled={{noCheckedItems}} type="button" {{action "removeSelected"}}>
+    Remove {{checkedItems.length}} Item(s)
+  </button>
+
+  {{#each model as |item|}}
+    <div class="checkbox">
+      <label>
+        {{input checked=item.checked type="checkbox"}} Item {{item.index}}
+      </label>
+    </div>
+  {{/each}}
 </div>
