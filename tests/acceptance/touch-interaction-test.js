@@ -1,7 +1,7 @@
 import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
 import { test } from 'qunit';
 
-moduleForAcceptance('Acceptance | mouse interaction');
+moduleForAcceptance('Acceptance | touch interaction');
 
 test('touching a tab (on a touch device) should select it', function(assert) {
   visit('/');

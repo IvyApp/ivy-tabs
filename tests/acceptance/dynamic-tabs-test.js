@@ -46,7 +46,7 @@ test('the previous tab should become selected when the active tab is removed', f
   });
 });
 
-test('removing all tabs should not break anything', function(assert) {
+test('removing all tabs should not prevent additional tabs from being added', function(assert) {
   visit('/dynamic-tabs');
   click('.btn:contains("Add an Item")');
   click('[role="tab"]:contains("Item 1") .close');
