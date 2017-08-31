@@ -57,7 +57,8 @@ export default Component.extend({
    * @method focusSelectedTab
    */
   focusSelectedTab() {
-    this.get('selectedTab').$().focus();
+    console.log('focus');
+    this.get('selectedTab').element.focus();
   },
 
   /**
