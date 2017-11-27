@@ -1,6 +1,7 @@
-import Component from 'ember-component';
-import computed, { readOnly } from 'ember-computed';
-import { once } from 'ember-runloop';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { readOnly } from '@ember/object/computed';
+import { once } from '@ember/runloop';
 
 /**
  * @module ivy-tabs

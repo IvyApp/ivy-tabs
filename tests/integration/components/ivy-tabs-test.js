@@ -1,6 +1,6 @@
 import hbs from 'htmlbars-inline-precompile';
-import run from 'ember-runloop';
-import { A } from 'ember-array/utils';
+import { run } from '@ember/runloop';
+import { A } from '@ember/array';
 import { moduleForComponent, test } from 'ember-qunit';
 
 moduleForComponent('ivy-tabs', {

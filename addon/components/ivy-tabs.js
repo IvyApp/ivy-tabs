@@ -1,7 +1,7 @@
-import Component from 'ember-component';
-import computed from 'ember-computed';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { A } from '@ember/array';
 import layout from '../templates/components/ivy-tabs';
-import { A } from 'ember-array/utils';
 
 /**
  * @module ivy-tabs
