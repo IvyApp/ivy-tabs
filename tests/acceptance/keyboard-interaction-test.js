@@ -69,7 +69,7 @@ test('the down arrow key should select the next tab', function(assert) {
   });
 });
 
-test('the down arrow key should select the last tab if there is no next tab', function(assert) {
+test('the down arrow key should select the first tab if there is no next tab', function(assert) {
   visit('/');
   click('#basic-tab-c');
   keyEvent('#basic-tablist', 'keydown', 40);

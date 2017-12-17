@@ -21,7 +21,7 @@ const eachTemplate = hbs`
 `;
 
 test('selects previous tab if active tab is removed', function(assert) {
-  this.set('selection', 'Item 1');
+  this.set('selection', 'Item 2');
   this.set('items', A(['Item 1', 'Item 2']));
   this.render(eachTemplate);
 
