@@ -1,5 +1,5 @@
-import Controller from 'ember-controller';
-import EmberObject from 'ember-object';
+import Controller from '@ember/controller';
+import EmberObject from '@ember/object';
 import { empty, filterBy } from 'ember-computed';
 
 export default Controller.extend({

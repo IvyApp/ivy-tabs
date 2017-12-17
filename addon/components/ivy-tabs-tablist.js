@@ -1,10 +1,10 @@
-import Component from 'ember-component';
-import computed from 'ember-computed';
+import Component from '@ember/component';
+import { isNone } from '@ember/utils';
+import { computed } from '@ember/object';
+import { on } from '@ember/object/evented';
+import { A } from '@ember/array';
 import layout from '../templates/components/ivy-tabs-tablist';
-import on from 'ember-evented/on';
-import { A } from 'ember-array/utils';
-import { isNone } from 'ember-utils';
-import { once, scheduleOnce } from 'ember-runloop';
+import { once, scheduleOnce } from '@ember/runloop';
 
 /**
  * @module ivy-tabs
