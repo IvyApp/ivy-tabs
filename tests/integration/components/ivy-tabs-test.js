@@ -67,3 +67,38 @@ test('selects the next tab when an active, first tab is removed', function(asser
 
   assert.equal(this.get('selection'), 'Item 2', 'selects next tab');
 });
+
+test('does not select tabs while being destroyed', function(assert) {
+  const _this = this;
+  let selectionCount = 0;
+
+  this.set('selectionAction', function(selection) {
+    _this.set('selection', selection);
+    selectionCount++;
+  });
+
+  this.set('items', A(['Item 1', 'Item 2', 'Item 3']));
+  this.render(hbs`
+    {{#unless hideComponent}}
+      {{#ivy-tabs selection=selection as |tabs|}}
+        {{#tabs.tablist as |tablist|}}
+          {{#each items as |item|}}
+            {{#tablist.tab item on-select=(action selectionAction)}}{{item}}{{/tablist.tab}}
+          {{/each}}
+        {{/tabs.tablist}}
+        {{#each items as |item|}}
+          {{#tabs.tabpanel item}}{{item}}{{/tabs.tabpanel}}
+        {{/each}}
+      {{/ivy-tabs}}
+    {{/unless}}
+  `);
+
+  assert.equal(selectionCount, 1, 'Triggers initial, automatic on-select during setup');
+
+  run(this, function() {
+    // Force a destruction of the component.
+    this.set('hideComponent', true);
+  });
+
+  assert.equal(selectionCount, 1, 'Does not trigger on-select during destroy');
+});
