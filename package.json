@@ -2,6 +2,17 @@
   "name": "ivy-tabs",
   "version": "3.1.0",
   "description": "WAI-ARIA accessible tabs for Ember.",
+  "keywords": [
+    "ember",
+    "ember-addon",
+    "tabs"
+  ],
+  "license": "MIT",
+  "author": "Dray Lacy",
+  "repository": "https://github.com/IvyApp/ivy-tabs",
+  "bugs": {
+    "url": "https://github.com/IvyApp/ivy-tabs/issues"
+  },
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -9,48 +20,40 @@
   "scripts": {
     "build": "ember build",
     "deploy": "ember github-pages:commit --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\"; git push; git checkout -",
+    "lint:js": "eslint ./*.js addon addon-test-support app config lib server test-support tests",
     "start": "ember server",
     "test": "ember try:each"
   },
-  "repository": "https://github.com/IvyApp/ivy-tabs",
-  "engines": {
-    "node": ">= 0.12.0"
-  },
-  "author": "Dray Lacy",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/IvyApp/ivy-tabs/issues"
+  "dependencies": {
+    "ember-cli-babel": "^6.10.0",
+    "ember-cli-htmlbars": "^2.0.3"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
-    "ember-cli": "^2.16.2",
+    "ember-cli": "^2.18.2",
     "ember-cli-app-version": "^3.1.0",
     "ember-cli-dependency-checker": "^2.1.0",
+    "ember-cli-eslint": "^4.2.1",
     "ember-cli-github-pages": "^0.1.2",
     "ember-cli-htmlbars-inline-precompile": "^1.0.2",
     "ember-cli-inject-live-reload": "^1.4.1",
-    "ember-cli-jshint": "^2.0.1",
     "ember-cli-qunit": "^4.1.1",
     "ember-cli-release": "^0.2.9",
     "ember-cli-shims": "^1.2.0",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-test-loader": "^2.2.0",
     "ember-cli-uglify": "^2.0.0",
-    "ember-disable-prototype-extensions": "^1.1.0",
+    "ember-disable-prototype-extensions": "^1.1.2",
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^1.0.0",
     "ember-resolver": "^4.5.0",
-    "ember-source": "^2.16.2",
-    "loader.js": "^4.0.10"
+    "ember-source": "^2.18.0",
+    "eslint-plugin-ember": "^5.0.0",
+    "eslint-plugin-node": "^5.2.1",
+    "loader.js": "^4.2.3"
   },
-  "keywords": [
-    "ember",
-    "ember-addon",
-    "tabs"
-  ],
-  "dependencies": {
-    "ember-cli-babel": "^6.10.0",
-    "ember-cli-htmlbars": "^2.0.3"
+  "engines": {
+    "node": "^4.5 || 6.* || >= 7.*"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
