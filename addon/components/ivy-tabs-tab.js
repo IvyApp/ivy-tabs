@@ -1,4 +1,3 @@
-import { on } from '@ember/object/evented';
 import Component from '@ember/component';
 import { readOnly } from '@ember/object/computed';
 import { computed } from '@ember/object';
@@ -161,13 +160,17 @@ export default Component.extend({
    * @method select
    */
   select() {
-    this.sendAction('on-select', this.get('model'));
+    const onSelect = this.get('on-select');
+
+    if (typeof onSelect === 'function') {
+      onSelect(this.get('model'));
+    }
   },
 
-  selectOnClickOrTouch: on('click', 'touchEnd', function(event) {
+  click(event) {
     event.preventDefault();
     this.select();
-  }),
+  },
 
   /**
    * The `ivy-tabs-tablist` component this tab belongs to.

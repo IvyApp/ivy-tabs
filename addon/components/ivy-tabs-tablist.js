@@ -1,7 +1,6 @@
 import Component from '@ember/component';
 import { isNone } from '@ember/utils';
 import { computed } from '@ember/object';
-import { on } from '@ember/object/evented';
 import { A } from '@ember/array';
 import layout from '../templates/components/ivy-tabs-tablist';
 import { once, scheduleOnce } from '@ember/runloop';
@@ -65,10 +64,10 @@ export default Component.extend({
    * selects the previous tab, while the right (or down) arrow selects the next
    * tab.
    *
-   * @method navigateOnKeyDown
+   * @method keyDown
    * @param {Event} event
    */
-  navigateOnKeyDown: on('keyDown', function(event) {
+  keyDown(event) {
     switch (event.keyCode) {
     case 37: /* left */
     case 38: /* up */
@@ -84,7 +83,7 @@ export default Component.extend({
 
     event.preventDefault();
     scheduleOnce('afterRender', this, this.focusSelectedTab);
-  }),
+  },
 
   /**
    * Adds a tab to the `tabs` array.
