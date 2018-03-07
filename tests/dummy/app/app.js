@@ -6,9 +6,9 @@ import config from './config/environment';
 let App;
 
 App = Application.extend({
+  Resolver,
   modulePrefix: config.modulePrefix,
-  podModulePrefix: config.podModulePrefix,
-  Resolver
+  podModulePrefix: config.podModulePrefix
 });
 
 loadInitializers(App, config.modulePrefix);

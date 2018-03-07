@@ -1,26 +1,25 @@
-/* jshint node: true */
+'use strict';
 
 module.exports = function(environment) {
-  var ENV = {
-    modulePrefix: 'dummy',
-    environment: environment,
-    rootURL: '/',
-    locationType: 'auto',
-    EmberENV: {
-      FEATURES: {
-        // Here you can enable experimental features on an ember canary build
-        // e.g. 'with-controller': true
-      },
-      EXTEND_PROTOTYPES: {
-        // Prevent Ember Data from overriding Date.parse.
-        Date: false
-      }
-    },
-
+  let ENV = {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+    },
+    EmberENV: {
+      EXTEND_PROTOTYPES: {
+        // Prevent Ember Data from overriding Date.parse.
+        Date: false
+      },
+      FEATURES: {
+        // Here you can enable experimental features on an ember canary build
+        // e.g. 'with-controller': true
+      }
+    },
+    environment,
+    locationType: 'auto',
+    modulePrefix: 'dummy',
+    rootURL: '/'
   };
 
   if (environment === 'development') {
@@ -40,12 +39,12 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
+    ENV.APP.autoboot = false;
   }
 
   if (environment === 'production') {
     ENV.locationType = 'hash';
     ENV.rootURL = '/ivy-tabs/';
-
   }
 
   return ENV;

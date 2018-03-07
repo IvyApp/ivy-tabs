@@ -13,19 +13,9 @@ import layout from '../templates/components/ivy-tabs';
  * @extends Ember.Component
  */
 export default Component.extend({
-  layout: layout,
-
   classNames: ['ivy-tabs'],
 
-  /**
-   * Set this to the model of the tab you'd like to be selected. Usually it is
-   * bound to a controller property that is used as a query parameter, but can
-   * be bound to anything.
-   *
-   * @property selection
-   * @type Object
-   */
-  selection: null,
+  layout: layout,
 
   /**
    * Registers the `ivy-tabs-tablist` instance.
@@ -46,6 +36,16 @@ export default Component.extend({
   registerTabPanel(tabPanel) {
     this.get('tabPanels').pushObject(tabPanel);
   },
+
+  /**
+   * Set this to the model of the tab you'd like to be selected. Usually it is
+   * bound to a controller property that is used as a query parameter, but can
+   * be bound to anything.
+   *
+   * @property selection
+   * @type Object
+   */
+  selection: null,
 
   tabPanels: computed(function() {
     return A();

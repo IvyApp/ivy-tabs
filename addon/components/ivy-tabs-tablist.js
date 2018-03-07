@@ -1,7 +1,6 @@
 import Component from '@ember/component';
 import { isNone } from '@ember/utils';
 import { computed } from '@ember/object';
-import { on } from '@ember/object/evented';
 import { A } from '@ember/array';
 import layout from '../templates/components/ivy-tabs-tablist';
 import { once, scheduleOnce } from '@ember/runloop';
@@ -16,19 +15,13 @@ import { once, scheduleOnce } from '@ember/runloop';
  * @extends Ember.Component
  */
 export default Component.extend({
-  layout: layout,
-
-  attributeBindings: ['aria-multiselectable'],
-  classNames: ['ivy-tabs-tablist'],
-
-  init() {
-    this._super(...arguments);
-    once(this, this._registerWithTabsContainer);
+  _registerWithTabsContainer() {
+    this.get('tabsContainer').registerTabList(this);
+    once(this, this.selectTab);
   },
 
-  willDestroy() {
-    this._super(...arguments);
-    once(this, this._unregisterWithTabsContainer);
+  _unregisterWithTabsContainer() {
+    this.get('tabsContainer').unregisterTabList(this);
   },
 
   /**
@@ -51,6 +44,10 @@ export default Component.extend({
    */
   ariaRole: 'tablist',
 
+  attributeBindings: ['aria-multiselectable'],
+
+  classNames: ['ivy-tabs-tablist'],
+
   /**
    * Gives focus to the selected tab.
    *
@@ -60,15 +57,20 @@ export default Component.extend({
     this.get('selectedTab').element.focus();
   },
 
+  init() {
+    this._super(...arguments);
+    once(this, this._registerWithTabsContainer);
+  },
+
   /**
    * Event handler for navigating tabs via arrow keys. The left (or up) arrow
    * selects the previous tab, while the right (or down) arrow selects the next
    * tab.
    *
-   * @method navigateOnKeyDown
+   * @method keyDown
    * @param {Event} event
    */
-  navigateOnKeyDown: on('keyDown', function(event) {
+  keyDown(event) {
     switch (event.keyCode) {
     case 37: /* left */
     case 38: /* up */
@@ -84,7 +86,9 @@ export default Component.extend({
 
     event.preventDefault();
     scheduleOnce('afterRender', this, this.focusSelectedTab);
-  }),
+  },
+
+  layout: layout,
 
   /**
    * Adds a tab to the `tabs` array.
@@ -162,16 +166,6 @@ export default Component.extend({
   },
 
   /**
-   * The currently-selected `ivy-tabs-tab` instance.
-   *
-   * @property selectedTab
-   * @type IvyTabs.IvyTabComponent
-   */
-  selectedTab: computed('selection', 'tabs.@each.model', function() {
-    return this.get('tabs').findBy('model', this.get('selection'));
-  }),
-
-  /**
    * Select the tab at `index`.
    *
    * @method selectTabByIndex
@@ -192,6 +186,16 @@ export default Component.extend({
       tab.select();
     }
   },
+
+  /**
+   * The currently-selected `ivy-tabs-tab` instance.
+   *
+   * @property selectedTab
+   * @type IvyTabs.IvyTabComponent
+   */
+  selectedTab: computed('selection', 'tabs.@each.model', function() {
+    return this.get('tabs').findBy('model', this.get('selection'));
+  }),
 
   tabs: computed(function() {
     return A();
@@ -226,12 +230,8 @@ export default Component.extend({
     this.get('tabs').removeObject(tab);
   },
 
-  _registerWithTabsContainer() {
-    this.get('tabsContainer').registerTabList(this);
-    once(this, this.selectTab);
-  },
-
-  _unregisterWithTabsContainer() {
-    this.get('tabsContainer').unregisterTabList(this);
+  willDestroy() {
+    this._super(...arguments);
+    once(this, this._unregisterWithTabsContainer);
   }
 });

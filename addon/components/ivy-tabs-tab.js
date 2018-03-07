@@ -1,4 +1,3 @@
-import { on } from '@ember/object/evented';
 import Component from '@ember/component';
 import { readOnly } from '@ember/object/computed';
 import { computed } from '@ember/object';
@@ -14,20 +13,35 @@ import { once } from '@ember/runloop';
  * @extends Ember.Component
  */
 export default Component.extend({
-  tagName: 'a',
-  attributeBindings: ['aria-controls', 'aria-expanded', 'aria-selected', 'href', 'selected', 'tabindex'],
-  classNames: ['ivy-tabs-tab'],
-  classNameBindings: ['active'],
-
-  init() {
-    this._super(...arguments);
-    once(this, this._registerWithTabList);
+  _registerWithTabList() {
+    this.get('tabList').registerTab(this);
   },
 
-  willDestroy() {
-    this._super(...arguments);
-    once(this, this._unregisterWithTabList);
+  _unregisterWithTabList() {
+    this.get('tabList').unregisterTab(this);
   },
+
+  /**
+   * Accessed as a className binding to apply the tab's `activeClass` CSS class
+   * to the element when the tab's `isSelected` property is true.
+   *
+   * @property active
+   * @type String
+   * @readOnly
+   */
+  active: computed('isSelected', function() {
+    if (this.get('isSelected')) { return this.get('activeClass'); }
+  }),
+
+  /**
+   * The CSS class to apply to a tab's element when its `isSelected` property
+   * is `true`.
+   *
+   * @property activeClass
+   * @type String
+   * @default 'active'
+   */
+  activeClass: 'active',
 
   /**
    * Tells screenreaders which panel this tab controls.
@@ -74,50 +88,16 @@ export default Component.extend({
    */
   ariaRole: 'tab',
 
-  /**
-   * The `selected` attribute of the tab element. If the tab's `isSelected`
-   * property is `true` this will be the literal string 'selected', otherwise
-   * it will be `undefined`.
-   *
-   * @property selected
-   * @type String
-   */
-  selected: computed('isSelected', function() {
-    if (this.get('isSelected')) { return 'selected'; }
-  }),
+  attributeBindings: ['aria-controls', 'aria-expanded', 'aria-selected', 'href', 'selected', 'tabindex'],
 
-  /**
-   * Makes the selected tab keyboard tabbable, and prevents tabs from getting
-   * focus when clicked with a mouse.
-   *
-   * @property tabindex
-   * @type Number
-   */
-  tabindex: computed('isSelected', function() {
-    if (this.get('isSelected')) { return 0; }
-  }),
+  classNameBindings: ['active'],
 
-  /**
-   * Accessed as a className binding to apply the tab's `activeClass` CSS class
-   * to the element when the tab's `isSelected` property is true.
-   *
-   * @property active
-   * @type String
-   * @readOnly
-   */
-  active: computed('isSelected', function() {
-    if (this.get('isSelected')) { return this.get('activeClass'); }
-  }),
+  classNames: ['ivy-tabs-tab'],
 
-  /**
-   * The CSS class to apply to a tab's element when its `isSelected` property
-   * is `true`.
-   *
-   * @property activeClass
-   * @type String
-   * @default 'active'
-   */
-  activeClass: 'active',
+  click(event) {
+    event.preventDefault();
+    this.select();
+  },
 
   href: computed('tabPanel.elementId', 'tagName', function() {
     if (this.get('tagName') !== 'a') {
@@ -136,6 +116,11 @@ export default Component.extend({
   index: computed('tabs.[]', function() {
     return this.get('tabs').indexOf(this);
   }),
+
+  init() {
+    this._super(...arguments);
+    once(this, this._registerWithTabList);
+  },
 
   /**
    * Whether or not this tab is selected.
@@ -161,12 +146,23 @@ export default Component.extend({
    * @method select
    */
   select() {
-    this.sendAction('on-select', this.get('model'));
+    const onSelect = this.get('on-select');
+
+    if (typeof onSelect === 'function') {
+      onSelect(this.get('model'));
+    }
   },
 
-  selectOnClickOrTouch: on('click', 'touchEnd', function(event) {
-    event.preventDefault();
-    this.select();
+  /**
+   * The `selected` attribute of the tab element. If the tab's `isSelected`
+   * property is `true` this will be the literal string 'selected', otherwise
+   * it will be `undefined`.
+   *
+   * @property selected
+   * @type String
+   */
+  selected: computed('isSelected', function() {
+    if (this.get('isSelected')) { return 'selected'; }
   }),
 
   /**
@@ -199,6 +195,17 @@ export default Component.extend({
   tabPanels: readOnly('tabsContainer.tabPanels'),
 
   /**
+   * Makes the selected tab keyboard tabbable, and prevents tabs from getting
+   * focus when clicked with a mouse.
+   *
+   * @property tabindex
+   * @type Number
+   */
+  tabindex: computed('isSelected', function() {
+    if (this.get('isSelected')) { return 0; }
+  }),
+
+  /**
    * The array of all `ivy-tabs-tab` instances within the `ivy-tabs-tablist` component.
    *
    * @property tabs
@@ -216,12 +223,11 @@ export default Component.extend({
    */
   tabsContainer: readOnly('tabList.tabsContainer'),
 
-  _registerWithTabList() {
-    this.get('tabList').registerTab(this);
-  },
+  tagName: 'a',
 
-  _unregisterWithTabList() {
-    this.get('tabList').unregisterTab(this);
+  willDestroy() {
+    this._super(...arguments);
+    once(this, this._unregisterWithTabList);
   }
 }).reopenClass({
   positionalParams: ['model']

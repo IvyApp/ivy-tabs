@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 import EmberObject from '@ember/object';
-import { empty, filterBy } from 'ember-computed';
+import { empty, filterBy } from '@ember/object/computed';
 
 export default Controller.extend({
   actions: {

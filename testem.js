@@ -1,6 +1,18 @@
-/* eslint-env node */
 module.exports = {
-  test_page: 'tests/index.html?hidepassed',
+  browser_args: {
+    Chrome: {
+      args: [
+        // --no-sandbox is needed when running Chrome inside a container
+        process.env.TRAVIS ? '--no-sandbox' : null,
+
+        '--disable-gpu',
+        '--headless',
+        '--remote-debugging-port=0',
+        '--window-size=1440,900'
+      ].filter(Boolean),
+      mode: 'ci'
+    },
+  },
   disable_watching: true,
   launch_in_ci: [
     'Chrome'
@@ -8,15 +20,5 @@ module.exports = {
   launch_in_dev: [
     'Chrome'
   ],
-  browser_args: {
-    Chrome: {
-      mode: 'ci',
-      args: [
-        '--disable-gpu',
-        '--headless',
-        '--remote-debugging-port=9222',
-        '--window-size=1440,900'
-      ]
-    },
-  }
+  test_page: 'tests/index.html?hidepassed'
 };
