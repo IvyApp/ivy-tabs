@@ -13,19 +13,35 @@ import { once } from '@ember/runloop';
  * @extends Ember.Component
  */
 export default Component.extend({
-  attributeBindings: ['aria-hidden', 'aria-labelledby'],
-  classNames: ['ivy-tabs-tabpanel'],
-  classNameBindings: ['active'],
-
-  init() {
-    this._super(...arguments);
-    once(this, this._registerWithTabsContainer);
+  _registerWithTabsContainer() {
+    this.get('tabsContainer').registerTabPanel(this);
   },
 
-  willDestroy() {
-    this._super(...arguments);
-    once(this, this._unregisterWithTabsContainer);
+  _unregisterWithTabsContainer() {
+    this.get('tabsContainer').unregisterTabPanel(this);
   },
+
+  /**
+   * Accessed as a className binding to apply the panel's `activeClass` CSS
+   * class to the element when the panel's `isSelected` property is true.
+   *
+   * @property active
+   * @type String
+   * @readOnly
+   */
+  active: computed('isSelected', function() {
+    if (this.get('isSelected')) { return this.get('activeClass'); }
+  }),
+
+  /**
+   * The CSS class to apply to a panel's element when its `isSelected` property
+   * is `true`.
+   *
+   * @property activeClass
+   * @type String
+   * @default 'active'
+   */
+  activeClass: 'active',
 
   /**
    * Tells screenreaders whether or not the panel is visible.
@@ -60,27 +76,16 @@ export default Component.extend({
    */
   ariaRole: 'tabpanel',
 
-  /**
-   * Accessed as a className binding to apply the panel's `activeClass` CSS
-   * class to the element when the panel's `isSelected` property is true.
-   *
-   * @property active
-   * @type String
-   * @readOnly
-   */
-  active: computed('isSelected', function() {
-    if (this.get('isSelected')) { return this.get('activeClass'); }
-  }),
+  attributeBindings: ['aria-hidden', 'aria-labelledby'],
 
-  /**
-   * The CSS class to apply to a panel's element when its `isSelected` property
-   * is `true`.
-   *
-   * @property activeClass
-   * @type String
-   * @default 'active'
-   */
-  activeClass: 'active',
+  classNameBindings: ['active'],
+
+  classNames: ['ivy-tabs-tabpanel'],
+
+  init() {
+    this._super(...arguments);
+    once(this, this._registerWithTabsContainer);
+  },
 
   /**
    * Whether or not this panel's associated tab is selected.
@@ -130,12 +135,9 @@ export default Component.extend({
    */
   tabsContainer: null,
 
-  _registerWithTabsContainer() {
-    this.get('tabsContainer').registerTabPanel(this);
-  },
-
-  _unregisterWithTabsContainer() {
-    this.get('tabsContainer').unregisterTabPanel(this);
+  willDestroy() {
+    this._super(...arguments);
+    once(this, this._unregisterWithTabsContainer);
   }
 }).reopenClass({
   positionalParams: ['model']

@@ -15,6 +15,7 @@ module.exports = {
     browser: true
   },
   rules: {
+    'sort-keys': 'error'
   },
   overrides: [
     // node files
