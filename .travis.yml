@@ -12,7 +12,6 @@ addons:
 cache:
   directories:
     - $HOME/.npm
-    - $HOME/.cache # includes Bower's cache
 
 env:
   global:
@@ -37,12 +36,6 @@ before_install:
   - npm config set spin false
   - npm install -g npm@4
   - npm --version
-  - npm install -g bower
-  - bower --version
-
-install:
-  - npm install
-  - bower install
 
 script:
   - npm run lint:js
