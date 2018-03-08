@@ -148,7 +148,7 @@ export default Component.extend({
   select() {
     const onSelect = this.get('on-select');
 
-    if (typeof onSelect === 'function') {
+    if (!this.isDestroying && typeof onSelect === 'function') {
       onSelect(this.get('model'));
     }
   },

@@ -4,6 +4,10 @@
 
 See [changes since release][HEAD].
 
+* No longer trigger selection actions during Component destruction.
+* [#33](https://github.com/IvyApp/ivy-tabs/pull/33) Remove jQuery usage. Thanks to @smfoote and @dxprog.
+* [#37](https://github.com/IvyApp/ivy-tabs/pull/37) Move to modules API. Thanks to @sutori.
+
 ## [3.1.0][] / 2016-12-02
 
 * [#32](https://github.com/IvyApp/ivy-tabs/pull/32) Add Ember 2.10 support.
