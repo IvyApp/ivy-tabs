@@ -4,6 +4,8 @@
 
 See [changes since release][HEAD].
 
+## [3.2.0][] / 2018-03-07
+
 * No longer trigger selection actions during Component destruction.
 * [#33](https://github.com/IvyApp/ivy-tabs/pull/33) Remove jQuery usage. Thanks to @smfoote and @dxprog.
 * [#37](https://github.com/IvyApp/ivy-tabs/pull/37) Move to modules API. Thanks to @sutori.
@@ -146,4 +148,5 @@ to the README for current usage.
 [3.0.1]: https://github.com/IvyApp/ivy-tabs/compare/v3.0.0...v3.0.1
 [3.0.2]: https://github.com/IvyApp/ivy-tabs/compare/v3.0.1...v3.0.2
 [3.1.0]: https://github.com/IvyApp/ivy-tabs/compare/v3.0.2...v3.1.0
-[HEAD]: https://github.com/IvyApp/ivy-tabs/compare/v3.1.0...master
+[3.2.0]: https://github.com/IvyApp/ivy-tabs/compare/v3.1.0...v3.2.0
+[HEAD]: https://github.com/IvyApp/ivy-tabs/compare/v3.2.0...master
