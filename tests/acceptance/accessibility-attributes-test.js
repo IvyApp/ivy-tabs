@@ -1,128 +1,104 @@
-import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
-import { test } from 'qunit';
+import jQuery from 'jquery';
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
+import { visit } from '@ember/test-helpers';
 
-moduleForAcceptance('Acceptance | accessibility attributes');
+module('Acceptance | accessibility attributes', function(hooks) {
+  setupApplicationTest(hooks);
 
-test('tablists should be [role="tablist"]', function(assert) {
-  visit('/');
+  test('tablists should be [role="tablist"]', async function(assert) {
+    await visit('/');
 
-  andThen(function() {
-    assert.equal(findWithAssert('#basic-tablist').attr('role'), 'tablist');
+    assert.equal(jQuery('#basic-tablist', '#ember-testing').attr('role'), 'tablist');
   });
-});
 
-test('tablists should be [aria-multiselectable="false"]', function(assert) {
-  visit('/');
+  test('tablists should be [aria-multiselectable="false"]', async function(assert) {
+    await visit('/');
 
-  andThen(function() {
-    assert.equal(findWithAssert('#basic-tablist').attr('aria-multiselectable'), 'false');
+    assert.equal(jQuery('#basic-tablist', '#ember-testing').attr('aria-multiselectable'), 'false');
   });
-});
 
-test('tabs should be [role="tab"]', function(assert) {
-  visit('/');
+  test('tabs should be [role="tab"]', async function(assert) {
+    await visit('/');
 
-  andThen(function() {
-    assert.equal(findWithAssert('#basic-tab-a').attr('role'), 'tab');
-    assert.equal(findWithAssert('#basic-tab-b').attr('role'), 'tab');
-    assert.equal(findWithAssert('#basic-tab-c').attr('role'), 'tab');
+    assert.equal(jQuery('#basic-tab-a', '#ember-testing').attr('role'), 'tab');
+    assert.equal(jQuery('#basic-tab-b', '#ember-testing').attr('role'), 'tab');
+    assert.equal(jQuery('#basic-tab-c', '#ember-testing').attr('role'), 'tab');
   });
-});
 
-test('tabs should be [aria-controls], set to the ID of their tabpanel', function(assert) {
-  visit('/');
+  test('tabs should be [aria-controls], set to the ID of their tabpanel', async function(assert) {
+    await visit('/');
 
-  andThen(function() {
-    assert.equal(findWithAssert('#basic-tab-a').attr('aria-controls'), 'basic-panel-a');
-    assert.equal(findWithAssert('#basic-tab-b').attr('aria-controls'), 'basic-panel-b');
-    assert.equal(findWithAssert('#basic-tab-c').attr('aria-controls'), 'basic-panel-c');
+    assert.equal(jQuery('#basic-tab-a', '#ember-testing').attr('aria-controls'), 'basic-panel-a');
+    assert.equal(jQuery('#basic-tab-b', '#ember-testing').attr('aria-controls'), 'basic-panel-b');
+    assert.equal(jQuery('#basic-tab-c', '#ember-testing').attr('aria-controls'), 'basic-panel-c');
   });
-});
 
-test('the active tab should be [aria-expanded="true"]', function(assert) {
-  visit('/');
+  test('the active tab should be [aria-expanded="true"]', async function(assert) {
+    await visit('/');
 
-  andThen(function() {
-    assert.equal(findWithAssert('#basic-tab-a').attr('aria-expanded'), 'true');
+    assert.equal(jQuery('#basic-tab-a', '#ember-testing').attr('aria-expanded'), 'true');
   });
-});
 
-test('the active tab should be [aria-selected="true"]', function(assert) {
-  visit('/');
+  test('the active tab should be [aria-selected="true"]', async function(assert) {
+    await visit('/');
 
-  andThen(function() {
-    assert.equal(findWithAssert('#basic-tab-a').attr('aria-selected'), 'true');
+    assert.equal(jQuery('#basic-tab-a', '#ember-testing').attr('aria-selected'), 'true');
   });
-});
 
-test('the inactive tabs should be [aria-expanded="false"]', function(assert) {
-  visit('/');
+  test('the inactive tabs should be [aria-expanded="false"]', async function(assert) {
+    await visit('/');
 
-  andThen(function() {
-    assert.equal(findWithAssert('#basic-tab-b').attr('aria-expanded'), 'false');
-    assert.equal(findWithAssert('#basic-tab-c').attr('aria-expanded'), 'false');
+    assert.equal(jQuery('#basic-tab-b', '#ember-testing').attr('aria-expanded'), 'false');
+    assert.equal(jQuery('#basic-tab-c', '#ember-testing').attr('aria-expanded'), 'false');
   });
-});
 
-test('the inactive tabs should be [aria-selected="false"]', function(assert) {
-  visit('/');
+  test('the inactive tabs should be [aria-selected="false"]', async function(assert) {
+    await visit('/');
 
-  andThen(function() {
-    assert.equal(findWithAssert('#basic-tab-b').attr('aria-selected'), 'false');
-    assert.equal(findWithAssert('#basic-tab-c').attr('aria-selected'), 'false');
+    assert.equal(jQuery('#basic-tab-b', '#ember-testing').attr('aria-selected'), 'false');
+    assert.equal(jQuery('#basic-tab-c', '#ember-testing').attr('aria-selected'), 'false');
   });
-});
 
-test('the active tab should be [tabindex="0"]', function(assert) {
-  visit('/');
+  test('the active tab should be [tabindex="0"]', async function(assert) {
+    await visit('/');
 
-  andThen(function() {
-    assert.equal(findWithAssert('#basic-tab-a').attr('tabindex'), '0');
+    assert.equal(jQuery('#basic-tab-a', '#ember-testing').attr('tabindex'), '0');
   });
-});
 
-test('the inactive tabs should not be [tabindex]', function(assert) {
-  visit('/');
+  test('the inactive tabs should not be [tabindex]', async function(assert) {
+    await visit('/');
 
-  andThen(function() {
-    assert.notOk(findWithAssert('#basic-tab-b').is('[tabindex]'));
-    assert.notOk(findWithAssert('#basic-tab-c').is('[tabindex]'));
+    assert.notOk(jQuery('#basic-tab-b', '#ember-testing').attr('tabindex'));
+    assert.notOk(jQuery('#basic-tab-c', '#ember-testing').attr('tabindex'));
   });
-});
 
-test('tabpanels should be [role="tabpanel"]', function(assert) {
-  visit('/');
+  test('tabpanels should be [role="tabpanel"]', async function(assert) {
+    await visit('/');
 
-  andThen(function() {
-    assert.equal(findWithAssert('#basic-panel-a').attr('role'), 'tabpanel');
-    assert.equal(findWithAssert('#basic-panel-b').attr('role'), 'tabpanel');
-    assert.equal(findWithAssert('#basic-panel-c').attr('role'), 'tabpanel');
+    assert.equal(jQuery('#basic-panel-a', '#ember-testing').attr('role'), 'tabpanel');
+    assert.equal(jQuery('#basic-panel-b', '#ember-testing').attr('role'), 'tabpanel');
+    assert.equal(jQuery('#basic-panel-c', '#ember-testing').attr('role'), 'tabpanel');
   });
-});
 
-test('tabpanels should be [aria-labelledby], set to the ID of their tab', function(assert) {
-  visit('/');
+  test('tabpanels should be [aria-labelledby], set to the ID of their tab', async function(assert) {
+    await visit('/');
 
-  andThen(function() {
-    assert.equal(findWithAssert('#basic-panel-a').attr('aria-labelledby'), 'basic-tab-a');
-    assert.equal(findWithAssert('#basic-panel-b').attr('aria-labelledby'), 'basic-tab-b');
-    assert.equal(findWithAssert('#basic-panel-c').attr('aria-labelledby'), 'basic-tab-c');
+    assert.equal(jQuery('#basic-panel-a', '#ember-testing').attr('aria-labelledby'), 'basic-tab-a');
+    assert.equal(jQuery('#basic-panel-b', '#ember-testing').attr('aria-labelledby'), 'basic-tab-b');
+    assert.equal(jQuery('#basic-panel-c', '#ember-testing').attr('aria-labelledby'), 'basic-tab-c');
   });
-});
 
-test('the active tabpanel should be [aria-hidden="false"]', function(assert) {
-  visit('/');
+  test('the active tabpanel should be [aria-hidden="false"]', async function(assert) {
+    await visit('/');
 
-  andThen(function() {
-    assert.equal(findWithAssert('#basic-panel-a').attr('aria-hidden'), 'false');
+    assert.equal(jQuery('#basic-panel-a', '#ember-testing').attr('aria-hidden'), 'false');
   });
-});
 
-test('the inactive tabpanels should be [aria-hidden="true"]', function(assert) {
-  visit('/');
+  test('the inactive tabpanels should be [aria-hidden="true"]', async function(assert) {
+    await visit('/');
 
-  andThen(function() {
-    assert.equal(findWithAssert('#basic-panel-b').attr('aria-hidden'), 'true');
-    assert.equal(findWithAssert('#basic-panel-c').attr('aria-hidden'), 'true');
+    assert.equal(jQuery('#basic-panel-b', '#ember-testing').attr('aria-hidden'), 'true');
+    assert.equal(jQuery('#basic-panel-c', '#ember-testing').attr('aria-hidden'), 'true');
   });
 });

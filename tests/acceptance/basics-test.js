@@ -1,12 +1,13 @@
-import { test } from 'qunit';
-import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
+import jQuery from 'jquery';
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
+import { visit } from '@ember/test-helpers';
 
-moduleForAcceptance('Acceptance | basics');
+module('Acceptance | basics', function(hooks) {
+  setupApplicationTest(hooks);
 
-test('should select the first tab by default', function(assert) {
-  visit('/');
-
-  andThen(function() {
-    assert.equal(findWithAssert('#basic-tab-a').attr('aria-selected'), 'true');
+  test('should select the first tab by default', async function(assert) {
+    await visit('/');
+    assert.equal(jQuery('#basic-tab-a').attr('aria-selected'), 'true');
   });
 });

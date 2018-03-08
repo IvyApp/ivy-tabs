@@ -1,38 +1,34 @@
-import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
-import { test } from 'qunit';
+import jQuery from 'jquery';
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
+import { visit } from '@ember/test-helpers';
 
-moduleForAcceptance('Acceptance | classes');
+module('Acceptance | classes', function(hooks) {
+  setupApplicationTest(hooks);
 
-test('the active tab should be .active', function(assert) {
-  visit('/');
+  test('the active tab should be .active', async function(assert) {
+    await visit('/');
 
-  andThen(function() {
-    assert.ok(findWithAssert('#basic-tab-a').is('.active'));
+    assert.ok(jQuery('#basic-tab-a', '#ember-testing').is('.active'));
   });
-});
 
-test('the inactive tabs should not be .active', function(assert) {
-  visit('/');
+  test('the inactive tabs should not be .active', async function(assert) {
+    await visit('/');
 
-  andThen(function() {
-    assert.notOk(findWithAssert('#basic-tab-b').is('.active'));
-    assert.notOk(findWithAssert('#basic-tab-c').is('.active'));
+    assert.notOk(jQuery('#basic-tab-b', '#ember-testing').is('.active'));
+    assert.notOk(jQuery('#basic-tab-c', '#ember-testing').is('.active'));
   });
-});
 
-test('the active tabpanel should be .active', function(assert) {
-  visit('/');
+  test('the active tabpanel should be .active', async function(assert) {
+    await visit('/');
 
-  andThen(function() {
-    assert.ok(findWithAssert('#basic-panel-a').is('.active'));
+    assert.ok(jQuery('#basic-panel-a', '#ember-testing').is('.active'));
   });
-});
 
-test('the inactive tabpanels should not be .active', function(assert) {
-  visit('/');
+  test('the inactive tabpanels should not be .active', async function(assert) {
+    await visit('/');
 
-  andThen(function() {
-    assert.notOk(findWithAssert('#basic-panel-b').is('.active'));
-    assert.notOk(findWithAssert('#basic-panel-c').is('.active'));
+    assert.notOk(jQuery('#basic-panel-b', '#ember-testing').is('.active'));
+    assert.notOk(jQuery('#basic-panel-c', '#ember-testing').is('.active'));
   });
 });

@@ -126,6 +126,11 @@ Or, to start a test server:
 ember test --server
 ```
 
+### Linting
+
+* `npm run lint:js`
+* `npm run lint:js -- --fix`
+
 ### Building
 
 ```sh

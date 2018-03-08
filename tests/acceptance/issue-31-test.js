@@ -1,39 +1,34 @@
-import { test } from 'qunit';
-import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
+import jQuery from 'jquery';
+import { click, visit } from '@ember/test-helpers';
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
 
-// https://github.com/IvyApp/ivy-tabs/issues/31
-moduleForAcceptance('Acceptance | issue #31');
+module('Acceptance | issue #31', function(hooks) {
+  setupApplicationTest(hooks);
 
-test('should keep Tab A selected when navigating between demo pages', function(assert) {
-  visit('/');
+  test('should keep Tab A selected when navigating between demo pages', async function(assert) {
+    await visit('/');
 
-  andThen(function() {
-    assert.equal(findWithAssert('[role="tab"][aria-selected="true"]').text().trim(), 'Tab A');
+    assert.equal(jQuery('[role="tab"][aria-selected="true"]', '#ember-testing').text().trim(), 'Tab A');
+
+    await visit('/query-params');
+    await visit('/');
+
+    assert.equal(jQuery('[role="tab"][aria-selected="true"]', '#ember-testing').text().trim(), 'Tab A');
   });
 
-  visit('/query-params');
-  visit('/');
+  test('should select correct next tab after bulk removal', async function(assert) {
+    await visit('/dynamic-tabs');
+    await click(jQuery('.btn:contains("Add an Item")', '#ember-testing').get(0));
+    await click(jQuery('.btn:contains("Add an Item")', '#ember-testing').get(0));
+    await click(jQuery('.btn:contains("Add an Item")', '#ember-testing').get(0));
 
-  andThen(function() {
-    assert.equal(findWithAssert('[role="tab"][aria-selected="true"]').text().trim(), 'Tab A');
-  });
-});
+    assert.equal(jQuery('[role="tab"]:contains("Item 1")', '#ember-testing').attr('aria-selected'), 'true', 'Item 1 is selected');
 
-test('should select correct next tab after bulk removal', function(assert) {
-  visit('/dynamic-tabs');
-  click('.btn:contains("Add an Item")');
-  click('.btn:contains("Add an Item")');
-  click('.btn:contains("Add an Item")');
+    await click(jQuery('input[type="checkbox"]:eq(0)', '#ember-testing').get(0));
+    await click(jQuery('input[type="checkbox"]:eq(1)', '#ember-testing').get(0));
+    await click(jQuery('.btn:contains("Remove 2 Item(s)")', '#ember-testing').get(0));
 
-  andThen(function() {
-    assert.ok(findWithAssert('[role="tab"]:contains("Item 1")').is('[aria-selected="true"]'), 'Item 1 is selected');
-  });
-
-  click('input[type="checkbox"]:eq(0)');
-  click('input[type="checkbox"]:eq(1)');
-  click('.btn:contains("Remove 2 Item(s)")');
-
-  andThen(function() {
-    assert.ok(findWithAssert('[role="tab"]:contains("Item 3")').is('[aria-selected="true"]'), 'Item 3 is selected');
+    assert.equal(jQuery('[role="tab"]:contains("Item 3")', '#ember-testing').attr('aria-selected'), 'true', 'Item 3 is selected');
   });
 });
