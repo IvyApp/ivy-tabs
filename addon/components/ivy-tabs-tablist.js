@@ -1,9 +1,14 @@
 import Component from '@ember/component';
-import { isNone } from '@ember/utils';
-import { computed } from '@ember/object';
-import { A } from '@ember/array';
 import layout from '../templates/components/ivy-tabs-tablist';
+import { A } from '@ember/array';
+import { computed } from '@ember/object';
+import { isNone } from '@ember/utils';
 import { once, scheduleOnce } from '@ember/runloop';
+
+export const DOWN_ARROW = 40;
+export const LEFT_ARROW = 37;
+export const RIGHT_ARROW = 39;
+export const UP_ARROW = 38;
 
 /**
  * @module ivy-tabs
@@ -72,12 +77,12 @@ export default Component.extend({
    */
   keyDown(event) {
     switch (event.keyCode) {
-      case 37: /* left */
-      case 38 /* up */:
+      case LEFT_ARROW:
+      case UP_ARROW:
         this.selectPreviousTab();
         break;
-      case 39: /* right */
-      case 40 /* down */:
+      case RIGHT_ARROW:
+      case DOWN_ARROW:
         this.selectNextTab();
         break;
       default:
