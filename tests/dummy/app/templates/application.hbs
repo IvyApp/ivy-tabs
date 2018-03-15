@@ -2,17 +2,18 @@
   <div class="page-header">
     <h1>ivy-tabs</h1>
   </div>
+  <hr>
 
   <div class="row">
     <div class="col-sm-9">
       {{outlet}}
     </div>
     <div class="col-sm-3">
-      <div class="list-group">
-        {{link-to "Basic Example" "index" class="list-group-item"}}
-        {{link-to "Query Parameters Example" "query-params" class="list-group-item"}}
-        {{link-to "Dynamic Tabs Example" "dynamic-tabs" class="list-group-item"}}
-      </div>
+      <nav class="list-group">
+        {{link-to "Basic Example" "index" class="list-group-item list-group-item-action"}}
+        {{link-to "Query Parameters Example" "query-params" class="list-group-item list-group-item-action"}}
+        {{link-to "Dynamic Tabs Example" "dynamic-tabs" class="list-group-item list-group-item-action"}}
+      </nav>
     </div>
   </div>
 

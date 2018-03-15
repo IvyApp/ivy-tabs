@@ -6,10 +6,11 @@
   {{#ivy-tabs selection=selection as |tabs|}}
     {{#tabs.tablist class="nav nav-tabs" tagName="ul" as |tablist|}}
       {{#each model as |item|}}
-        <li class="{{if (eq selection item.index) "active"}}" role="presentation">
-          {{#tablist.tab item.index on-select=(action (mut selection))}}
-            <button class="close" type="button" {{action "removeItem" item}}>
+        <li class="nav-item {{if (eq selection item.index) "active"}}" role="presentation">
+          {{#tablist.tab item.index class="nav-link" on-select=(action (mut selection))}}
+            <button aria-label="Close Tab" class="close" type="button" {{action "removeItem" item}}>
               <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close Item</span>
             </button>
 
             Item {{item.index}}
@@ -27,19 +28,23 @@
     </div>
   {{/ivy-tabs}}
 
-  <button class="btn btn-default" type="button" {{action "addItem"}}>
+  <button class="btn btn-primary" type="button" {{action "addItem"}}>
     Add an Item
   </button>
 
-  <button class="btn btn-default" disabled={{noCheckedItems}} type="button" {{action "removeSelected"}}>
+  <button class="btn btn-secondary" disabled={{noCheckedItems}} type="button" {{action "removeSelected"}}>
     Remove {{checkedItems.length}} Item(s)
   </button>
 
-  {{#each model as |item|}}
-    <div class="checkbox">
-      <label>
-        {{input checked=item.checked type="checkbox"}} Item {{item.index}}
-      </label>
-    </div>
-  {{/each}}
+  <ul class="list-unstyled">
+    {{#each model as |item|}}
+      <li>
+        <div class="checkbox">
+          <label>
+            {{input checked=item.checked type="checkbox"}} Item {{item.index}}
+          </label>
+        </div>
+      </li>
+    {{/each}}
+  </ul>
 </div>

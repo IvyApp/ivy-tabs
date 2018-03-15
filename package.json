@@ -30,7 +30,7 @@
     "ember-cli-htmlbars": "^2.0.3"
   },
   "devDependencies": {
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^4.0.0",
     "broccoli-asset-rev": "^2.4.5",
     "ember-cli": "~3.0.0",
     "ember-cli-app-version": "^3.1.0",
