@@ -1,7 +1,7 @@
-import jQuery from 'jquery';
+import { click, triggerKeyEvent, visit } from '@ember/test-helpers';
+import { findTab } from '../helpers/finders';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import { click, triggerKeyEvent, visit } from '@ember/test-helpers';
 
 const KEYS = {
   DOWN_ARROW: 40,
@@ -15,61 +15,81 @@ module('Acceptance | keyboard interaction', function(hooks) {
 
   test('the left arrow key should select the previous tab', async function(assert) {
     await visit('/');
-    await click('#basic-tab-b');
-    await triggerKeyEvent('#basic-tablist', 'keydown', KEYS.LEFT_ARROW);
+    await click(findTab('Tab B'));
+    await triggerKeyEvent(findTab('Tab B'), 'keydown', KEYS.LEFT_ARROW);
 
-    assert.equal(jQuery('a#basic-tab-a').attr('aria-selected'), 'true');
+    assert.equal(findTab('Tab A').getAttribute('aria-selected'), 'true');
+    assert.equal(findTab('Tab B').getAttribute('aria-selected'), 'false');
+    assert.equal(findTab('Tab C').getAttribute('aria-selected'), 'false');
   });
 
   test('the left arrow key should select the last tab if there is no previous tab', async function(assert) {
     await visit('/');
-    triggerKeyEvent('#basic-tablist', 'keydown', KEYS.LEFT_ARROW);
+    await click(findTab('Tab A'));
+    await triggerKeyEvent(findTab('Tab A'), 'keydown', KEYS.LEFT_ARROW);
 
-    assert.ok(jQuery('#basic-tab-c').attr('aria-selected'), 'true');
+    assert.equal(findTab('Tab A').getAttribute('aria-selected'), 'false');
+    assert.equal(findTab('Tab B').getAttribute('aria-selected'), 'false');
+    assert.equal(findTab('Tab C').getAttribute('aria-selected'), 'true');
   });
 
   test('the up arrow key should select the previous tab', async function(assert) {
     await visit('/');
-    await click('#basic-tab-b');
-    triggerKeyEvent('#basic-tablist', 'keydown', KEYS.UP_ARROW);
+    await click(findTab('Tab B'));
+    await triggerKeyEvent(findTab('Tab B'), 'keydown', KEYS.UP_ARROW);
 
-    assert.ok(jQuery('#basic-tab-a').attr('aria-selected'), 'true');
+    assert.equal(findTab('Tab A').getAttribute('aria-selected'), 'true');
+    assert.equal(findTab('Tab B').getAttribute('aria-selected'), 'false');
+    assert.equal(findTab('Tab C').getAttribute('aria-selected'), 'false');
   });
 
   test('the up arrow key should select the last tab if there is no previous tab', async function(assert) {
     await visit('/');
-    triggerKeyEvent('#basic-tablist', 'keydown', KEYS.UP_ARROW);
+    await click(findTab('Tab A'));
+    await triggerKeyEvent(findTab('Tab A'), 'keydown', KEYS.UP_ARROW);
 
-    assert.ok(jQuery('#basic-tab-c').attr('aria-selected'), 'true');
+    assert.equal(findTab('Tab A').getAttribute('aria-selected'), 'false');
+    assert.equal(findTab('Tab B').getAttribute('aria-selected'), 'false');
+    assert.equal(findTab('Tab C').getAttribute('aria-selected'), 'true');
   });
 
   test('the right arrow key should select the next tab', async function(assert) {
     await visit('/');
-    triggerKeyEvent('#basic-tablist', 'keydown', KEYS.RIGHT_ARROW);
+    await click(findTab('Tab A'));
+    await triggerKeyEvent(findTab('Tab A'), 'keydown', KEYS.RIGHT_ARROW);
 
-    assert.ok(jQuery('#basic-tab-b').attr('aria-selected'), 'true');
+    assert.equal(findTab('Tab A').getAttribute('aria-selected'), 'false');
+    assert.equal(findTab('Tab B').getAttribute('aria-selected'), 'true');
+    assert.equal(findTab('Tab C').getAttribute('aria-selected'), 'false');
   });
 
   test('the right arrow key should select the first tab if there is no next tab', async function(assert) {
     await visit('/');
-    await click('#basic-tab-c');
-    triggerKeyEvent('#basic-tablist', 'keydown', KEYS.RIGHT_ARROW);
+    await click(findTab('Tab C'));
+    await triggerKeyEvent(findTab('Tab C'), 'keydown', KEYS.RIGHT_ARROW);
 
-    assert.ok(jQuery('#basic-tab-a').attr('aria-selected'), 'true');
+    assert.equal(findTab('Tab A').getAttribute('aria-selected'), 'true');
+    assert.equal(findTab('Tab B').getAttribute('aria-selected'), 'false');
+    assert.equal(findTab('Tab C').getAttribute('aria-selected'), 'false');
   });
 
   test('the down arrow key should select the next tab', async function(assert) {
     await visit('/');
-    triggerKeyEvent('#basic-tablist', 'keydown', KEYS.DOWN_ARROW);
+    await click(findTab('Tab A'));
+    await triggerKeyEvent(findTab('Tab A'), 'keydown', KEYS.DOWN_ARROW);
 
-    assert.ok(jQuery('#basic-tab-b').attr('aria-selected'), 'true');
+    assert.equal(findTab('Tab A').getAttribute('aria-selected'), 'false');
+    assert.equal(findTab('Tab B').getAttribute('aria-selected'), 'true');
+    assert.equal(findTab('Tab C').getAttribute('aria-selected'), 'false');
   });
 
   test('the down arrow key should select the first tab if there is no next tab', async function(assert) {
     await visit('/');
-    await click('#basic-tab-c');
-    triggerKeyEvent('#basic-tablist', 'keydown', KEYS.DOWN_ARROW);
+    await click(findTab('Tab C'));
+    await triggerKeyEvent(findTab('Tab C'), 'keydown', KEYS.DOWN_ARROW);
 
-    assert.ok(jQuery('#basic-tab-a').attr('aria-selected'), 'true');
+    assert.equal(findTab('Tab A').getAttribute('aria-selected'), 'true');
+    assert.equal(findTab('Tab B').getAttribute('aria-selected'), 'false');
+    assert.equal(findTab('Tab C').getAttribute('aria-selected'), 'false');
   });
 });

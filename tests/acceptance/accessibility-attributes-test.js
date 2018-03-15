@@ -1,7 +1,7 @@
-import jQuery from 'jquery';
+import { find, visit } from '@ember/test-helpers';
+import { findTab, findTabPanel } from '../helpers/finders';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import { visit } from '@ember/test-helpers';
 
 module('Acceptance | accessibility attributes', function(hooks) {
   setupApplicationTest(hooks);
@@ -9,96 +9,96 @@ module('Acceptance | accessibility attributes', function(hooks) {
   test('tablists should be [role="tablist"]', async function(assert) {
     await visit('/');
 
-    assert.equal(jQuery('#basic-tablist', '#ember-testing').attr('role'), 'tablist');
+    assert.equal(find('#basic-tablist').getAttribute('role'), 'tablist');
   });
 
   test('tablists should be [aria-multiselectable="false"]', async function(assert) {
     await visit('/');
 
-    assert.equal(jQuery('#basic-tablist', '#ember-testing').attr('aria-multiselectable'), 'false');
+    assert.equal(find('#basic-tablist').getAttribute('aria-multiselectable'), 'false');
   });
 
   test('tabs should be [role="tab"]', async function(assert) {
     await visit('/');
 
-    assert.equal(jQuery('#basic-tab-a', '#ember-testing').attr('role'), 'tab');
-    assert.equal(jQuery('#basic-tab-b', '#ember-testing').attr('role'), 'tab');
-    assert.equal(jQuery('#basic-tab-c', '#ember-testing').attr('role'), 'tab');
+    assert.equal(findTab('Tab A').getAttribute('role'), 'tab');
+    assert.equal(findTab('Tab B').getAttribute('role'), 'tab');
+    assert.equal(findTab('Tab C').getAttribute('role'), 'tab');
   });
 
   test('tabs should be [aria-controls], set to the ID of their tabpanel', async function(assert) {
     await visit('/');
 
-    assert.equal(jQuery('#basic-tab-a', '#ember-testing').attr('aria-controls'), 'basic-panel-a');
-    assert.equal(jQuery('#basic-tab-b', '#ember-testing').attr('aria-controls'), 'basic-panel-b');
-    assert.equal(jQuery('#basic-tab-c', '#ember-testing').attr('aria-controls'), 'basic-panel-c');
+    assert.equal(findTab('Tab A').getAttribute('aria-controls'), 'basic-panel-a');
+    assert.equal(findTab('Tab B').getAttribute('aria-controls'), 'basic-panel-b');
+    assert.equal(findTab('Tab C').getAttribute('aria-controls'), 'basic-panel-c');
   });
 
   test('the active tab should be [aria-expanded="true"]', async function(assert) {
     await visit('/');
 
-    assert.equal(jQuery('#basic-tab-a', '#ember-testing').attr('aria-expanded'), 'true');
+    assert.equal(findTab('Tab A').getAttribute('aria-expanded'), 'true');
   });
 
   test('the active tab should be [aria-selected="true"]', async function(assert) {
     await visit('/');
 
-    assert.equal(jQuery('#basic-tab-a', '#ember-testing').attr('aria-selected'), 'true');
+    assert.equal(findTab('Tab A').getAttribute('aria-selected'), 'true');
   });
 
   test('the inactive tabs should be [aria-expanded="false"]', async function(assert) {
     await visit('/');
 
-    assert.equal(jQuery('#basic-tab-b', '#ember-testing').attr('aria-expanded'), 'false');
-    assert.equal(jQuery('#basic-tab-c', '#ember-testing').attr('aria-expanded'), 'false');
+    assert.equal(findTab('Tab B').getAttribute('aria-expanded'), 'false');
+    assert.equal(findTab('Tab C').getAttribute('aria-expanded'), 'false');
   });
 
   test('the inactive tabs should be [aria-selected="false"]', async function(assert) {
     await visit('/');
 
-    assert.equal(jQuery('#basic-tab-b', '#ember-testing').attr('aria-selected'), 'false');
-    assert.equal(jQuery('#basic-tab-c', '#ember-testing').attr('aria-selected'), 'false');
+    assert.equal(findTab('Tab B').getAttribute('aria-selected'), 'false');
+    assert.equal(findTab('Tab C').getAttribute('aria-selected'), 'false');
   });
 
   test('the active tab should be [tabindex="0"]', async function(assert) {
     await visit('/');
 
-    assert.equal(jQuery('#basic-tab-a', '#ember-testing').attr('tabindex'), '0');
+    assert.equal(findTab('Tab A').getAttribute('tabindex'), '0');
   });
 
   test('the inactive tabs should not be [tabindex]', async function(assert) {
     await visit('/');
 
-    assert.notOk(jQuery('#basic-tab-b', '#ember-testing').attr('tabindex'));
-    assert.notOk(jQuery('#basic-tab-c', '#ember-testing').attr('tabindex'));
+    assert.notOk(findTab('Tab B').getAttribute('tabindex'));
+    assert.notOk(findTab('Tab C').getAttribute('tabindex'));
   });
 
   test('tabpanels should be [role="tabpanel"]', async function(assert) {
     await visit('/');
 
-    assert.equal(jQuery('#basic-panel-a', '#ember-testing').attr('role'), 'tabpanel');
-    assert.equal(jQuery('#basic-panel-b', '#ember-testing').attr('role'), 'tabpanel');
-    assert.equal(jQuery('#basic-panel-c', '#ember-testing').attr('role'), 'tabpanel');
+    assert.equal(findTabPanel('Tab A').getAttribute('role'), 'tabpanel');
+    assert.equal(findTabPanel('Tab B').getAttribute('role'), 'tabpanel');
+    assert.equal(findTabPanel('Tab C').getAttribute('role'), 'tabpanel');
   });
 
   test('tabpanels should be [aria-labelledby], set to the ID of their tab', async function(assert) {
     await visit('/');
 
-    assert.equal(jQuery('#basic-panel-a', '#ember-testing').attr('aria-labelledby'), 'basic-tab-a');
-    assert.equal(jQuery('#basic-panel-b', '#ember-testing').attr('aria-labelledby'), 'basic-tab-b');
-    assert.equal(jQuery('#basic-panel-c', '#ember-testing').attr('aria-labelledby'), 'basic-tab-c');
+    assert.equal(findTabPanel('Tab A').getAttribute('aria-labelledby'), 'basic-tab-a');
+    assert.equal(findTabPanel('Tab B').getAttribute('aria-labelledby'), 'basic-tab-b');
+    assert.equal(findTabPanel('Tab C').getAttribute('aria-labelledby'), 'basic-tab-c');
   });
 
   test('the active tabpanel should be [aria-hidden="false"]', async function(assert) {
     await visit('/');
 
-    assert.equal(jQuery('#basic-panel-a', '#ember-testing').attr('aria-hidden'), 'false');
+    assert.equal(findTabPanel('Tab A').getAttribute('aria-hidden'), 'false');
   });
 
   test('the inactive tabpanels should be [aria-hidden="true"]', async function(assert) {
     await visit('/');
 
-    assert.equal(jQuery('#basic-panel-b', '#ember-testing').attr('aria-hidden'), 'true');
-    assert.equal(jQuery('#basic-panel-c', '#ember-testing').attr('aria-hidden'), 'true');
+    assert.equal(findTabPanel('Tab B').getAttribute('aria-hidden'), 'true');
+    assert.equal(findTabPanel('Tab C').getAttribute('aria-hidden'), 'true');
   });
 });
