@@ -31,6 +31,15 @@ export default Component.extend({
   },
 
   /**
+   * Tells screenreaders to notify the user during DOM modifications.
+   *
+   * @property aria-live
+   * @type String
+   * @default 'polite'
+   */
+  'aria-live': 'polite',
+
+  /**
    * Tells screenreaders that only one tab can be selected at a time.
    *
    * @property aria-multiselectable
@@ -42,6 +51,16 @@ export default Component.extend({
       return 'false';
     }
   }).readOnly(),
+
+  /**
+   * Tells screenreaders which DOM modification activites to monitor for user
+   * notification.
+   *
+   * @property aria-relevant
+   * @type String
+   * @default 'all'
+   */
+  'aria-relevant': 'all',
 
   /**
    * The `role` attribute of the tab list element.
@@ -58,7 +77,7 @@ export default Component.extend({
     }
   }).readOnly(),
 
-  attributeBindings: ['aria-multiselectable'],
+  attributeBindings: ['aria-live', 'aria-multiselectable', 'aria-relevant'],
 
   classNames: ['ivy-tabs-tablist'],
 

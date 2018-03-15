@@ -12,6 +12,18 @@ module('Acceptance | accessibility attributes', function(hooks) {
     assert.equal(find('#basic-tablist').getAttribute('role'), 'tablist');
   });
 
+  test('tablists should be [aria-live="polite"]', async function(assert) {
+    await visit('/');
+
+    assert.equal(find('#basic-tablist').getAttribute('aria-live'), 'polite');
+  });
+
+  test('tablists should be [aria-relevant="all"]', async function(assert) {
+    await visit('/');
+
+    assert.equal(find('#basic-tablist').getAttribute('aria-relevant'), 'all');
+  });
+
   test('tablists should be [aria-multiselectable="false"]', async function(assert) {
     await visit('/');
 

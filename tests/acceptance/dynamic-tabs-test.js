@@ -6,30 +6,22 @@ import { setupApplicationTest } from 'ember-qunit';
 module('Acceptance | dynamic tabs', function(hooks) {
   setupApplicationTest(hooks);
 
-  test('role=tablist and aria-multiselectable=false is added when non-empty', async function(assert) {
+  test('aria-multiselectable=false and role=tablist is added when non-empty', async function(assert) {
     await visit('/dynamic-tabs');
 
-    assert.equal(find('#dynamic-tablist').getAttribute('role'), null);
-    assert.equal(
-      find('#dynamic-tablist').getAttribute('aria-multiselectable'),
-      null
-    );
+    const tablist = find('#dynamic-tablist');
+    assert.equal(tablist.getAttribute('aria-multiselectable'), null);
+    assert.equal(tablist.getAttribute('role'), null);
 
     await click(findButtonByText('Add an Item'));
 
-    assert.equal(find('#dynamic-tablist').getAttribute('role'), 'tablist');
-    assert.equal(
-      find('#dynamic-tablist').getAttribute('aria-multiselectable'),
-      'false'
-    );
+    assert.equal(tablist.getAttribute('aria-multiselectable'), 'false');
+    assert.equal(tablist.getAttribute('role'), 'tablist');
 
     await click(findTab('Item 1').querySelector('.close'));
 
-    assert.equal(find('#dynamic-tablist').getAttribute('role'), null);
-    assert.equal(
-      find('#dynamic-tablist').getAttribute('aria-multiselectable'),
-      null
-    );
+    assert.equal(tablist.getAttribute('aria-multiselectable'), null);
+    assert.equal(tablist.getAttribute('role'), null);
   });
 
   test('the first tab added should be selected', async function(assert) {
