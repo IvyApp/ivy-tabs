@@ -11,14 +11,10 @@ module.exports = {
         '--window-size=1440,900'
       ].filter(Boolean),
       mode: 'ci'
-    },
+    }
   },
   disable_watching: true,
-  launch_in_ci: [
-    'Chrome'
-  ],
-  launch_in_dev: [
-    'Chrome'
-  ],
+  launch_in_ci: ['Chrome'],
+  launch_in_dev: ['Chrome'],
   test_page: 'tests/index.html?hidepassed'
 };

@@ -23,12 +23,20 @@ module('Acceptance | issue #31', function(hooks) {
     await click(findButtonByText('Add an Item'));
     await click(findButtonByText('Add an Item'));
 
-    assert.equal(findTab('Item 1').getAttribute('aria-selected'), 'true', 'Item 1 is selected');
+    assert.equal(
+      findTab('Item 1').getAttribute('aria-selected'),
+      'true',
+      'Item 1 is selected'
+    );
 
     await click(findCheckboxFor('Item 1'));
     await click(findCheckboxFor('Item 2'));
     await click(findButtonByText('Remove 2 Item(s)'));
 
-    assert.equal(findTab('Item 3').getAttribute('aria-selected'), 'true', 'Item 3 is selected');
+    assert.equal(
+      findTab('Item 3').getAttribute('aria-selected'),
+      'true',
+      'Item 3 is selected'
+    );
   });
 });

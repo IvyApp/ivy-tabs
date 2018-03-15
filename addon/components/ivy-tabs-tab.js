@@ -30,7 +30,9 @@ export default Component.extend({
    * @readOnly
    */
   active: computed('isSelected', function() {
-    if (this.get('isSelected')) { return this.get('activeClass'); }
+    if (this.get('isSelected')) {
+      return this.get('activeClass');
+    }
   }),
 
   /**
@@ -88,7 +90,14 @@ export default Component.extend({
    */
   ariaRole: 'tab',
 
-  attributeBindings: ['aria-controls', 'aria-expanded', 'aria-selected', 'href', 'selected', 'tabindex'],
+  attributeBindings: [
+    'aria-controls',
+    'aria-expanded',
+    'aria-selected',
+    'href',
+    'selected',
+    'tabindex'
+  ],
 
   classNameBindings: ['active'],
 
@@ -162,7 +171,9 @@ export default Component.extend({
    * @type String
    */
   selected: computed('isSelected', function() {
-    if (this.get('isSelected')) { return 'selected'; }
+    if (this.get('isSelected')) {
+      return 'selected';
+    }
   }),
 
   /**
@@ -202,7 +213,9 @@ export default Component.extend({
    * @type Number
    */
   tabindex: computed('isSelected', function() {
-    if (this.get('isSelected')) { return 0; }
+    if (this.get('isSelected')) {
+      return 0;
+    }
   }),
 
   /**

@@ -95,13 +95,21 @@ module('ivy-tabs', function(hooks) {
       {{/unless}}
     `);
 
-    assert.equal(selectionCount, 1, 'Triggers initial, automatic on-select during setup');
+    assert.equal(
+      selectionCount,
+      1,
+      'Triggers initial, automatic on-select during setup'
+    );
 
     run(this, function() {
       // Force a destruction of the component.
       this.set('hideComponent', true);
     });
 
-    assert.equal(selectionCount, 1, 'Does not trigger on-select during destroy');
+    assert.equal(
+      selectionCount,
+      1,
+      'Does not trigger on-select during destroy'
+    );
   });
 });

@@ -30,7 +30,9 @@ export default Component.extend({
    * @readOnly
    */
   active: computed('isSelected', function() {
-    if (this.get('isSelected')) { return this.get('activeClass'); }
+    if (this.get('isSelected')) {
+      return this.get('activeClass');
+    }
   }),
 
   /**
@@ -114,7 +116,9 @@ export default Component.extend({
    */
   tab: computed('model', 'tabs.@each.model', function() {
     const tabs = this.get('tabs');
-    if (tabs) { return tabs.findBy('model', this.get('model')); }
+    if (tabs) {
+      return tabs.findBy('model', this.get('model'));
+    }
   }),
 
   /**

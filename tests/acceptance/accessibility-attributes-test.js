@@ -15,7 +15,10 @@ module('Acceptance | accessibility attributes', function(hooks) {
   test('tablists should be [aria-multiselectable="false"]', async function(assert) {
     await visit('/');
 
-    assert.equal(find('#basic-tablist').getAttribute('aria-multiselectable'), 'false');
+    assert.equal(
+      find('#basic-tablist').getAttribute('aria-multiselectable'),
+      'false'
+    );
   });
 
   test('tabs should be [role="tab"]', async function(assert) {
@@ -29,9 +32,18 @@ module('Acceptance | accessibility attributes', function(hooks) {
   test('tabs should be [aria-controls], set to the ID of their tabpanel', async function(assert) {
     await visit('/');
 
-    assert.equal(findTab('Tab A').getAttribute('aria-controls'), 'basic-panel-a');
-    assert.equal(findTab('Tab B').getAttribute('aria-controls'), 'basic-panel-b');
-    assert.equal(findTab('Tab C').getAttribute('aria-controls'), 'basic-panel-c');
+    assert.equal(
+      findTab('Tab A').getAttribute('aria-controls'),
+      'basic-panel-a'
+    );
+    assert.equal(
+      findTab('Tab B').getAttribute('aria-controls'),
+      'basic-panel-b'
+    );
+    assert.equal(
+      findTab('Tab C').getAttribute('aria-controls'),
+      'basic-panel-c'
+    );
   });
 
   test('the active tab should be [aria-expanded="true"]', async function(assert) {
@@ -84,9 +96,18 @@ module('Acceptance | accessibility attributes', function(hooks) {
   test('tabpanels should be [aria-labelledby], set to the ID of their tab', async function(assert) {
     await visit('/');
 
-    assert.equal(findTabPanel('Tab A').getAttribute('aria-labelledby'), 'basic-tab-a');
-    assert.equal(findTabPanel('Tab B').getAttribute('aria-labelledby'), 'basic-tab-b');
-    assert.equal(findTabPanel('Tab C').getAttribute('aria-labelledby'), 'basic-tab-c');
+    assert.equal(
+      findTabPanel('Tab A').getAttribute('aria-labelledby'),
+      'basic-tab-a'
+    );
+    assert.equal(
+      findTabPanel('Tab B').getAttribute('aria-labelledby'),
+      'basic-tab-b'
+    );
+    assert.equal(
+      findTabPanel('Tab C').getAttribute('aria-labelledby'),
+      'basic-tab-c'
+    );
   });
 
   test('the active tabpanel should be [aria-hidden="false"]', async function(assert) {

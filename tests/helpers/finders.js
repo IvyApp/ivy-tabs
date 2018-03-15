@@ -1,5 +1,7 @@
 function findElementByText(selector, text) {
-  return Array.from(document.querySelectorAll(selector)).find(element => element.textContent.includes(text));
+  return Array.from(document.querySelectorAll(selector)).find(element =>
+    element.textContent.includes(text)
+  );
 }
 
 export function findButtonByText(text) {
@@ -28,7 +30,9 @@ export function findTab(text) {
 
 export function findTabPanel(text) {
   const tab = findTab(text);
-  const tabPanel = document.querySelector(`#${tab.getAttribute('aria-controls')}`);
+  const tabPanel = document.querySelector(
+    `#${tab.getAttribute('aria-controls')}`
+  );
 
   if (!tabPanel) {
     throw new Error(`Could not locate a TabPanel for "${text}".`);

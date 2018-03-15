@@ -72,16 +72,16 @@ export default Component.extend({
    */
   keyDown(event) {
     switch (event.keyCode) {
-    case 37: /* left */
-    case 38: /* up */
-      this.selectPreviousTab();
-      break;
-    case 39: /* right */
-    case 40: /* down */
-      this.selectNextTab();
-      break;
-    default:
-      return;
+      case 37: /* left */
+      case 38 /* up */:
+        this.selectPreviousTab();
+        break;
+      case 39: /* right */
+      case 40 /* down */:
+        this.selectNextTab();
+        break;
+      default:
+        return;
     }
 
     event.preventDefault();
@@ -117,7 +117,9 @@ export default Component.extend({
     do {
       idx++;
       // Next from the last tab should select the first tab.
-      if (idx === length) { idx = 0; }
+      if (idx === length) {
+        idx = 0;
+      }
 
       tab = tabs.objectAt(idx);
     } while (tab && tab.isDestroying && tab !== selectedTab);
@@ -143,9 +145,13 @@ export default Component.extend({
     do {
       idx--;
       // Previous from the first tab should select the last tab.
-      if (idx < 0) { idx = length - 1; }
+      if (idx < 0) {
+        idx = length - 1;
+      }
       // This would only happen if there are no tabs, so stay at 0.
-      if (idx < 0) { idx = 0; }
+      if (idx < 0) {
+        idx = 0;
+      }
 
       tab = tabs.objectAt(idx);
     } while (tab && tab.isDestroying && tab !== selectedTab);

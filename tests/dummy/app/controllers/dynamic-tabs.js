@@ -5,10 +5,12 @@ import { empty, filterBy } from '@ember/object/computed';
 export default Controller.extend({
   actions: {
     addItem() {
-      this.get('model').pushObject(EmberObject.create({
-        checked: false,
-        index: this.incrementProperty('nextIndex')
-      }));
+      this.get('model').pushObject(
+        EmberObject.create({
+          checked: false,
+          index: this.incrementProperty('nextIndex')
+        })
+      );
     },
 
     removeItem(item) {
