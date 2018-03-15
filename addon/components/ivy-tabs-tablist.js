@@ -2,6 +2,7 @@ import Component from '@ember/component';
 import layout from '../templates/components/ivy-tabs-tablist';
 import { A } from '@ember/array';
 import { computed } from '@ember/object';
+import { empty } from '@ember/object/computed';
 import { isNone } from '@ember/utils';
 import { once, scheduleOnce } from '@ember/runloop';
 
@@ -36,7 +37,11 @@ export default Component.extend({
    * @type String
    * @default 'false'
    */
-  'aria-multiselectable': 'false',
+  'aria-multiselectable': computed('isEmpty', function() {
+    if (!this.get('isEmpty')) {
+      return 'false';
+    }
+  }).readOnly(),
 
   /**
    * The `role` attribute of the tab list element.
@@ -47,7 +52,11 @@ export default Component.extend({
    * @type String
    * @default 'tablist'
    */
-  ariaRole: 'tablist',
+  ariaRole: computed('isEmpty', function() {
+    if (!this.get('isEmpty')) {
+      return 'tablist';
+    }
+  }).readOnly(),
 
   attributeBindings: ['aria-multiselectable'],
 
@@ -66,6 +75,8 @@ export default Component.extend({
     this._super(...arguments);
     once(this, this._registerWithTabsContainer);
   },
+
+  isEmpty: empty('tabs'),
 
   /**
    * Event handler for navigating tabs via arrow keys. The left (or up) arrow

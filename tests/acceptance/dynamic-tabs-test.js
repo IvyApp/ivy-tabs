@@ -1,10 +1,36 @@
-import { click, visit } from '@ember/test-helpers';
+import { click, find, visit } from '@ember/test-helpers';
 import { findButtonByText, findTab } from '../helpers/finders';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 
 module('Acceptance | dynamic tabs', function(hooks) {
   setupApplicationTest(hooks);
+
+  test('role=tablist and aria-multiselectable=false is added when non-empty', async function(assert) {
+    await visit('/dynamic-tabs');
+
+    assert.equal(find('#dynamic-tablist').getAttribute('role'), null);
+    assert.equal(
+      find('#dynamic-tablist').getAttribute('aria-multiselectable'),
+      null
+    );
+
+    await click(findButtonByText('Add an Item'));
+
+    assert.equal(find('#dynamic-tablist').getAttribute('role'), 'tablist');
+    assert.equal(
+      find('#dynamic-tablist').getAttribute('aria-multiselectable'),
+      'false'
+    );
+
+    await click(findTab('Item 1').querySelector('.close'));
+
+    assert.equal(find('#dynamic-tablist').getAttribute('role'), null);
+    assert.equal(
+      find('#dynamic-tablist').getAttribute('aria-multiselectable'),
+      null
+    );
+  });
 
   test('the first tab added should be selected', async function(assert) {
     await visit('/dynamic-tabs');
