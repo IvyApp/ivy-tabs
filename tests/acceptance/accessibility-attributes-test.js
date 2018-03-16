@@ -143,4 +143,10 @@ module('Acceptance | accessibility attributes', function(hooks) {
     assert.equal(findTabPanel('Tab B').getAttribute('aria-hidden'), 'true');
     assert.equal(findTabPanel('Tab C').getAttribute('aria-hidden'), 'true');
   });
+
+  test('the active tabpanel should be [tabindex="0"]', async function(assert) {
+    await visit('/');
+
+    assert.equal(findTabPanel('Tab A').getAttribute('tabindex'), '0');
+  });
 });

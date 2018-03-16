@@ -78,7 +78,7 @@ export default Component.extend({
    */
   ariaRole: 'tabpanel',
 
-  attributeBindings: ['aria-hidden', 'aria-labelledby'],
+  attributeBindings: ['aria-hidden', 'aria-labelledby', 'tabindex'],
 
   classNameBindings: ['active'],
 
@@ -118,6 +118,19 @@ export default Component.extend({
     const tabs = this.get('tabs');
     if (tabs) {
       return tabs.findBy('model', this.get('model'));
+    }
+  }),
+
+  /**
+   * Makes the selected tab keyboard tabbable, and prevents tabs from getting
+   * focus when clicked with a mouse.
+   *
+   * @property tabindex
+   * @type Number
+   */
+  tabindex: computed('isSelected', function() {
+    if (this.get('isSelected')) {
+      return 0;
     }
   }),
 
