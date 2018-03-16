@@ -7,6 +7,7 @@ See [changes since release][HEAD].
 * Add "aria-live" to tablists for reporting tab changes to the user.
 * Add optional "aria-label" to tablists to improve screenreader reporting.
 * Give active tabpanels tabindex 0 to allow keyboard navigation to the active panel content.
+* Use a temporary "presentation" role for tablists until tabs are inserted and the "tablist" role is then allowed. See emberjs/ember.js#16379.
 
 ## [3.2.0][] / 2018-03-07
 

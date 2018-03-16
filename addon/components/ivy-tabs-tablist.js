@@ -84,6 +84,12 @@ export default Component.extend({
   ariaRole: computed('isEmpty', function() {
     if (!this.get('isEmpty')) {
       return 'tablist';
+    } else {
+      // FIXME: Ember 3.1.0-beta.1 introduced a bug which does not bind/watch
+      // ariaRole changes if it's initially falsy. This sets a non-falsy,
+      // "safe" value for ariaRole until it can be a "tablist" when Tabs are
+      // added.
+      return 'presentation';
     }
   }).readOnly(),
 
