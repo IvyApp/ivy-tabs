@@ -5,6 +5,7 @@
 See [changes since release][HEAD].
 
 * Add "aria-live" to tablists for reporting tab changes to the user.
+* Add optional "aria-label" to tablists to improve screenreader reporting.
 
 ## [3.2.0][] / 2018-03-07
 

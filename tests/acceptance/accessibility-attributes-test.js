@@ -33,6 +33,15 @@ module('Acceptance | accessibility attributes', function(hooks) {
     );
   });
 
+  test('tablists should allow [aria-label] to be used', async function(assert) {
+    await visit('/');
+
+    assert.equal(
+      find('#basic-tablist').getAttribute('aria-label'),
+      'Example Tabs'
+    );
+  });
+
   test('tabs should be [role="tab"]', async function(assert) {
     await visit('/');
 

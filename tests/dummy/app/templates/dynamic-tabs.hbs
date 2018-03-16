@@ -4,7 +4,7 @@
 
 <div class="example">
   {{#ivy-tabs selection=selection as |tabs|}}
-    {{#tabs.tablist class="nav nav-tabs" id="dynamic-tablist" tagName="ul" as |tablist|}}
+    {{#tabs.tablist aria-label="Example Tabs" class="nav nav-tabs" id="dynamic-tablist" tagName="ul" as |tablist|}}
       {{#each model as |item|}}
         <li class="nav-item {{if (eq selection item.index) "active"}}" role="presentation">
           {{#tablist.tab item.index class="nav-link" on-select=(action (mut selection))}}

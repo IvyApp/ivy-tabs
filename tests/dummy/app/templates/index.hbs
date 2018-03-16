@@ -4,7 +4,7 @@
 
 <div class="example">
   {{#ivy-tabs selection=selection as |tabs|}}
-    {{#tabs.tablist class="nav nav-tabs" id="basic-tablist" tagName="ul" as |tablist|}}
+    {{#tabs.tablist aria-label="Example Tabs" class="nav nav-tabs" id="basic-tablist" tagName="ul" as |tablist|}}
       <li class="nav-item {{if (eq selection "A") "active"}}" role="presentation">
         {{#tablist.tab "A" class="nav-link" id="basic-tab-a" on-select=(action (mut selection))}}Tab A{{/tablist.tab}}
       </li>
