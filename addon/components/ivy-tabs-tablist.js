@@ -30,7 +30,6 @@ export default Component.extend({
     this.get('tabsContainer').unregisterTabList(this);
   },
 
-
   /**
    * The label of the tablist for screenreaders to use.
    *
@@ -93,7 +92,12 @@ export default Component.extend({
     }
   }).readOnly(),
 
-  attributeBindings: ['aria-label', 'aria-live', 'aria-multiselectable', 'aria-relevant'],
+  attributeBindings: [
+    'aria-label',
+    'aria-live',
+    'aria-multiselectable',
+    'aria-relevant'
+  ],
 
   classNames: ['ivy-tabs-tablist'],
 
