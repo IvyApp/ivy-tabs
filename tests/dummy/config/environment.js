@@ -18,6 +18,15 @@ module.exports = function(environment) {
     },
     environment,
     locationType: 'auto',
+    metricsAdapters: [
+      {
+        config: {
+          id: 'GTM-NLWTPMC'
+        },
+        environments: ['production'],
+        name: 'GoogleTagManager'
+      }
+    ],
     modulePrefix: 'dummy',
     rootURL: '/'
   };
