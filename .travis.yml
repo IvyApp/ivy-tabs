@@ -3,7 +3,7 @@ language: node_js
 node_js:
   # we recommend testing addons with the same minimum supported node version as Ember CLI
   # so that your addon works for all apps
-  - "6"
+  - '6'
 
 sudo: false
 dist: trusty
@@ -12,8 +12,7 @@ addons:
   chrome: stable
 
 cache:
-  directories:
-    - $HOME/.npm
+  yarn: true
 
 env:
   global:
@@ -34,16 +33,16 @@ jobs:
   include:
     # runs linting and tests with current locked deps
 
-    - stage: "Tests"
-      name: "Tests"
+    - stage: 'Tests'
+      name: 'Tests'
       script:
-        - npm run lint:hbs
-        - npm run lint:js
-        - npm test
+        - yarn run lint:hbs
+        - yarn run lint:js
+        - yarn test
 
     # we recommend new addons test the current and previous LTS
     # as well as latest stable release (bonus points to beta/canary)
-    - stage: "Additional Tests"
+    - stage: 'Additional Tests'
       env: EMBER_TRY_SCENARIO=ember-lts-2.18
     - env: EMBER_TRY_SCENARIO=ember-lts-3.4
     - env: EMBER_TRY_SCENARIO=ember-release
@@ -52,9 +51,11 @@ jobs:
     - env: EMBER_TRY_SCENARIO=ember-default-with-jquery
 
 before_install:
-  - npm config set spin false
-  - npm install -g npm@4
-  - npm --version
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - export PATH=$HOME/.yarn/bin:$PATH
+
+install:
+  - yarn install --no-lockfile --non-interactive
 
 script:
   - node_modules/.bin/ember try:one $EMBER_TRY_SCENARIO
@@ -65,4 +66,4 @@ notifications:
     on_success: change
     on_failure: always
     rooms:
-    - secure: "avn9mgG/Hkf9sbjr/aQYLt5ZlAP+5aHzX023s2g/kBO5bbnr1DHHBKglJ//faAk8VdCXzfMjsAjKpXEvD05Q+/VZkX//WFhE1fzOpYQGuC7+qtA7VfYwlhYqGbEDcp2pgDEih/1tco5SRp8F/o8iQSYFelDXhLETIx0/SwL4WyM="
+      - secure: 'avn9mgG/Hkf9sbjr/aQYLt5ZlAP+5aHzX023s2g/kBO5bbnr1DHHBKglJ//faAk8VdCXzfMjsAjKpXEvD05Q+/VZkX//WFhE1fzOpYQGuC7+qtA7VfYwlhYqGbEDcp2pgDEih/1tco5SRp8F/o8iQSYFelDXhLETIx0/SwL4WyM='
