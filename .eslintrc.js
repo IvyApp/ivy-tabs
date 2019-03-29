@@ -1,35 +1,34 @@
 module.exports = {
-  root: true,
-  parserOptions: {
-    ecmaVersion: 2017,
-    sourceType: 'module'
-  },
-  plugins: ['ember'],
-  extends: ['eslint:recommended', 'plugin:ember/recommended'],
   env: {
     browser: true
   },
-  rules: {
-    'sort-keys': 'error'
-  },
+  extends: ['eslint:recommended', 'plugin:ember/recommended'],
   overrides: [
     // node files
     {
-      files: [
-        'index.js',
-        'testem.js',
-        'ember-cli-build.js',
-        'config/**/*.js',
-        'tests/dummy/config/**/*.js'
-      ],
-      excludedFiles: ['app/**', 'addon/**', 'tests/dummy/app/**'],
-      parserOptions: {
-        sourceType: 'script',
-        ecmaVersion: 2015
-      },
       env: {
         browser: false,
         node: true
+      },
+      excludedFiles: [
+        'addon/**',
+        'addon-test-support/**',
+        'app/**',
+        'tests/dummy/app/**'
+      ],
+      files: [
+        '.eslintrc.js',
+        '.template-lintrc.js',
+        'ember-cli-build.js',
+        'index.js',
+        'testem.js',
+        'blueprints/*/index.js',
+        'config/**/*.js',
+        'tests/dummy/config/**/*.js'
+      ],
+      parserOptions: {
+        ecmaVersion: 2015,
+        sourceType: 'script'
       },
       plugins: ['node'],
       rules: Object.assign(
@@ -40,5 +39,14 @@ module.exports = {
         }
       )
     }
-  ]
+  ],
+  parserOptions: {
+    ecmaVersion: 2017,
+    sourceType: 'module'
+  },
+  plugins: ['ember'],
+  root: true,
+  rules: {
+    'sort-keys': 'error'
+  }
 };
