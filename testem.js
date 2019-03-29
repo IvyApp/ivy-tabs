@@ -11,8 +11,7 @@ module.exports = {
         '--mute-audio',
         '--remote-debugging-port=0',
         '--window-size=1440,900'
-      ].filter(Boolean),
-      mode: 'ci'
+      ].filter(Boolean)
     }
   },
   disable_watching: true,
