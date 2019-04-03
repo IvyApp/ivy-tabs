@@ -25,6 +25,7 @@ module.exports = {
         'testem.js',
         'blueprints/*/index.js',
         'config/**/*.js',
+        'prettier.config.js',
         'tests/dummy/config/**/*.js'
       ],
       parserOptions: {
