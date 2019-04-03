@@ -35,7 +35,8 @@
     "ember-cli-babel": "^7.1.2",
     "ember-cli-htmlbars": "^3.0.0",
     "ember-cli-typescript": "^2.0.0",
-    "ember-decorators": "^5.1.4"
+    "ember-decorators": "^5.1.4",
+    "ember-native-class-polyfill": "^1.0.6"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^7.5.0",
