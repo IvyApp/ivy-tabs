@@ -1,12 +1,12 @@
-import hbs from 'htmlbars-inline-precompile';
-import { run } from '@ember/runloop';
 import { A } from '@ember/array';
-import { module, test } from 'qunit';
+import { run } from '@ember/runloop';
 import { setupRenderingTest } from 'ember-qunit';
+import hbs from 'htmlbars-inline-precompile';
+import { module, test } from 'qunit';
 
 import { render } from '@ember/test-helpers';
 
-module('ivy-tabs', function(hooks) {
+module('ivy-tabs', hooks => {
   setupRenderingTest(hooks);
 
   const eachTemplate = hbs`
@@ -71,11 +71,10 @@ module('ivy-tabs', function(hooks) {
   });
 
   test('does not select tabs while being destroyed', async function(assert) {
-    const _this = this;
     let selectionCount = 0;
 
-    this.set('selectionAction', function(selection) {
-      _this.set('selection', selection);
+    this.set('selectionAction', (selection: string) => {
+      this.set('selection', selection);
       selectionCount++;
     });
 
@@ -101,7 +100,7 @@ module('ivy-tabs', function(hooks) {
       'Triggers initial, automatic on-select during setup'
     );
 
-    run(this, function() {
+    run(() => {
       // Force a destruction of the component.
       this.set('hideComponent', true);
     });
