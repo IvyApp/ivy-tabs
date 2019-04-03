@@ -1,12 +1,12 @@
 import { click, visit } from '@ember/test-helpers';
-import { findTab } from '../helpers/finders';
-import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { findTab } from '../helpers/finders';
 
-module('Acceptance | mouse interaction', function(hooks) {
+module('Acceptance | mouse interaction', hooks => {
   setupApplicationTest(hooks);
 
-  test('clicking a tab should select it', async function(assert) {
+  test('clicking a tab should select it', async assert => {
     await visit('/');
     await click(findTab('Tab B'));
 

@@ -13,21 +13,37 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
-    "noEmitOnError": false,
+    "noEmitOnError": true,
     "noEmit": true,
     "inlineSourceMap": true,
     "inlineSources": true,
     "baseUrl": ".",
     "module": "es6",
     "paths": {
-      "dummy/tests/*": ["tests/*"],
-      "dummy/*": ["tests/dummy/app/*", "app/*"],
-      "ivy-tabs": ["addon"],
-      "ivy-tabs/*": ["addon/*"],
-      "ivy-tabs/test-support": ["addon-test-support"],
-      "ivy-tabs/test-support/*": ["addon-test-support/*"],
-      "*": ["types/*"]
-    }
+      "dummy/tests/*": [
+        "tests/*"
+      ],
+      "dummy/*": [
+        "tests/dummy/app/*",
+        "app/*"
+      ],
+      "ivy-tabs": [
+        "addon"
+      ],
+      "ivy-tabs/*": [
+        "addon/*"
+      ],
+      "ivy-tabs/test-support": [
+        "addon-test-support"
+      ],
+      "ivy-tabs/test-support/*": [
+        "addon-test-support/*"
+      ],
+      "*": [
+        "types/*"
+      ]
+    },
+    "experimentalDecorators": true
   },
   "include": [
     "app/**/*",

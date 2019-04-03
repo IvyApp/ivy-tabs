@@ -1,12 +1,12 @@
 import { click, visit } from '@ember/test-helpers';
-import { findButtonByText, findCheckboxFor, findTab } from '../helpers/finders';
-import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { findButtonByText, findCheckboxFor, findTab } from '../helpers/finders';
 
-module('Acceptance | issue #31', function(hooks) {
+module('Acceptance | issue #31', hooks => {
   setupApplicationTest(hooks);
 
-  test('should keep Tab A selected when navigating between demo pages', async function(assert) {
+  test('should keep Tab A selected when navigating between demo pages', async assert => {
     await visit('/');
 
     assert.equal(findTab('Tab A').getAttribute('aria-selected'), 'true');
@@ -17,7 +17,7 @@ module('Acceptance | issue #31', function(hooks) {
     assert.equal(findTab('Tab A').getAttribute('aria-selected'), 'true');
   });
 
-  test('should select correct next tab after bulk removal', async function(assert) {
+  test('should select correct next tab after bulk removal', async assert => {
     await visit('/dynamic-tabs');
     await click(findButtonByText('Add an Item'));
     await click(findButtonByText('Add an Item'));

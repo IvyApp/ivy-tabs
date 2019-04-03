@@ -1,7 +1,7 @@
 import Route from '@ember/routing/route';
 
-export default Route.extend({
-  queryParams: {
+export default class QueryParamsRoute extends Route {
+  public queryParams = {
     selection: {
       as: 'tab',
 
@@ -10,5 +10,5 @@ export default Route.extend({
       // `pushState` when this property changes.
       replace: true
     }
-  }
-});
+  };
+}

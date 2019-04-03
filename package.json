@@ -31,9 +31,11 @@
     "test:all": "ember try:each"
   },
   "dependencies": {
+    "@ember-decorators/babel-transforms": "^5.1.4",
     "ember-cli-babel": "^7.1.2",
     "ember-cli-htmlbars": "^3.0.0",
-    "ember-cli-typescript": "^2.0.0"
+    "ember-cli-typescript": "^2.0.0",
+    "ember-decorators": "^5.1.4"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^7.5.0",
@@ -45,7 +47,9 @@
     "@types/ember__test-helpers": "^0.7.8",
     "@types/prettier": "^1.16.1",
     "@types/qunit": "^2.5.4",
+    "@types/qunit-dom": "^0.6.0",
     "@types/rsvp": "^4.0.2",
+    "babel-eslint": "^8.0.0",
     "bootstrap": "^4.0.0",
     "broccoli-asset-rev": "^3.0.0",
     "commitizen": "^3.0.7",
@@ -82,6 +86,7 @@
     "prettier": "^1.11.1",
     "qunit-dom": "^0.8.0",
     "standard-version": "^5.0.2",
+    "tslint-config-prettier": "^1.18.0",
     "tslint-consistent-codestyle": "^1.15.1",
     "tslint-eslint-rules": "^5.4.0",
     "typescript": "^3.4.1"
