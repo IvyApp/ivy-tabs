@@ -1,8 +1,12 @@
-# ivy-tabs
+# Change Log
 
-[![Build Status](https://travis-ci.org/IvyApp/ivy-tabs.svg?branch=master)](https://travis-ci.org/IvyApp/ivy-tabs)
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-See [changes since release][HEAD].
+## [3.3.1](https://github.com/IvyApp/ivy-tabs/compare/v3.3.0...v3.3.1) (2019-05-10)
+
+### Security
+
+* Bump jquery from 3.3.1 to 3.4.0 ([05c21dd](https://github.com/IvyApp/ivy-tabs/commit/05c21dd))
 
 ## [3.3.0][] / 2018-03-17
 
