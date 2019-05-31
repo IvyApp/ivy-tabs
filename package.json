@@ -33,7 +33,7 @@
     "ember-cli-htmlbars": "^3.0.1"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "^7.5.0",
+    "@commitlint/config-conventional": "^8.0.0",
     "@ember/optional-features": "^0.7.0",
     "@types/prettier": "^1.16.1",
     "bootstrap": "^4.0.0",
