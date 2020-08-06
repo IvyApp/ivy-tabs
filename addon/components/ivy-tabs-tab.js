@@ -33,6 +33,7 @@ export default Component.extend({
     if (this.get('isSelected')) {
       return this.get('activeClass');
     }
+    return undefined;
   }),
 
   /**
@@ -174,6 +175,7 @@ export default Component.extend({
     if (this.get('isSelected')) {
       return 'selected';
     }
+    return undefined;
   }),
 
   /**
@@ -216,6 +218,7 @@ export default Component.extend({
     if (this.get('isSelected')) {
       return 0;
     }
+    return undefined;
   }),
 
   /**

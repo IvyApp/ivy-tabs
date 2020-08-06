@@ -59,6 +59,7 @@ export default Component.extend({
     if (!this.get('isEmpty')) {
       return 'false';
     }
+    return undefined;
   }).readOnly(),
 
   /**
