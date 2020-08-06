@@ -4,7 +4,6 @@ module.exports = {
   env: {
     browser: true
   },
-  extends: ['eslint:recommended', 'plugin:ember/recommended'],
   overrides: [
     // node files
     {
@@ -35,13 +34,7 @@ module.exports = {
         sourceType: 'script'
       },
       plugins: ['node'],
-      rules: Object.assign(
-        {},
-        require('eslint-plugin-node').configs.recommended.rules,
-        {
-          // add your custom rules and overrides for node files here
-        }
-      )
+      extends: ['plugin:node/recommended']
     }
   ],
   parserOptions: {
