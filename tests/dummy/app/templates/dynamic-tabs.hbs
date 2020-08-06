@@ -6,7 +6,7 @@
   {{#ivy-tabs selection=selection as |tabs|}}
     {{#tabs.tablist aria-label="Example Tabs" class="nav nav-tabs" id="dynamic-tablist" tagName="ul" as |tablist|}}
       {{#each model as |item|}}
-        <li class="nav-item {{if (eq selection item.index) "active"}}" role="presentation">
+        <li class="nav-item {{if (eq selection item.index) "active"}}">
           {{#tablist.tab item.index class="nav-link" on-select=(action (mut selection))}}
             <button aria-label="Close" class="close" type="button" {{action "removeItem" item}}>
               <span aria-hidden="true">&times;</span>
