@@ -22,12 +22,12 @@ export const UP_ARROW = 38;
  */
 export default Component.extend({
   _registerWithTabsContainer() {
-    this.get('tabsContainer').registerTabList(this);
+    this.tabsContainer.registerTabList(this);
     once(this, this.selectTab);
   },
 
   _unregisterWithTabsContainer() {
-    this.get('tabsContainer').unregisterTabList(this);
+    this.tabsContainer.unregisterTabList(this);
   },
 
   /**
@@ -56,7 +56,7 @@ export default Component.extend({
    * @default 'false'
    */
   'aria-multiselectable': computed('isEmpty', function() {
-    if (!this.get('isEmpty')) {
+    if (!this.isEmpty) {
       return 'false';
     }
     return undefined;
@@ -82,7 +82,7 @@ export default Component.extend({
    * @default 'tablist'
    */
   ariaRole: computed('isEmpty', function() {
-    if (!this.get('isEmpty')) {
+    if (!this.isEmpty) {
       return 'tablist';
     } else {
       // FIXME: Ember 3.1.0-beta.1 introduced a bug which does not bind/watch
@@ -108,7 +108,7 @@ export default Component.extend({
    * @method focusSelectedTab
    */
   focusSelectedTab() {
-    this.get('selectedTab').element.focus();
+    this.selectedTab.element.focus();
   },
 
   init() {
@@ -153,7 +153,7 @@ export default Component.extend({
    * @param {IvyTabs.IvyTabComponent} tab
    */
   registerTab(tab) {
-    this.get('tabs').pushObject(tab);
+    this.tabs.pushObject(tab);
     once(this, this.selectTab);
   },
 
@@ -163,8 +163,8 @@ export default Component.extend({
    * @method selectNextTab
    */
   selectNextTab() {
-    const selectedTab = this.get('selectedTab');
-    const tabs = this.get('tabs');
+    const selectedTab = this.selectedTab;
+    const tabs = this.tabs;
     const length = tabs.get('length');
 
     let idx = selectedTab.get('index');
@@ -191,8 +191,8 @@ export default Component.extend({
    * @method selectPreviousTab
    */
   selectPreviousTab() {
-    const selectedTab = this.get('selectedTab');
-    const tabs = this.get('tabs');
+    const selectedTab = this.selectedTab;
+    const tabs = this.tabs;
     const length = tabs.get('length');
 
     let idx = selectedTab.get('index');
@@ -218,9 +218,9 @@ export default Component.extend({
   },
 
   selectTab() {
-    const selection = this.get('selection');
+    const selection = this.selection;
 
-    if (isNone(selection) || this.get('tabs.length') === 1) {
+    if (isNone(selection) || this.tabs.length === 1) {
       this.selectTabByIndex(0);
     } else {
       this.selectTabByModel(selection);
@@ -234,7 +234,7 @@ export default Component.extend({
    * @param {Number} index
    */
   selectTabByIndex(index) {
-    const tab = this.get('tabs').objectAt(index);
+    const tab = this.tabs.objectAt(index);
 
     if (tab) {
       tab.select();
@@ -242,7 +242,7 @@ export default Component.extend({
   },
 
   selectTabByModel(model) {
-    const tab = this.get('tabs').findBy('model', model);
+    const tab = this.tabs.findBy('model', model);
 
     if (tab) {
       tab.select();
@@ -256,7 +256,7 @@ export default Component.extend({
    * @type IvyTabs.IvyTabComponent
    */
   selectedTab: computed('selection', 'tabs.@each.model', function() {
-    return this.get('tabs').findBy('model', this.get('selection'));
+    return this.tabs.findBy('model', this.selection);
   }),
 
   tabs: computed(function() {
@@ -289,7 +289,7 @@ export default Component.extend({
       }
     }
 
-    this.get('tabs').removeObject(tab);
+    this.tabs.removeObject(tab);
   },
 
   willDestroy() {

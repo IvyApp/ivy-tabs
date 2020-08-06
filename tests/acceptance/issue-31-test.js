@@ -1,5 +1,9 @@
 import { click, visit } from '@ember/test-helpers';
-import { findButtonByText, findCheckboxFor, findTab } from '../helpers/finders';
+import {
+  findButtonByText,
+  findCheckboxFor,
+  findTab
+} from '../helpers/finders';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 

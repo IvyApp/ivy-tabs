@@ -13,7 +13,8 @@ module.exports = {
     {
       env: {
         browser: false,
-        node: true
+        es6: true,
+        node: true,
       },
       excludedFiles: [
         'addon/**',
@@ -26,6 +27,7 @@ module.exports = {
         '.template-lintrc.js',
         'commitlint.config.js',
         'ember-cli-build.js',
+        'config/ember-try.js',
         'index.js',
         'testem.js',
         'blueprints/*/index.js',
@@ -34,7 +36,7 @@ module.exports = {
         'tests/dummy/config/**/*.js'
       ],
       parserOptions: {
-        ecmaVersion: 2015,
+        ecmaVersion: 8,
         sourceType: 'script'
       },
       plugins: ['node'],

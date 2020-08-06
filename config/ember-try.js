@@ -4,7 +4,6 @@ const getChannelURL = require('ember-source-channel-url');
 
 module.exports = async function() {
   return {
-    useYarn: true,
     scenarios: [
       {
         name: 'ember-lts-3.12',
@@ -47,12 +46,12 @@ module.exports = async function() {
         }
       },
       {
-        name: 'ember-default-with-jquery',
         env: {
           EMBER_OPTIONAL_FEATURES: JSON.stringify({
             'jquery-integration': true
           })
         },
+        name: 'ember-default-with-jquery',
         npm: {
           devDependencies: {
             '@ember/jquery': '^0.5.1'
@@ -60,7 +59,6 @@ module.exports = async function() {
         }
       },
       {
-        name: 'ember-classic',
         env: {
           EMBER_OPTIONAL_FEATURES: JSON.stringify({
             'application-template-wrapper': true,
@@ -68,12 +66,14 @@ module.exports = async function() {
             'template-only-glimmer-components': false
           })
         },
+        name: 'ember-classic',
         npm: {
           ember: {
             edition: 'classic'
           }
         }
       }
-    ]
+    ],
+    useYarn: true
   };
 };

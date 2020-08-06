@@ -6,9 +6,9 @@ export default Route.extend({
     this._super(...arguments);
 
     this.on('routeDidChange', () => {
-      const page = this.get('router.url');
-      const title = this.getWithDefault('currentRouteName', 'unknown');
-      this.get('metrics').trackPage({ page, title });
+      const page = this.router.url;
+      const title = this.currentRouteName || 'unknown';
+      this.metrics.trackPage({ page, title });
     });
   },
 

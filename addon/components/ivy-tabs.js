@@ -34,7 +34,7 @@ export default Component.extend({
    * @param {IvyTabs.IvyTabPanelComponent} tabPanel
    */
   registerTabPanel(tabPanel) {
-    this.get('tabPanels').pushObject(tabPanel);
+    this.tabPanels.pushObject(tabPanel);
   },
 
   /**
@@ -68,6 +68,6 @@ export default Component.extend({
    * @param {IvyTabs.IvyTabPanelComponent} tabPanel
    */
   unregisterTabPanel(tabPanel) {
-    this.get('tabPanels').removeObject(tabPanel);
+    this.tabPanels.removeObject(tabPanel);
   }
 });
