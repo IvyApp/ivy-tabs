@@ -10,6 +10,9 @@ Special thanks to [ic-tabs], which this addon is based on.
 
 **NOTE: This addon uses contextual components, which require Ember >= 2.3. For
 older versions of Ember, use the 1.x release series of this addon.**
+* Ember.js v3.12 or above
+* Ember CLI v2.13 or above
+* Node.js v10 or above
 
 ## Installation
 
@@ -23,18 +26,16 @@ $ ember install ivy-tabs
 
 ```handlebars
 {{#ivy-tabs selection=selection as |tabs|}}
-  {{#tabs.tablist as |tablist|}}
-    <ul role="presentation">
-      <li role="presentation">
-        {{#tablist.tab "TabA" on-select=(action (mut selection))}}Foo{{/tablist.tab}}
-      </li>
-      <li role="presentation">
-        {{#tablist.tab "TabB" on-select=(action (mut selection))}}Bar{{/tablist.tab}}
-      </li>
-      <li role="presentation">
-        {{#tablist.tab "TabC" on-select=(action (mut selection))}}Baz{{/tablist.tab}}
-      </li>
-    </ul>
+  {{#tabs.tablist tagName="ul" as |tablist|}}
+    <li>
+      {{#tablist.tab "TabA" on-select=(action (mut selection))}}Foo{{/tablist.tab}}
+    </li>
+    <li>
+      {{#tablist.tab "TabB" on-select=(action (mut selection))}}Bar{{/tablist.tab}}
+    </li>
+    <li>
+      {{#tablist.tab "TabC" on-select=(action (mut selection))}}Baz{{/tablist.tab}}
+    </li>
   {{/tabs.tablist}}
 
   {{#tabs.tabpanel "TabA"}}

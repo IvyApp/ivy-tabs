@@ -5,7 +5,7 @@ import { empty, filterBy } from '@ember/object/computed';
 export default Controller.extend({
   actions: {
     addItem() {
-      this.get('model').pushObject(
+      this.model.pushObject(
         EmberObject.create({
           checked: false,
           index: this.incrementProperty('nextIndex')
@@ -14,11 +14,11 @@ export default Controller.extend({
     },
 
     removeItem(item) {
-      this.get('model').removeObject(item);
+      this.model.removeObject(item);
     },
 
     removeSelected() {
-      this.get('model').removeObjects(this.get('checkedItems'));
+      this.model.removeObjects(this.checkedItems);
     }
   },
 

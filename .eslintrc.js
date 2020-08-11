@@ -1,14 +1,20 @@
+'use strict';
+
 module.exports = {
   env: {
     browser: true
   },
-  extends: ['eslint:recommended', 'plugin:ember/recommended'],
+  extends: [
+    'eslint:recommended',
+    'plugin:ember/recommended'
+  ],
   overrides: [
     // node files
     {
       env: {
         browser: false,
-        node: true
+        es6: true,
+        node: true,
       },
       excludedFiles: [
         'addon/**',
@@ -21,6 +27,7 @@ module.exports = {
         '.template-lintrc.js',
         'commitlint.config.js',
         'ember-cli-build.js',
+        'config/ember-try.js',
         'index.js',
         'testem.js',
         'blueprints/*/index.js',
@@ -29,17 +36,10 @@ module.exports = {
         'tests/dummy/config/**/*.js'
       ],
       parserOptions: {
-        ecmaVersion: 2015,
+        ecmaVersion: 8,
         sourceType: 'script'
       },
       plugins: ['node'],
-      rules: Object.assign(
-        {},
-        require('eslint-plugin-node').configs.recommended.rules,
-        {
-          // add your custom rules and overrides for node files here
-        }
-      )
     }
   ],
   parserOptions: {

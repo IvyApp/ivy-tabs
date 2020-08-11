@@ -14,11 +14,11 @@ import { once } from '@ember/runloop';
  */
 export default Component.extend({
   _registerWithTabsContainer() {
-    this.get('tabsContainer').registerTabPanel(this);
+    this.tabsContainer.registerTabPanel(this);
   },
 
   _unregisterWithTabsContainer() {
-    this.get('tabsContainer').unregisterTabPanel(this);
+    this.tabsContainer.unregisterTabPanel(this);
   },
 
   /**
@@ -29,10 +29,11 @@ export default Component.extend({
    * @type String
    * @readOnly
    */
-  active: computed('isSelected', function() {
-    if (this.get('isSelected')) {
-      return this.get('activeClass');
+  active: computed('isSelected','activeClass', function() {
+    if (this.isSelected) {
+      return this.activeClass;
     }
+    return undefined;
   }),
 
   /**
@@ -55,7 +56,7 @@ export default Component.extend({
    * @readOnly
    */
   'aria-hidden': computed('isSelected', function() {
-    return `${!this.get('isSelected')}`;
+    return `${!this.isSelected}`;
   }).readOnly(),
 
   /**
@@ -97,7 +98,7 @@ export default Component.extend({
    * @readOnly
    */
   isSelected: computed('model', 'selection', function() {
-    return this.get('model') === this.get('selection');
+    return this.model === this.selection;
   }).readOnly(),
 
   /**
@@ -115,10 +116,11 @@ export default Component.extend({
    * @type IvyTabs.IvyTabComponent
    */
   tab: computed('model', 'tabs.@each.model', function() {
-    const tabs = this.get('tabs');
+    const tabs = this.tabs;
     if (tabs) {
-      return tabs.findBy('model', this.get('model'));
+      return tabs.findBy('model', this.model);
     }
+    return undefined;
   }),
 
   /**
@@ -129,9 +131,10 @@ export default Component.extend({
    * @type Number
    */
   tabindex: computed('isSelected', function() {
-    if (this.get('isSelected')) {
+    if (this.isSelected) {
       return 0;
     }
+    return undefined;
   }),
 
   /**

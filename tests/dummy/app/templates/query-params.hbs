@@ -5,13 +5,13 @@
 <div class="example">
   {{#ivy-tabs selection=selection as |tabs|}}
     {{#tabs.tablist aria-label="Example Tabs" class="nav nav-tabs" tagName="ul" as |tablist|}}
-      <li class="nav-item {{if (eq selection "A") "active"}}" role="presentation">
+      <li class="nav-item {{if (eq selection "A") "active"}}">
         {{#tablist.tab "A" class="nav-link" id="query-params-tab-a" on-select=(action (mut selection))}}Tab A{{/tablist.tab}}
       </li>
-      <li class="nav-item {{if (eq selection "B") "active"}}" role="presentation">
+      <li class="nav-item {{if (eq selection "B") "active"}}">
         {{#tablist.tab "B" class="nav-link" id="query-params-tab-b" on-select=(action (mut selection))}}Tab B{{/tablist.tab}}
       </li>
-      <li class="nav-item {{if (eq selection "C") "active"}}" role="presentation">
+      <li class="nav-item {{if (eq selection "C") "active"}}">
         {{#tablist.tab "C" class="nav-link" id="query-params-tab-c" on-select=(action (mut selection))}}Tab C{{/tablist.tab}}
       </li>
     {{/tabs.tablist}}

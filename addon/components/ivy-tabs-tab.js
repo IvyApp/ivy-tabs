@@ -14,11 +14,11 @@ import { once } from '@ember/runloop';
  */
 export default Component.extend({
   _registerWithTabList() {
-    this.get('tabList').registerTab(this);
+    this.tabList.registerTab(this);
   },
 
   _unregisterWithTabList() {
-    this.get('tabList').unregisterTab(this);
+    this.tabList.unregisterTab(this);
   },
 
   /**
@@ -29,10 +29,11 @@ export default Component.extend({
    * @type String
    * @readOnly
    */
-  active: computed('isSelected', function() {
-    if (this.get('isSelected')) {
-      return this.get('activeClass');
+  active: computed('isSelected', 'activeClass', function() {
+    if (this.isSelected) {
+      return this.activeClass;
     }
+    return undefined;
   }),
 
   /**
@@ -76,7 +77,7 @@ export default Component.extend({
    * @type String
    */
   'aria-selected': computed('isSelected', function() {
-    return this.get('isSelected') + ''; // coerce to 'true' or 'false'
+    return this.isSelected + ''; // coerce to 'true' or 'false'
   }),
 
   /**
@@ -109,11 +110,11 @@ export default Component.extend({
   },
 
   href: computed('tabPanel.elementId', 'tagName', function() {
-    if (this.get('tagName') !== 'a') {
+    if (this.tagName !== 'a' || !this.tabPanel) {
       return;
     }
 
-    return '#' + this.get('tabPanel.elementId');
+    return '#' + this.tabPanel.elementId;
   }).readOnly(),
 
   /**
@@ -123,7 +124,7 @@ export default Component.extend({
    * @type Number
    */
   index: computed('tabs.[]', function() {
-    return this.get('tabs').indexOf(this);
+    return this.tabs.indexOf(this);
   }),
 
   init() {
@@ -138,7 +139,7 @@ export default Component.extend({
    * @type Boolean
    */
   isSelected: computed('tabList.selectedTab', function() {
-    return this.get('tabList.selectedTab') === this;
+    return this.tabList.selectedTab === this;
   }),
 
   /**
@@ -155,10 +156,10 @@ export default Component.extend({
    * @method select
    */
   select() {
-    const onSelect = this.get('on-select');
+    const onSelect = this['on-select'];
 
     if (!this.isDestroying && typeof onSelect === 'function') {
-      onSelect(this.get('model'));
+      onSelect(this.model);
     }
   },
 
@@ -171,9 +172,10 @@ export default Component.extend({
    * @type String
    */
   selected: computed('isSelected', function() {
-    if (this.get('isSelected')) {
+    if (this.isSelected) {
       return 'selected';
     }
+    return undefined;
   }),
 
   /**
@@ -192,7 +194,7 @@ export default Component.extend({
    * @type IvyTabs.IvyTabPanelComponent
    */
   tabPanel: computed('tabPanels.@each.model', 'model', function() {
-    return this.get('tabPanels').findBy('model', this.get('model'));
+    return this.tabPanels.findBy('model', this.model);
   }),
 
   /**
@@ -213,9 +215,10 @@ export default Component.extend({
    * @type Number
    */
   tabindex: computed('isSelected', function() {
-    if (this.get('isSelected')) {
+    if (this.isSelected) {
       return 0;
     }
+    return undefined;
   }),
 
   /**

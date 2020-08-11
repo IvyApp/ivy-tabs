@@ -28,10 +28,10 @@ module('ivy-tabs', function(hooks) {
     await render(eachTemplate);
 
     run(this, function() {
-      this.get('items').removeAt(1);
+      this.items.removeAt(1);
     });
 
-    assert.equal(this.get('selection'), 'Item 1', 'previous tab became active');
+    assert.equal(this.selection, 'Item 1', 'previous tab became active');
   });
 
   test('selects previous tab if active tab is removed via replacement', async function(assert) {
@@ -43,7 +43,7 @@ module('ivy-tabs', function(hooks) {
       this.set('items', A(['Item 3']));
     });
 
-    assert.equal(this.get('selection'), 'Item 3', 'previous tab became active');
+    assert.equal(this.selection, 'Item 3', 'previous tab became active');
   });
 
   test('retains tab selection if preceeding tab is removed', async function(assert) {
@@ -52,10 +52,10 @@ module('ivy-tabs', function(hooks) {
     await render(eachTemplate);
 
     run(this, function() {
-      this.get('items').removeAt(0);
+      this.items.removeAt(0);
     });
 
-    assert.equal(this.get('selection'), 'Item 2', 'tab selection is retained');
+    assert.equal(this.selection, 'Item 2', 'tab selection is retained');
   });
 
   test('selects the next tab when an active, first tab is removed', async function(assert) {
@@ -64,10 +64,10 @@ module('ivy-tabs', function(hooks) {
     await render(eachTemplate);
 
     run(this, function() {
-      this.get('items').removeAt(0);
+      this.items.removeAt(0);
     });
 
-    assert.equal(this.get('selection'), 'Item 2', 'selects next tab');
+    assert.equal(this.selection, 'Item 2', 'selects next tab');
   });
 
   test('does not select tabs while being destroyed', async function(assert) {

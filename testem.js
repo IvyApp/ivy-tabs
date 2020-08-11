@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   browser_args: {
     Chrome: {
@@ -14,9 +16,15 @@ module.exports = {
       ].filter(Boolean)
     }
   },
+  browser_start_timeout: 120,
   disable_watching: true,
-  launch_in_ci: ['Chrome'],
-  launch_in_dev: ['Chrome'],
+  launch_in_ci: [
+    'Chrome'
+  ],
+  launch_in_dev: [
+    'Chrome'
+  ],
   reporter: 'dot',
   test_page: 'tests/index.html?hidepassed'
+
 };
