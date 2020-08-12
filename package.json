@@ -1,6 +1,6 @@
 {
   "name": "ivy-tabs",
-  "version": "3.3.1",
+  "version": "0.0.0-development",
   "description": "WAI-ARIA accessible tabs for Ember.",
   "keywords": [
     "ember",
@@ -19,22 +19,24 @@
   },
   "scripts": {
     "build": "ember build --environment=production",
+    "commit": "git-cz",
     "deploy": "ember build && ember github-pages:commit --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\" && git push origin gh-pages:gh-pages",
     "format": "prettier --single-quote --write './*.js' './{addon,app,config,tests}/{**/,}*.js'",
     "lint": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*",
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
-    "release": "standard-version",
     "start": "ember server",
     "test": "npm-run-all lint:* test:*",
     "test:ember": "ember test",
-    "test:ember-compatibility": "ember try:each"
+    "test:ember-compatibility": "ember try:each",
+    "semantic-release": "semantic-release"
   },
   "dependencies": {
     "ember-cli-babel": "^7.21.0",
     "ember-cli-htmlbars": "^5.2.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^9.1.1",
     "@commitlint/config-conventional": "^9.1.1",
     "@ember/optional-features": "^1.3.0",
     "@glimmer/tracking": "^1.0.0",
@@ -72,10 +74,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.5",
     "qunit-dom": "^1.2.0",
-    "standard-version": "^8.0.1"
-  },
-  "resolutions": {
-    "conventional-changelog": "~3.0.6"
+    "semantic-release": "^17.1.1"
   },
   "engines": {
     "node": "10.* || >= 12"
@@ -84,9 +83,14 @@
     "configPath": "tests/dummy/config",
     "demoURL": "http://ivyapp.github.io/ivy-tabs/"
   },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
   "config": {
     "commitizen": {
-      "path": "cz-conventional-changelog"
+      "path": "node_modules/cz-conventional-changelog"
     }
   },
   "husky": {
