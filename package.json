@@ -20,7 +20,7 @@
   "scripts": {
     "build": "ember build --environment=production",
     "commit": "git-cz",
-    "deploy": "ember build && ember github-pages:commit --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\" && git push origin gh-pages:gh-pages",
+    "deploy-docs": "node tools/gh-pages-publish.js",
     "format": "prettier --single-quote --write './*.js' './{addon,app,config,tests}/{**/,}*.js'",
     "lint": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*",
     "lint:hbs": "ember-template-lint .",
@@ -49,7 +49,6 @@
     "ember-cli": "~3.20.0",
     "ember-cli-app-version": "^3.1.0",
     "ember-cli-dependency-checker": "^3.1.0",
-    "ember-cli-github-pages": "^0.2.0",
     "ember-cli-inject-live-reload": "^2.0.2",
     "ember-cli-release": "^0.2.9",
     "ember-cli-sri": "^2.1.1",
@@ -74,7 +73,8 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.5",
     "qunit-dom": "^1.2.0",
-    "semantic-release": "^17.1.1"
+    "semantic-release": "^17.1.1",
+    "shelljs": "^0.8.4"
   },
   "engines": {
     "node": "10.* || >= 12"
