@@ -19,6 +19,7 @@
   },
   "scripts": {
     "build": "ember build --environment=production",
+    "commit": "git-cz",
     "deploy": "ember build && ember github-pages:commit --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\" && git push origin gh-pages:gh-pages",
     "format": "prettier --single-quote --write './*.js' './{addon,app,config,tests}/{**/,}*.js'",
     "lint": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*",
@@ -35,6 +36,7 @@
     "ember-cli-htmlbars": "^5.2.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^9.1.1",
     "@commitlint/config-conventional": "^9.1.1",
     "@ember/optional-features": "^1.3.0",
     "@glimmer/tracking": "^1.0.0",
@@ -74,9 +76,6 @@
     "qunit-dom": "^1.2.0",
     "semantic-release": "^17.1.1"
   },
-  "resolutions": {
-    "conventional-changelog": "~3.0.6"
-  },
   "engines": {
     "node": "10.* || >= 12"
   },
@@ -84,9 +83,14 @@
     "configPath": "tests/dummy/config",
     "demoURL": "http://ivyapp.github.io/ivy-tabs/"
   },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
   "config": {
     "commitizen": {
-      "path": "cz-conventional-changelog"
+      "path": "node_modules/cz-conventional-changelog"
     }
   },
   "husky": {
