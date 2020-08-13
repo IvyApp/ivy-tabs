@@ -48,12 +48,11 @@ jobs:
 
     - stage: 'Release'
       node_js: lts/*
-      script:
-        - yarn build
+      script: skip
       deploy:
         provider: script
         skip_cleanup: true
-        script: yarn run-s semantic-release deploy-docs
+        script: yarn run-s semantic-release build deploy-docs
 
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
