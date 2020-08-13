@@ -1,7 +1,7 @@
-import { cd, echo, exec, touch } from 'shelljs';
-import url from 'url';
+const { cd, echo, exec, touch } = require('shelljs');
+const url = require('url');
 
-import pkg from '../package.json';
+const pkg = require('../package.json');
 
 const { host, path } = url.parse(pkg.repository);
 const repository = (host || '') + (path || '');
