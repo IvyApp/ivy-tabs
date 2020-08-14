@@ -5377,12 +5377,7 @@ ember-resolver@^8.0.0:
     ember-cli-version-checker "^5.1.1"
     resolve "^1.17.0"
 
-ember-rfc176-data@^0.3.12:
-  version "0.3.12"
-  resolved "https://registry.yarnpkg.com/ember-rfc176-data/-/ember-rfc176-data-0.3.12.tgz#90d82878e69e2ac9a5438e8ce14d12c6031c5bd2"
-  integrity sha512-g9HeZj/gU5bfIIrGXkP7MhS2b3Vu5DfNUrYr14hy99TgIvtZETO+96QF4WOEUXGjIJdfTRjerVnQlqngPQSv1g==
-
-ember-rfc176-data@^0.3.15:
+ember-rfc176-data@^0.3.12, ember-rfc176-data@^0.3.15:
   version "0.3.15"
   resolved "https://registry.yarnpkg.com/ember-rfc176-data/-/ember-rfc176-data-0.3.15.tgz#af3f1da5a0339b6feda380edc2f7190e0f416c2d"
   integrity sha512-GPKa7zRDBblRy0orxTXt5yrpp/Pf5CkuRFSIR8qMFDww0CqCKjCRwdZnWYzCM4kAEfZnXRIDDefe1tBaFw7v7w==
@@ -5747,9 +5742,9 @@ escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.5:
   integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
 
 eslint-plugin-ember@^8.9.1:
-  version "8.10.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-ember/-/eslint-plugin-ember-8.10.1.tgz#359e31dc5478959244481c03323e22813ff65508"
-  integrity sha512-NmsrB8E4An8ErjHz5exCS4zjJSueFetZ9UCqdqYyERV6i/yucSBlPsop6tM2Bfopj0nSbB+qdSzTF3AZWVAAqA==
+  version "8.11.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-ember/-/eslint-plugin-ember-8.11.0.tgz#40f7c76047047100fed12af5e56a775cab29ae32"
+  integrity sha512-9VeqrVBbQ5HsxyvKFJORGfkyzJt0bCdUgIdVeHkYN1+31+3SVpGHB8N1zQYLlTh7JkYn/UYxhfUtBN3p4joGJg==
   dependencies:
     "@ember-data/rfc395-data" "^0.0.4"
     ember-rfc176-data "^0.3.15"
