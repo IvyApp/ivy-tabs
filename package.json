@@ -36,7 +36,7 @@
     "ember-cli-htmlbars": "^5.2.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^11.0.0",
+    "@commitlint/cli": "^12.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@ember/optional-features": "^2.0.0",
     "@glimmer/tracking": "^1.0.0",
