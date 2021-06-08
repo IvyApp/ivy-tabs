@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    vault.hashicorp.com/agent-inject: "true"
+    vault.hashicorp.com/agent-configmap: "configmap-jenkins-vault-injector"
+    vault.hashicorp.com/agent-pre-populate-only: "true"
+    vault.hashicorp.com/agent-run-as-user: "1000"
+    vault.hashicorp.com/agent-run-as-group: "1000"
+  labels:
+    spotinst.io/restrict-scale-down: "true"
+spec:
+  serviceAccount: "jenkins"
+  nodeSelector:
+    spotinst.io/node-lifecycle: od # prevent having pre-emptible nodes
+  containers:
+    - name: node
+      image: timbru31/node-chrome:12
+      imagePullPolicy: IfNotPresent
+      resources:
+        requests:
+          memory: "6G"
+          cpu: "4"
+        limits:
+          memory: "8G"
+          cpu: "6"
+      command:
+        - sleep
+      args:
+        - infinity
+      securityContext:
+        runAsUser: 1000 # the node user
+    - name: jnlp
+      securityContext:
+        runAsUser: 1000

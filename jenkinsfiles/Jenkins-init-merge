@@ -1,0 +1,27 @@
+pipeline {
+    agent {
+        kubernetes {
+        defaultContainer 'node'
+        yamlFile 'jenkinsfiles/JenkinsKubernetesPod.yaml'
+        }
+  }
+  options {
+    timestamps()
+    buildDiscarder(logRotator(numToKeepStr: '50'))
+    timeout(time: 25, unit: 'MINUTES', activity: true)
+    //25 minutes of 'inactivity' (no log output)
+    ansiColor('xterm')
+  }
+  stages {
+    stage('Test JS') {
+      environment { HOME = "." }
+      steps {
+        sh '''#!/bin/bash -ex
+             cd $WORKSPACE
+             npm install
+             npm test
+        '''
+      }
+    }
+  }
+}
