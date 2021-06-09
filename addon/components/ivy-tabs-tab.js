@@ -109,12 +109,24 @@ export default Component.extend({
     this.select();
   },
 
-  href: computed('tabPanel.elementId', 'tagName', function() {
+  /**
+   * Override the 'a' tag's href with a dedicated dynamic value to allow routable tab links.
+   * @property fixedHref
+   * @type String
+   * @default ""
+   */
+  fixedHref: '',
+
+  href: computed('tabPanel.elementId', 'tagName', 'fixedHref', function() {
     if (this.tagName !== 'a' || !this.tabPanel) {
       return;
     }
 
-    return '#' + this.tabPanel.elementId;
+    if (!this.fixedHref) {
+      return '#' + this.tabPanel.elementId;
+    } else {
+      return this.fixedHref;
+    }
   }).readOnly(),
 
   /**

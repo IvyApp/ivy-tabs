@@ -9,6 +9,11 @@ const Router = EmberRouter.extend({
 Router.map(function() {
   this.route('dynamic-tabs');
   this.route('query-params');
+  this.route('routable-tabs', function() {
+    this.route('tab-a');
+    this.route('tab-b');
+    this.route('tab-c');
+  });
 });
 
 export default Router;
