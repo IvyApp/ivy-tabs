@@ -1,1 +1,1 @@
-export { default } from 'ivy-tabs/components/ivy-tabs-tablist';
+export { default } from '@puppet/ivy-tabs/components/ivy-tabs-tablist';

@@ -7,7 +7,7 @@ import {
   LEFT_ARROW,
   RIGHT_ARROW,
   UP_ARROW
-} from 'ivy-tabs/components/ivy-tabs-tablist';
+} from '@puppet/ivy-tabs/components/ivy-tabs-tablist';
 
 module('Acceptance | keyboard interaction', function(hooks) {
   setupApplicationTest(hooks);
