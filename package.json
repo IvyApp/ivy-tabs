@@ -1,21 +1,25 @@
 {
-  "name": "ivy-tabs",
-  "version": "0.0.0-development",
-  "description": "WAI-ARIA accessible tabs for Ember.",
+  "name": "@puppet/ivy-tabs",
+  "version": "4.0.1",
+  "description": "WAI-ARIA accessible tabs for Ember. Originally created by Envy Labs",
   "keywords": [
     "ember",
     "ember-addon",
-    "tabs"
+    "tabs",
+    "aria",
+    "accessibility"
   ],
-  "repository": "https://github.com/IvyApp/ivy-tabs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/puppetlabs/ivy-tabs.git"
+  },
   "license": "MIT",
   "author": "Dray Lacy",
   "directories": {
-    "doc": "doc",
     "test": "tests"
   },
   "bugs": {
-    "url": "https://github.com/IvyApp/ivy-tabs/issues"
+    "url": "https://github.com/puppetlabs/ivy-tabs/issues"
   },
   "scripts": {
     "build": "ember build --environment=production",
@@ -87,5 +91,7 @@
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
     }
-  }
+  },
+  "homepage": "https://github.com/puppetlabs/ivy-tabs#readme",
+  "main": "index.js"
 }
