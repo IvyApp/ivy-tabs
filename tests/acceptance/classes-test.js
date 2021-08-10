@@ -9,26 +9,26 @@ module('Acceptance | classes', function(hooks) {
   test('the active tab should be .active', async function(assert) {
     await visit('/');
 
-    assert.ok(findTab('Tab A').classList.contains('active'));
+    assert.dom(findTab('Tab A')).hasClass('active');
   });
 
   test('the inactive tabs should not be .active', async function(assert) {
     await visit('/');
 
-    assert.notOk(findTab('Tab B').classList.contains('active'));
-    assert.notOk(findTab('Tab C').classList.contains('active'));
+    assert.dom(findTab('Tab B')).hasNoClass('active');
+    assert.dom(findTab('Tab C')).hasNoClass('active');
   });
 
   test('the active tabpanel should be .active', async function(assert) {
     await visit('/');
 
-    assert.ok(findTabPanel('Tab A').classList.contains('active'));
+    assert.dom(findTabPanel('Tab A')).hasClass('active');
   });
 
   test('the inactive tabpanels should not be .active', async function(assert) {
     await visit('/');
 
-    assert.notOk(findTabPanel('Tab B').classList.contains('active'));
-    assert.notOk(findTabPanel('Tab C').classList.contains('active'));
+    assert.dom(findTabPanel('Tab B')).hasNoClass('active');
+    assert.dom(findTabPanel('Tab C')).hasNoClass('active');
   });
 });

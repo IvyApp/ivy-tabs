@@ -28,7 +28,7 @@ module('Acceptance | dynamic tabs', function(hooks) {
     await visit('/dynamic-tabs');
     await click(findButtonByText('Add an Item'));
 
-    assert.ok(findTab('Item 1').classList.contains('active'));
+    assert.dom(findTab('Item 1')).hasClass('active');
   });
 
   test('the first tab should remain selected when additional tabs are added', async function(assert) {
@@ -36,7 +36,7 @@ module('Acceptance | dynamic tabs', function(hooks) {
     await click(findButtonByText('Add an Item'));
     await click(findButtonByText('Add an Item'));
 
-    assert.ok(findTab('Item 1').classList.contains('active'));
+    assert.dom(findTab('Item 1')).hasClass('active');
   });
 
   test('the next tab should become selected when the first tab is active and is removed', async function(assert) {
@@ -46,7 +46,7 @@ module('Acceptance | dynamic tabs', function(hooks) {
     await click(findTab('Item 1'));
     await click(findTab('Item 1').querySelector('.close'));
 
-    assert.ok(findTab('Item 2').classList.contains('active'));
+    assert.dom(findTab('Item 2')).hasClass('active');
   });
 
   test('the previous tab should become selected when the active tab is removed', async function(assert) {
@@ -55,11 +55,11 @@ module('Acceptance | dynamic tabs', function(hooks) {
     await click(findButtonByText('Add an Item'));
     await click(findTab('Item 2'));
 
-    assert.ok(findTab('Item 2').classList.contains('active'));
+    assert.dom(findTab('Item 2')).hasClass('active');
 
     await click(findTab('Item 2').querySelector('.close'));
 
-    assert.ok(findTab('Item 1').classList.contains('active'));
+    assert.dom(findTab('Item 1')).hasClass('active');
   });
 
   test('removing all tabs should not prevent additional tabs from being added', async function(assert) {
@@ -68,6 +68,6 @@ module('Acceptance | dynamic tabs', function(hooks) {
     await click(findTab('Item 1').querySelector('.close'));
     await click(findButtonByText('Add an Item'));
 
-    assert.ok(findTab('Item 2').classList.contains('active'));
+    assert.dom(findTab('Item 2')).hasClass('active');
   });
 });

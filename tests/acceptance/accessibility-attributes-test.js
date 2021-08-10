@@ -1,4 +1,4 @@
-import { find, visit } from '@ember/test-helpers';
+import { visit } from '@ember/test-helpers';
 import { findTab, findTabPanel } from '../helpers/finders';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
@@ -9,37 +9,31 @@ module('Acceptance | accessibility attributes', function(hooks) {
   test('tablists should be [role="tablist"]', async function(assert) {
     await visit('/');
 
-    assert.equal(find('#basic-tablist').getAttribute('role'), 'tablist');
+    assert.dom('#basic-tablist').hasAttribute('role', 'tablist');
   });
 
   test('tablists should be [aria-live="polite"]', async function(assert) {
     await visit('/');
 
-    assert.equal(find('#basic-tablist').getAttribute('aria-live'), 'polite');
+    assert.dom('#basic-tablist').hasAttribute('aria-live', 'polite');
   });
 
   test('tablists should be [aria-relevant="all"]', async function(assert) {
     await visit('/');
 
-    assert.equal(find('#basic-tablist').getAttribute('aria-relevant'), 'all');
+    assert.dom('#basic-tablist').hasAttribute('aria-relevant', 'all');
   });
 
   test('tablists should be [aria-multiselectable="false"]', async function(assert) {
     await visit('/');
 
-    assert.equal(
-      find('#basic-tablist').getAttribute('aria-multiselectable'),
-      'false'
-    );
+    assert.dom('#basic-tablist').hasAttribute('aria-multiselectable', 'false');
   });
 
   test('tablists should allow [aria-label] to be used', async function(assert) {
     await visit('/');
 
-    assert.equal(
-      find('#basic-tablist').getAttribute('aria-label'),
-      'Example Tabs'
-    );
+    assert.dom('#basic-tablist').hasAttribute('aria-label', 'Example Tabs');
   });
 
   test('tabs should be [role="tab"]', async function(assert) {
