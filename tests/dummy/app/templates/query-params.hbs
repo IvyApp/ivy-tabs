@@ -1,20 +1,20 @@
 <h2>Query Parameters Example</h2>
 
-<p>Like in the {{link-to "Basic Example" "index"}}, we've bound the selection to a <code>selection</code> property (currently set to <code>{{selection}}</code>). We've also told Ember to treat <code>selection</code> as a query parameter, serializing it into the querystring as <code>tab</code>. Notice how the URL changes when you select a new tab? Now try refreshing the page. Neat, huh?</p>
+<p>Like in the <LinkTo @route="index">Basic Example</LinkTo>, we've bound the selection to a <code>selection</code> property (currently set to <code>{{this.selection}}</code>). We've also told Ember to treat <code>selection</code> as a query parameter, serializing it into the querystring as <code>tab</code>. Notice how the URL changes when you select a new tab? Now try refreshing the page. Neat, huh?</p>
 
 <div class="example">
-  {{#ivy-tabs selection=selection as |tabs|}}
-    {{#tabs.tablist aria-label="Example Tabs" class="nav nav-tabs" tagName="ul" as |tablist|}}
-      <li class="nav-item {{if (eq selection "A") "active"}}">
-        {{#tablist.tab "A" fixedHref=(concat '/#' (url-for 'query-params' (hash queryParams=(hash tab='A')))) class="nav-link" id="query-params-tab-a" on-select=(action (mut selection))}}Tab A{{/tablist.tab}}
+  <IvyTabs @selection={{this.selection}} as |tabs|>
+    <tabs.tablist @aria-label="Example Tabs" @class="nav nav-tabs" @tagName="ul" as |tablist|>
+      <li class="nav-item {{if (eq this.selection "A") "active"}}">
+        {{#tablist.tab "A" fixedHref=(concat '/#' (url-for 'query-params' (hash queryParams=(hash tab='A')))) class="nav-link" id="query-params-tab-a" on-select=(action (mut this.selection))}}Tab A{{/tablist.tab}}
       </li>
-      <li class="nav-item {{if (eq selection "B") "active"}}">
-        {{#tablist.tab "B" fixedHref="#{{url-for 'query-params' (hash queryParams (hash tab='B'))}}" class="nav-link" id="query-params-tab-b" on-select=(action (mut selection))}}Tab B{{/tablist.tab}}
+      <li class="nav-item {{if (eq this.selection "B") "active"}}">
+        {{#tablist.tab "B" fixedHref="#{{url-for 'query-params' (hash queryParams (hash tab='B'))}}" class="nav-link" id="query-params-tab-b" on-select=(action (mut this.selection))}}Tab B{{/tablist.tab}}
       </li>
-      <li class="nav-item {{if (eq selection "C") "active"}}">
-        {{#tablist.tab "C" fixedHref="#{{url-for 'query-params' (hash queryParams (hash tab='C'))}}" class="nav-link" id="query-params-tab-c" on-select=(action (mut selection))}}Tab C{{/tablist.tab}}
+      <li class="nav-item {{if (eq this.selection "C") "active"}}">
+        {{#tablist.tab "C" fixedHref="#{{url-for 'query-params' (hash queryParams (hash tab='C'))}}" class="nav-link" id="query-params-tab-c" on-select=(action (mut this.selection))}}Tab C{{/tablist.tab}}
       </li>
-    {{/tabs.tablist}}
+    </tabs.tablist>
 
     <div class="tab-content">
       {{#tabs.tabpanel "A" class="tab-pane" id="query-panel-a"}}
@@ -29,5 +29,5 @@
         <p>Pork belly waistcoat tbh, pour-over lyft intelligentsia man bun sartorial mumblecore live-edge plaid pok pok salvia. Keytar jean shorts distillery, kogi deep v blog hexagon meditation vegan tumblr schlitz mixtape franzen 3 wolf moon. +1 semiotics pork belly cliche food truck, paleo hell of cred vegan polaroid. Microdosing DIY craft beer messenger bag deep v. Live-edge asymmetrical williamsburg vinyl, raw denim dreamcatcher brunch lyft tilde migas glossier hashtag cliche YOLO. Banjo gochujang locavore organic. Wayfarers chambray hammock, scenester direct trade 90's disrupt activated charcoal poke kinfolk fanny pack try-hard asymmetrical vaporware.</p>
       {{/tabs.tabpanel}}
     </div>
-  {{/ivy-tabs}}
+  </IvyTabs>
 </div>
