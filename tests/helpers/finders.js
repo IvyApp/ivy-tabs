@@ -1,5 +1,5 @@
 function findElementByText(selector, text) {
-  return Array.from(document.querySelectorAll(selector)).find(element =>
+  return Array.from(document.querySelectorAll(selector)).find((element) =>
     element.textContent.includes(text)
   );
 }

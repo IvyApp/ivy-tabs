@@ -29,7 +29,7 @@ export default Component.extend({
    * @type String
    * @readOnly
    */
-  active: computed('isSelected', 'activeClass', function() {
+  active: computed('isSelected', 'activeClass', function () {
     if (this.isSelected) {
       return this.activeClass;
     }
@@ -76,7 +76,7 @@ export default Component.extend({
    * @property aria-selected
    * @type String
    */
-  'aria-selected': computed('isSelected', function() {
+  'aria-selected': computed('isSelected', function () {
     return this.isSelected + ''; // coerce to 'true' or 'false'
   }),
 
@@ -97,7 +97,7 @@ export default Component.extend({
     'aria-selected',
     'href',
     'selected',
-    'tabindex'
+    'tabindex',
   ],
 
   classNameBindings: ['active'],
@@ -117,7 +117,7 @@ export default Component.extend({
    */
   fixedHref: '',
 
-  href: computed('tabPanel.elementId', 'tagName', 'fixedHref', function() {
+  href: computed('tabPanel.elementId', 'tagName', 'fixedHref', function () {
     if (this.tagName !== 'a' || !this.tabPanel) {
       return;
     }
@@ -135,7 +135,7 @@ export default Component.extend({
    * @property index
    * @type Number
    */
-  index: computed('tabs.[]', function() {
+  index: computed('tabs.[]', function () {
     return this.tabs.indexOf(this);
   }),
 
@@ -150,7 +150,7 @@ export default Component.extend({
    * @property isSelected
    * @type Boolean
    */
-  isSelected: computed('tabList.selectedTab', function() {
+  isSelected: computed('tabList.selectedTab', function () {
     return this.tabList.selectedTab === this;
   }),
 
@@ -183,7 +183,7 @@ export default Component.extend({
    * @property selected
    * @type String
    */
-  selected: computed('isSelected', function() {
+  selected: computed('isSelected', function () {
     if (this.isSelected) {
       return 'selected';
     }
@@ -205,7 +205,7 @@ export default Component.extend({
    * @property tabPanel
    * @type IvyTabs.IvyTabPanelComponent
    */
-  tabPanel: computed('tabPanels.@each.model', 'model', function() {
+  tabPanel: computed('tabPanels.@each.model', 'model', function () {
     return this.tabPanels.findBy('model', this.model);
   }),
 
@@ -226,7 +226,7 @@ export default Component.extend({
    * @property tabindex
    * @type Number
    */
-  tabindex: computed('isSelected', function() {
+  tabindex: computed('isSelected', function () {
     if (this.isSelected) {
       return 0;
     }
@@ -256,7 +256,7 @@ export default Component.extend({
   willDestroy() {
     this._super(...arguments);
     once(this, this._unregisterWithTabList);
-  }
+  },
 }).reopenClass({
-  positionalParams: ['model']
+  positionalParams: ['model'],
 });

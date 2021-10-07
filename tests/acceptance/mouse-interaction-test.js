@@ -3,10 +3,10 @@ import { findTab } from '../helpers/finders';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 
-module('Acceptance | mouse interaction', function(hooks) {
+module('Acceptance | mouse interaction', function (hooks) {
   setupApplicationTest(hooks);
 
-  test('clicking a tab should select it', async function(assert) {
+  test('clicking a tab should select it', async function (assert) {
     await visit('/');
     await click(findTab('Tab B'));
 

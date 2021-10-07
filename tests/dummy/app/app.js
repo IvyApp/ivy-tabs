@@ -8,7 +8,7 @@ let App;
 App = Application.extend({
   Resolver,
   modulePrefix: config.modulePrefix,
-  podModulePrefix: config.podModulePrefix
+  podModulePrefix: config.podModulePrefix,
 });
 
 loadInitializers(App, config.modulePrefix);

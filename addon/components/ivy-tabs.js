@@ -47,7 +47,7 @@ export default Component.extend({
    */
   selection: null,
 
-  tabPanels: computed(function() {
+  tabPanels: computed(function () {
     return A();
   }).readOnly(),
 
@@ -69,5 +69,5 @@ export default Component.extend({
    */
   unregisterTabPanel(tabPanel) {
     this.tabPanels.removeObject(tabPanel);
-  }
+  },
 });

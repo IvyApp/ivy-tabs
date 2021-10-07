@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(environment) {
+module.exports = function (environment) {
   let ENV = {
     APP: {
       // Here you can pass flags/options to your application instance
@@ -9,17 +9,13 @@ module.exports = function(environment) {
     EmberENV: {
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
-        Date: false
+        Date: false,
       },
-      FEATURES: {
-        // Here you can enable experimental features on an ember canary build
-        // e.g. 'with-controller': true
-      }
     },
     environment,
     locationType: 'auto',
     modulePrefix: 'dummy',
-    rootURL: '/'
+    rootURL: '/',
   };
 
   if (environment === 'development') {

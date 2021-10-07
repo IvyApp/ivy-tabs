@@ -6,6 +6,5 @@ export default Route.extend({
     this._super(...arguments);
   },
 
-
-  router: service()
+  router: service(),
 });
