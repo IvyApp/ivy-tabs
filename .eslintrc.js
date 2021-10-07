@@ -1,29 +1,44 @@
 'use strict';
 
 module.exports = {
-  env: {
-    browser: true
+  root: true,
+  parser: 'babel-eslint',
+  parserOptions: {
+    ecmaVersion: 2018,
+    sourceType: 'module',
+    ecmaFeatures: {
+      legacyDecorators: true,
+    },
   },
+  plugins: ['ember'],
   extends: [
     'eslint:recommended',
-    'plugin:ember/recommended'
+    'plugin:ember/recommended',
+    'plugin:prettier/recommended',
   ],
+  env: {
+    browser: true,
+  },
+  rules: {
+    // should be reenabled once the issues are addressed
+    'ember/no-classic-components': 'off',
+    'ember/no-classic-classes': 'off',
+    'ember/require-tagless-components': 'off',
+    'ember/no-actions-hash': 'off',
+    'ember/no-controller-access-in-routes': 'off',
+  },
   overrides: [
     // node files
     {
-      env: {
-        browser: false,
-        es6: true,
-        node: true,
-      },
       excludedFiles: [
         'addon/**',
         'addon-test-support/**',
         'app/**',
-        'tests/dummy/app/**'
+        'tests/dummy/app/**',
       ],
       files: [
         '.eslintrc.js',
+        '.prettierrc.js',
         '.template-lintrc.js',
         'commitlint.config.js',
         'ember-cli-build.js',
@@ -32,23 +47,17 @@ module.exports = {
         'testem.js',
         'blueprints/*/index.js',
         'config/**/*.js',
-        'prettier.config.js',
-        'tests/dummy/config/**/*.js'
+        'tests/dummy/config/**/*.js',
       ],
       parserOptions: {
-        ecmaVersion: 8,
-        sourceType: 'script'
+        sourceType: 'script',
+      },
+      env: {
+        browser: false,
+        node: true,
       },
       plugins: ['node'],
-    }
+      extends: ['plugin:node/recommended'],
+    },
   ],
-  parserOptions: {
-    ecmaVersion: 2018,
-    sourceType: 'module'
-  },
-  plugins: ['ember'],
-  root: true,
-  rules: {
-    'sort-keys': 'error'
-  }
 };

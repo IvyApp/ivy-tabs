@@ -55,7 +55,7 @@ export default Component.extend({
    * @type String
    * @default 'false'
    */
-  'aria-multiselectable': computed('isEmpty', function() {
+  'aria-multiselectable': computed('isEmpty', function () {
     if (!this.isEmpty) {
       return 'false';
     }
@@ -81,7 +81,7 @@ export default Component.extend({
    * @type String
    * @default 'tablist'
    */
-  ariaRole: computed('isEmpty', function() {
+  ariaRole: computed('isEmpty', function () {
     if (!this.isEmpty) {
       return 'tablist';
     } else {
@@ -97,7 +97,7 @@ export default Component.extend({
     'aria-label',
     'aria-live',
     'aria-multiselectable',
-    'aria-relevant'
+    'aria-relevant',
   ],
 
   classNames: ['ivy-tabs-tablist'],
@@ -255,11 +255,11 @@ export default Component.extend({
    * @property selectedTab
    * @type IvyTabs.IvyTabComponent
    */
-  selectedTab: computed('selection', 'tabs.@each.model', function() {
+  selectedTab: computed('selection', 'tabs.@each.model', function () {
     return this.tabs.findBy('model', this.selection);
   }),
 
-  tabs: computed(function() {
+  tabs: computed(function () {
     return A();
   }).readOnly(),
 
@@ -295,5 +295,5 @@ export default Component.extend({
   willDestroy() {
     this._super(...arguments);
     once(this, this._unregisterWithTabsContainer);
-  }
+  },
 });

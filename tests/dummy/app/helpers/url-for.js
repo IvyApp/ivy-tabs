@@ -13,5 +13,5 @@ export default Helper.extend({
     }
   },
 
-  router: service()
+  router: service(),
 });

@@ -8,7 +8,7 @@ export default Controller.extend({
       this.model.pushObject(
         EmberObject.create({
           checked: false,
-          index: this.incrementProperty('nextIndex')
+          index: this.incrementProperty('nextIndex'),
         })
       );
     },
@@ -19,12 +19,12 @@ export default Controller.extend({
 
     removeSelected() {
       this.model.removeObjects(this.checkedItems);
-    }
+    },
   },
 
   checkedItems: filterBy('model', 'checked', true),
 
   nextIndex: 0,
 
-  noCheckedItems: empty('checkedItems')
+  noCheckedItems: empty('checkedItems'),
 });

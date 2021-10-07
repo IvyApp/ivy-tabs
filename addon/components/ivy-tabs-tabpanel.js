@@ -29,7 +29,7 @@ export default Component.extend({
    * @type String
    * @readOnly
    */
-  active: computed('isSelected','activeClass', function() {
+  active: computed('isSelected', 'activeClass', function () {
     if (this.isSelected) {
       return this.activeClass;
     }
@@ -55,7 +55,7 @@ export default Component.extend({
    * @type Boolean
    * @readOnly
    */
-  'aria-hidden': computed('isSelected', function() {
+  'aria-hidden': computed('isSelected', function () {
     return `${!this.isSelected}`;
   }).readOnly(),
 
@@ -97,7 +97,7 @@ export default Component.extend({
    * @type Boolean
    * @readOnly
    */
-  isSelected: computed('model', 'selection', function() {
+  isSelected: computed('model', 'selection', function () {
     return this.model === this.selection;
   }).readOnly(),
 
@@ -115,7 +115,7 @@ export default Component.extend({
    * @property tab
    * @type IvyTabs.IvyTabComponent
    */
-  tab: computed('model', 'tabs.@each.model', function() {
+  tab: computed('model', 'tabs.@each.model', function () {
     const tabs = this.tabs;
     if (tabs) {
       return tabs.findBy('model', this.model);
@@ -130,7 +130,7 @@ export default Component.extend({
    * @property tabindex
    * @type Number
    */
-  tabindex: computed('isSelected', function() {
+  tabindex: computed('isSelected', function () {
     if (this.isSelected) {
       return 0;
     }
@@ -158,7 +158,7 @@ export default Component.extend({
   willDestroy() {
     this._super(...arguments);
     once(this, this._unregisterWithTabsContainer);
-  }
+  },
 }).reopenClass({
-  positionalParams: ['model']
+  positionalParams: ['model'],
 });

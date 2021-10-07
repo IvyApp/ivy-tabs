@@ -8,9 +8,7 @@ A group of Ember.js Components that interact to create a [WAI-ARIA tab] interfac
 
 Special thanks to [ic-tabs], which this addon is based on.
 
-**NOTE: This addon uses contextual components, which require Ember >= 2.3. For
-older versions of Ember, use the 1.x release series of this addon.**
-* Ember.js v3.12 or above
+* Ember.js v3.16 or above
 * Ember CLI v2.13 or above
 * Node.js v10 or above
 

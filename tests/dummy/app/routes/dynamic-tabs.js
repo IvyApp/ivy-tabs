@@ -4,5 +4,5 @@ import { A } from '@ember/array';
 export default Route.extend({
   model() {
     return A();
-  }
+  },
 });
