@@ -1,6 +1,5 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import layout from '../templates/components/ivy-tabs';
 
 /**
  * @module ivy-tabs
@@ -9,14 +8,10 @@ import layout from '../templates/components/ivy-tabs';
 /**
  * @class IvyTabsComponent
  * @namespace IvyTabs
- * @extends Ember.Component
+ * @extends glimmer Component
  */
 export default class IvyTabsTabsComponent extends Component {
-  classNames = ['ivy-tabs'];
-
-  layout = layout;
   @tracked tabList = null;
-
   /**
    * Registers the `ivy-tabs-tablist` instance.
    *
@@ -37,15 +32,6 @@ export default class IvyTabsTabsComponent extends Component {
     this.tabPanels.pushObject(tabPanel);
   }
 
-  /**
-   * Set this to the model of the tab you'd like to be selected. Usually it is
-   * bound to a controller property that is used as a query parameter, but can
-   * be bound to anything.
-   *
-   * @property selection
-   * @type Object
-   */
-  @tracked selection = null;
   @tracked tabPanels = [];
 
   /**
