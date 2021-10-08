@@ -1,6 +1,5 @@
 import Component from '@ember/component';
-import { computed } from '@ember/object';
-import { A } from '@ember/array';
+import { tracked } from '@glimmer/tracking';
 import layout from '../templates/components/ivy-tabs';
 
 /**
@@ -12,10 +11,11 @@ import layout from '../templates/components/ivy-tabs';
  * @namespace IvyTabs
  * @extends Ember.Component
  */
-export default Component.extend({
-  classNames: ['ivy-tabs'],
+export default class IvyTabsTabsComponent extends Component {
+  classNames = ['ivy-tabs'];
 
-  layout: layout,
+  layout = layout;
+  @tracked tabList = null;
 
   /**
    * Registers the `ivy-tabs-tablist` instance.
@@ -24,8 +24,8 @@ export default Component.extend({
    * @param {IvyTabs.IvyTabListComponent} tabList
    */
   registerTabList(tabList) {
-    this.set('tabList', tabList);
-  },
+    this.tabList = tabList;
+  }
 
   /**
    * Adds a panel to the `tabPanels` array.
@@ -35,7 +35,7 @@ export default Component.extend({
    */
   registerTabPanel(tabPanel) {
     this.tabPanels.pushObject(tabPanel);
-  },
+  }
 
   /**
    * Set this to the model of the tab you'd like to be selected. Usually it is
@@ -45,11 +45,8 @@ export default Component.extend({
    * @property selection
    * @type Object
    */
-  selection: null,
-
-  tabPanels: computed(function () {
-    return A();
-  }).readOnly(),
+  @tracked selection = null;
+  @tracked tabPanels = [];
 
   /**
    * Removes the `ivy-tabs-tablist` component.
@@ -58,8 +55,8 @@ export default Component.extend({
    * @param {IvyTabs.IvyTabListComponent} tabList
    */
   unregisterTabList(/* tabList */) {
-    this.set('tabList', null);
-  },
+    this.tabList = null;
+  }
 
   /**
    * Removes a panel from the `tabPanels` array.
@@ -69,5 +66,5 @@ export default Component.extend({
    */
   unregisterTabPanel(tabPanel) {
     this.tabPanels.removeObject(tabPanel);
-  },
-});
+  }
+}
