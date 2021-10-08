@@ -1,5 +1,4 @@
 import Component from '@ember/component';
-import layout from '../templates/components/ivy-tabs-tablist';
 import { A } from '@ember/array';
 import { computed } from '@ember/object';
 import { empty } from '@ember/object/computed';
@@ -20,15 +19,15 @@ export const UP_ARROW = 38;
  * @namespace IvyTabs
  * @extends Ember.Component
  */
-export default Component.extend({
+export default class IvyTabsTabListComponent extends Component {
   _registerWithTabsContainer() {
     this.tabsContainer.registerTabList(this);
     once(this, this.selectTab);
-  },
+  }
 
   _unregisterWithTabsContainer() {
     this.tabsContainer.unregisterTabList(this);
-  },
+  }
 
   /**
    * The label of the tablist for screenreaders to use.
@@ -37,7 +36,7 @@ export default Component.extend({
    * @type String
    * @default ''
    */
-  'aria-label': '',
+  'aria-label' = '';
 
   /**
    * Tells screenreaders to notify the user during DOM modifications.
@@ -46,7 +45,7 @@ export default Component.extend({
    * @type String
    * @default 'polite'
    */
-  'aria-live': 'polite',
+  'aria-live' = 'polite';
 
   /**
    * Tells screenreaders that only one tab can be selected at a time.
@@ -55,12 +54,13 @@ export default Component.extend({
    * @type String
    * @default 'false'
    */
-  'aria-multiselectable': computed('isEmpty', function () {
+  @computed('isEmpty')
+  get 'aria-multiselectable'() {
     if (!this.isEmpty) {
       return 'false';
     }
     return undefined;
-  }).readOnly(),
+  }
 
   /**
    * Tells screenreaders which DOM modification activites to monitor for user
@@ -70,7 +70,7 @@ export default Component.extend({
    * @type String
    * @default 'all'
    */
-  'aria-relevant': 'all',
+  'aria-relevant' = 'all';
 
   /**
    * The `role` attribute of the tab list element.
@@ -81,7 +81,8 @@ export default Component.extend({
    * @type String
    * @default 'tablist'
    */
-  ariaRole: computed('isEmpty', function () {
+  @computed('isEmpty')
+  get ariaRole() {
     if (!this.isEmpty) {
       return 'tablist';
     } else {
@@ -91,16 +92,16 @@ export default Component.extend({
       // added.
       return 'presentation';
     }
-  }).readOnly(),
+  }
 
-  attributeBindings: [
+  attributeBindings = [
     'aria-label',
     'aria-live',
     'aria-multiselectable',
     'aria-relevant',
-  ],
+  ];
 
-  classNames: ['ivy-tabs-tablist'],
+  classNames = ['ivy-tabs-tablist'];
 
   /**
    * Gives focus to the selected tab.
@@ -109,14 +110,14 @@ export default Component.extend({
    */
   focusSelectedTab() {
     this.selectedTab.element.focus();
-  },
+  }
 
-  init() {
-    this._super(...arguments);
+  constructor() {
+    super(...arguments);
     once(this, this._registerWithTabsContainer);
-  },
+  }
 
-  isEmpty: empty('tabs'),
+  @empty('tabs') isEmpty;
 
   /**
    * Event handler for navigating tabs via arrow keys. The left (or up) arrow
@@ -142,9 +143,7 @@ export default Component.extend({
 
     event.preventDefault();
     scheduleOnce('afterRender', this, this.focusSelectedTab);
-  },
-
-  layout: layout,
+  }
 
   /**
    * Adds a tab to the `tabs` array.
@@ -155,7 +154,7 @@ export default Component.extend({
   registerTab(tab) {
     this.tabs.pushObject(tab);
     once(this, this.selectTab);
-  },
+  }
 
   /**
    * Selects the next tab in the list, if any.
@@ -183,7 +182,7 @@ export default Component.extend({
     if (tab) {
       tab.select();
     }
-  },
+  }
 
   /**
    * Selects the previous tab in the list, if any.
@@ -215,7 +214,7 @@ export default Component.extend({
     if (tab) {
       tab.select();
     }
-  },
+  }
 
   selectTab() {
     const selection = this.selection;
@@ -225,7 +224,7 @@ export default Component.extend({
     } else {
       this.selectTabByModel(selection);
     }
-  },
+  }
 
   /**
    * Select the tab at `index`.
@@ -239,7 +238,7 @@ export default Component.extend({
     if (tab) {
       tab.select();
     }
-  },
+  }
 
   selectTabByModel(model) {
     const tab = this.tabs.findBy('model', model);
@@ -247,7 +246,7 @@ export default Component.extend({
     if (tab) {
       tab.select();
     }
-  },
+  }
 
   /**
    * The currently-selected `ivy-tabs-tab` instance.
@@ -255,13 +254,12 @@ export default Component.extend({
    * @property selectedTab
    * @type IvyTabs.IvyTabComponent
    */
-  selectedTab: computed('selection', 'tabs.@each.model', function () {
+  @computed('selection', 'tabs.@each.model')
+  get selectedTab() {
     return this.tabs.findBy('model', this.selection);
-  }),
+  }
 
-  tabs: computed(function () {
-    return A();
-  }).readOnly(),
+  tabs = [];
 
   /**
    * The `ivy-tabs` component.
@@ -270,7 +268,7 @@ export default Component.extend({
    * @type IvyTabs.IvyTabsComponent
    * @default null
    */
-  tabsContainer: null,
+  tabsContainer = null;
 
   /**
    * Removes a tab from the `tabs` array.
@@ -290,10 +288,10 @@ export default Component.extend({
     }
 
     this.tabs.removeObject(tab);
-  },
+  }
 
   willDestroy() {
-    this._super(...arguments);
+    super.willDestroy(...arguments);
     once(this, this._unregisterWithTabsContainer);
-  },
-});
+  }
+}
