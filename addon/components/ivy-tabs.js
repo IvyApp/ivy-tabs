@@ -34,6 +34,10 @@ export default class IvyTabsTabsComponent extends Component {
 
   @tracked tabPanels = [];
 
+  get selection() {
+    return this.args.selection;
+  }
+
   /**
    * Removes the `ivy-tabs-tablist` component.
    *

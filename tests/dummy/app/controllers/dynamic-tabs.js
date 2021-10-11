@@ -1,30 +1,52 @@
 import Controller from '@ember/controller';
-import EmberObject from '@ember/object';
-import { empty, filterBy } from '@ember/object/computed';
+import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
-export default Controller.extend({
-  actions: {
-    addItem() {
-      this.model.pushObject(
-        EmberObject.create({
-          checked: false,
-          index: this.incrementProperty('nextIndex'),
-        })
-      );
-    },
+class ModelObject {
+  @tracked checked = false;
+  @tracked index;
+  constructor(index) {
+    this.index = index;
+  }
+}
 
-    removeItem(item) {
-      this.model.removeObject(item);
-    },
+export default class DynamicTabsController extends Controller {
+  @action
+  addItem() {
+    this.model.pushObject(new ModelObject(++this.nextIndex));
+  }
 
-    removeSelected() {
-      this.model.removeObjects(this.checkedItems);
-    },
-  },
+  @action
+  removeItem(item) {
+    this.model.removeObject(item);
+  }
 
-  checkedItems: filterBy('model', 'checked', true),
+  @action
+  removeSelected() {
+    this.model.removeObjects(this.checkedItems);
+  }
 
-  nextIndex: 0,
+  @action
+  updateSelection(item) {
+    this.selection = item;
+  }
 
-  noCheckedItems: empty('checkedItems'),
-});
+  get checkedItems() {
+    let result = [];
+    for (let i = 0; i < this.model.length; i++) {
+      if (this.model[i].checked) {
+        result.push(this.model[i]);
+      }
+    }
+    return result;
+  }
+
+  @tracked
+  nextIndex = 0;
+
+  get noCheckedItems() {
+    return this.checkedItems.length === 0;
+  }
+  @tracked
+  selection = null;
+}

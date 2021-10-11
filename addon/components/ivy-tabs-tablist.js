@@ -1,8 +1,6 @@
 import Component from '@ember/component';
-import { A } from '@ember/array';
-import { computed } from '@ember/object';
-import { empty } from '@ember/object/computed';
-import { isNone } from '@ember/utils';
+import { isNone, isEmpty } from '@ember/utils';
+import { tracked } from '@glimmer/tracking';
 import { once, scheduleOnce } from '@ember/runloop';
 
 export const DOWN_ARROW = 40;
@@ -54,7 +52,6 @@ export default class IvyTabsTabListComponent extends Component {
    * @type String
    * @default 'false'
    */
-  @computed('isEmpty')
   get 'aria-multiselectable'() {
     if (!this.isEmpty) {
       return 'false';
@@ -81,7 +78,6 @@ export default class IvyTabsTabListComponent extends Component {
    * @type String
    * @default 'tablist'
    */
-  @computed('isEmpty')
   get ariaRole() {
     if (!this.isEmpty) {
       return 'tablist';
@@ -117,7 +113,9 @@ export default class IvyTabsTabListComponent extends Component {
     once(this, this._registerWithTabsContainer);
   }
 
-  @empty('tabs') isEmpty;
+  get isEmpty() {
+    return isEmpty(this.tabs);
+  }
 
   /**
    * Event handler for navigating tabs via arrow keys. The left (or up) arrow
@@ -164,9 +162,9 @@ export default class IvyTabsTabListComponent extends Component {
   selectNextTab() {
     const selectedTab = this.selectedTab;
     const tabs = this.tabs;
-    const length = tabs.get('length');
+    const length = tabs.length;
 
-    let idx = selectedTab.get('index');
+    let idx = selectedTab.index;
     let tab;
 
     do {
@@ -192,9 +190,9 @@ export default class IvyTabsTabListComponent extends Component {
   selectPreviousTab() {
     const selectedTab = this.selectedTab;
     const tabs = this.tabs;
-    const length = tabs.get('length');
+    const length = tabs.length;
 
-    let idx = selectedTab.get('index');
+    let idx = selectedTab.index;
     let tab;
 
     do {
@@ -214,6 +212,10 @@ export default class IvyTabsTabListComponent extends Component {
     if (tab) {
       tab.select();
     }
+  }
+
+  get selection() {
+    return this.tabsContainer.selection;
   }
 
   selectTab() {
@@ -254,12 +256,16 @@ export default class IvyTabsTabListComponent extends Component {
    * @property selectedTab
    * @type IvyTabs.IvyTabComponent
    */
-  @computed('selection', 'tabs.@each.model')
   get selectedTab() {
-    return this.tabs.findBy('model', this.selection);
+    for (let i = 0; i < this.tabs.length; i++) {
+      if (this.tabs[i].model === this.selection) {
+        return this.tabs[i];
+      }
+    }
+    return null;
   }
 
-  tabs = [];
+  @tracked tabs = [];
 
   /**
    * The `ivy-tabs` component.
@@ -268,7 +274,7 @@ export default class IvyTabsTabListComponent extends Component {
    * @type IvyTabs.IvyTabsComponent
    * @default null
    */
-  tabsContainer = null;
+  @tracked tabsContainer = null;
 
   /**
    * Removes a tab from the `tabs` array.
@@ -277,9 +283,9 @@ export default class IvyTabsTabListComponent extends Component {
    * @param {IvyTabs.IvyTabComponent} tab
    */
   unregisterTab(tab) {
-    const index = tab.get('index');
+    const index = tab.index;
 
-    if (tab.get('isSelected')) {
+    if (tab.isSelected) {
       if (index === 0) {
         this.selectNextTab();
       } else {

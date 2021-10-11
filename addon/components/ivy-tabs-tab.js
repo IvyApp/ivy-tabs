@@ -1,6 +1,4 @@
 import Component from '@ember/component';
-import { readOnly } from '@ember/object/computed';
-import { computed } from '@ember/object';
 import { once } from '@ember/runloop';
 
 /**
@@ -27,14 +25,13 @@ export default Component.extend({
    *
    * @property active
    * @type String
-   * @readOnly
    */
-  active: computed('isSelected', 'activeClass', function () {
+  get active() {
     if (this.isSelected) {
       return this.activeClass;
     }
     return undefined;
-  }),
+  },
 
   /**
    * The CSS class to apply to a tab's element when its `isSelected` property
@@ -55,7 +52,12 @@ export default Component.extend({
    * @type String
    * @readOnly
    */
-  'aria-controls': readOnly('tabPanel.elementId'),
+  get 'aria-controls'() {
+    if (this.tabPanel) {
+      return this.tabPanel.elementId;
+    }
+    return '';
+  },
 
   /**
    * Tells screenreaders whether or not this tab's panel is expanded.
@@ -66,7 +68,9 @@ export default Component.extend({
    * @type String
    * @readOnly
    */
-  'aria-expanded': readOnly('aria-selected'),
+  get 'aria-expanded'() {
+    return String(this.isSelected); // coerce to 'true' or 'false'
+  },
 
   /**
    * Tells screenreaders whether or not this tab is selected.
@@ -76,9 +80,9 @@ export default Component.extend({
    * @property aria-selected
    * @type String
    */
-  'aria-selected': computed('isSelected', function () {
-    return this.isSelected + ''; // coerce to 'true' or 'false'
-  }),
+  get 'aria-selected'() {
+    return String(this.isSelected); // coerce to 'true' or 'false'
+  },
 
   /**
    * The `role` attribute of the tab element.
@@ -117,9 +121,9 @@ export default Component.extend({
    */
   fixedHref: '',
 
-  href: computed('tabPanel.elementId', 'tagName', 'fixedHref', function () {
+  get href() {
     if (this.tagName !== 'a' || !this.tabPanel) {
-      return;
+      return '';
     }
 
     if (!this.fixedHref) {
@@ -127,7 +131,7 @@ export default Component.extend({
     } else {
       return this.fixedHref;
     }
-  }).readOnly(),
+  },
 
   /**
    * The index of this tab in the `ivy-tabs-tablist` component.
@@ -135,9 +139,9 @@ export default Component.extend({
    * @property index
    * @type Number
    */
-  index: computed('tabs.[]', function () {
+  get index() {
     return this.tabs.indexOf(this);
-  }),
+  },
 
   init() {
     this._super(...arguments);
@@ -150,9 +154,9 @@ export default Component.extend({
    * @property isSelected
    * @type Boolean
    */
-  isSelected: computed('tabList.selectedTab', function () {
+  get isSelected() {
     return this.tabList.selectedTab === this;
-  }),
+  },
 
   /**
    * Object to uniquely identify this tab within the tabList.
@@ -183,12 +187,12 @@ export default Component.extend({
    * @property selected
    * @type String
    */
-  selected: computed('isSelected', function () {
+  get selected() {
     if (this.isSelected) {
       return 'selected';
     }
     return undefined;
-  }),
+  },
 
   /**
    * The `ivy-tabs-tablist` component this tab belongs to.
@@ -205,9 +209,16 @@ export default Component.extend({
    * @property tabPanel
    * @type IvyTabs.IvyTabPanelComponent
    */
-  tabPanel: computed('tabPanels.@each.model', 'model', function () {
-    return this.tabPanels.findBy('model', this.model);
-  }),
+  get tabPanel() {
+    const tabPanels = this.tabPanels;
+    for (let i = 0; i < tabPanels.length; i++) {
+      const result = tabPanels[i];
+      if (result.model === this.model) {
+        return result;
+      }
+    }
+    return null;
+  },
 
   /**
    * The array of all `ivy-tabs-tabpanel` instances within the `ivy-tabs`
@@ -217,7 +228,12 @@ export default Component.extend({
    * @type Array | IvyTabs.IvyTabPanelComponent
    * @readOnly
    */
-  tabPanels: readOnly('tabsContainer.tabPanels'),
+  get tabPanels() {
+    if (this.tabsContainer) {
+      return this.tabsContainer.tabPanels;
+    }
+    return [];
+  },
 
   /**
    * Makes the selected tab keyboard tabbable, and prevents tabs from getting
@@ -226,12 +242,12 @@ export default Component.extend({
    * @property tabindex
    * @type Number
    */
-  tabindex: computed('isSelected', function () {
+  get tabindex() {
     if (this.isSelected) {
       return 0;
     }
     return undefined;
-  }),
+  },
 
   /**
    * The array of all `ivy-tabs-tab` instances within the `ivy-tabs-tablist` component.
@@ -240,7 +256,12 @@ export default Component.extend({
    * @type Array | IvyTabs.IvyTabComponent
    * @readOnly
    */
-  tabs: readOnly('tabList.tabs'),
+  get tabs() {
+    if (this.tabList) {
+      return this.tabList.tabs;
+    }
+    return [];
+  },
 
   /**
    * The `ivy-tabs` component.
@@ -249,7 +270,12 @@ export default Component.extend({
    * @type IvyTabs.IvyTabsComponent
    * @readOnly
    */
-  tabsContainer: readOnly('tabList.tabsContainer'),
+  get tabsContainer() {
+    if (this.tabList) {
+      return this.tabList.tabsContainer;
+    }
+    return null;
+  },
 
   tagName: 'a',
 

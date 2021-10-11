@@ -17,23 +17,23 @@
     </tabs.tablist>
 
     <div class="tab-content">
-      {{#tabs.tabpanel "tab-a" class="tab-pane"}}
+      <tabs.tabpanel @model={{"tab-a"}} class="tab-pane">
         {{#if (eq this.currentTab 'tab-a')}}
           {{outlet}}
         {{/if}}
-      {{/tabs.tabpanel}}
+      </tabs.tabpanel>
 
-      {{#tabs.tabpanel "tab-b" class="tab-pane"}}
+      <tabs.tabpanel @model={{"tab-b"}} class="tab-pane">
         {{#if (eq this.currentTab 'tab-b')}}
           {{outlet}}
         {{/if}}
-      {{/tabs.tabpanel}}
+      </tabs.tabpanel>
 
-      {{#tabs.tabpanel "tab-c" class="tab-pane"}}
+      <tabs.tabpanel @model={{"tab-c"}} class="tab-pane">
         {{#if (eq this.currentTab 'tab-c')}}
           {{outlet}}
         {{/if}}
-      {{/tabs.tabpanel}}
+      </tabs.tabpanel>
     </div>
   </IvyTabs>
 </div>
