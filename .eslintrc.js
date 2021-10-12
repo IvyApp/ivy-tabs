@@ -20,12 +20,10 @@ module.exports = {
     browser: true,
   },
   rules: {
-    // should be reenabled once the issues are addressed
+    // currently the tablist remains a classic component to allow the tagName to be
+    // overridden. If this constraint can be removed, then these can be removed.
     'ember/no-classic-components': 'off',
-    'ember/no-classic-classes': 'off',
     'ember/require-tagless-components': 'off',
-    'ember/no-actions-hash': 'off',
-    'ember/no-controller-access-in-routes': 'off',
   },
   overrides: [
     // node files

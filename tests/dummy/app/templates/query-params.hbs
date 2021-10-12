@@ -6,28 +6,28 @@
   <IvyTabs @selection={{this.selection}} as |tabs|>
     <tabs.tablist @aria-label="Example Tabs" @class="nav nav-tabs" @tagName="ul" as |tablist|>
       <li class="nav-item {{if (eq this.selection "A") "active"}}">
-        {{#tablist.tab "A" fixedHref=(concat '/#' (url-for 'query-params' (hash queryParams=(hash tab='A')))) class="nav-link" id="query-params-tab-a" on-select=(action (mut this.selection))}}Tab A{{/tablist.tab}}
+        <tablist.tab @model="A" @fixedHref={{concat '/#' (url-for 'query-params' (hash queryParams=(hash tab='A')))}} class="nav-link" @id="query-params-tab-a" @onSelect={{action (mut this.selection)}}>Tab A</tablist.tab>
       </li>
       <li class="nav-item {{if (eq this.selection "B") "active"}}">
-        {{#tablist.tab "B" fixedHref="#{{url-for 'query-params' (hash queryParams (hash tab='B'))}}" class="nav-link" id="query-params-tab-b" on-select=(action (mut this.selection))}}Tab B{{/tablist.tab}}
+        <tablist.tab @model="B" @fixedHref="#{{url-for 'query-params' (hash queryParams=(hash tab='B'))}}" class="nav-link" @id="query-params-tab-b" @onSelect={{action (mut this.selection)}}>Tab B</tablist.tab>
       </li>
       <li class="nav-item {{if (eq this.selection "C") "active"}}">
-        {{#tablist.tab "C" fixedHref="#{{url-for 'query-params' (hash queryParams (hash tab='C'))}}" class="nav-link" id="query-params-tab-c" on-select=(action (mut this.selection))}}Tab C{{/tablist.tab}}
+        <tablist.tab @model="C" @fixedHref="#{{url-for 'query-params' (hash queryParams=(hash tab='C'))}}" class="nav-link" @id="query-params-tab-c" @onSelect={{action (mut this.selection)}}>Tab C</tablist.tab>
       </li>
     </tabs.tablist>
 
     <div class="tab-content">
-      {{#tabs.tabpanel "A" class="tab-pane" id="query-panel-a"}}
+      <tabs.tabpanel @model={{"A"}} class="tab-pane" @id="query-panel-a">
         <p>Kale chips marfa next level hella hot chicken. Post-ironic snackwave dreamcatcher lyft, hot chicken brunch roof party small batch quinoa migas ugh. Live-edge beard leggings affogato, marfa yr brooklyn. Jean shorts artisan cred schlitz gluten-free pour-over distillery sriracha portland iceland, normcore kombucha roof party. Gentrify truffaut hot chicken air plant, hashtag la croix photo booth kogi live-edge. Bitters kogi subway tile tousled offal bushwick narwhal fam. Cray salvia poutine, jianbing ethical hot chicken whatever VHS.</p>
-      {{/tabs.tabpanel}}
+      </tabs.tabpanel>
 
-      {{#tabs.tabpanel "B" class="tab-pane" id="query-panel-b"}}
+      <tabs.tabpanel @model={{"B"}} class="tab-pane" @id="query-panel-b">
         <p>Green juice vice PBR&amp;B +1 affogato. Sustainable lumbersexual fam, glossier letterpress mustache street art tilde 3 wolf moon viral. Enamel pin trust fund chia YOLO, PBR&amp;B organic ethical cardigan lomo migas pour-over shoreditch dreamcatcher. Enamel pin kickstarter godard organic authentic, butcher snackwave paleo celiac messenger bag roof party keffiyeh distillery. Direct trade skateboard narwhal thundercats, tumeric fam lumbersexual. Vice helvetica brooklyn, tbh edison bulb authentic austin post-ironic. Organic pickled YOLO godard.</p>
-      {{/tabs.tabpanel}}
+      </tabs.tabpanel>
 
-      {{#tabs.tabpanel "C" class="tab-pane" id="query-panel-c"}}
+      <tabs.tabpanel @model={{"C"}} class="tab-pane" @id="query-panel-c">
         <p>Pork belly waistcoat tbh, pour-over lyft intelligentsia man bun sartorial mumblecore live-edge plaid pok pok salvia. Keytar jean shorts distillery, kogi deep v blog hexagon meditation vegan tumblr schlitz mixtape franzen 3 wolf moon. +1 semiotics pork belly cliche food truck, paleo hell of cred vegan polaroid. Microdosing DIY craft beer messenger bag deep v. Live-edge asymmetrical williamsburg vinyl, raw denim dreamcatcher brunch lyft tilde migas glossier hashtag cliche YOLO. Banjo gochujang locavore organic. Wayfarers chambray hammock, scenester direct trade 90's disrupt activated charcoal poke kinfolk fanny pack try-hard asymmetrical vaporware.</p>
-      {{/tabs.tabpanel}}
+      </tabs.tabpanel>
     </div>
   </IvyTabs>
 </div>

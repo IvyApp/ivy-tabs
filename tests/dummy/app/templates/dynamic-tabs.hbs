@@ -7,31 +7,31 @@
     <tabs.tablist @aria-label="Example Tabs" @class="nav nav-tabs" @id="dynamic-tablist" @tagName="ul" as |tablist|>
       {{#each this.model as |item|}}
         <li class="nav-item {{if (eq this.selection item.index) "active"}}">
-          {{#tablist.tab item.index class="nav-link" on-select=(action (mut this.selection))}}
-            <button aria-label="Close" class="close" type="button" {{action "removeItem" item}}>
+          <tablist.tab @model={{item.index}} class="nav-link" @onSelect={{this.updateSelection}}>
+            <button aria-label="Close" class="close" type="button" {{on "click" (fn this.removeItem item)}}>
               <span aria-hidden="true">&times;</span>
             </button>
 
             Item {{item.index}}
-          {{/tablist.tab}}
+          </tablist.tab>
         </li>
       {{/each}}
     </tabs.tablist>
 
     <div class="tab-content">
       {{#each this.model as |item|}}
-        {{#tabs.tabpanel item.index class="tab-pane"}}
+        <tabs.tabpanel @model={{item.index}} class="tab-pane">
           <p>Here is some content for Item {{item.index}}. Kale chips marfa next level hella hot chicken. Post-ironic snackwave dreamcatcher lyft, hot chicken brunch roof party small batch quinoa migas ugh. Live-edge beard leggings affogato, marfa yr brooklyn. Jean shorts artisan cred schlitz gluten-free pour-over distillery sriracha portland iceland, normcore kombucha roof party. Gentrify truffaut hot chicken air plant, hashtag la croix photo booth kogi live-edge. Bitters kogi subway tile tousled offal bushwick narwhal fam. Cray salvia poutine, jianbing ethical hot chicken whatever VHS.</p>
-        {{/tabs.tabpanel}}
+        </tabs.tabpanel>
       {{/each}}
     </div>
   </IvyTabs>
 
-  <button class="btn btn-primary" type="button" {{action "addItem"}}>
+  <button class="btn btn-primary" type="button" {{on "click" this.addItem}}>
     Add an Item
   </button>
 
-  <button class="btn btn-secondary" disabled={{this.noCheckedItems}} type="button" {{action "removeSelected"}}>
+  <button class="btn btn-secondary" disabled={{this.noCheckedItems}} type="button" {{on "click" this.removeSelected}}>
     Remove {{this.checkedItems.length}} Item(s)
   </button>
 

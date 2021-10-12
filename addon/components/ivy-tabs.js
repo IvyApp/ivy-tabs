@@ -1,7 +1,5 @@
-import Component from '@ember/component';
-import { computed } from '@ember/object';
-import { A } from '@ember/array';
-import layout from '../templates/components/ivy-tabs';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 
 /**
  * @module ivy-tabs
@@ -10,13 +8,10 @@ import layout from '../templates/components/ivy-tabs';
 /**
  * @class IvyTabsComponent
  * @namespace IvyTabs
- * @extends Ember.Component
+ * @extends glimmer Component
  */
-export default Component.extend({
-  classNames: ['ivy-tabs'],
-
-  layout: layout,
-
+export default class IvyTabsTabsComponent extends Component {
+  @tracked tabList = null;
   /**
    * Registers the `ivy-tabs-tablist` instance.
    *
@@ -24,8 +19,8 @@ export default Component.extend({
    * @param {IvyTabs.IvyTabListComponent} tabList
    */
   registerTabList(tabList) {
-    this.set('tabList', tabList);
-  },
+    this.tabList = tabList;
+  }
 
   /**
    * Adds a panel to the `tabPanels` array.
@@ -35,21 +30,13 @@ export default Component.extend({
    */
   registerTabPanel(tabPanel) {
     this.tabPanels.pushObject(tabPanel);
-  },
+  }
 
-  /**
-   * Set this to the model of the tab you'd like to be selected. Usually it is
-   * bound to a controller property that is used as a query parameter, but can
-   * be bound to anything.
-   *
-   * @property selection
-   * @type Object
-   */
-  selection: null,
+  @tracked tabPanels = [];
 
-  tabPanels: computed(function () {
-    return A();
-  }).readOnly(),
+  get selection() {
+    return this.args.selection;
+  }
 
   /**
    * Removes the `ivy-tabs-tablist` component.
@@ -58,8 +45,8 @@ export default Component.extend({
    * @param {IvyTabs.IvyTabListComponent} tabList
    */
   unregisterTabList(/* tabList */) {
-    this.set('tabList', null);
-  },
+    this.tabList = null;
+  }
 
   /**
    * Removes a panel from the `tabPanels` array.
@@ -69,5 +56,5 @@ export default Component.extend({
    */
   unregisterTabPanel(tabPanel) {
     this.tabPanels.removeObject(tabPanel);
-  },
-});
+  }
+}

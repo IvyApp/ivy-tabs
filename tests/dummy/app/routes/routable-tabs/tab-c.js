@@ -1,8 +1,8 @@
 import Route from '@ember/routing/route';
 
-export default Route.extend({
+export default class TabCRoute extends Route {
   setupController() {
     this.send('setCurrentTab', 'tab-c');
-    return this._super(...arguments);
-  },
-});
+    return super.setupController(...arguments);
+  }
+}
