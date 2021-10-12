@@ -7,13 +7,13 @@
     <tabs.tablist @aria-label="Example Tabs" @class="nav nav-tabs" @id="dynamic-tablist" @tagName="ul" as |tablist|>
       {{#each this.model as |item|}}
         <li class="nav-item {{if (eq this.selection item.index) "active"}}">
-          {{#tablist.tab item.index class="nav-link" on-select=this.updateSelection }}
+          <tablist.tab @model={{item.index}} class="nav-link" @onSelect={{this.updateSelection}}>
             <button aria-label="Close" class="close" type="button" {{on "click" (fn this.removeItem item)}}>
               <span aria-hidden="true">&times;</span>
             </button>
 
             Item {{item.index}}
-          {{/tablist.tab}}
+          </tablist.tab>
         </li>
       {{/each}}
     </tabs.tablist>

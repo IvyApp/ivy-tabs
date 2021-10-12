@@ -105,7 +105,7 @@ export default class IvyTabsTabListComponent extends Component {
    * @method focusSelectedTab
    */
   focusSelectedTab() {
-    this.selectedTab.element.focus();
+    this.selectedTab.focus();
   }
 
   constructor() {

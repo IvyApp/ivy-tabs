@@ -23,42 +23,42 @@ $ ember install ivy-tabs
 ### Templates
 
 ```handlebars
-{{#ivy-tabs selection=selection as |tabs|}}
-  {{#tabs.tablist tagName="ul" as |tablist|}}
+<IvyTabs @selection={{this.selection}} as |tabs|}}
+  <tabs.tablist @tagName="ul" as |tablist|>
     <li>
-      {{#tablist.tab "TabA" on-select=(action (mut selection))}}Foo{{/tablist.tab}}
+      <tablist.tab @model="TabA" @onSelect={{action (mut this.selection)}}>Foo</tablist.tab>
     </li>
     <li>
-      {{#tablist.tab "TabB" on-select=(action (mut selection))}}Bar{{/tablist.tab}}
+      <tablist.tab @model="TabB" @onSelect={{action (mut this.selection)}}>Bar</tablist.tab>
     </li>
     <li>
-      {{#tablist.tab "TabC" on-select=(action (mut selection))}}Baz{{/tablist.tab}}
+      <tablist.tab @model="TabC" @onSelect={{action (mut this.selection)}}>Baz</tablist.tab>
     </li>
-  {{/tabs.tablist}}
+  </tabs.tablist>
 
-  {{#tabs.tabpanel "TabA"}}
+  <tabs.tabpanel @model="TabA">
     <h2>Foo</h2>
-  {{/tabs.tabpanel}}
+  </tabs.tabpanel>
 
-  {{#tabs.tabpanel "TabB"}}
+  <tabs.tabpanel @model="TabB">
     <h2>Bar</h2>
-  {{/tabs.tabpanel}}
+  </tabs.tabpanel>
 
-  {{#tabs.tabpanel "TabC"}}
+  <tabs.tabpanel @model="TabC">
     <h2>Baz</h2>
-  {{/tabs.tabpanel}}
-{{/ivy-tabs}}
+  </tabs.tabpanel>
+</IvyTabs>
 ```
 
 Some things to note:
 
   * Associations between tabs and panels are explicitly defined by the "models"
-    (the first positional parameter) given to them. In the above example, the
+    given to them. In the above example, the
     given tab models are "TabA", "TabB", and "TabC". This model could be any
     JavaScript Object that you'd like, they are not required to be strings.
-  * An `on-select` action is sent when a tab is selected. As an argument, it
+  * An `onSelect` action is sent when a tab is selected. As an argument, it
     receives the model defined on the tab (for example, when the Foo tab is
-    selected, the `on-select` event will carry "TabA" as an argument).
+    selected, the `onSelect` event will carry "TabA" as an argument).
 
 ### Presentation
 

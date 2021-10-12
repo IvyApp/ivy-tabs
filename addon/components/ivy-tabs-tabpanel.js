@@ -69,7 +69,7 @@ export default class IvyTabsPanelComponent extends Component {
   get ariaLabelledby() {
     const tab = this.tab;
     if (tab) {
-      return tab.elementId;
+      return tab.id;
     }
 
     return '';

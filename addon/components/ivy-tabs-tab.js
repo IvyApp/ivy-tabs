@@ -1,47 +1,26 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import { once } from '@ember/runloop';
+import { action } from '@ember/object';
 
 /**
  * @module ivy-tabs
  */
+
+let ivyTabsTabCount = 0;
 
 /**
  * @class IvyTabComponent
  * @namespace IvyTabs
  * @extends Ember.Component
  */
-export default Component.extend({
+export default class IvyTabsTabComponent extends Component {
   _registerWithTabList() {
-    this.tabList.registerTab(this);
-  },
+    this.args.tabList.registerTab(this);
+  }
 
   _unregisterWithTabList() {
-    this.tabList.unregisterTab(this);
-  },
-
-  /**
-   * Accessed as a className binding to apply the tab's `activeClass` CSS class
-   * to the element when the tab's `isSelected` property is true.
-   *
-   * @property active
-   * @type String
-   */
-  get active() {
-    if (this.isSelected) {
-      return this.activeClass;
-    }
-    return undefined;
-  },
-
-  /**
-   * The CSS class to apply to a tab's element when its `isSelected` property
-   * is `true`.
-   *
-   * @property activeClass
-   * @type String
-   * @default 'active'
-   */
-  activeClass: 'active',
+    this.args.tabList.unregisterTab(this);
+  }
 
   /**
    * Tells screenreaders which panel this tab controls.
@@ -52,12 +31,12 @@ export default Component.extend({
    * @type String
    * @readOnly
    */
-  get 'aria-controls'() {
+  get ariaControls() {
     if (this.tabPanel) {
       return this.tabPanel.elementId;
     }
     return '';
-  },
+  }
 
   /**
    * Tells screenreaders whether or not this tab's panel is expanded.
@@ -68,70 +47,27 @@ export default Component.extend({
    * @type String
    * @readOnly
    */
-  get 'aria-expanded'() {
+  get ariaExpanded() {
     return String(this.isSelected); // coerce to 'true' or 'false'
-  },
+  }
 
-  /**
-   * Tells screenreaders whether or not this tab is selected.
-   *
-   * See http://www.w3.org/TR/wai-aria/states_and_properties#aria-selected
-   *
-   * @property aria-selected
-   * @type String
-   */
-  get 'aria-selected'() {
-    return String(this.isSelected); // coerce to 'true' or 'false'
-  },
-
-  /**
-   * The `role` attribute of the tab element.
-   *
-   * See http://www.w3.org/TR/wai-aria/roles#tab
-   *
-   * @property ariaRole
-   * @type String
-   * @default 'tab'
-   */
-  ariaRole: 'tab',
-
-  attributeBindings: [
-    'aria-controls',
-    'aria-expanded',
-    'aria-selected',
-    'href',
-    'selected',
-    'tabindex',
-  ],
-
-  classNameBindings: ['active'],
-
-  classNames: ['ivy-tabs-tab'],
-
-  click(event) {
+  @action
+  handleClick(event) {
     event.preventDefault();
     this.select();
-  },
-
-  /**
-   * Override the 'a' tag's href with a dedicated dynamic value to allow routable tab links.
-   * @property fixedHref
-   * @type String
-   * @default ""
-   */
-  fixedHref: '',
+  }
 
   get href() {
-    if (this.tagName !== 'a' || !this.tabPanel) {
+    if (!this.tabPanel) {
       return '';
     }
 
-    if (!this.fixedHref) {
+    if (!this.args.fixedHref) {
       return '#' + this.tabPanel.elementId;
     } else {
-      return this.fixedHref;
+      return this.args.fixedHref;
     }
-  },
+  }
 
   /**
    * The index of this tab in the `ivy-tabs-tablist` component.
@@ -141,12 +77,13 @@ export default Component.extend({
    */
   get index() {
     return this.tabs.indexOf(this);
-  },
+  }
 
-  init() {
-    this._super(...arguments);
+  constructor() {
+    super(...arguments);
+    this.uniqueSelector = `ivy-tabs-tab-${ivyTabsTabCount++}`;
     once(this, this._registerWithTabList);
-  },
+  }
 
   /**
    * Whether or not this tab is selected.
@@ -155,16 +92,8 @@ export default Component.extend({
    * @type Boolean
    */
   get isSelected() {
-    return this.tabList.selectedTab === this;
-  },
-
-  /**
-   * Object to uniquely identify this tab within the tabList.
-   *
-   * @property model
-   * @type Object
-   */
-  model: null,
+    return this.args.tabList.selectedTab === this;
+  }
 
   /**
    * Called when the user clicks on the tab. Selects this tab.
@@ -172,12 +101,30 @@ export default Component.extend({
    * @method select
    */
   select() {
-    const onSelect = this['on-select'];
+    const onSelect = this.args.onSelect;
 
     if (!this.isDestroying && typeof onSelect === 'function') {
-      onSelect(this.model);
+      onSelect(this.args.model);
     }
-  },
+  }
+
+  focus() {
+    let element = document.getElementById(this.id);
+    if (element) {
+      element.focus();
+    }
+  }
+
+  get model() {
+    return this.args.model;
+  }
+
+  get id() {
+    if (this.args.id) {
+      return this.args.id;
+    }
+    return this.uniqueSelector;
+  }
 
   /**
    * The `selected` attribute of the tab element. If the tab's `isSelected`
@@ -192,16 +139,7 @@ export default Component.extend({
       return 'selected';
     }
     return undefined;
-  },
-
-  /**
-   * The `ivy-tabs-tablist` component this tab belongs to.
-   *
-   * @property tabList
-   * @type IvyTabs.IvyTabListComponent
-   * @default null
-   */
-  tabList: null,
+  }
 
   /**
    * The `ivy-tabs-tabpanel` associated with this tab.
@@ -213,12 +151,12 @@ export default Component.extend({
     const tabPanels = this.tabPanels;
     for (let i = 0; i < tabPanels.length; i++) {
       const result = tabPanels[i];
-      if (result.model === this.model) {
+      if (result.model === this.args.model) {
         return result;
       }
     }
     return null;
-  },
+  }
 
   /**
    * The array of all `ivy-tabs-tabpanel` instances within the `ivy-tabs`
@@ -233,21 +171,7 @@ export default Component.extend({
       return this.tabsContainer.tabPanels;
     }
     return [];
-  },
-
-  /**
-   * Makes the selected tab keyboard tabbable, and prevents tabs from getting
-   * focus when clicked with a mouse.
-   *
-   * @property tabindex
-   * @type Number
-   */
-  get tabindex() {
-    if (this.isSelected) {
-      return 0;
-    }
-    return undefined;
-  },
+  }
 
   /**
    * The array of all `ivy-tabs-tab` instances within the `ivy-tabs-tablist` component.
@@ -257,11 +181,11 @@ export default Component.extend({
    * @readOnly
    */
   get tabs() {
-    if (this.tabList) {
-      return this.tabList.tabs;
+    if (this.args.tabList) {
+      return this.args.tabList.tabs;
     }
     return [];
-  },
+  }
 
   /**
    * The `ivy-tabs` component.
@@ -271,18 +195,14 @@ export default Component.extend({
    * @readOnly
    */
   get tabsContainer() {
-    if (this.tabList) {
-      return this.tabList.tabsContainer;
+    if (this.args.tabList) {
+      return this.args.tabList.tabsContainer;
     }
     return null;
-  },
-
-  tagName: 'a',
+  }
 
   willDestroy() {
-    this._super(...arguments);
+    super.willDestroy(...arguments);
     once(this, this._unregisterWithTabList);
-  },
-}).reopenClass({
-  positionalParams: ['model'],
-});
+  }
+}

@@ -13,7 +13,7 @@ module('ivy-tabs', function (hooks) {
     {{#ivy-tabs selection=this.selection as |tabs|}}
       {{#tabs.tablist as |tablist|}}
         {{#each this.items as |item|}}
-          {{#tablist.tab item on-select=(action (mut this.selection))}}{{item}}{{/tablist.tab}}
+          {{#tablist.tab model=item onSelect=(action (mut this.selection))}}{{item}}{{/tablist.tab}}
         {{/each}}
       {{/tabs.tablist}}
       {{#each this.items as |item|}}
@@ -71,27 +71,26 @@ module('ivy-tabs', function (hooks) {
   });
 
   test('does not select tabs while being destroyed', async function (assert) {
-    const _this = this;
     let selectionCount = 0;
 
-    this.set('selectionAction', function (selection) {
-      _this.set('selection', selection);
+    this.set('selectionAction', (selection) => {
+      this.set('selection', selection);
       selectionCount++;
     });
 
     this.set('items', A(['Item 1', 'Item 2', 'Item 3']));
     await render(hbs`
       {{#unless this.hideComponent}}
-        {{#ivy-tabs selection=this.selection as |tabs|}}
-          {{#tabs.tablist as |tablist|}}
+        <IvyTabs @selection={{this.selection}} as |tabs|>
+          <tabs.tablist as |tablist|>
             {{#each this.items as |item|}}
-              {{#tablist.tab item on-select=(action this.selectionAction)}}{{item}}{{/tablist.tab}}
+              <tablist.tab @model={{item}} @onSelect={{this.selectionAction}}>{{item}}</tablist.tab>
             {{/each}}
-          {{/tabs.tablist}}
+          </tabs.tablist>
           {{#each this.items as |item|}}
-            {{#tabs.tabpanel item}}{{item}}{{/tabs.tabpanel}}
+            <tabs.tabpanel @model={{item}}>{{item}}</tabs.tabpanel>
           {{/each}}
-        {{/ivy-tabs}}
+        </IvyTabs>
       {{/unless}}
     `);
 

@@ -3,34 +3,34 @@
 <p>Create a set of tabs that can be accessed via url directly, and are part of the application routes.</p>
 
 <div class="example">
-    <IvyTabs @selection={{this.currentTab}} as |tabs|>
+    <IvyTabs @selection={{this.model}} as |tabs|>
     <tabs.tablist @aria-label="Example Tabs" @class="nav nav-tabs" @tagName="ul" as |tablist|>
       <li class="nav-item {{if (eq this.selection "tab-a") "active"}}">
-        {{#tablist.tab "tab-a" fixedHref=(url-for 'routable-tabs.tab-a') class="nav-link" on-select=(action "switchToTab" "tab-a")}}Tab A{{/tablist.tab}}
+        <tablist.tab @model="tab-a" @fixedHref={{url-for 'routable-tabs.tab-a'}} class="nav-link" @onSelect={{action "switchToTab" "tab-a"}}>Tab A</tablist.tab>
       </li>
       <li class="nav-item {{if (eq this.selection "tab-b") "active"}}">
-        {{#tablist.tab "tab-b" fixedHref=(url-for 'routable-tabs.tab-b') class="nav-link" on-select=(action "switchToTab" "tab-b")}}Tab B{{/tablist.tab}}
+        <tablist.tab @model="tab-b" @fixedHref={{url-for 'routable-tabs.tab-b'}} class="nav-link" @onSelect={{action "switchToTab" "tab-b"}}>Tab B</tablist.tab>
       </li>
       <li class="nav-item {{if (eq this.selection "tab-c") "active"}}">
-        {{#tablist.tab "tab-c" fixedHref=(url-for 'routable-tabs.tab-c') class="nav-link"  on-select=(action "switchToTab" "tab-c")}}Tab C{{/tablist.tab}}
+        <tablist.tab @model="tab-c" @fixedHref={{url-for 'routable-tabs.tab-c'}} class="nav-link"  @onSelect={{action "switchToTab" "tab-c"}}>Tab C</tablist.tab>
       </li>
     </tabs.tablist>
 
     <div class="tab-content">
       <tabs.tabpanel @model={{"tab-a"}} class="tab-pane">
-        {{#if (eq this.currentTab 'tab-a')}}
+        {{#if (eq this.model 'tab-a')}}
           {{outlet}}
         {{/if}}
       </tabs.tabpanel>
 
       <tabs.tabpanel @model={{"tab-b"}} class="tab-pane">
-        {{#if (eq this.currentTab 'tab-b')}}
+        {{#if (eq this.model 'tab-b')}}
           {{outlet}}
         {{/if}}
       </tabs.tabpanel>
 
       <tabs.tabpanel @model={{"tab-c"}} class="tab-pane">
-        {{#if (eq this.currentTab 'tab-c')}}
+        {{#if (eq this.model 'tab-c')}}
           {{outlet}}
         {{/if}}
       </tabs.tabpanel>
