@@ -1,0 +1,21 @@
+---
+name: snyk_merge
+
+on: push
+
+jobs:
+  snyk_node:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout the code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - name: run snyk monitor
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_PE_TOKEN }}
+        with:
+          command: monitor
+          args: --file=package.json --org=puppet-enterprise --project-name=ivy-tabs
