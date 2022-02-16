@@ -12,10 +12,13 @@ jobs:
         with:
           fetch-depth: 1
           persist-credentials: false
+      - name: install npm dependencies
+        uses: actions/setup-node@v2
+        run: npm install
       - name: run snyk monitor
         uses: snyk/actions/node@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_PE_TOKEN }}
         with:
           command: monitor
-          args: --file=package.json --org=puppet-enterprise --project-name=ivy-tabs
+          args: --file=package-lock.json --org=puppet-enterprise --project-name=ivy-tabs
