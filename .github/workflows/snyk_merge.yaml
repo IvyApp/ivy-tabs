@@ -14,7 +14,8 @@ jobs:
           persist-credentials: false
       - name: install npm dependencies
         uses: actions/setup-node@v2
-        run: npm install
+        with:
+          command: npm install
       - name: run snyk monitor
         uses: snyk/actions/node@master
         env:
