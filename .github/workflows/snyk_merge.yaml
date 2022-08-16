@@ -1,24 +1,28 @@
 ---
-name: snyk_merge
+name: Snyk Scan
 
-on: push
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  snyk_node:
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout the code
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-          persist-credentials: false
-      - name: install npm dependencies
-        uses: actions/setup-node@v2
-      - run: npm install
-      - name: run snyk monitor
-        uses: snyk/actions/node@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_PE_TOKEN }}
-        with:
-          command: monitor
-          args: --file=package-lock.json --org=puppet-enterprise --project-name=ivy-tabs
+ security:
+   runs-on: ubuntu-latest
+   steps:
+    - name: Connect to Twingate
+      uses: twingate/github-action@v1
+      with:
+        service-key: ${{ secrets.TWINGATE_KEY }}
+    - name: Checkout the main branch
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
+        persist-credentials: false
+    - name: Snyk Node Scan
+      uses: snyk/actions/node@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_PE_TOKEN }}
+      with:
+        command: monitor
+        args: --file=package-lock.json --org=puppet-enterprise --project-name=ivy-tabs
